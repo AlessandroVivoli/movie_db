@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class CarouselItem extends StatelessWidget {
   final String image;
+  final Function()? onTap;
 
-  const CarouselItem({super.key, required this.image});
+  const CarouselItem({super.key, required this.image, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -57,19 +58,17 @@ class CarouselItem extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.play_circle_outline,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    iconSize: 70,
+                  Icon(
+                    Icons.play_circle_outline,
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 70,
                   ),
                 ],
               )
             ],
           ),
         ),
+        GestureDetector(onTap: onTap)
       ],
     );
   }
