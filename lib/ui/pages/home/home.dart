@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: const Drawer(),
         appBar: AppBar(
           title: Text(widget.title),
           centerTitle: true,
