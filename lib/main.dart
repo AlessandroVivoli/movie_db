@@ -13,7 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'FlutterMovie',
       theme: ThemeData(
-        colorScheme: const ColorScheme.dark(),
+        colorScheme: const ColorScheme.dark().copyWith(
+          primary: const Color.fromARGB(255, 217, 176, 22),
+          secondary: Colors.grey,
+        ),
         appBarTheme: const AppBarTheme(
           backgroundColor: Color.fromARGB(255, 17, 25, 37),
         ),
