@@ -13,7 +13,13 @@ class Carousel extends StatefulWidget {
 }
 
 class _CarouselState extends State<Carousel> {
-  final PageController _controller = PageController();
+  late final PageController _controller;
+
+  @override
+  void initState() {
+    _controller = PageController();
+    super.initState();
+  }
 
   @override
   void dispose() {
