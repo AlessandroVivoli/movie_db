@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_db/core/models/movie/movie.dart';
+import 'package:movie_db/core/services/movie_service.dart';
 import 'package:movie_db/ui/pages/home/carousel/carousel.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,13 +27,32 @@ class _HomePageState extends State<HomePage> {
         ),
         body: SingleChildScrollView(
           child: Column(
-            children: const [
-              Carousel(
-                images: [
-                  "https://dlcdnrog.asus.com/rog/media/1554200908315.webp",
-                  "https://miro.medium.com/max/1400/1*evrWaYJyKbCv7c0dGu1K_w.png",
-                  "https://image.tmdb.org/t/p/w780/s16H6tpK2utvwDtzZ8Qy4qm5Emw.jpg"
-                ],
+            children: [
+              FutureBuilder(
+                future: MovieService.getPopularMovies(),
+                builder: ((context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.data == null) {
+                      return const AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: Center(
+                          child: Text("Nothing found."),
+                        ),
+                      );
+                    }
+
+                    return Carousel(
+                      movies: (snapshot.data as List<Movie>).take(6).toList(),
+                    );
+                  }
+
+                  return const AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }),
               ),
             ],
           ),
