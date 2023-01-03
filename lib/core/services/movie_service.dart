@@ -6,44 +6,52 @@ import 'package:movie_db/core/models/movie/movie.dart';
 class MovieService {
   static Future<List<Movie>?> getPopularMovies({List<int>? withGenres}) async {
     try {
-      Response<dynamic> response = await Dio().fetch(
-        RequestOptions(
-          path: '/discover/movie',
-          baseUrl: dotenv.env['BASE_URL'],
-          queryParameters: {
-            'api_key': dotenv.env['TMDB_API_KEY'],
-            'language': 'en-US',
-            'sort_by': 'popularity.desc',
-            'with_genres': withGenres?.join(','),
-          },
+      Response<dynamic> response = await Dio().get(
+        "${dotenv.env['BASE_URL']}/discover/movie",
+        queryParameters: {
+          'api_key': dotenv.env['TMDB_API_KEY'],
+          'language': 'en_US',
+          'sort_by': 'popularity.desc',
+          'with_genres': withGenres?.join(','),
+        },
+        options: Options(
+          method: 'GET',
+          contentType: 'application/json',
         ),
       );
 
-      List<Movie> data = (response.data as List<Map<String, Object?>>)
-          .map((json) => Movie.fromJson(json))
-          .toList();
+      final rawData = List<Map<String, dynamic>>.from(
+        Map<String, dynamic>.from(response.data)['results'],
+      );
+
+      final data = rawData.map((json) => Movie.fromJson(json)).toList();
 
       return data;
-    } on DioError {
+    } catch (e) {
       return null;
     }
   }
 
   static Future<MovieDetails?> getMovieDetails({required int id}) async {
     try {
-      Response<dynamic> response = await Dio().fetch(RequestOptions(
-        path: '/movie/$id',
-        baseUrl: dotenv.env['BASE_URL'],
+      Response<dynamic> response = await Dio().get(
+        "${dotenv.env['BASE_URL']}/movie/$id",
         queryParameters: {
           'api_key': dotenv.env['TMDB_API_KEY'],
           'language': 'en_US',
         },
-      ));
+        options: Options(
+          method: 'GET',
+          contentType: 'application/json',
+        ),
+      );
 
-      MovieDetails data = MovieDetails.fromJson(response.data);
+      final responseBody = Map<String, dynamic>.from(response.data);
+
+      MovieDetails? data = MovieDetails.fromJson(responseBody);
 
       return data;
-    } on DioError {
+    } catch (e) {
       return null;
     }
   }

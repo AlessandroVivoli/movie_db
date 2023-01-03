@@ -16,10 +16,12 @@ class MovieImagesService {
         ),
       );
 
-      MovieImages images = MovieImages.fromJson(response.data);
+      final responseBody = Map<String, dynamic>.from(response.data);
+
+      MovieImages images = MovieImages.fromJson(responseBody);
 
       return images;
-    } on DioError {
+    } catch (e) {
       return null;
     }
   }
