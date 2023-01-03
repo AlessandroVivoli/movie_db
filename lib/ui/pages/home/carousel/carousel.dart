@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:movie_db/core/models/movie/movie.dart';
+import 'package:movie_db/core/services/movie_service.dart';
 import 'package:movie_db/ui/pages/home/carousel/carousel_item.dart';
 
 class Carousel extends StatefulWidget {
-  final List<String> images;
+  final List<Movie> movies;
   final double? height;
 
-  const Carousel({super.key, required this.images, this.height});
+  const Carousel({super.key, this.height, required this.movies});
 
   @override
   State<StatefulWidget> createState() => _CarouselState();
@@ -19,12 +21,6 @@ class _CarouselState extends State<Carousel> {
   void initState() {
     _controller = PageController();
     _activePage = 0;
-
-    _controller.addListener(() {
-      setState(() {
-        _activePage = _controller.page ?? 0;
-      });
-    });
 
     super.initState();
   }
@@ -41,14 +37,24 @@ class _CarouselState extends State<Carousel> {
       children: [
         AspectRatio(
           aspectRatio: 16 / 9,
-          child: PageView.builder(
-            controller: _controller,
-            itemCount: widget.images.length,
-            pageSnapping: true,
-            itemBuilder: (context, pagePosition) {
-              return CarouselItem(
-                image: widget.images[pagePosition],
-                title: "Doctor Strange in the Multiverse of Madness",
+          child: FutureBuilder(
+            future: MovieService.getPopularMovies(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return PageView.builder(
+                    controller: _controller,
+                    itemCount: widget.movies.length,
+                    pageSnapping: true,
+                    itemBuilder: (context, pagePosition) {
+                      return CarouselItem(
+                        image: widget.movies[pagePosition].backdropPath ?? "",
+                        title: widget.movies[pagePosition].title,
+                      );
+                    });
+              }
+
+              return const Center(
+                child: CircularProgressIndicator(),
               );
             },
           ),
@@ -61,7 +67,7 @@ class _CarouselState extends State<Carousel> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List<Widget>.generate(
-              widget.images.length,
+              widget.movies.length,
               (index) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: InkWell(
@@ -79,18 +85,53 @@ class _CarouselState extends State<Carousel> {
             ),
           ),
         ),
-        Positioned(
-          bottom: 7,
-          left: ((MediaQuery.of(context).size.width / 2) -
-                  ((5 * 2 + 3 * 2.0) * widget.images.length)) +
-              (8 + (5 * 2 + 3 * 2) * _activePage),
-          width: (5 * 2 + 3 * 2.0) * widget.images.length,
-          child: CircleAvatar(
-            radius: 3,
-            backgroundColor: Theme.of(context).colorScheme.primary,
-          ),
-        ),
+        _ActiveDot(controller: _controller, length: widget.movies.length),
       ],
+    );
+  }
+}
+
+class _ActiveDot extends StatefulWidget {
+  final PageController controller;
+  final int length;
+
+  const _ActiveDot({
+    Key? key,
+    required this.controller,
+    required this.length,
+  }) : super(key: key);
+
+  @override
+  State<_ActiveDot> createState() => _ActiveDotState();
+}
+
+class _ActiveDotState extends State<_ActiveDot> {
+  late double _activePage;
+
+  @override
+  void initState() {
+    _activePage = 0;
+
+    widget.controller.addListener(() {
+      setState(() {
+        _activePage = widget.controller.page ?? 0;
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 7,
+      left: ((MediaQuery.of(context).size.width / 2) -
+              ((5 * 2 + 3 * 2.0) * widget.length)) +
+          (8 + (5 * 2 + 3 * 2) * _activePage),
+      width: (5 * 2 + 3 * 2.0) * widget.length,
+      child: CircleAvatar(
+        radius: 3,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+      ),
     );
   }
 }
