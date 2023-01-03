@@ -46,7 +46,10 @@ class _CarouselState extends State<Carousel> {
             itemCount: widget.images.length,
             pageSnapping: true,
             itemBuilder: (context, pagePosition) {
-              return CarouselItem(image: widget.images[pagePosition]);
+              return CarouselItem(
+                image: widget.images[pagePosition],
+                title: "Doctor Strange in the Multiverse of Madness",
+              );
             },
           ),
         ),
