@@ -5,21 +5,24 @@ part 'movie.g.dart';
 
 @freezed
 class Movie with _$Movie {
+  @JsonSerializable(
+    fieldRename: FieldRename.snake,
+  )
   const factory Movie({
-    required String? poster_path,
+    required String? posterPath,
     required bool adult,
     required String overview,
-    required DateTime release_date,
-    required List<int> genre_ids,
+    required DateTime releaseDate,
+    required List<int> genreIds,
     required int id,
-    required String original_title,
-    required String original_language,
+    required String originalTitle,
+    required String originalLanguage,
     required String title,
-    required String? backdrop_path,
+    required String? backdropPath,
     required double popularity,
-    required int vote_count,
+    required int voteCount,
     required bool video,
-    required double vote_average,
+    required double voteAverage,
   }) = _Movie;
 
   factory Movie.fromJson(Map<String, Object?> json) => _$MovieFromJson(json);

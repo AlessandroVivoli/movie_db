@@ -7,36 +7,36 @@ part of 'movie.dart';
 // **************************************************************************
 
 _$_Movie _$$_MovieFromJson(Map<String, dynamic> json) => _$_Movie(
-      poster_path: json['poster_path'] as String?,
+      posterPath: json['poster_path'] as String?,
       adult: json['adult'] as bool,
       overview: json['overview'] as String,
-      release_date: DateTime.parse(json['release_date'] as String),
-      genre_ids:
+      releaseDate: DateTime.parse(json['release_date'] as String),
+      genreIds:
           (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
       id: json['id'] as int,
-      original_title: json['original_title'] as String,
-      original_language: json['original_language'] as String,
+      originalTitle: json['original_title'] as String,
+      originalLanguage: json['original_language'] as String,
       title: json['title'] as String,
-      backdrop_path: json['backdrop_path'] as String?,
+      backdropPath: json['backdrop_path'] as String?,
       popularity: (json['popularity'] as num).toDouble(),
-      vote_count: json['vote_count'] as int,
+      voteCount: json['vote_count'] as int,
       video: json['video'] as bool,
-      vote_average: (json['vote_average'] as num).toDouble(),
+      voteAverage: (json['vote_average'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$_MovieToJson(_$_Movie instance) => <String, dynamic>{
-      'poster_path': instance.poster_path,
+      'poster_path': instance.posterPath,
       'adult': instance.adult,
       'overview': instance.overview,
-      'release_date': instance.release_date.toIso8601String(),
-      'genre_ids': instance.genre_ids,
+      'release_date': instance.releaseDate.toIso8601String(),
+      'genre_ids': instance.genreIds,
       'id': instance.id,
-      'original_title': instance.original_title,
-      'original_language': instance.original_language,
+      'original_title': instance.originalTitle,
+      'original_language': instance.originalLanguage,
       'title': instance.title,
-      'backdrop_path': instance.backdrop_path,
+      'backdrop_path': instance.backdropPath,
       'popularity': instance.popularity,
-      'vote_count': instance.vote_count,
+      'vote_count': instance.voteCount,
       'video': instance.video,
-      'vote_average': instance.vote_average,
+      'vote_average': instance.voteAverage,
     };
