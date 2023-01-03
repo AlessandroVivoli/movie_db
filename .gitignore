@@ -43,6 +43,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-/lib/core/auth/secrets.dart
+.env
 
 /.fvm/flutter_sdk
