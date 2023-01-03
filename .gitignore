@@ -45,4 +45,4 @@ app.*.map.json
 
 /lib/core/auth/secrets.dart
 
-/.fvm/
+/.fvm/flutter_sdk
