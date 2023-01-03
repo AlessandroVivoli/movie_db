@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_db/core/models/movie/movie.dart';
 import 'package:movie_db/core/services/movie_service.dart';
@@ -49,6 +50,8 @@ class _CarouselState extends State<Carousel> {
                       return CarouselItem(
                         image: widget.movies[pagePosition].backdropPath ?? "",
                         title: widget.movies[pagePosition].title,
+                        id: widget.movies[pagePosition].id,
+                        onTap: onTap,
                       );
                     });
               }
@@ -66,6 +69,7 @@ class _CarouselState extends State<Carousel> {
           height: 20,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: List<Widget>.generate(
               widget.movies.length,
               (index) => Padding(
@@ -85,9 +89,21 @@ class _CarouselState extends State<Carousel> {
             ),
           ),
         ),
-        _ActiveDot(controller: _controller, length: widget.movies.length),
+        _ActiveDot(
+          controller: _controller,
+          length: widget.movies.length,
+          radius: 3,
+          padding: 5,
+        ),
       ],
     );
+  }
+
+  void onTap(id) async {
+    final data = await MovieService.getMovieDetails(id: id);
+    if (kDebugMode) {
+      print(data);
+    }
   }
 }
 
@@ -95,11 +111,18 @@ class _ActiveDot extends StatefulWidget {
   final PageController controller;
   final int length;
 
+  final int? radius;
+  final int? padding;
+
   const _ActiveDot({
     Key? key,
     required this.controller,
     required this.length,
-  }) : super(key: key);
+    int? radius,
+    int? padding,
+  })  : radius = radius ?? 3,
+        padding = padding ?? 5,
+        super(key: key);
 
   @override
   State<_ActiveDot> createState() => _ActiveDotState();
@@ -122,14 +145,17 @@ class _ActiveDotState extends State<_ActiveDot> {
 
   @override
   Widget build(BuildContext context) {
+    double dotComposite = (widget.padding! * 2 + widget.radius! * 2.0);
+    double screenWidth = MediaQuery.of(context).size.width;
+    double calculatedWidth = (screenWidth - dotComposite * widget.length);
+    double startPosition = calculatedWidth / 2;
+
     return Positioned(
-      bottom: 7,
-      left: ((MediaQuery.of(context).size.width / 2) -
-              ((5 * 2 + 3 * 2.0) * widget.length)) +
-          (8 + (5 * 2 + 3 * 2) * _activePage),
-      width: (5 * 2 + 3 * 2.0) * widget.length,
+      bottom: (20 - widget.radius! * 2) / 2,
+      left: startPosition + (dotComposite * _activePage),
+      width: dotComposite,
       child: CircleAvatar(
-        radius: 3,
+        radius: widget.radius! * 1,
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
     );
