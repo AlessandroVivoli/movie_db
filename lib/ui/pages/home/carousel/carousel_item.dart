@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_db/widgets/backdrop_image.dart';
 
 class CarouselItem extends StatelessWidget {
   final String image;
@@ -10,27 +11,7 @@ class CarouselItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(image),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 17, 25, 37),
-                Color.fromARGB(0, 0, 0, 0)
-              ],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              stops: [0, .5],
-            ),
-          ),
-        ),
+        BackdropImage(imgUrl: image),
         Container(
           margin: const EdgeInsets.only(bottom: 40, left: 10, right: 10),
           child: Column(
