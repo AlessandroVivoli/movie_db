@@ -10,6 +10,7 @@ class BackdropImage extends StatelessWidget {
     return Stack(
       children: [
         Container(
+          margin: const EdgeInsets.only(bottom: 1),
           decoration: BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(imgUrl),
