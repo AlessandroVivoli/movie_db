@@ -8,8 +8,8 @@ part of 'production_country.dart';
 
 _$_ProductionCountry _$$_ProductionCountryFromJson(Map<String, dynamic> json) =>
     _$_ProductionCountry(
-      iso_3166_1: json['iso_3166_1'] as String,
-      name: json['name'] as String,
+      iso_3166_1: json['iso_3166_1'] as String?,
+      name: json['name'] as String?,
     );
 
 Map<String, dynamic> _$$_ProductionCountryToJson(

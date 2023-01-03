@@ -20,8 +20,8 @@ ProductionCountry _$ProductionCountryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProductionCountry {
-  String get iso_3166_1 => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String? get iso_3166_1 => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $ProductionCountryCopyWith<$Res> {
           ProductionCountry value, $Res Function(ProductionCountry) then) =
       _$ProductionCountryCopyWithImpl<$Res, ProductionCountry>;
   @useResult
-  $Res call({String iso_3166_1, String name});
+  $Res call({String? iso_3166_1, String? name});
 }
 
 /// @nodoc
@@ -51,18 +51,18 @@ class _$ProductionCountryCopyWithImpl<$Res, $Val extends ProductionCountry>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? iso_3166_1 = null,
-    Object? name = null,
+    Object? iso_3166_1 = freezed,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      iso_3166_1: null == iso_3166_1
+      iso_3166_1: freezed == iso_3166_1
           ? _value.iso_3166_1
           : iso_3166_1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$_ProductionCountryCopyWith<$Res>
       __$$_ProductionCountryCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String iso_3166_1, String name});
+  $Res call({String? iso_3166_1, String? name});
 }
 
 /// @nodoc
@@ -89,18 +89,18 @@ class __$$_ProductionCountryCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? iso_3166_1 = null,
-    Object? name = null,
+    Object? iso_3166_1 = freezed,
+    Object? name = freezed,
   }) {
     return _then(_$_ProductionCountry(
-      iso_3166_1: null == iso_3166_1
+      iso_3166_1: freezed == iso_3166_1
           ? _value.iso_3166_1
           : iso_3166_1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -115,9 +115,9 @@ class _$_ProductionCountry implements _ProductionCountry {
       _$$_ProductionCountryFromJson(json);
 
   @override
-  final String iso_3166_1;
+  final String? iso_3166_1;
   @override
-  final String name;
+  final String? name;
 
   @override
   String toString() {
@@ -155,16 +155,16 @@ class _$_ProductionCountry implements _ProductionCountry {
 
 abstract class _ProductionCountry implements ProductionCountry {
   const factory _ProductionCountry(
-      {required final String iso_3166_1,
-      required final String name}) = _$_ProductionCountry;
+      {required final String? iso_3166_1,
+      required final String? name}) = _$_ProductionCountry;
 
   factory _ProductionCountry.fromJson(Map<String, dynamic> json) =
       _$_ProductionCountry.fromJson;
 
   @override
-  String get iso_3166_1;
+  String? get iso_3166_1;
   @override
-  String get name;
+  String? get name;
   @override
   @JsonKey(ignore: true)
   _$$_ProductionCountryCopyWith<_$_ProductionCountry> get copyWith =>
