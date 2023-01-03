@@ -12,7 +12,7 @@ class BackdropImage extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(imgUrl),
+              image: NetworkImage('https://image.tmdb.org/t/p/original$imgUrl'),
               fit: BoxFit.cover,
             ),
           ),
