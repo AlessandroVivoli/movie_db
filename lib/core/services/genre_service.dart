@@ -7,8 +7,8 @@ class GenreService {
     try {
       Response<dynamic> response = await Dio(
         BaseOptions(queryParameters: {
-          "key": dotenv.env['TMDB_API_KEY'],
-          "lang": 'en-US'
+          'key': dotenv.env['TMDB_API_KEY'],
+          'language': 'en-US'
         }),
       ).fetch(RequestOptions(
         path: 'https://api.themoviedb.org/3/genre/movie/list',
