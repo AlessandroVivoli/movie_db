@@ -39,8 +39,8 @@ class _CarouselState extends State<Carousel> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SizedBox(
-          height: widget.height ?? 250,
+        AspectRatio(
+          aspectRatio: 16 / 9,
           child: PageView.builder(
             controller: _controller,
             itemCount: widget.images.length,
