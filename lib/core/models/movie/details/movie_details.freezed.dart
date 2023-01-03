@@ -20,32 +20,32 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MovieDetails {
-  bool get adult => throw _privateConstructorUsedError;
+  bool? get adult => throw _privateConstructorUsedError;
   String? get backdropPath => throw _privateConstructorUsedError;
-  int get budget => throw _privateConstructorUsedError;
-  List<Genre> get genres => throw _privateConstructorUsedError;
+  int? get budget => throw _privateConstructorUsedError;
+  List<Genre>? get genres => throw _privateConstructorUsedError;
   String? get homepage => throw _privateConstructorUsedError;
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get imdbId => throw _privateConstructorUsedError;
-  String get originalLanguage => throw _privateConstructorUsedError;
-  String get originalTitle => throw _privateConstructorUsedError;
+  String? get originalLanguage => throw _privateConstructorUsedError;
+  String? get originalTitle => throw _privateConstructorUsedError;
   String? get overview => throw _privateConstructorUsedError;
-  double get popularity => throw _privateConstructorUsedError;
+  double? get popularity => throw _privateConstructorUsedError;
   String? get posterPath => throw _privateConstructorUsedError;
-  List<ProductionCompany> get productionCompanies =>
+  List<ProductionCompany>? get productionCompanies =>
       throw _privateConstructorUsedError;
-  List<ProductionCountry> get productionCountries =>
+  List<ProductionCountry>? get productionCountries =>
       throw _privateConstructorUsedError;
-  String get releaseDate => throw _privateConstructorUsedError;
-  int get revenue => throw _privateConstructorUsedError;
+  String? get releaseDate => throw _privateConstructorUsedError;
+  int? get revenue => throw _privateConstructorUsedError;
   int? get runtime => throw _privateConstructorUsedError;
   List<SpokenLanguage> get spokenLanguages =>
       throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
+  String? get status => throw _privateConstructorUsedError;
   String? get tagline => throw _privateConstructorUsedError;
-  bool get video => throw _privateConstructorUsedError;
-  double get voteAverage => throw _privateConstructorUsedError;
-  int get voteCount => throw _privateConstructorUsedError;
+  bool? get video => throw _privateConstructorUsedError;
+  double? get voteAverage => throw _privateConstructorUsedError;
+  int? get voteCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -60,29 +60,29 @@ abstract class $MovieDetailsCopyWith<$Res> {
       _$MovieDetailsCopyWithImpl<$Res, MovieDetails>;
   @useResult
   $Res call(
-      {bool adult,
+      {bool? adult,
       String? backdropPath,
-      int budget,
-      List<Genre> genres,
+      int? budget,
+      List<Genre>? genres,
       String? homepage,
-      int id,
+      int? id,
       String? imdbId,
-      String originalLanguage,
-      String originalTitle,
+      String? originalLanguage,
+      String? originalTitle,
       String? overview,
-      double popularity,
+      double? popularity,
       String? posterPath,
-      List<ProductionCompany> productionCompanies,
-      List<ProductionCountry> productionCountries,
-      String releaseDate,
-      int revenue,
+      List<ProductionCompany>? productionCompanies,
+      List<ProductionCountry>? productionCountries,
+      String? releaseDate,
+      int? revenue,
       int? runtime,
       List<SpokenLanguage> spokenLanguages,
-      String status,
+      String? status,
       String? tagline,
-      bool video,
-      double voteAverage,
-      int voteCount});
+      bool? video,
+      double? voteAverage,
+      int? voteCount});
 }
 
 /// @nodoc
@@ -98,95 +98,95 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? adult = null,
+    Object? adult = freezed,
     Object? backdropPath = freezed,
-    Object? budget = null,
-    Object? genres = null,
+    Object? budget = freezed,
+    Object? genres = freezed,
     Object? homepage = freezed,
-    Object? id = null,
+    Object? id = freezed,
     Object? imdbId = freezed,
-    Object? originalLanguage = null,
-    Object? originalTitle = null,
+    Object? originalLanguage = freezed,
+    Object? originalTitle = freezed,
     Object? overview = freezed,
-    Object? popularity = null,
+    Object? popularity = freezed,
     Object? posterPath = freezed,
-    Object? productionCompanies = null,
-    Object? productionCountries = null,
-    Object? releaseDate = null,
-    Object? revenue = null,
+    Object? productionCompanies = freezed,
+    Object? productionCountries = freezed,
+    Object? releaseDate = freezed,
+    Object? revenue = freezed,
     Object? runtime = freezed,
     Object? spokenLanguages = null,
-    Object? status = null,
+    Object? status = freezed,
     Object? tagline = freezed,
-    Object? video = null,
-    Object? voteAverage = null,
-    Object? voteCount = null,
+    Object? video = freezed,
+    Object? voteAverage = freezed,
+    Object? voteCount = freezed,
   }) {
     return _then(_value.copyWith(
-      adult: null == adult
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      budget: null == budget
+      budget: freezed == budget
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
-              as int,
-      genres: null == genres
+              as int?,
+      genres: freezed == genres
           ? _value.genres
           : genres // ignore: cast_nullable_to_non_nullable
-              as List<Genre>,
+              as List<Genre>?,
       homepage: freezed == homepage
           ? _value.homepage
           : homepage // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       imdbId: freezed == imdbId
           ? _value.imdbId
           : imdbId // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalLanguage: null == originalLanguage
+      originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
-      originalTitle: null == originalTitle
+              as String?,
+      originalTitle: freezed == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String?,
-      popularity: null == popularity
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      productionCompanies: null == productionCompanies
+      productionCompanies: freezed == productionCompanies
           ? _value.productionCompanies
           : productionCompanies // ignore: cast_nullable_to_non_nullable
-              as List<ProductionCompany>,
-      productionCountries: null == productionCountries
+              as List<ProductionCompany>?,
+      productionCountries: freezed == productionCountries
           ? _value.productionCountries
           : productionCountries // ignore: cast_nullable_to_non_nullable
-              as List<ProductionCountry>,
-      releaseDate: null == releaseDate
+              as List<ProductionCountry>?,
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      revenue: null == revenue
+              as String?,
+      revenue: freezed == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       runtime: freezed == runtime
           ? _value.runtime
           : runtime // ignore: cast_nullable_to_non_nullable
@@ -195,26 +195,26 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
           ? _value.spokenLanguages
           : spokenLanguages // ignore: cast_nullable_to_non_nullable
               as List<SpokenLanguage>,
-      status: null == status
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       tagline: freezed == tagline
           ? _value.tagline
           : tagline // ignore: cast_nullable_to_non_nullable
               as String?,
-      video: null == video
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voteAverage: null == voteAverage
+              as bool?,
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as double,
-      voteCount: null == voteCount
+              as double?,
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
   }
 }
@@ -228,29 +228,29 @@ abstract class _$$_MovieDetailsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool adult,
+      {bool? adult,
       String? backdropPath,
-      int budget,
-      List<Genre> genres,
+      int? budget,
+      List<Genre>? genres,
       String? homepage,
-      int id,
+      int? id,
       String? imdbId,
-      String originalLanguage,
-      String originalTitle,
+      String? originalLanguage,
+      String? originalTitle,
       String? overview,
-      double popularity,
+      double? popularity,
       String? posterPath,
-      List<ProductionCompany> productionCompanies,
-      List<ProductionCountry> productionCountries,
-      String releaseDate,
-      int revenue,
+      List<ProductionCompany>? productionCompanies,
+      List<ProductionCountry>? productionCountries,
+      String? releaseDate,
+      int? revenue,
       int? runtime,
       List<SpokenLanguage> spokenLanguages,
-      String status,
+      String? status,
       String? tagline,
-      bool video,
-      double voteAverage,
-      int voteCount});
+      bool? video,
+      double? voteAverage,
+      int? voteCount});
 }
 
 /// @nodoc
@@ -264,95 +264,95 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? adult = null,
+    Object? adult = freezed,
     Object? backdropPath = freezed,
-    Object? budget = null,
-    Object? genres = null,
+    Object? budget = freezed,
+    Object? genres = freezed,
     Object? homepage = freezed,
-    Object? id = null,
+    Object? id = freezed,
     Object? imdbId = freezed,
-    Object? originalLanguage = null,
-    Object? originalTitle = null,
+    Object? originalLanguage = freezed,
+    Object? originalTitle = freezed,
     Object? overview = freezed,
-    Object? popularity = null,
+    Object? popularity = freezed,
     Object? posterPath = freezed,
-    Object? productionCompanies = null,
-    Object? productionCountries = null,
-    Object? releaseDate = null,
-    Object? revenue = null,
+    Object? productionCompanies = freezed,
+    Object? productionCountries = freezed,
+    Object? releaseDate = freezed,
+    Object? revenue = freezed,
     Object? runtime = freezed,
     Object? spokenLanguages = null,
-    Object? status = null,
+    Object? status = freezed,
     Object? tagline = freezed,
-    Object? video = null,
-    Object? voteAverage = null,
-    Object? voteCount = null,
+    Object? video = freezed,
+    Object? voteAverage = freezed,
+    Object? voteCount = freezed,
   }) {
     return _then(_$_MovieDetails(
-      adult: null == adult
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      budget: null == budget
+      budget: freezed == budget
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
-              as int,
-      genres: null == genres
+              as int?,
+      genres: freezed == genres
           ? _value._genres
           : genres // ignore: cast_nullable_to_non_nullable
-              as List<Genre>,
+              as List<Genre>?,
       homepage: freezed == homepage
           ? _value.homepage
           : homepage // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       imdbId: freezed == imdbId
           ? _value.imdbId
           : imdbId // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalLanguage: null == originalLanguage
+      originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
-      originalTitle: null == originalTitle
+              as String?,
+      originalTitle: freezed == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String?,
-      popularity: null == popularity
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      productionCompanies: null == productionCompanies
+      productionCompanies: freezed == productionCompanies
           ? _value._productionCompanies
           : productionCompanies // ignore: cast_nullable_to_non_nullable
-              as List<ProductionCompany>,
-      productionCountries: null == productionCountries
+              as List<ProductionCompany>?,
+      productionCountries: freezed == productionCountries
           ? _value._productionCountries
           : productionCountries // ignore: cast_nullable_to_non_nullable
-              as List<ProductionCountry>,
-      releaseDate: null == releaseDate
+              as List<ProductionCountry>?,
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      revenue: null == revenue
+              as String?,
+      revenue: freezed == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       runtime: freezed == runtime
           ? _value.runtime
           : runtime // ignore: cast_nullable_to_non_nullable
@@ -361,26 +361,26 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
           ? _value._spokenLanguages
           : spokenLanguages // ignore: cast_nullable_to_non_nullable
               as List<SpokenLanguage>,
-      status: null == status
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       tagline: freezed == tagline
           ? _value.tagline
           : tagline // ignore: cast_nullable_to_non_nullable
               as String?,
-      video: null == video
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voteAverage: null == voteAverage
+              as bool?,
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as double,
-      voteCount: null == voteCount
+              as double?,
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -393,7 +393,7 @@ class _$_MovieDetails implements _MovieDetails {
       {required this.adult,
       required this.backdropPath,
       required this.budget,
-      required final List<Genre> genres,
+      required final List<Genre>? genres,
       required this.homepage,
       required this.id,
       required this.imdbId,
@@ -402,8 +402,8 @@ class _$_MovieDetails implements _MovieDetails {
       required this.overview,
       required this.popularity,
       required this.posterPath,
-      required final List<ProductionCompany> productionCompanies,
-      required final List<ProductionCountry> productionCountries,
+      required final List<ProductionCompany>? productionCompanies,
+      required final List<ProductionCountry>? productionCountries,
       required this.releaseDate,
       required this.revenue,
       required this.runtime,
@@ -422,57 +422,63 @@ class _$_MovieDetails implements _MovieDetails {
       _$$_MovieDetailsFromJson(json);
 
   @override
-  final bool adult;
+  final bool? adult;
   @override
   final String? backdropPath;
   @override
-  final int budget;
-  final List<Genre> _genres;
+  final int? budget;
+  final List<Genre>? _genres;
   @override
-  List<Genre> get genres {
+  List<Genre>? get genres {
+    final value = _genres;
+    if (value == null) return null;
     if (_genres is EqualUnmodifiableListView) return _genres;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_genres);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
   final String? homepage;
   @override
-  final int id;
+  final int? id;
   @override
   final String? imdbId;
   @override
-  final String originalLanguage;
+  final String? originalLanguage;
   @override
-  final String originalTitle;
+  final String? originalTitle;
   @override
   final String? overview;
   @override
-  final double popularity;
+  final double? popularity;
   @override
   final String? posterPath;
-  final List<ProductionCompany> _productionCompanies;
+  final List<ProductionCompany>? _productionCompanies;
   @override
-  List<ProductionCompany> get productionCompanies {
+  List<ProductionCompany>? get productionCompanies {
+    final value = _productionCompanies;
+    if (value == null) return null;
     if (_productionCompanies is EqualUnmodifiableListView)
       return _productionCompanies;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_productionCompanies);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<ProductionCountry> _productionCountries;
+  final List<ProductionCountry>? _productionCountries;
   @override
-  List<ProductionCountry> get productionCountries {
+  List<ProductionCountry>? get productionCountries {
+    final value = _productionCountries;
+    if (value == null) return null;
     if (_productionCountries is EqualUnmodifiableListView)
       return _productionCountries;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_productionCountries);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final String releaseDate;
+  final String? releaseDate;
   @override
-  final int revenue;
+  final int? revenue;
   @override
   final int? runtime;
   final List<SpokenLanguage> _spokenLanguages;
@@ -484,15 +490,15 @@ class _$_MovieDetails implements _MovieDetails {
   }
 
   @override
-  final String status;
+  final String? status;
   @override
   final String? tagline;
   @override
-  final bool video;
+  final bool? video;
   @override
-  final double voteAverage;
+  final double? voteAverage;
   @override
-  final int voteCount;
+  final int? voteCount;
 
   @override
   String toString() {
@@ -587,79 +593,79 @@ class _$_MovieDetails implements _MovieDetails {
 
 abstract class _MovieDetails implements MovieDetails {
   const factory _MovieDetails(
-      {required final bool adult,
+      {required final bool? adult,
       required final String? backdropPath,
-      required final int budget,
-      required final List<Genre> genres,
+      required final int? budget,
+      required final List<Genre>? genres,
       required final String? homepage,
-      required final int id,
+      required final int? id,
       required final String? imdbId,
-      required final String originalLanguage,
-      required final String originalTitle,
+      required final String? originalLanguage,
+      required final String? originalTitle,
       required final String? overview,
-      required final double popularity,
+      required final double? popularity,
       required final String? posterPath,
-      required final List<ProductionCompany> productionCompanies,
-      required final List<ProductionCountry> productionCountries,
-      required final String releaseDate,
-      required final int revenue,
+      required final List<ProductionCompany>? productionCompanies,
+      required final List<ProductionCountry>? productionCountries,
+      required final String? releaseDate,
+      required final int? revenue,
       required final int? runtime,
       required final List<SpokenLanguage> spokenLanguages,
-      required final String status,
+      required final String? status,
       required final String? tagline,
-      required final bool video,
-      required final double voteAverage,
-      required final int voteCount}) = _$_MovieDetails;
+      required final bool? video,
+      required final double? voteAverage,
+      required final int? voteCount}) = _$_MovieDetails;
 
   factory _MovieDetails.fromJson(Map<String, dynamic> json) =
       _$_MovieDetails.fromJson;
 
   @override
-  bool get adult;
+  bool? get adult;
   @override
   String? get backdropPath;
   @override
-  int get budget;
+  int? get budget;
   @override
-  List<Genre> get genres;
+  List<Genre>? get genres;
   @override
   String? get homepage;
   @override
-  int get id;
+  int? get id;
   @override
   String? get imdbId;
   @override
-  String get originalLanguage;
+  String? get originalLanguage;
   @override
-  String get originalTitle;
+  String? get originalTitle;
   @override
   String? get overview;
   @override
-  double get popularity;
+  double? get popularity;
   @override
   String? get posterPath;
   @override
-  List<ProductionCompany> get productionCompanies;
+  List<ProductionCompany>? get productionCompanies;
   @override
-  List<ProductionCountry> get productionCountries;
+  List<ProductionCountry>? get productionCountries;
   @override
-  String get releaseDate;
+  String? get releaseDate;
   @override
-  int get revenue;
+  int? get revenue;
   @override
   int? get runtime;
   @override
   List<SpokenLanguage> get spokenLanguages;
   @override
-  String get status;
+  String? get status;
   @override
   String? get tagline;
   @override
-  bool get video;
+  bool? get video;
   @override
-  double get voteAverage;
+  double? get voteAverage;
   @override
-  int get voteCount;
+  int? get voteCount;
   @override
   @JsonKey(ignore: true)
   _$$_MovieDetailsCopyWith<_$_MovieDetails> get copyWith =>
