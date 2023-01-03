@@ -6,8 +6,12 @@ class CarouselItem extends StatelessWidget {
   final String title;
   final Function()? onTap;
 
-  const CarouselItem(
-      {super.key, required this.image, this.onTap, required this.title});
+  const CarouselItem({
+    super.key,
+    required this.image,
+    this.onTap,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
