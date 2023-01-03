@@ -20,10 +20,10 @@ ProductionCompany _$ProductionCompanyFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProductionCompany {
-  String get name => throw _privateConstructorUsedError;
-  int get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get logoPath => throw _privateConstructorUsedError;
-  String get originCountry => throw _privateConstructorUsedError;
+  String? get originCountry => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $ProductionCompanyCopyWith<$Res> {
           ProductionCompany value, $Res Function(ProductionCompany) then) =
       _$ProductionCompanyCopyWithImpl<$Res, ProductionCompany>;
   @useResult
-  $Res call({String name, int id, String? logoPath, String originCountry});
+  $Res call({String? name, int? id, String? logoPath, String? originCountry});
 }
 
 /// @nodoc
@@ -53,28 +53,28 @@ class _$ProductionCompanyCopyWithImpl<$Res, $Val extends ProductionCompany>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? id = null,
+    Object? name = freezed,
+    Object? id = freezed,
     Object? logoPath = freezed,
-    Object? originCountry = null,
+    Object? originCountry = freezed,
   }) {
     return _then(_value.copyWith(
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
+              as String?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       logoPath: freezed == logoPath
           ? _value.logoPath
           : logoPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      originCountry: null == originCountry
+      originCountry: freezed == originCountry
           ? _value.originCountry
           : originCountry // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -87,7 +87,7 @@ abstract class _$$_ProductionCompanyCopyWith<$Res>
       __$$_ProductionCompanyCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, int id, String? logoPath, String originCountry});
+  $Res call({String? name, int? id, String? logoPath, String? originCountry});
 }
 
 /// @nodoc
@@ -101,28 +101,28 @@ class __$$_ProductionCompanyCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? id = null,
+    Object? name = freezed,
+    Object? id = freezed,
     Object? logoPath = freezed,
-    Object? originCountry = null,
+    Object? originCountry = freezed,
   }) {
     return _then(_$_ProductionCompany(
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
+              as String?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       logoPath: freezed == logoPath
           ? _value.logoPath
           : logoPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      originCountry: null == originCountry
+      originCountry: freezed == originCountry
           ? _value.originCountry
           : originCountry // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -141,13 +141,13 @@ class _$_ProductionCompany implements _ProductionCompany {
       _$$_ProductionCompanyFromJson(json);
 
   @override
-  final String name;
+  final String? name;
   @override
-  final int id;
+  final int? id;
   @override
   final String? logoPath;
   @override
-  final String originCountry;
+  final String? originCountry;
 
   @override
   String toString() {
@@ -189,22 +189,22 @@ class _$_ProductionCompany implements _ProductionCompany {
 
 abstract class _ProductionCompany implements ProductionCompany {
   const factory _ProductionCompany(
-      {required final String name,
-      required final int id,
+      {required final String? name,
+      required final int? id,
       required final String? logoPath,
-      required final String originCountry}) = _$_ProductionCompany;
+      required final String? originCountry}) = _$_ProductionCompany;
 
   factory _ProductionCompany.fromJson(Map<String, dynamic> json) =
       _$_ProductionCompany.fromJson;
 
   @override
-  String get name;
+  String? get name;
   @override
-  int get id;
+  int? get id;
   @override
   String? get logoPath;
   @override
-  String get originCountry;
+  String? get originCountry;
   @override
   @JsonKey(ignore: true)
   _$$_ProductionCompanyCopyWith<_$_ProductionCompany> get copyWith =>
