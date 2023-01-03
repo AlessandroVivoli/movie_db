@@ -7,7 +7,8 @@ class MovieService {
   static Future<List<Movie>?> getPopularMovies({List<int>? withGenres}) async {
     try {
       Response<dynamic> response = await Dio().fetch(RequestOptions(
-          path: 'https://api.themoviedb.org/3/discover/movie',
+          path: '/discover/movie',
+          baseUrl: dotenv.env['BASE_URL'],
           queryParameters: {
             'api_key': dotenv.env['TMDB_API_KEY'],
             'language': 'en-US',
@@ -28,7 +29,8 @@ class MovieService {
   static Future<MovieDetails?> getMovieDetails({required int id}) async {
     try {
       Response<dynamic> response = await Dio().fetch(RequestOptions(
-        path: 'http://api.themoviedb.org/3/movie/$id',
+        path: '/movie/$id',
+        baseUrl: dotenv.env['BASE_URL'],
         queryParameters: {
           'api_key': dotenv.env['TMDB_API_KEY'],
           'language': 'en_US',

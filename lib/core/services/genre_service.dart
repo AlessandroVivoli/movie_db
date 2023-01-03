@@ -11,7 +11,8 @@ class GenreService {
           'language': 'en-US'
         }),
       ).fetch(RequestOptions(
-        path: 'https://api.themoviedb.org/3/genre/movie/list',
+        path: '/genre/movie/list',
+        baseUrl: dotenv.env['BASE_URL'],
       ));
 
       List<Genre> data = (response.data as List<Map<String, Object?>>)
