@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_db/widgets/backdrop_image.dart';
+import 'package:movie_db/ui/shared/widgets/backdrop_image.dart';
 
 class CarouselItem extends StatelessWidget {
   final String image;

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_db/core/models/movie/movie.dart';
-import 'package:movie_db/widgets/rating.dart';
+import 'package:movie_db/ui/shared/widgets/rating.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
