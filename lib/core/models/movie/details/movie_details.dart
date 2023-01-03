@@ -11,6 +11,7 @@ part 'movie_details.g.dart';
 class MovieDetails with _$MovieDetails {
   @JsonSerializable(
     fieldRename: FieldRename.snake,
+    explicitToJson: true,
   )
   const factory MovieDetails({
     required bool adult,
