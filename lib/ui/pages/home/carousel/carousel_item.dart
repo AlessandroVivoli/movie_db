@@ -4,13 +4,15 @@ import 'package:movie_db/ui/shared/widgets/backdrop_image.dart';
 class CarouselItem extends StatelessWidget {
   final String image;
   final String title;
-  final Function()? onTap;
+  final int id;
+  final void Function(int id)? onTap;
 
   const CarouselItem({
     super.key,
     required this.image,
-    this.onTap,
     required this.title,
+    required this.id,
+    this.onTap,
   });
 
   @override
@@ -19,10 +21,10 @@ class CarouselItem extends StatelessWidget {
       constraints: const BoxConstraints(maxHeight: 2),
       child: Stack(
         children: [
-          GestureDetector(onTap: onTap),
           BackdropImage(imgUrl: image),
           _Title(title: title),
           const _PlayIcon(),
+          GestureDetector(onTap: (onTap == null) ? null : () => onTap!(id)),
         ],
       ),
     );
