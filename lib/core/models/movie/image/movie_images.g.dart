@@ -8,7 +8,7 @@ part of 'movie_images.dart';
 
 _$_MovieImages _$$_MovieImagesFromJson(Map<String, dynamic> json) =>
     _$_MovieImages(
-      backgdrops: (json['backgdrops'] as List<dynamic>)
+      backdrops: (json['backdrops'] as List<dynamic>)
           .map((e) => MovieImage.fromJson(e as Map<String, dynamic>))
           .toList(),
       posters: (json['posters'] as List<dynamic>)
@@ -18,6 +18,6 @@ _$_MovieImages _$$_MovieImagesFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_MovieImagesToJson(_$_MovieImages instance) =>
     <String, dynamic>{
-      'backgdrops': instance.backgdrops,
-      'posters': instance.posters,
+      'backdrops': instance.backdrops.map((e) => e.toJson()).toList(),
+      'posters': instance.posters.map((e) => e.toJson()).toList(),
     };

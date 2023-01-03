@@ -20,7 +20,7 @@ MovieImages _$MovieImagesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MovieImages {
-  List<MovieImage> get backgdrops => throw _privateConstructorUsedError;
+  List<MovieImage> get backdrops => throw _privateConstructorUsedError;
   List<MovieImage> get posters => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $MovieImagesCopyWith<$Res> {
           MovieImages value, $Res Function(MovieImages) then) =
       _$MovieImagesCopyWithImpl<$Res, MovieImages>;
   @useResult
-  $Res call({List<MovieImage> backgdrops, List<MovieImage> posters});
+  $Res call({List<MovieImage> backdrops, List<MovieImage> posters});
 }
 
 /// @nodoc
@@ -51,13 +51,13 @@ class _$MovieImagesCopyWithImpl<$Res, $Val extends MovieImages>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? backgdrops = null,
+    Object? backdrops = null,
     Object? posters = null,
   }) {
     return _then(_value.copyWith(
-      backgdrops: null == backgdrops
-          ? _value.backgdrops
-          : backgdrops // ignore: cast_nullable_to_non_nullable
+      backdrops: null == backdrops
+          ? _value.backdrops
+          : backdrops // ignore: cast_nullable_to_non_nullable
               as List<MovieImage>,
       posters: null == posters
           ? _value.posters
@@ -75,7 +75,7 @@ abstract class _$$_MovieImagesCopyWith<$Res>
       __$$_MovieImagesCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<MovieImage> backgdrops, List<MovieImage> posters});
+  $Res call({List<MovieImage> backdrops, List<MovieImage> posters});
 }
 
 /// @nodoc
@@ -89,13 +89,13 @@ class __$$_MovieImagesCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? backgdrops = null,
+    Object? backdrops = null,
     Object? posters = null,
   }) {
     return _then(_$_MovieImages(
-      backgdrops: null == backgdrops
-          ? _value._backgdrops
-          : backgdrops // ignore: cast_nullable_to_non_nullable
+      backdrops: null == backdrops
+          ? _value._backdrops
+          : backdrops // ignore: cast_nullable_to_non_nullable
               as List<MovieImage>,
       posters: null == posters
           ? _value._posters
@@ -106,23 +106,24 @@ class __$$_MovieImagesCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_MovieImages implements _MovieImages {
   const _$_MovieImages(
-      {required final List<MovieImage> backgdrops,
+      {required final List<MovieImage> backdrops,
       required final List<MovieImage> posters})
-      : _backgdrops = backgdrops,
+      : _backdrops = backdrops,
         _posters = posters;
 
   factory _$_MovieImages.fromJson(Map<String, dynamic> json) =>
       _$$_MovieImagesFromJson(json);
 
-  final List<MovieImage> _backgdrops;
+  final List<MovieImage> _backdrops;
   @override
-  List<MovieImage> get backgdrops {
-    if (_backgdrops is EqualUnmodifiableListView) return _backgdrops;
+  List<MovieImage> get backdrops {
+    if (_backdrops is EqualUnmodifiableListView) return _backdrops;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_backgdrops);
+    return EqualUnmodifiableListView(_backdrops);
   }
 
   final List<MovieImage> _posters;
@@ -135,7 +136,7 @@ class _$_MovieImages implements _MovieImages {
 
   @override
   String toString() {
-    return 'MovieImages(backgdrops: $backgdrops, posters: $posters)';
+    return 'MovieImages(backdrops: $backdrops, posters: $posters)';
   }
 
   @override
@@ -144,7 +145,7 @@ class _$_MovieImages implements _MovieImages {
         (other.runtimeType == runtimeType &&
             other is _$_MovieImages &&
             const DeepCollectionEquality()
-                .equals(other._backgdrops, _backgdrops) &&
+                .equals(other._backdrops, _backdrops) &&
             const DeepCollectionEquality().equals(other._posters, _posters));
   }
 
@@ -152,7 +153,7 @@ class _$_MovieImages implements _MovieImages {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_backgdrops),
+      const DeepCollectionEquality().hash(_backdrops),
       const DeepCollectionEquality().hash(_posters));
 
   @JsonKey(ignore: true)
@@ -171,14 +172,14 @@ class _$_MovieImages implements _MovieImages {
 
 abstract class _MovieImages implements MovieImages {
   const factory _MovieImages(
-      {required final List<MovieImage> backgdrops,
+      {required final List<MovieImage> backdrops,
       required final List<MovieImage> posters}) = _$_MovieImages;
 
   factory _MovieImages.fromJson(Map<String, dynamic> json) =
       _$_MovieImages.fromJson;
 
   @override
-  List<MovieImage> get backgdrops;
+  List<MovieImage> get backdrops;
   @override
   List<MovieImage> get posters;
   @override

@@ -7,8 +7,9 @@ part 'movie_images.g.dart';
 
 @freezed
 class MovieImages with _$MovieImages {
+  @JsonSerializable(explicitToJson: true)
   const factory MovieImages({
-    required List<MovieImage> backgdrops,
+    required List<MovieImage> backdrops,
     required List<MovieImage> posters,
   }) = _MovieImages;
 
