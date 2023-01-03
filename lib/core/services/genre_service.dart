@@ -7,7 +7,7 @@ class GenreService {
     try {
       Response<dynamic> response = await Dio(
         BaseOptions(queryParameters: {
-          'key': dotenv.env['TMDB_API_KEY'],
+          'api_key': dotenv.env['TMDB_API_KEY'],
           'language': 'en-US'
         }),
       ).fetch(RequestOptions(
