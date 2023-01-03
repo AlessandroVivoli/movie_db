@@ -5,15 +5,16 @@ import 'package:movie_db/core/models/genre/genre.dart';
 class GenreService {
   static Future<List<Genre>?> getGenres() async {
     try {
-      Response<dynamic> response = await Dio(
-        BaseOptions(queryParameters: {
-          'api_key': dotenv.env['TMDB_API_KEY'],
-          'language': 'en-US'
-        }),
-      ).fetch(RequestOptions(
-        path: '/genre/movie/list',
-        baseUrl: dotenv.env['BASE_URL'],
-      ));
+      Response<dynamic> response = await Dio().fetch(
+        RequestOptions(
+          path: '/genre/movie/list',
+          baseUrl: dotenv.env['BASE_URL'],
+          queryParameters: {
+            'api_key': dotenv.env['TMDB_API_KEY'],
+            'language': 'en-US'
+          },
+        ),
+      );
 
       List<Genre> data = (response.data as List<Map<String, Object?>>)
           .map((json) => Genre.fromJson(json))

@@ -6,7 +6,8 @@ import 'package:movie_db/core/models/movie/movie.dart';
 class MovieService {
   static Future<List<Movie>?> getPopularMovies({List<int>? withGenres}) async {
     try {
-      Response<dynamic> response = await Dio().fetch(RequestOptions(
+      Response<dynamic> response = await Dio().fetch(
+        RequestOptions(
           path: '/discover/movie',
           baseUrl: dotenv.env['BASE_URL'],
           queryParameters: {
@@ -14,7 +15,9 @@ class MovieService {
             'language': 'en-US',
             'sort_by': 'popularity.desc',
             'with_genres': withGenres?.join(','),
-          }));
+          },
+        ),
+      );
 
       List<Movie> data = (response.data as List<Map<String, Object?>>)
           .map((json) => Movie.fromJson(json))
