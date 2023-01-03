@@ -20,8 +20,8 @@ SpokenLanguage _$SpokenLanguageFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SpokenLanguage {
-  String get iso_649_1 => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String? get iso_649_1 => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $SpokenLanguageCopyWith<$Res> {
           SpokenLanguage value, $Res Function(SpokenLanguage) then) =
       _$SpokenLanguageCopyWithImpl<$Res, SpokenLanguage>;
   @useResult
-  $Res call({String iso_649_1, String name});
+  $Res call({String? iso_649_1, String? name});
 }
 
 /// @nodoc
@@ -51,18 +51,18 @@ class _$SpokenLanguageCopyWithImpl<$Res, $Val extends SpokenLanguage>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? iso_649_1 = null,
-    Object? name = null,
+    Object? iso_649_1 = freezed,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      iso_649_1: null == iso_649_1
+      iso_649_1: freezed == iso_649_1
           ? _value.iso_649_1
           : iso_649_1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$_SpokenLanguageCopyWith<$Res>
       __$$_SpokenLanguageCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String iso_649_1, String name});
+  $Res call({String? iso_649_1, String? name});
 }
 
 /// @nodoc
@@ -89,18 +89,18 @@ class __$$_SpokenLanguageCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? iso_649_1 = null,
-    Object? name = null,
+    Object? iso_649_1 = freezed,
+    Object? name = freezed,
   }) {
     return _then(_$_SpokenLanguage(
-      iso_649_1: null == iso_649_1
+      iso_649_1: freezed == iso_649_1
           ? _value.iso_649_1
           : iso_649_1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -115,9 +115,9 @@ class _$_SpokenLanguage implements _SpokenLanguage {
       _$$_SpokenLanguageFromJson(json);
 
   @override
-  final String iso_649_1;
+  final String? iso_649_1;
   @override
-  final String name;
+  final String? name;
 
   @override
   String toString() {
@@ -154,16 +154,16 @@ class _$_SpokenLanguage implements _SpokenLanguage {
 
 abstract class _SpokenLanguage implements SpokenLanguage {
   const factory _SpokenLanguage(
-      {required final String iso_649_1,
-      required final String name}) = _$_SpokenLanguage;
+      {required final String? iso_649_1,
+      required final String? name}) = _$_SpokenLanguage;
 
   factory _SpokenLanguage.fromJson(Map<String, dynamic> json) =
       _$_SpokenLanguage.fromJson;
 
   @override
-  String get iso_649_1;
+  String? get iso_649_1;
   @override
-  String get name;
+  String? get name;
   @override
   @JsonKey(ignore: true)
   _$$_SpokenLanguageCopyWith<_$_SpokenLanguage> get copyWith =>

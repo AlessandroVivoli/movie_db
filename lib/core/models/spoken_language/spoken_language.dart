@@ -9,8 +9,8 @@ class SpokenLanguage with _$SpokenLanguage {
     explicitToJson: true,
   )
   const factory SpokenLanguage({
-    required String iso_649_1,
-    required String name,
+    required String? iso_649_1,
+    required String? name,
   }) = _SpokenLanguage;
 
   factory SpokenLanguage.fromJson(Map<String, Object?> json) =>
