@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movie_db/core/models/movie/movie.dart';
-import 'package:movie_db/core/services/movie_service.dart';
-import 'package:movie_db/ui/pages/home/carousel/carousel.dart';
+
+import '../../../core/models/movie/movie.dart';
+import '../../../core/services/movie_service.dart';
+import '../../shared/widgets/genre_tab/genre_tab.dart';
+import 'carousel/carousel.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -33,11 +35,8 @@ class _HomePageState extends State<HomePage> {
                 builder: ((context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.data == null) {
-                      return const AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: Center(
-                          child: Text("Nothing found."),
-                        ),
+                      return const Center(
+                        child: Text('Nothing found.'),
                       );
                     }
 
@@ -54,6 +53,7 @@ class _HomePageState extends State<HomePage> {
                   );
                 }),
               ),
+              const GenreTab()
             ],
           ),
         ),

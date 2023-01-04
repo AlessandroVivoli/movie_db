@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_db/core/models/movie/movie.dart';
-import 'package:movie_db/core/services/movie_service.dart';
-import 'package:movie_db/ui/pages/home/carousel/carousel_item.dart';
+
+import '../../../../core/models/movie/movie.dart';
+import '../../../../core/services/movie_service.dart';
+import 'carousel_item.dart';
 
 class Carousel extends StatefulWidget {
   final List<Movie> movies;
@@ -34,26 +35,27 @@ class _CarouselState extends State<Carousel> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        AspectRatio(
-          aspectRatio: 16 / 9,
-          child: FutureBuilder(
+    return SizedBox(
+      height: 200,
+      child: Stack(
+        children: [
+          FutureBuilder(
             future: MovieService.getPopularMovies(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return PageView.builder(
-                    controller: _controller,
-                    itemCount: widget.movies.length,
-                    pageSnapping: true,
-                    itemBuilder: (context, pagePosition) {
-                      return CarouselItem(
-                        image: widget.movies[pagePosition].backdropPath ?? "",
-                        title: widget.movies[pagePosition].title,
-                        id: widget.movies[pagePosition].id,
-                        onTap: onTap,
-                      );
-                    });
+                  controller: _controller,
+                  itemCount: widget.movies.length,
+                  pageSnapping: true,
+                  itemBuilder: (context, pagePosition) {
+                    return CarouselItem(
+                      image: widget.movies[pagePosition].backdropPath ?? '',
+                      title: widget.movies[pagePosition].title,
+                      id: widget.movies[pagePosition].id,
+                      onTap: onTap,
+                    );
+                  },
+                );
               }
 
               return const Center(
@@ -61,41 +63,41 @@ class _CarouselState extends State<Carousel> {
               );
             },
           ),
-        ),
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: 20,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: List<Widget>.generate(
-              widget.movies.length,
-              (index) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: InkWell(
-                  onTap: () => _controller.animateToPage(
-                    index,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeOutCubic,
-                  ),
-                  child: CircleAvatar(
-                    radius: 3,
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: List<Widget>.generate(
+                widget.movies.length,
+                (index) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: InkWell(
+                    onTap: () => _controller.animateToPage(
+                      index,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeOutCubic,
+                    ),
+                    child: CircleAvatar(
+                      radius: 3,
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-        _ActiveDot(
-          controller: _controller,
-          length: widget.movies.length,
-          radius: 3,
-          padding: 5,
-        ),
-      ],
+          _ActiveDot(
+            controller: _controller,
+            length: widget.movies.length,
+            radius: 3,
+            padding: 5,
+          ),
+        ],
+      ),
     );
   }
 

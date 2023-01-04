@@ -260,8 +260,7 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class _$_Movie implements _Movie {
   const _$_Movie(
       {required this.posterPath,

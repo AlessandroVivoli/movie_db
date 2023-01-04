@@ -5,9 +5,6 @@ part 'movie.g.dart';
 
 @freezed
 class Movie with _$Movie {
-  @JsonSerializable(
-    fieldRename: FieldRename.snake,
-  )
   const factory Movie({
     required String? posterPath,
     required bool adult,

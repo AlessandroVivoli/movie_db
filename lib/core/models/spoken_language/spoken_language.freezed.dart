@@ -106,8 +106,7 @@ class __$$_SpokenLanguageCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$_SpokenLanguage implements _SpokenLanguage {
   const _$_SpokenLanguage({required this.iso_649_1, required this.name});
 

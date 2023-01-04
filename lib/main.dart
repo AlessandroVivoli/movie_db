@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:movie_db/ui/pages/home/home.dart';
+
+import 'ui/pages/home/home.dart';
 
 void main() async {
   await dotenv.load();
@@ -23,14 +24,23 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           backgroundColor: Color.fromARGB(255, 17, 25, 37),
         ),
+        tabBarTheme: const TabBarTheme(
+            indicator: ShapeDecoration(
+          shape: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Color.fromARGB(255, 217, 176, 22),
+              width: 5,
+            ),
+          ),
+        )),
         scaffoldBackgroundColor: const Color.fromARGB(255, 17, 25, 37),
         drawerTheme: const DrawerThemeData(
           backgroundColor: Color.fromARGB(255, 17, 25, 37),
         ),
       ),
-      initialRoute: "/home",
+      initialRoute: '/home',
       routes: {
-        "/home": (context) => const HomePage(title: "FlutterMovie"),
+        '/home': (context) => const HomePage(title: 'FlutterMovie'),
       },
     );
   }

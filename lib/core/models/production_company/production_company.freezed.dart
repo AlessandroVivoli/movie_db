@@ -128,8 +128,7 @@ class __$$_ProductionCompanyCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
+@JsonSerializable()
 class _$_ProductionCompany implements _ProductionCompany {
   const _$_ProductionCompany(
       {required this.name,

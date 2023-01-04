@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:movie_db/core/models/movie/image/movie_images.dart';
+
+import '../models/movie/image/movie_images.dart';
 
 class MovieImagesService {
   static Future<MovieImages?> getMovieImages({required int id}) async {

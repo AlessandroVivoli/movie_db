@@ -5,10 +5,6 @@ part 'movie_image.g.dart';
 
 @freezed
 class MovieImage with _$MovieImage {
-  @JsonSerializable(
-    explicitToJson: true,
-    fieldRename: FieldRename.snake,
-  )
   const factory MovieImage({
     required double aspectRatio,
     required String filePath,

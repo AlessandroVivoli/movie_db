@@ -106,8 +106,7 @@ class __$$_MovieImagesCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$_MovieImages implements _MovieImages {
   const _$_MovieImages(
       {required final List<MovieImage> backdrops,

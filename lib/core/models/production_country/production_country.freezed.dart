@@ -106,8 +106,7 @@ class __$$_ProductionCountryCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$_ProductionCountry implements _ProductionCountry {
   const _$_ProductionCountry({required this.iso_3166_1, required this.name});
 

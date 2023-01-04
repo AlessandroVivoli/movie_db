@@ -175,8 +175,7 @@ class __$$_MovieImageCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
+@JsonSerializable()
 class _$_MovieImage implements _MovieImage {
   const _$_MovieImage(
       {required this.aspectRatio,

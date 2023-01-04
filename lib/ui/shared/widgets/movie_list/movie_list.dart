@@ -1,16 +1,48 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class MovieList extends StatefulWidget {
-  const MovieList({super.key});
+import '../../../../core/models/movie/movie.dart';
+import '../movie_card/movie_card.dart';
 
-  @override
-  State<MovieList> createState() => _MovieListState();
-}
+class MovieList extends StatelessWidget {
+  final Future<List<Movie>?>? movieList;
 
-class _MovieListState extends State<MovieList> {
+  const MovieList({super.key, this.movieList});
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return FutureBuilder(
+      future: movieList,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData == false) {
+            return const Center(
+              child: Text('Nothing found.'),
+            );
+          }
+
+          final data = snapshot.data!;
+
+          return ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            scrollDirection: Axis.horizontal,
+            children: List<Widget>.generate(
+              data.length,
+              (index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: MovieCard(
+                    movie: data[index],
+                  ),
+                );
+              },
+            ),
+          );
+        }
+
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
   }
 }

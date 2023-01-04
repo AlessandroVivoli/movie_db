@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:movie_db/core/models/genre/genre.dart';
+
+import '../models/genre/genre.dart';
 
 class GenreService {
   static Future<List<Genre>?> getGenres() async {

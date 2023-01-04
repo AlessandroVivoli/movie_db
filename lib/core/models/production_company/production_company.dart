@@ -5,10 +5,6 @@ part 'production_company.g.dart';
 
 @freezed
 class ProductionCompany with _$ProductionCompany {
-  @JsonSerializable(
-    explicitToJson: true,
-    fieldRename: FieldRename.snake,
-  )
   const factory ProductionCompany({
     required String? name,
     required int? id,

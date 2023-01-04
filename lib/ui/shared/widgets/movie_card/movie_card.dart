@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_db/core/models/movie/movie.dart';
-import 'package:movie_db/ui/shared/widgets/rating.dart';
+
+import '../../../../core/models/movie/movie.dart';
+import '../rating/rating.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -11,31 +12,35 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AspectRatio(
-        aspectRatio: 2 / 3,
+    return AspectRatio(
+      aspectRatio: 9 / 16,
+      child: GestureDetector(
+        onTap: onTap,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(
-              flex: 2,
+            Expanded(
               child: Image(
                 image: NetworkImage(
-                  "https://image.tmdb.org/t/p/original${movie.posterPath}",
+                  'https://image.tmdb.org/t/p/w500${movie.posterPath}',
                 ),
                 fit: BoxFit.cover,
               ),
             ),
-            Flexible(
-              flex: 1,
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(movie.title),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10, bottom: 5),
+                    child: Text(movie.title),
+                  ),
                   Rating(
                     rating: movie.voteAverage,
                     size: 12,
-                    alignment: MainAxisAlignment.center,
+                    alignment: MainAxisAlignment.start,
                   )
                 ],
               ),

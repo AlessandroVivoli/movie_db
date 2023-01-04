@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_db/ui/shared/widgets/backdrop_image.dart';
+
+import '../../../shared/widgets/backdrop_image/backdrop_image.dart';
 
 class CarouselItem extends StatelessWidget {
   final String image;
@@ -17,16 +18,13 @@ class CarouselItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxHeight: 2),
-      child: Stack(
-        children: [
-          BackdropImage(imgUrl: image),
-          _Title(title: title),
-          const _PlayIcon(),
-          GestureDetector(onTap: (onTap == null) ? null : () => onTap!(id)),
-        ],
-      ),
+    return Stack(
+      children: [
+        BackdropImage(imgUrl: image),
+        _Title(title: title),
+        const _PlayIcon(),
+        GestureDetector(onTap: (onTap == null) ? null : () => onTap!(id)),
+      ],
     );
   }
 }

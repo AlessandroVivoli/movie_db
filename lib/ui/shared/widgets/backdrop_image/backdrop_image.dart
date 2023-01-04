@@ -15,6 +15,7 @@ class BackdropImage extends StatelessWidget {
             image: DecorationImage(
               image: NetworkImage('https://image.tmdb.org/t/p/original$imgUrl'),
               fit: BoxFit.cover,
+              alignment: Alignment.center,
             ),
           ),
         ),

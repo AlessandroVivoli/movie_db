@@ -386,8 +386,7 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
+@JsonSerializable()
 class _$_MovieDetails implements _MovieDetails {
   const _$_MovieDetails(
       {required this.adult,

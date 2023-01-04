@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:movie_db/core/models/movie/details/movie_details.dart';
-import 'package:movie_db/core/models/movie/movie.dart';
+
+import '../models/movie/details/movie_details.dart';
+import '../models/movie/movie.dart';
 
 class MovieService {
   static Future<List<Movie>?> getPopularMovies({List<int>? withGenres}) async {

@@ -1,18 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:movie_db/core/models/genre/genre.dart';
-import 'package:movie_db/core/models/production_company/production_company.dart';
-import 'package:movie_db/core/models/production_country/production_country.dart';
-import 'package:movie_db/core/models/spoken_language/spoken_language.dart';
+
+import '../../genre/genre.dart';
+import '../../production_company/production_company.dart';
+import '../../production_country/production_country.dart';
+import '../../spoken_language/spoken_language.dart';
 
 part 'movie_details.freezed.dart';
 part 'movie_details.g.dart';
 
 @freezed
 class MovieDetails with _$MovieDetails {
-  @JsonSerializable(
-    fieldRename: FieldRename.snake,
-    explicitToJson: true,
-  )
   const factory MovieDetails({
     required bool? adult,
     required String? backdropPath,

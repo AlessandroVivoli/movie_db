@@ -56,12 +56,9 @@ class Rating extends StatelessWidget {
       child: Row(
         mainAxisAlignment: alignment!,
         children: [
-          Padding(
-            padding: EdgeInsets.only(right: padding!),
-            child: SizedBox(
-              width: 32,
-              child: Center(child: Text(rating.toString())),
-            ),
+          SizedBox(
+            width: 32,
+            child: Text(rating.toString()),
           ),
           Stack(
             children: [
