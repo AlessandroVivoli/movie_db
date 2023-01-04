@@ -1,0 +1,23 @@
+{
+  "freezed": {
+    "scope": "dart",
+    "prefix": "frzd-class",
+    "body": [
+      "import 'package:freezed_annotation/freezed_annotation.dart';",
+      "",
+      "part '${TM_FILENAME_BASE}.freezed.dart';",
+      "part '${TM_FILENAME_BASE}.g.dart';",
+      "",
+      "@freezed",
+      "class ${2:NewClass} with _$${2:NewClass} {",
+      "  const factory ${2:NewClass}({",
+      "    required String value,",
+      "        }) = _${2:NewClass};",
+      "",
+      "  factory ${2:NewClass}.fromJson(Map<String, Object?> json) =>",
+      "      _$${2:NewClass}FromJson(json);",
+      "}"
+    ],
+    "description": "Basic Freezed class with JSON"
+  }
+}
