@@ -23,7 +23,6 @@ class MovieList extends StatelessWidget {
           final data = snapshot.data!;
 
           return ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
             scrollDirection: Axis.horizontal,
             children: List<Widget>.generate(
               data.length,
