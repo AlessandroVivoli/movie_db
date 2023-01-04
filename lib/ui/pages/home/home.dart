@@ -53,10 +53,45 @@ class _HomePageState extends State<HomePage> {
                   );
                 }),
               ),
-              const GenreTab()
+              const GenreTab(),
+              const _Wrapper(),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _Wrapper extends StatelessWidget {
+  const _Wrapper({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Row(
+              children: [
+                Text(
+                  'Trending persons on this week'.toUpperCase(),
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
