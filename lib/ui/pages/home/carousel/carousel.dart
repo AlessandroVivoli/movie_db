@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/models/movie/movie.dart';
@@ -103,9 +102,7 @@ class _CarouselState extends State<Carousel> {
 
   void onTap(id) async {
     final data = await MovieService.getMovieDetails(id: id);
-    if (kDebugMode) {
-      print(data);
-    }
+    debugPrint('$data');
   }
 }
 
