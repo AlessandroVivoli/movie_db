@@ -24,6 +24,7 @@ mixin _$Person {
   bool? get adult => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   List<dynamic>? get knownFor => throw _privateConstructorUsedError;
+  String? get knownForDepartment => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   double get popularity => throw _privateConstructorUsedError;
 
@@ -42,6 +43,7 @@ abstract class $PersonCopyWith<$Res> {
       bool? adult,
       int id,
       List<dynamic>? knownFor,
+      String? knownForDepartment,
       String name,
       double popularity});
 }
@@ -63,6 +65,7 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? adult = freezed,
     Object? id = null,
     Object? knownFor = freezed,
+    Object? knownForDepartment = freezed,
     Object? name = null,
     Object? popularity = null,
   }) {
@@ -83,6 +86,10 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.knownFor
           : knownFor // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
+      knownForDepartment: freezed == knownForDepartment
+          ? _value.knownForDepartment
+          : knownForDepartment // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -106,6 +113,7 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       bool? adult,
       int id,
       List<dynamic>? knownFor,
+      String? knownForDepartment,
       String name,
       double popularity});
 }
@@ -124,6 +132,7 @@ class __$$_PersonCopyWithImpl<$Res>
     Object? adult = freezed,
     Object? id = null,
     Object? knownFor = freezed,
+    Object? knownForDepartment = freezed,
     Object? name = null,
     Object? popularity = null,
   }) {
@@ -144,6 +153,10 @@ class __$$_PersonCopyWithImpl<$Res>
           ? _value._knownFor
           : knownFor // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
+      knownForDepartment: freezed == knownForDepartment
+          ? _value.knownForDepartment
+          : knownForDepartment // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -164,6 +177,7 @@ class _$_Person implements _Person {
       required this.adult,
       required this.id,
       required final List<dynamic>? knownFor,
+      required this.knownForDepartment,
       required this.name,
       required this.popularity})
       : _knownFor = knownFor;
@@ -188,13 +202,15 @@ class _$_Person implements _Person {
   }
 
   @override
+  final String? knownForDepartment;
+  @override
   final String name;
   @override
   final double popularity;
 
   @override
   String toString() {
-    return 'Person(profilePath: $profilePath, adult: $adult, id: $id, knownFor: $knownFor, name: $name, popularity: $popularity)';
+    return 'Person(profilePath: $profilePath, adult: $adult, id: $id, knownFor: $knownFor, knownForDepartment: $knownForDepartment, name: $name, popularity: $popularity)';
   }
 
   @override
@@ -207,6 +223,8 @@ class _$_Person implements _Person {
             (identical(other.adult, adult) || other.adult == adult) &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._knownFor, _knownFor) &&
+            (identical(other.knownForDepartment, knownForDepartment) ||
+                other.knownForDepartment == knownForDepartment) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.popularity, popularity) ||
                 other.popularity == popularity));
@@ -214,8 +232,15 @@ class _$_Person implements _Person {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, profilePath, adult, id,
-      const DeepCollectionEquality().hash(_knownFor), name, popularity);
+  int get hashCode => Object.hash(
+      runtimeType,
+      profilePath,
+      adult,
+      id,
+      const DeepCollectionEquality().hash(_knownFor),
+      knownForDepartment,
+      name,
+      popularity);
 
   @JsonKey(ignore: true)
   @override
@@ -237,6 +262,7 @@ abstract class _Person implements Person {
       required final bool? adult,
       required final int id,
       required final List<dynamic>? knownFor,
+      required final String? knownForDepartment,
       required final String name,
       required final double popularity}) = _$_Person;
 
@@ -250,6 +276,8 @@ abstract class _Person implements Person {
   int get id;
   @override
   List<dynamic>? get knownFor;
+  @override
+  String? get knownForDepartment;
   @override
   String get name;
   @override

@@ -10,6 +10,7 @@ class Person with _$Person {
     required bool? adult,
     required int id,
     required List<dynamic>? knownFor,
+    required String? knownForDepartment,
     required String name,
     required double popularity,
   }) = _Person;
