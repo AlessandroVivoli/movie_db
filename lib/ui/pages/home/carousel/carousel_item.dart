@@ -6,14 +6,12 @@ class CarouselItem extends StatelessWidget {
   final String image;
   final String title;
   final int id;
-  final void Function(int id)? onTap;
 
   const CarouselItem({
     super.key,
     required this.image,
     required this.title,
     required this.id,
-    this.onTap,
   });
 
   @override
@@ -23,7 +21,9 @@ class CarouselItem extends StatelessWidget {
         BackdropImage(imgUrl: image),
         _Title(title: title),
         const _PlayIcon(),
-        GestureDetector(onTap: (onTap == null) ? null : () => onTap!(id)),
+        GestureDetector(
+          onTap: () => debugPrint('$id'), // Add redirect to movie details page
+        ),
       ],
     );
   }

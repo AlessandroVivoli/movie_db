@@ -51,7 +51,6 @@ class _CarouselState extends State<Carousel> {
                       image: widget.movies[pagePosition].backdropPath ?? '',
                       title: widget.movies[pagePosition].title,
                       id: widget.movies[pagePosition].id,
-                      onTap: onTap,
                     );
                   },
                 );
@@ -98,11 +97,6 @@ class _CarouselState extends State<Carousel> {
         ],
       ),
     );
-  }
-
-  void onTap(id) async {
-    final data = await MovieService.getMovieDetails(id: id);
-    debugPrint('$data');
   }
 }
 

@@ -6,16 +6,16 @@ import '../rating/rating.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
-  final void Function()? onTap;
 
-  const MovieCard({super.key, required this.movie, this.onTap});
+  const MovieCard({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 9 / 16,
       child: GestureDetector(
-        onTap: onTap,
+        onTap: () =>
+            debugPrint('${movie.id}'), // Add redirect to movie details page
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
