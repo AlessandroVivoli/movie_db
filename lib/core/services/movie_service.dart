@@ -36,6 +36,24 @@ class MovieService {
     }
   }
 
+  static Future<List<Movie>> getTopRatedMovies() async {
+    try {
+      Response<dynamic> response = await DioProvider.dio.get(
+        '/movie/top_rated',
+      );
+
+      final rawData = List<Map<String, dynamic>>.from(
+        Map<String, dynamic>.from(response.data)['results'],
+      );
+
+      final data = rawData.map(Movie.fromJson).toList();
+
+      return data;
+    } on DioError catch (e) {
+      return Future.error(e);
+    }
+  }
+
   static Future<List<Movie>> getMovies({
     List<int>? withGenres,
     String? sortBy,
