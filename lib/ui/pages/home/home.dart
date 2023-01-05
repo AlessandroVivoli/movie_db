@@ -153,7 +153,7 @@ class _Wrapper extends StatelessWidget {
           LimitedBox(
             maxHeight: 250,
             child: FutureBuilder(
-              future: MovieService.getMovies(sortBy: 'vote_average.desc'),
+              future: MovieService.getTopRatedMovies(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
