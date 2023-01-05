@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'core/providers/dio_provider.dart';
 import 'ui/pages/home/home.dart';
 
 void main() async {
   await dotenv.load();
+
+  DioProvider.init();
+
   runApp(const MyApp());
 }
 
