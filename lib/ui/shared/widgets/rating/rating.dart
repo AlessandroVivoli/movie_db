@@ -57,8 +57,8 @@ class Rating extends StatelessWidget {
         mainAxisAlignment: alignment!,
         children: [
           SizedBox(
-            width: 32,
-            child: Text(rating.toString()),
+            width: 30,
+            child: Text(rating.toStringAsFixed(1)),
           ),
           Stack(
             children: [
