@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/models/movie/movie.dart';
-import '../../../../core/services/movie_service.dart';
 import 'carousel_item.dart';
 
 class Carousel extends StatefulWidget {
@@ -16,12 +15,10 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel> {
   late final PageController _controller;
-  late double _activePage;
 
   @override
   void initState() {
     _controller = PageController();
-    _activePage = 0;
 
     super.initState();
   }
@@ -38,26 +35,15 @@ class _CarouselState extends State<Carousel> {
       height: 200,
       child: Stack(
         children: [
-          FutureBuilder(
-            future: MovieService.getPopularMovies(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return PageView.builder(
-                  controller: _controller,
-                  itemCount: widget.movies.length,
-                  pageSnapping: true,
-                  itemBuilder: (context, pagePosition) {
-                    return CarouselItem(
-                      image: widget.movies[pagePosition].backdropPath ?? '',
-                      title: widget.movies[pagePosition].title,
-                      id: widget.movies[pagePosition].id,
-                    );
-                  },
-                );
-              }
-
-              return const Center(
-                child: CircularProgressIndicator(),
+          PageView.builder(
+            controller: _controller,
+            itemCount: widget.movies.length,
+            pageSnapping: true,
+            itemBuilder: (context, pagePosition) {
+              return CarouselItem(
+                image: widget.movies[pagePosition].backdropPath ?? '',
+                title: widget.movies[pagePosition].title,
+                id: widget.movies[pagePosition].id,
               );
             },
           ),
