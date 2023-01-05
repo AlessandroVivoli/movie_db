@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../genre/genre.dart';
-
 part 'movie_with_media_type.freezed.dart';
 part 'movie_with_media_type.g.dart';
 
@@ -11,7 +9,7 @@ class MovieWithMediaType with _$MovieWithMediaType {
     required String? posterPath,
     required bool adult,
     required String overview,
-    required DateTime releaseDate,
+    required String releaseDate,
     required String originalTitle,
     required List<int> genreIds,
     required int id,

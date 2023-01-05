@@ -27,7 +27,7 @@ mixin _$TVWithMediaType {
   String? get backdropPath => throw _privateConstructorUsedError;
   double get voteAverage => throw _privateConstructorUsedError;
   String get mediaType => throw _privateConstructorUsedError;
-  DateTime get firstAirDate => throw _privateConstructorUsedError;
+  String get firstAirDate => throw _privateConstructorUsedError;
   List<String> get originCountry => throw _privateConstructorUsedError;
   List<int> get genreIds => throw _privateConstructorUsedError;
   String get originalLanguage => throw _privateConstructorUsedError;
@@ -55,7 +55,7 @@ abstract class $TVWithMediaTypeCopyWith<$Res> {
       String? backdropPath,
       double voteAverage,
       String mediaType,
-      DateTime firstAirDate,
+      String firstAirDate,
       List<String> originCountry,
       List<int> genreIds,
       String originalLanguage,
@@ -124,7 +124,7 @@ class _$TVWithMediaTypeCopyWithImpl<$Res, $Val extends TVWithMediaType>
       firstAirDate: null == firstAirDate
           ? _value.firstAirDate
           : firstAirDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       originCountry: null == originCountry
           ? _value.originCountry
           : originCountry // ignore: cast_nullable_to_non_nullable
@@ -169,7 +169,7 @@ abstract class _$$_TVWithMediaTypeCopyWith<$Res>
       String? backdropPath,
       double voteAverage,
       String mediaType,
-      DateTime firstAirDate,
+      String firstAirDate,
       List<String> originCountry,
       List<int> genreIds,
       String originalLanguage,
@@ -236,7 +236,7 @@ class __$$_TVWithMediaTypeCopyWithImpl<$Res>
       firstAirDate: null == firstAirDate
           ? _value.firstAirDate
           : firstAirDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       originCountry: null == originCountry
           ? _value._originCountry
           : originCountry // ignore: cast_nullable_to_non_nullable
@@ -304,7 +304,7 @@ class _$_TVWithMediaType implements _TVWithMediaType {
   @override
   final String mediaType;
   @override
-  final DateTime firstAirDate;
+  final String firstAirDate;
   final List<String> _originCountry;
   @override
   List<String> get originCountry {
@@ -409,7 +409,7 @@ abstract class _TVWithMediaType implements TVWithMediaType {
       required final String? backdropPath,
       required final double voteAverage,
       required final String mediaType,
-      required final DateTime firstAirDate,
+      required final String firstAirDate,
       required final List<String> originCountry,
       required final List<int> genreIds,
       required final String originalLanguage,
@@ -435,7 +435,7 @@ abstract class _TVWithMediaType implements TVWithMediaType {
   @override
   String get mediaType;
   @override
-  DateTime get firstAirDate;
+  String get firstAirDate;
   @override
   List<String> get originCountry;
   @override

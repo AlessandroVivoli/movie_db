@@ -23,7 +23,7 @@ mixin _$Movie {
   String? get posterPath => throw _privateConstructorUsedError;
   bool get adult => throw _privateConstructorUsedError;
   String get overview => throw _privateConstructorUsedError;
-  DateTime get releaseDate => throw _privateConstructorUsedError;
+  String get releaseDate => throw _privateConstructorUsedError;
   List<int> get genreIds => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   String get originalTitle => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $MovieCopyWith<$Res> {
       {String? posterPath,
       bool adult,
       String overview,
-      DateTime releaseDate,
+      String releaseDate,
       List<int> genreIds,
       int id,
       String originalTitle,
@@ -106,7 +106,7 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
       releaseDate: null == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       genreIds: null == genreIds
           ? _value.genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
@@ -161,7 +161,7 @@ abstract class _$$_MovieCopyWith<$Res> implements $MovieCopyWith<$Res> {
       {String? posterPath,
       bool adult,
       String overview,
-      DateTime releaseDate,
+      String releaseDate,
       List<int> genreIds,
       int id,
       String originalTitle,
@@ -214,7 +214,7 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
       releaseDate: null == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       genreIds: null == genreIds
           ? _value._genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
@@ -289,7 +289,7 @@ class _$_Movie implements _Movie {
   @override
   final String overview;
   @override
-  final DateTime releaseDate;
+  final String releaseDate;
   final List<int> _genreIds;
   @override
   List<int> get genreIds {
@@ -390,7 +390,7 @@ abstract class _Movie implements Movie {
       {required final String? posterPath,
       required final bool adult,
       required final String overview,
-      required final DateTime releaseDate,
+      required final String releaseDate,
       required final List<int> genreIds,
       required final int id,
       required final String originalTitle,
@@ -411,7 +411,7 @@ abstract class _Movie implements Movie {
   @override
   String get overview;
   @override
-  DateTime get releaseDate;
+  String get releaseDate;
   @override
   List<int> get genreIds;
   @override

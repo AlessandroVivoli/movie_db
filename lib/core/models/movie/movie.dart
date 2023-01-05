@@ -9,7 +9,7 @@ class Movie with _$Movie {
     required String? posterPath,
     required bool adult,
     required String overview,
-    required DateTime releaseDate,
+    required String releaseDate,
     required List<int> genreIds,
     required int id,
     required String originalTitle,

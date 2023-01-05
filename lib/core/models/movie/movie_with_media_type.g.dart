@@ -12,7 +12,7 @@ _$_MovieWithMediaType _$$_MovieWithMediaTypeFromJson(
       posterPath: json['poster_path'] as String?,
       adult: json['adult'] as bool,
       overview: json['overview'] as String,
-      releaseDate: DateTime.parse(json['release_date'] as String),
+      releaseDate: json['release_date'] as String,
       originalTitle: json['original_title'] as String,
       genreIds:
           (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
@@ -33,7 +33,7 @@ Map<String, dynamic> _$$_MovieWithMediaTypeToJson(
       'poster_path': instance.posterPath,
       'adult': instance.adult,
       'overview': instance.overview,
-      'release_date': instance.releaseDate.toIso8601String(),
+      'release_date': instance.releaseDate,
       'original_title': instance.originalTitle,
       'genre_ids': instance.genreIds,
       'id': instance.id,

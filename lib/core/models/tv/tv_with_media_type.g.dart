@@ -15,7 +15,7 @@ _$_TVWithMediaType _$$_TVWithMediaTypeFromJson(Map<String, dynamic> json) =>
       backdropPath: json['backdrop_path'] as String?,
       voteAverage: (json['vote_average'] as num).toDouble(),
       mediaType: json['media_type'] as String,
-      firstAirDate: DateTime.parse(json['first_air_date'] as String),
+      firstAirDate: json['first_air_date'] as String,
       originCountry: (json['origin_country'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -36,7 +36,7 @@ Map<String, dynamic> _$$_TVWithMediaTypeToJson(_$_TVWithMediaType instance) =>
       'backdrop_path': instance.backdropPath,
       'vote_average': instance.voteAverage,
       'media_type': instance.mediaType,
-      'first_air_date': instance.firstAirDate.toIso8601String(),
+      'first_air_date': instance.firstAirDate,
       'origin_country': instance.originCountry,
       'genre_ids': instance.genreIds,
       'original_language': instance.originalLanguage,

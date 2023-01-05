@@ -13,7 +13,7 @@ class TVWithMediaType with _$TVWithMediaType {
     required String? backdropPath,
     required double voteAverage,
     required String mediaType,
-    required DateTime firstAirDate,
+    required String firstAirDate,
     required List<String> originCountry,
     required List<int> genreIds,
     required String originalLanguage,

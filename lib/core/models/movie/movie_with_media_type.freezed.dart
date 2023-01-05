@@ -23,7 +23,7 @@ mixin _$MovieWithMediaType {
   String? get posterPath => throw _privateConstructorUsedError;
   bool get adult => throw _privateConstructorUsedError;
   String get overview => throw _privateConstructorUsedError;
-  DateTime get releaseDate => throw _privateConstructorUsedError;
+  String get releaseDate => throw _privateConstructorUsedError;
   String get originalTitle => throw _privateConstructorUsedError;
   List<int> get genreIds => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $MovieWithMediaTypeCopyWith<$Res> {
       {String? posterPath,
       bool adult,
       String overview,
-      DateTime releaseDate,
+      String releaseDate,
       String originalTitle,
       List<int> genreIds,
       int id,
@@ -111,7 +111,7 @@ class _$MovieWithMediaTypeCopyWithImpl<$Res, $Val extends MovieWithMediaType>
       releaseDate: null == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       originalTitle: null == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
@@ -172,7 +172,7 @@ abstract class _$$_MovieWithMediaTypeCopyWith<$Res>
       {String? posterPath,
       bool adult,
       String overview,
-      DateTime releaseDate,
+      String releaseDate,
       String originalTitle,
       List<int> genreIds,
       int id,
@@ -229,7 +229,7 @@ class __$$_MovieWithMediaTypeCopyWithImpl<$Res>
       releaseDate: null == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       originalTitle: null == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
@@ -309,7 +309,7 @@ class _$_MovieWithMediaType implements _MovieWithMediaType {
   @override
   final String overview;
   @override
-  final DateTime releaseDate;
+  final String releaseDate;
   @override
   final String originalTitle;
   final List<int> _genreIds;
@@ -416,7 +416,7 @@ abstract class _MovieWithMediaType implements MovieWithMediaType {
       {required final String? posterPath,
       required final bool adult,
       required final String overview,
-      required final DateTime releaseDate,
+      required final String releaseDate,
       required final String originalTitle,
       required final List<int> genreIds,
       required final int id,
@@ -439,7 +439,7 @@ abstract class _MovieWithMediaType implements MovieWithMediaType {
   @override
   String get overview;
   @override
-  DateTime get releaseDate;
+  String get releaseDate;
   @override
   String get originalTitle;
   @override
