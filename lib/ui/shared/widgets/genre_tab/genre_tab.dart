@@ -15,27 +15,15 @@ class GenreTab extends StatelessWidget {
       future: GenreService.getGenres(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [CircularProgressIndicator()],
-          );
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (snapshot.hasError) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [Text('Nothing found')],
-          );
+          return const Center(child: Text('Nothing found'));
         }
 
         if (!snapshot.hasData || (snapshot.hasData && snapshot.data!.isEmpty)) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [Text('Nothing found')],
-          );
+          return const Center(child: Text('Nothing found'));
         }
 
         final data = snapshot.data!;
