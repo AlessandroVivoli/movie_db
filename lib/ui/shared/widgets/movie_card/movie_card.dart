@@ -21,11 +21,13 @@ class MovieCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Image(
-                image: NetworkImage(
-                  'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+              child: Center(
+                child: Image(
+                  image: NetworkImage(
+                    'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                  ),
+                  fit: BoxFit.cover,
                 ),
-                fit: BoxFit.cover,
               ),
             ),
             Container(
