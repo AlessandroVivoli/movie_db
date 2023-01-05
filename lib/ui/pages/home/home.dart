@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/models/movie/movie.dart';
 import '../../../core/services/movie_service.dart';
+import '../../../core/services/person_service.dart';
 import '../../shared/widgets/genre_tab/genre_tab.dart';
+import '../../shared/widgets/movie_list/movie_list.dart';
+import '../../shared/widgets/person_list/person_list.dart';
 import 'carousel/carousel.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,27 +33,39 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               FutureBuilder(
-                future: MovieService.getPopularMovies(),
-                builder: ((context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.data == null) {
-                      return const Center(
-                        child: Text('Nothing found.'),
-                      );
-                    }
-
-                    return Carousel(
-                      movies: (snapshot.data as List<Movie>).take(6).toList(),
+                future: MovieService.getTrendingMovies(timeWindow: 'week'),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
                     );
                   }
 
-                  return const AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                  if (snapshot.hasError) {
+                    return const AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: Center(
+                        child: Text('Nothing found.'),
+                      ),
+                    );
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: Center(
+                        child: Text('Nothing found.'),
+                      ),
+                    );
+                  }
+
+                  return Carousel(
+                    movies: (snapshot.data!).take(6).toList(),
                   );
-                }),
+                },
               ),
               const GenreTab(),
               const _Wrapper(),
@@ -73,16 +87,16 @@ class _Wrapper extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
             child: Row(
               children: [
                 Text(
                   'Trending persons on this week'.toUpperCase(),
-                  textAlign: TextAlign.start,
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.w600,
@@ -91,6 +105,81 @@ class _Wrapper extends StatelessWidget {
               ],
             ),
           ),
+          Container(
+            height: 130,
+            margin: const EdgeInsets.symmetric(vertical: 5),
+            child: FutureBuilder(
+              future: PersonService.getTrendingPersons(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('Nothing found'),
+                  );
+                }
+
+                if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(
+                    child: Text('Nothing found'),
+                  );
+                }
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 5),
+                  child: PersonList(personList: snapshot.data!),
+                );
+              },
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            child: Row(
+              children: [
+                Text(
+                  'Top rated movies'.toUpperCase(),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          LimitedBox(
+            maxHeight: 250,
+            child: FutureBuilder(
+              future: MovieService.getMovies(sortBy: 'vote_average.desc'),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('Has error'),
+                  );
+                }
+
+                if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(
+                    child: Text('Nothing found'),
+                  );
+                }
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 5),
+                  child: MovieList(movieList: snapshot.data!),
+                );
+              },
+            ),
+          )
         ],
       ),
     );
