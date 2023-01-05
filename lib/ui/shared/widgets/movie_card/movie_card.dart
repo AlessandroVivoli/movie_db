@@ -11,17 +11,19 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 9 / 16,
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 120),
       child: GestureDetector(
         onTap: () =>
             debugPrint('${movie.id}'), // Add redirect to movie details page
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: (movie.posterPath != null)
+              ? MainAxisAlignment.spaceBetween
+              : MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Center(
+            if (movie.posterPath != null)
+              Expanded(
                 child: Image(
                   image: NetworkImage(
                     'https://image.tmdb.org/t/p/w500${movie.posterPath}',
@@ -29,7 +31,6 @@ class MovieCard extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-            ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
@@ -37,11 +38,17 @@ class MovieCard extends StatelessWidget {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(top: 10, bottom: 5),
-                    child: Text(movie.title),
+                    child: Text(
+                      movie.title,
+                      overflow: (movie.posterPath != null)
+                          ? TextOverflow.ellipsis
+                          : TextOverflow.visible,
+                    ),
                   ),
                   Rating(
                     rating: movie.voteAverage,
                     size: 12,
+                    padding: 1,
                     alignment: MainAxisAlignment.start,
                   )
                 ],
