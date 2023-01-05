@@ -5,9 +5,10 @@ class QueryInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     options.queryParameters.addAll({
-      'api_key': dotenv.env['TMD_API_KEY'],
+      'api_key': dotenv.env['TMDB_API_KEY'],
       'language': 'en_US',
     });
+
     super.onRequest(options, handler);
   }
 }
