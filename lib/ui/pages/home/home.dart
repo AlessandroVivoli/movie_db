@@ -36,8 +36,8 @@ class _HomePageState extends State<HomePage> {
                 future: MovieService.getTrendingMovies(timeWindow: 'week'),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const AspectRatio(
-                      aspectRatio: 16 / 9,
+                    return const SizedBox(
+                      height: 200,
                       child: Center(
                         child: CircularProgressIndicator(),
                       ),
@@ -45,8 +45,8 @@ class _HomePageState extends State<HomePage> {
                   }
 
                   if (snapshot.hasError) {
-                    return const AspectRatio(
-                      aspectRatio: 16 / 9,
+                    return const SizedBox(
+                      height: 200,
                       child: Center(
                         child: Text('Nothing found.'),
                       ),
@@ -54,8 +54,8 @@ class _HomePageState extends State<HomePage> {
                   }
 
                   if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const AspectRatio(
-                      aspectRatio: 16 / 9,
+                    return const SizedBox(
+                      height: 200,
                       child: Center(
                         child: Text('Nothing found.'),
                       ),
@@ -67,7 +67,10 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              const GenreTab(),
+              const LimitedBox(
+                maxHeight: 300,
+                child: GenreTab(),
+              ),
               const _Wrapper(),
             ],
           ),
