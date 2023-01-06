@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import '../../../../core/models/movie/movie.dart';
 import '../../../../core/services/genre_service.dart';
@@ -19,6 +19,12 @@ class GenreTab extends StatelessWidget {
         }
 
         if (snapshot.hasError) {
+          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Could not get genres')),
+            );
+          });
+
           return const Center(child: Text('Nothing found'));
         }
 
@@ -78,7 +84,11 @@ class GenreTab extends StatelessWidget {
     }
 
     if (snapshot.hasError) {
-      debugPrint((snapshot.error as DioError).message);
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not get movies')),
+        );
+      });
 
       return const Center(
         child: Text('Nothing found!'),

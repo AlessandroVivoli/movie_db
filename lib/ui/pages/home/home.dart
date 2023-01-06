@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import '../../../core/services/movie_service.dart';
 import '../../../core/services/person_service.dart';
@@ -45,6 +46,14 @@ class _HomePageState extends State<HomePage> {
                   }
 
                   if (snapshot.hasError) {
+                    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Could not get trending movies'),
+                        ),
+                      );
+                    });
+
                     return const SizedBox(
                       height: 200,
                       child: Center(
@@ -121,6 +130,13 @@ class _Wrapper extends StatelessWidget {
                 }
 
                 if (snapshot.hasError) {
+                  SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Could not get trending persons'),
+                      ),
+                    );
+                  });
                   return const Center(
                     child: Text('Nothing found'),
                   );
@@ -165,6 +181,14 @@ class _Wrapper extends StatelessWidget {
                 }
 
                 if (snapshot.hasError) {
+                  SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Could not get top rated movies'),
+                      ),
+                    );
+                  });
+
                   return const Center(
                     child: Text('Has error'),
                   );
