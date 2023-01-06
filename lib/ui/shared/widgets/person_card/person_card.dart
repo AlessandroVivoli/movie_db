@@ -21,7 +21,7 @@ class PersonCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        debugPrint('${person.id}');
+        // TODO: Add redirect to person details page. Maybe?
       },
       child: Column(
         children: [

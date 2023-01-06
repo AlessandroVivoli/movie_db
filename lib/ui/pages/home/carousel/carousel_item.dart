@@ -22,7 +22,9 @@ class CarouselItem extends StatelessWidget {
         _Title(title: title),
         const _PlayIcon(),
         GestureDetector(
-          onTap: () => debugPrint('$id'), // Add redirect to movie details page
+          onTap: () {
+            // TODO: Add redirect to movie details page
+          },
         ),
       ],
     );

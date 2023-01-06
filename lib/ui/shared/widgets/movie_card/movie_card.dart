@@ -14,8 +14,9 @@ class MovieCard extends StatelessWidget {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 120),
       child: GestureDetector(
-        onTap: () =>
-            debugPrint('${movie.id}'), // Add redirect to movie details page
+        onTap: () {
+          // TODO: Add redirect to movie details page
+        },
         child: Column(
           mainAxisAlignment: (movie.posterPath != null)
               ? MainAxisAlignment.spaceBetween
