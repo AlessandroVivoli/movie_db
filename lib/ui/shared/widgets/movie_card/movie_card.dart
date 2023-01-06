@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/models/movie/movie.dart';
+import '../../../../core/services/image_service.dart';
+import '../../../../utils/enums.dart';
 import '../rating/rating.dart';
 
 class MovieCard extends StatelessWidget {
@@ -26,8 +28,9 @@ class MovieCard extends StatelessWidget {
             if (movie.posterPath != null)
               Expanded(
                 child: Image(
-                  image: NetworkImage(
-                    'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                  image: ImageService.getImage(
+                    size: PosterSizes.w500.name,
+                    path: movie.posterPath!,
                   ),
                   fit: BoxFit.cover,
                 ),

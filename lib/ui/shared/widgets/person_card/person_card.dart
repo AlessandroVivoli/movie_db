@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/models/person/person.dart';
+import '../../../../core/services/image_service.dart';
+import '../../../../utils/enums.dart';
 import '../blank_profile_image/blank_profile_image.dart';
 
 class PersonCard extends StatelessWidget {
@@ -17,8 +19,6 @@ class PersonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imgPath = 'https://image.tmdb.org/t/p/w500/${person.profilePath}';
-
     return GestureDetector(
       onTap: () {
         // TODO: Add redirect to person details page. Maybe?
@@ -29,8 +29,9 @@ class PersonCard extends StatelessWidget {
             Center(
               child: CircleAvatar(
                 radius: imgRadius,
-                backgroundImage: NetworkImage(
-                  imgPath,
+                backgroundImage: ImageService.getImage(
+                  size: ProfileSizes.w185.name,
+                  path: person.profilePath!,
                 ),
               ),
             ),

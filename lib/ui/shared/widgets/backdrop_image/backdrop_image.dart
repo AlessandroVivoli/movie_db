@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/services/image_service.dart';
+import '../../../../utils/enums.dart';
+
 class BackdropImage extends StatelessWidget {
   final String imgUrl;
 
@@ -13,7 +16,10 @@ class BackdropImage extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 1),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage('https://image.tmdb.org/t/p/original$imgUrl'),
+              image: ImageService.getImage(
+                size: BackdropSizes.original.name,
+                path: imgUrl,
+              ),
               fit: BoxFit.cover,
               alignment: Alignment.center,
             ),
