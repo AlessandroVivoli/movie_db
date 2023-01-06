@@ -1,10 +1,32 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:loggy/loggy.dart';
 
 import 'ui/pages/home/home.dart';
 
 void main() async {
   await dotenv.load();
+
+  Loggy.initLoggy(
+    logOptions: const LogOptions(
+      LogLevel.all,
+      stackTraceLevel: LogLevel.error,
+    ),
+  );
+
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+
+    if (!kDebugMode) {
+      logError(details.toString(), details.stack);
+    }
+  };
+
+  PlatformDispatcher.instance.onError = (error, stack) {
+    logError(error, stack);
+    return true;
+  };
 
   runApp(const MyApp());
 }
