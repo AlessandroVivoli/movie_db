@@ -1,29 +1,11 @@
-import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 import '../models/movie/image/movie_images.dart';
+import '../providers/dio_provider.dart';
 
 class MovieImagesService {
-  static Future<MovieImages?> getMovieImages({required int id}) async {
-    try {
-      Response<dynamic> response = await Dio().fetch(
-        RequestOptions(
-          path: '/movie/$id/images',
-          baseUrl: dotenv.env['BASE_URL'],
-          queryParameters: {
-            'api_key': dotenv.env['TMDB_API_KEY'],
-            'language': 'en_US'
-          },
-        ),
-      );
-
-      final responseBody = Map<String, dynamic>.from(response.data);
-
-      MovieImages images = MovieImages.fromJson(responseBody);
-
-      return images;
-    } catch (e) {
-      return null;
-    }
+  static Future<MovieImages> getMovieImages({required int id}) {
+    return DioProvider.dio
+        .get('/movie/$id/images')
+        .then((res) => Map<String, Object?>.from(res.data))
+        .then(MovieImages.fromJson);
   }
 }

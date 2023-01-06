@@ -1,32 +1,12 @@
-import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 import '../models/genre/genre.dart';
+import '../providers/dio_provider.dart';
 
 class GenreService {
-  static Future<List<Genre>?> getGenres() async {
-    try {
-      Response<dynamic> response = await Dio().get(
-        '${dotenv.env['BASE_URL']}/genre/movie/list',
-        queryParameters: {
-          'api_key': dotenv.env['TMDB_API_KEY'],
-          'language': 'en-US'
-        },
-        options: Options(
-          method: 'GET',
-          contentType: 'application/json',
-        ),
-      );
-
-      final responseBody = List<Map<String, dynamic>>.from(
-        Map<String, dynamic>.from(response.data)['genres'],
-      );
-
-      List<Genre> data = (responseBody).map(Genre.fromJson).toList();
-
-      return data;
-    } catch (e) {
-      return null;
-    }
+  static Future<List<Genre>> getGenres() {
+    return DioProvider.dio
+        .get('/genre/movie/list')
+        .then((res) => List<Map<String, Object?>>.from(res.data['genres']))
+        .then((rawList) => rawList.map(Genre.fromJson))
+        .then((genres) => genres.toList());
   }
 }

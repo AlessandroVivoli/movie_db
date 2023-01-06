@@ -1,7 +1,3 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 import '../../utils/extensions.dart';
 import '../models/movie/details/movie_details.dart';
 import '../models/movie/movie.dart';
@@ -11,97 +7,48 @@ class MovieService {
   static Future<List<Movie>> getTrendingMovies({
     List<int>? withGenres,
     String timeWindow = 'week',
-  }) async {
-    try {
-      Response<dynamic> response = await DioProvider.dio.get(
-        '/trending/movie/$timeWindow',
-      );
-
-      final rawData = List<Map<String, dynamic>>.from(
-        Map<String, dynamic>.from(response.data)['results'],
-      );
-
-      var data = rawData.map(Movie.fromJson).toList();
-
-      if (withGenres != null) {
-        data = data
-            .where((movie) => movie.genreIds.containsAny(withGenres))
-            .toList();
-      }
-
-      return data;
-    } on DioError catch (e) {
-      debugPrint(e.message);
-      return List.empty();
-    }
+  }) {
+    return DioProvider.dio
+        .get('/trending/movie/$timeWindow')
+        .then((res) => List<Map<String, Object?>>.from(res.data['results']))
+        .then((rawList) => rawList.map(Movie.fromJson))
+        .then(
+          (movies) => withGenres != null
+              ? movies.where((movie) => movie.genreIds.containsAny(withGenres))
+              : movies,
+        )
+        .then((movies) => movies.toList());
   }
 
-  static Future<List<Movie>> getTopRatedMovies() async {
-    try {
-      Response<dynamic> response = await DioProvider.dio.get(
-        '/movie/top_rated',
-      );
-
-      final rawData = List<Map<String, dynamic>>.from(
-        Map<String, dynamic>.from(response.data)['results'],
-      );
-
-      final data = rawData.map(Movie.fromJson).toList();
-
-      return data;
-    } on DioError catch (e) {
-      return Future.error(e);
-    }
+  static Future<List<Movie>> getTopRatedMovies() {
+    return DioProvider.dio
+        .get('/movie/top_rated')
+        .then((res) => List<Map<String, Object?>>.from(res.data['results']))
+        .then((rawList) => rawList.map(Movie.fromJson))
+        .then((movies) => movies.toList());
   }
 
   static Future<List<Movie>> getMovies({
     List<int>? withGenres,
     String? sortBy,
-  }) async {
-    try {
-      Response<dynamic> response = await DioProvider.dio.get(
-        '/discover/movie',
-        queryParameters: {
-          'sort_by': sortBy,
-          'with_genres': withGenres?.join(','),
-        },
-      );
-
-      final rawData = List<Map<String, dynamic>>.from(
-        Map<String, dynamic>.from(response.data)['results'],
-      );
-
-      final data = rawData.map(Movie.fromJson).toList();
-
-      return data;
-    } on DioError catch (e) {
-      return Future.error(e);
-    }
+  }) {
+    return DioProvider.dio
+        .get(
+          '/discover/movie',
+          queryParameters: {
+            'sort_by': sortBy,
+            'with_genres': withGenres?.join(','),
+          },
+        )
+        .then((res) => List<Map<String, Object?>>.from(res.data['results']))
+        .then((rawList) => rawList.map(Movie.fromJson))
+        .then((movies) => movies.toList());
   }
 
-  static Future<MovieDetails> getMovieDetails({
-    required int id,
-  }) async {
-    try {
-      Response<dynamic> response = await Dio().get(
-        "${dotenv.env['BASE_URL']}/movie/$id",
-        queryParameters: {
-          'api_key': dotenv.env['TMDB_API_KEY'],
-          'language': 'en_US',
-        },
-        options: Options(
-          method: 'GET',
-          contentType: 'application/json',
-        ),
-      );
-
-      final responseBody = Map<String, dynamic>.from(response.data);
-
-      MovieDetails data = MovieDetails.fromJson(responseBody);
-
-      return data;
-    } on DioError catch (e) {
-      return Future.error(e);
-    }
+  static Future<MovieDetails> getMovieDetails({required int id}) {
+    return DioProvider.dio
+        .get('/movie/$id')
+        .then((res) => Map<String, Object?>.from(res.data))
+        .then(MovieDetails.fromJson);
   }
 }
