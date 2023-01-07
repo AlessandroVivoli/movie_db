@@ -57,8 +57,9 @@ class GenreTab extends StatelessWidget {
                     (index) => Container(
                       margin: const EdgeInsets.symmetric(vertical: 10),
                       child: FutureBuilder(
-                        future: MovieService.getTrendingMovies(
+                        future: MovieService.getMovies(
                           withGenres: [data[index].id],
+                          sortBy: 'popularity.desc',
                         ),
                         builder: _buildMovieList,
                       ),
