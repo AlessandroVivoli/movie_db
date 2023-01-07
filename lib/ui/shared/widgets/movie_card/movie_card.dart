@@ -27,12 +27,17 @@ class MovieCard extends StatelessWidget {
           children: [
             if (movie.posterPath != null)
               Expanded(
-                child: Image(
-                  image: ImageService.getImage(
-                    size: PosterSizes.w500.name,
-                    path: movie.posterPath!,
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: ImageService.getImage(
+                        size: PosterSizes.w500.name,
+                        path: movie.posterPath!,
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
                   ),
-                  fit: BoxFit.cover,
                 ),
               ),
             Container(
