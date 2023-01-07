@@ -36,10 +36,7 @@ class PersonCard extends StatelessWidget {
               ),
             ),
           if (person.profilePath == null)
-            BlankProfileImage(
-              imgRadius: imgRadius,
-              imgBorderWidth: imgBorderWidth,
-            ),
+            BlankProfileImage(imgRadius: imgRadius),
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: Column(
