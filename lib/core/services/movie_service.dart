@@ -1,22 +1,15 @@
-import '../../utils/extensions.dart';
 import '../models/movie/details/movie_details.dart';
 import '../models/movie/movie.dart';
 import '../providers/dio_provider.dart';
 
 class MovieService {
   static Future<List<Movie>> getTrendingMovies({
-    List<int>? withGenres,
     String timeWindow = 'week',
   }) {
     return DioProvider.dio
         .get('/trending/movie/$timeWindow')
         .then((res) => List<Map<String, Object?>>.from(res.data['results']))
         .then((rawList) => rawList.map(Movie.fromJson))
-        .then(
-          (movies) => withGenres != null
-              ? movies.where((movie) => movie.genreIds.containsAny(withGenres))
-              : movies,
-        )
         .then((movies) => movies.toList());
   }
 
