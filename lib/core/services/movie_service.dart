@@ -44,4 +44,12 @@ class MovieService {
         .then((res) => Map<String, Object?>.from(res.data))
         .then(MovieDetails.fromJson);
   }
+
+  static Future<List<Movie>> getSimilarMovies({required int id}) {
+    return DioProvider.dio
+        .get('/movie/$id/similar')
+        .then((res) => List<Map<String, Object?>>.from(res.data['results']))
+        .then((rawList) => rawList.map(Movie.fromJson))
+        .then((movies) => movies.toList());
+  }
 }
