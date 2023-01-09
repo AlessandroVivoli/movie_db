@@ -16,9 +16,11 @@ class BackdropImage extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 1),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: ImageService.getImage(
-                size: BackdropSizes.original.name,
-                path: imgUrl,
+              image: NetworkImage(
+                ImageService.getImageUrl(
+                  size: BackdropSizes.original.name,
+                  path: imgUrl,
+                ),
               ),
               fit: BoxFit.cover,
               alignment: Alignment.center,

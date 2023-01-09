@@ -29,9 +29,11 @@ class PersonCard extends StatelessWidget {
             Center(
               child: CircleAvatar(
                 radius: imgRadius,
-                backgroundImage: ImageService.getImage(
-                  size: ProfileSizes.w185.name,
-                  path: person.profilePath!,
+                backgroundImage: NetworkImage(
+                  ImageService.getImageUrl(
+                    size: ProfileSizes.w185.name,
+                    path: person.profilePath!,
+                  ),
                 ),
               ),
             ),
