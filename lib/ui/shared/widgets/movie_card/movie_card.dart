@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/models/movie/movie.dart';
 import '../../../../core/services/image_service.dart';
+import '../../../../core/services/movie_service.dart';
 import '../../../../utils/enums.dart';
 import '../rating/rating.dart';
 
@@ -17,7 +18,11 @@ class MovieCard extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 120),
       child: GestureDetector(
         onTap: () {
-          // TODO: Add redirect to movie details page
+          Navigator.pushNamed(
+            context,
+            '/details',
+            arguments: MovieService.getMovieDetails(id: movie.id),
+          );
         },
         child: Column(
           mainAxisAlignment: (movie.posterPath != null)

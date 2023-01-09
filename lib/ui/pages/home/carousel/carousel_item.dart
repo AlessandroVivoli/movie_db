@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/services/movie_service.dart';
 import '../../../shared/widgets/backdrop_image/backdrop_image.dart';
 
 class CarouselItem extends StatelessWidget {
@@ -23,7 +24,11 @@ class CarouselItem extends StatelessWidget {
         const _PlayIcon(),
         GestureDetector(
           onTap: () {
-            // TODO: Add redirect to movie details page
+            Navigator.pushNamed(
+              context,
+              '/details',
+              arguments: MovieService.getMovieDetails(id: id),
+            );
           },
         ),
       ],
