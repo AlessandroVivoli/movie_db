@@ -10,28 +10,31 @@ class GenreList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: List<Widget>.generate(
-        genres.length,
-        (index) => Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.fromBorderSide(
-              BorderSide(
-                width: 2,
-                color: Theme.of(context).colorScheme.secondary,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List<Widget>.generate(
+          genres.length,
+          (index) => Container(
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.fromBorderSide(
+                BorderSide(
+                  width: 2,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
               ),
             ),
+            child: Text(
+              genres[index].name,
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            ),
           ),
-          child: Text(
-            genres[index].name,
-            style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+        ).joinElement(
+          const SizedBox(
+            width: 10,
           ),
-        ),
-      ).joinElement(
-        const SizedBox(
-          width: 10,
         ),
       ),
     );
