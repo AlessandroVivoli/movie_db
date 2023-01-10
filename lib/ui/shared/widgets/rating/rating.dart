@@ -5,6 +5,7 @@ class Rating extends StatelessWidget {
   final double? padding;
   final double? size;
   final MainAxisAlignment? alignment;
+  final int? digits;
 
   const Rating({
     super.key,
@@ -12,6 +13,7 @@ class Rating extends StatelessWidget {
     this.padding = 3,
     this.size = 10,
     this.alignment = MainAxisAlignment.center,
+    this.digits = 1,
   });
 
   @override
@@ -57,8 +59,12 @@ class Rating extends StatelessWidget {
         mainAxisAlignment: alignment!,
         children: [
           SizedBox(
-            width: 30,
-            child: Text(rating.toStringAsFixed(1)),
+            width: 30 + (digits! - 1) * 5,
+            child: Text(
+              rating
+                  .toStringAsFixed(digits!)
+                  .replaceFirst(RegExp(r'(?<=)\.0+'), ''),
+            ),
           ),
           Stack(
             children: [
