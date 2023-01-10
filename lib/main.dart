@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:loggy/loggy.dart';
 
@@ -37,6 +38,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      color: const Color.fromARGB(255, 17, 25, 37),
       title: 'FlutterMovie',
       theme: ThemeData(
         colorScheme: const ColorScheme.dark().copyWith(
@@ -45,8 +48,10 @@ class MyApp extends StatelessWidget {
           secondary: Colors.grey,
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 17, 25, 37),
-        ),
+            color: Color.fromARGB(255, 17, 25, 37),
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Color.fromARGB(255, 17, 25, 37),
+            )),
         tabBarTheme: const TabBarTheme(
             indicator: ShapeDecoration(
           shape: UnderlineInputBorder(
