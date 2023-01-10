@@ -283,7 +283,7 @@ class _Wrapper extends StatelessWidget {
               if (snapshot.hasError) {
                 SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Could not get genres')),
+                    const SnackBar(content: Text('Could not get cast')),
                   );
                 });
 
@@ -334,7 +334,8 @@ class _Wrapper extends StatelessWidget {
                 if (snapshot.hasError) {
                   SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Could not get genres')),
+                      const SnackBar(
+                          content: Text('Could not get similar movies')),
                     );
                   });
 
