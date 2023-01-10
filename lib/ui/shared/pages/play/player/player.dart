@@ -15,13 +15,9 @@ class Player extends StatefulWidget {
 class _PlayerState extends State<Player> {
   late final YoutubePlayerController _controller;
 
-  late Orientation _currentOrientation;
-
   @override
   void initState() {
     _controller = YoutubePlayerController(initialVideoId: widget.video.key!);
-
-    _currentOrientation = Orientation.portrait;
 
     super.initState();
   }
