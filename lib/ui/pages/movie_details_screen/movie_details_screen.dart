@@ -5,21 +5,21 @@ import '../../../../core/models/movie/details/movie_details.dart';
 import '../../../../core/services/movie_service.dart';
 import '../../../../core/services/person_service.dart';
 import '../../../../core/services/video_service.dart';
-import '../../widgets/backdrop_image/backdrop_image.dart';
-import '../../widgets/genre_list/genre_list.dart';
-import '../../widgets/movie_list/movie_list.dart';
-import '../../widgets/person_list/person_list.dart';
-import '../../widgets/rating/rating.dart';
+import '../../shared/widgets/backdrop_image/backdrop_image.dart';
+import '../../shared/widgets/genre_list/genre_list.dart';
+import '../../shared/widgets/movie_list/movie_list.dart';
+import '../../shared/widgets/person_list/person_list.dart';
+import '../../shared/widgets/rating/rating.dart';
 import 'floating_button/floating_button.dart';
 
-class MovieDetailsPage extends StatefulWidget {
-  const MovieDetailsPage({super.key});
+class MovieDetailsScreen extends StatefulWidget {
+  const MovieDetailsScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _MovieDetailsPageState();
+  State<StatefulWidget> createState() => _MovieDetailsScreenState();
 }
 
-class _MovieDetailsPageState extends State<MovieDetailsPage> {
+class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   late final ScrollController _scrollController;
 
   @override
