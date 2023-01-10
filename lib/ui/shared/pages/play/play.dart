@@ -70,16 +70,14 @@ class PlayPage extends StatelessWidget {
 
         final data = snapshot.data;
 
-        final video = data
-            ?.where(
-              (video) =>
-                  video.official &&
-                  video.type == 'Trailer' &&
-                  video.site == 'YouTube',
-            )
-            .first;
+        final videos = data?.where(
+          (video) =>
+              video.official &&
+              video.type == 'Trailer' &&
+              video.site == 'YouTube',
+        );
 
-        if (video == null) {
+        if (videos == null || videos.isEmpty) {
           return Scaffold(
             floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
             floatingActionButton: FloatingActionButton(
@@ -93,6 +91,8 @@ class PlayPage extends StatelessWidget {
             ),
           );
         }
+
+        final video = videos.first;
 
         return Scaffold(
           backgroundColor: Colors.black,
