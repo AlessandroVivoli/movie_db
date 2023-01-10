@@ -9,6 +9,7 @@ import '../../shared/widgets/genre_list/genre_list.dart';
 import '../../shared/widgets/movie_list/movie_list.dart';
 import '../../shared/widgets/person_list/person_list.dart';
 import '../../shared/widgets/rating/rating.dart';
+import 'floating_button/floating_button.dart';
 
 class MovieDetailsPage extends StatefulWidget {
   const MovieDetailsPage({super.key});
@@ -18,6 +19,20 @@ class MovieDetailsPage extends StatefulWidget {
 }
 
 class _MovieDetailsPageState extends State<MovieDetailsPage> {
+  late final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments;
@@ -64,26 +79,34 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
           final data = snapshot.data!;
 
           return Scaffold(
-            body: CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  pinned: true,
-                  expandedHeight: 250,
-                  flexibleSpace: FlexibleSpaceBar(
-                    title: Text(
-                      data.originalTitle ?? '',
-                      style: const TextStyle(
-                        fontSize: 16,
+            body: Stack(
+              children: [
+                CustomScrollView(
+                  controller: _scrollController,
+                  slivers: [
+                    SliverAppBar(
+                      pinned: true,
+                      expandedHeight: 250,
+                      flexibleSpace: FlexibleSpaceBar(
+                        title: Text(
+                          data.originalTitle ?? '',
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        centerTitle: true,
+                        background: (data.backdropPath != null)
+                            ? BackdropImage(imgUrl: data.backdropPath!)
+                            : null,
                       ),
                     ),
-                    centerTitle: true,
-                    background: (data.backdropPath != null)
-                        ? BackdropImage(imgUrl: data.backdropPath!)
-                        : null,
-                  ),
+                    SliverToBoxAdapter(
+                      child: _Wrapper(details: data),
+                    )
+                  ],
                 ),
-                SliverToBoxAdapter(
-                  child: _Wrapper(details: data),
+                FloatingButton(
+                  controller: _scrollController,
                 )
               ],
             ),
@@ -267,7 +290,10 @@ class _Wrapper extends StatelessWidget {
                 );
               }
 
-              return PersonList(personList: snapshot.data!);
+              return PersonList(
+                personList: snapshot.data!,
+                padding: 10,
+              );
             },
           ),
         ),
