@@ -16,6 +16,7 @@ class MovieDetailsBackdrop extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
           details.originalTitle ?? '',
+          overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             fontSize: 16,
           ),
