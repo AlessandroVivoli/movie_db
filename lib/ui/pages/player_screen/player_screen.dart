@@ -5,14 +5,12 @@ import '../../../../core/models/video/video.dart';
 import 'player/player.dart';
 
 class PlayerScreen extends StatelessWidget {
-  const PlayerScreen({super.key});
+  final Future<List<Video>> videoList;
+
+  const PlayerScreen({super.key, required this.videoList});
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments;
-
-    final videoList = args as Future<List<Video>>?;
-
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
