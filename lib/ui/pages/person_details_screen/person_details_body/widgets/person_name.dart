@@ -19,7 +19,7 @@ class PersonName extends StatelessWidget {
       children: [
         Text(
           name,
-          style: const TextStyle(fontSize: 24),
+          style: const TextStyle(fontSize: 20),
         ),
         if (imdbId != null)
           TextButton.icon(
