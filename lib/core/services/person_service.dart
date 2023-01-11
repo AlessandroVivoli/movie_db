@@ -13,7 +13,7 @@ class PersonService {
         .then((persons) => persons.toList());
   }
 
-  static Future<PersonDetails> getPersonDetails({required String id}) {
+  static Future<PersonDetails> getPersonDetails({required int id}) {
     return DioProvider.dio
         .get('/person/$id')
         .then((res) => Map<String, Object?>.from(res.data))
