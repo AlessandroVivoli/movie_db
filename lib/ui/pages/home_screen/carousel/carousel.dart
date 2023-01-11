@@ -42,7 +42,7 @@ class _CarouselState extends State<Carousel> {
             itemBuilder: (context, pagePosition) {
               return CarouselItem(
                 image: widget.movies[pagePosition].backdropPath ?? '',
-                title: widget.movies[pagePosition].title,
+                title: widget.movies[pagePosition].title!,
                 id: widget.movies[pagePosition].id,
               );
             },
