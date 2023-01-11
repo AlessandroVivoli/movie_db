@@ -13,15 +13,6 @@ class PlayerScreen extends StatelessWidget {
 
     final videoList = args as Future<List<Video>>?;
 
-    final actionButton = FloatingActionButton(
-      onPressed: () => Navigator.pop(context),
-      backgroundColor: Colors.white.withOpacity(.75),
-      foregroundColor: Colors.transparent,
-      child: const Icon(Icons.close),
-    );
-
-    const actionButtonLocation = FloatingActionButtonLocation.endTop;
-
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -30,8 +21,13 @@ class PlayerScreen extends StatelessWidget {
           statusBarColor: Colors.black,
         ),
       ),
-      floatingActionButtonLocation: actionButtonLocation,
-      floatingActionButton: actionButton,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pop(context),
+        backgroundColor: Colors.white.withOpacity(.75),
+        foregroundColor: Colors.black,
+        child: const Icon(Icons.close),
+      ),
       body: FutureBuilder(
         future: videoList,
         builder: (context, snapshot) {
