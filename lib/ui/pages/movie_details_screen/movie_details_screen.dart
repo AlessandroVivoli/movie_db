@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/models/movie/details/movie_details.dart';
 import '../../../../core/services/video_service.dart';
+import '../../../utils/enums.dart';
 import 'backdrop/backdrop.dart';
 import 'movie_details_wrapper/movie_details_wrapper.dart';
 import 'play_button/play_button.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
-  const MovieDetailsScreen({super.key});
+  final Future<MovieDetails> movieDetails;
+
+  const MovieDetailsScreen({super.key, required this.movieDetails});
 
   @override
   State<StatefulWidget> createState() => _MovieDetailsScreenState();
@@ -30,51 +33,46 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments;
-
-    final movieDetails = args as Future<MovieDetails>?;
-
     return SafeArea(
-      child: FutureBuilder(
-        future: movieDetails,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Scaffold(
-              appBar: AppBar(),
-              body: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
+      child: Scaffold(
+        body: FutureBuilder(
+          future: widget.movieDetails,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              const Center(child: CircularProgressIndicator());
+            }
 
-          if (snapshot.hasError) {
-            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Could not get movie details')),
+            if (snapshot.hasError) {
+              WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Could not get movie details')),
+                );
+              });
+
+              return Column(
+                children: [
+                  AppBar(),
+                  const Expanded(
+                    child: Center(child: Text('Nothing found')),
+                  ),
+                ],
               );
-            });
+            }
 
-            return Scaffold(
-              appBar: AppBar(),
-              body: const Center(
-                child: Text('Nothing found'),
-              ),
-            );
-          }
+            if (!snapshot.hasData) {
+              return Column(
+                children: [
+                  AppBar(),
+                  const Expanded(
+                    child: Center(child: Text('Nothing found')),
+                  ),
+                ],
+              );
+            }
 
-          if (!snapshot.hasData) {
-            return Scaffold(
-              appBar: AppBar(),
-              body: const Center(
-                child: Text('Nothing found'),
-              ),
-            );
-          }
+            final data = snapshot.data!;
 
-          final data = snapshot.data!;
-
-          return Scaffold(
-            body: Stack(
+            return Stack(
               children: [
                 CustomScrollView(
                   controller: _scrollController,
@@ -89,14 +87,14 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                   controller: _scrollController,
                   onPressed: () => Navigator.pushNamed(
                     context,
-                    '/play',
+                    RouteNames.player.name,
                     arguments: VideoService.getVideos(movieId: data.id!),
                   ),
                 )
               ],
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
