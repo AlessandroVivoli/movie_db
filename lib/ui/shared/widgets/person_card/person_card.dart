@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/models/person/person.dart';
 import '../../../../core/services/image_service.dart';
+import '../../../../core/services/person_service.dart';
 import '../../../../utils/enums.dart';
 import '../blank_profile_image/blank_profile_image.dart';
 
@@ -21,7 +22,11 @@ class PersonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO: Add redirect to person details page. Maybe?
+        Navigator.pushNamed(
+          context,
+          RouteNames.personDetails.name,
+          arguments: PersonService.getPersonDetails(id: person.id),
+        );
       },
       child: Column(
         children: [
