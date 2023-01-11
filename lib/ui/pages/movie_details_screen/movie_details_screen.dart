@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 import '../../../../core/models/movie/details/movie_details.dart';
 import '../../../../core/services/movie_service.dart';
@@ -54,7 +53,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
           }
 
           if (snapshot.hasError) {
-            SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Could not get movie details')),
               );
@@ -281,7 +280,7 @@ class _Wrapper extends StatelessWidget {
               }
 
               if (snapshot.hasError) {
-                SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+                WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Could not get cast')),
                   );
@@ -332,7 +331,7 @@ class _Wrapper extends StatelessWidget {
                 }
 
                 if (snapshot.hasError) {
-                  SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+                  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                           content: Text('Could not get similar movies')),

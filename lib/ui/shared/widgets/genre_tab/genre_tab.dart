@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 import '../../../../core/models/movie/movie.dart';
 import '../../../../core/services/genre_service.dart';
@@ -19,7 +18,7 @@ class GenreTab extends StatelessWidget {
         }
 
         if (snapshot.hasError) {
-          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Could not get genres')),
             );
@@ -85,7 +84,7 @@ class GenreTab extends StatelessWidget {
     }
 
     if (snapshot.hasError) {
-      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Could not get movies')),
         );

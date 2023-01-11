@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../core/models/video/video.dart';
@@ -43,7 +42,7 @@ class PlayerScreen extends StatelessWidget {
           }
 
           if (snapshot.hasError) {
-            SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Cannot play movie trailer')),
               );
