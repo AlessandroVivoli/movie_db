@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../core/models/movie/details/movie_details.dart';
 import '../../../../core/services/video_service.dart';
 import 'backdrop/backdrop.dart';
+import 'movie_details_wrapper/movie_details_wrapper.dart';
 import 'play_button/play_button.dart';
-import 'wrapper/movie_details_wrapper.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
   const MovieDetailsScreen({super.key});
