@@ -20,7 +20,7 @@ class MovieCard extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            '/details',
+            RouteNames.movieDetails.name,
             arguments: MovieService.getMovieDetails(id: movie.id),
           );
         },
@@ -55,7 +55,7 @@ class MovieCard extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 10, bottom: 5),
                     child: Text(
-                      movie.title,
+                      '${movie.title}',
                       overflow: (movie.posterPath != null)
                           ? TextOverflow.ellipsis
                           : TextOverflow.visible,
