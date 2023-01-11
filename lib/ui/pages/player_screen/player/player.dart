@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../../../core/models/video/video.dart';
@@ -35,6 +35,7 @@ class _PlayerState extends State<Player> {
       child: YoutubePlayer(
         aspectRatio: 16 / 9,
         controller: _controller,
+        onEnded: (_) => Navigator.pop(context),
         bottomActions: const [],
         topActions: const [],
       ),
