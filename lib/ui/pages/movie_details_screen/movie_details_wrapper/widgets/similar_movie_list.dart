@@ -23,7 +23,7 @@ class SimilarMovieList extends StatelessWidget {
             'Similar movies'.toUpperCase(),
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

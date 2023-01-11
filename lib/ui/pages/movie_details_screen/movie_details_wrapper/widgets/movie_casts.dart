@@ -23,7 +23,7 @@ class MovieCasts extends StatelessWidget {
             'Casts'.toUpperCase(),
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
@@ -50,7 +50,7 @@ class MovieCasts extends StatelessWidget {
                 );
               }
 
-              if (!snapshot.hasData) {
+              if (!snapshot.hasData || snapshot.data!.isEmpty) {
                 return const Center(
                   child: Text('Nothing found'),
                 );

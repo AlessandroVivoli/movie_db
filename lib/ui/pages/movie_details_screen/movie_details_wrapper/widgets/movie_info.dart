@@ -42,7 +42,7 @@ class _BudgetText extends StatelessWidget {
           'Budget'.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
         ),
         const SizedBox(
@@ -52,7 +52,7 @@ class _BudgetText extends StatelessWidget {
           '$budget \$',
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],
@@ -77,7 +77,7 @@ class _DurationText extends StatelessWidget {
           'Duration'.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
         ),
         const SizedBox(
@@ -87,7 +87,7 @@ class _DurationText extends StatelessWidget {
           '$runtime min',
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],
@@ -112,7 +112,7 @@ class _ReleaseDateText extends StatelessWidget {
           'Release date'.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
         ),
         const SizedBox(
@@ -122,7 +122,7 @@ class _ReleaseDateText extends StatelessWidget {
           releaseDate,
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],

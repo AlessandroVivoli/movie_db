@@ -15,7 +15,7 @@ class MovieDescription extends StatelessWidget {
           'Overview'.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
           textAlign: TextAlign.justify,
         ),
