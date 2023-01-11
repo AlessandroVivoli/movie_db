@@ -52,4 +52,12 @@ class MovieService {
         .then((rawList) => rawList.map(Movie.fromJson))
         .then((movies) => movies.toList());
   }
+
+  static Future<List<Movie>> getPersonCredits({required int personId}) {
+    return DioProvider.dio
+        .get('/person/$personId/movie_credits')
+        .then((res) => List<Map<String, Object?>>.from(res.data['cast']))
+        .then((rawList) => rawList.map(Movie.fromJson))
+        .then((movies) => movies.toList());
+  }
 }
