@@ -9,7 +9,7 @@ import '../../shared/widgets/genre_list/genre_list.dart';
 import '../../shared/widgets/movie_list/movie_list.dart';
 import '../../shared/widgets/person_list/person_list.dart';
 import '../../shared/widgets/rating/rating.dart';
-import 'floating_button/floating_button.dart';
+import 'play_button/play_button.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
   const MovieDetailsScreen({super.key});
