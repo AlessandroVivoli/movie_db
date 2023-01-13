@@ -19,8 +19,8 @@ class MovieDescription extends StatelessWidget {
           ),
           textAlign: TextAlign.justify,
         ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 20),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
           child: Text(description),
         ),
       ],

@@ -9,8 +9,8 @@ class MovieRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 20),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
       child: Rating(
         rating: rating,
         alignment: MainAxisAlignment.start,

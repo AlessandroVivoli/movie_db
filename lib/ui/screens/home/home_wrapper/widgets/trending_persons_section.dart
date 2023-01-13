@@ -27,8 +27,8 @@ class _TrendingPersonsText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
           Text(
@@ -51,42 +51,44 @@ class _TrendingPersonsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 130,
-      margin: const EdgeInsets.symmetric(vertical: 5),
-      child: FutureBuilder(
-        future: PersonService.getTrendingPersons(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          if (snapshot.hasError) {
-            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Could not get trending persons'),
-                ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: SizedBox(
+        height: 130,
+        child: FutureBuilder(
+          future: PersonService.getTrendingPersons(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
               );
-            });
-            return const Center(
-              child: Text('Nothing found'),
-            );
-          }
+            }
 
-          if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(
-              child: Text('Nothing found'),
-            );
-          }
+            if (snapshot.hasError) {
+              WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Could not get trending persons'),
+                  ),
+                );
+              });
+              return const Center(
+                child: Text('Nothing found'),
+              );
+            }
 
-          return Container(
-            margin: const EdgeInsets.symmetric(vertical: 5),
-            child: PersonList(personList: snapshot.data!),
-          );
-        },
+            if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(
+                child: Text('Nothing found'),
+              );
+            }
+
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: PersonList(personList: snapshot.data!),
+            );
+          },
+        ),
       ),
     );
   }

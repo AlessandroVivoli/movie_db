@@ -17,8 +17,8 @@ class MovieCasts extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          margin: const EdgeInsets.only(bottom: 20, left: 10),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20, left: 10),
           child: Text(
             'Casts'.toUpperCase(),
             style: TextStyle(

@@ -36,8 +36,8 @@ class MovieDetailsWrapper extends StatelessWidget {
             ],
           ),
         ),
-        Container(
-          margin: const EdgeInsets.only(bottom: 20),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20),
           child: MovieCasts(details: details),
         ),
         SimilarMovieList(details: details),

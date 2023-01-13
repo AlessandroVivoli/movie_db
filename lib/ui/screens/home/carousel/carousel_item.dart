@@ -74,8 +74,8 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 30, left: 10, right: 10),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 30, left: 10, right: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,

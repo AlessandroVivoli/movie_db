@@ -27,8 +27,8 @@ class _TopRatedMoviesText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
           Text(
@@ -82,8 +82,8 @@ class _TopRatedMoviesList extends StatelessWidget {
             );
           }
 
-          return Container(
-            margin: const EdgeInsets.symmetric(vertical: 5),
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5),
             child: MovieList(movieList: snapshot.data!),
           );
         },

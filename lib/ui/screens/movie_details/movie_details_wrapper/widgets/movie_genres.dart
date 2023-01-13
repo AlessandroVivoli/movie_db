@@ -16,8 +16,8 @@ class MovieGenres extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          margin: const EdgeInsets.only(top: 10),
+        Padding(
+          padding: const EdgeInsets.only(top: 10),
           child: Text(
             'Genres'.toUpperCase(),
             style: TextStyle(
@@ -26,8 +26,8 @@ class MovieGenres extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 20),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
           child: GenreList(genres: details.genres!),
         ),
       ],
