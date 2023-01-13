@@ -5,7 +5,7 @@ import '../../../../core/services/image_service.dart';
 import '../../../../core/services/person_service.dart';
 import '../../../../utils/enums.dart';
 import '../../../../utils/routes.dart';
-import '../blank_profile_image/blank_profile_image.dart';
+import '../custom_image/custom_network_image.dart';
 
 class PersonCard extends StatelessWidget {
   final Person person;
@@ -31,26 +31,28 @@ class PersonCard extends StatelessWidget {
       },
       child: Column(
         children: [
-          if (person.profilePath != null)
-            Center(
-              child: CircleAvatar(
-                radius: imgRadius,
-                backgroundImage: NetworkImage(
-                  ImageService.getImageUrl(
-                    size: ProfileSizes.w185.name,
-                    path: person.profilePath!,
-                  ),
+          CircleAvatar(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            radius: imgRadius,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(imgRadius),
+              child: CustomNetworkImage(
+                width: imgRadius * 2,
+                height: imgRadius * 2,
+                url: ImageService.getImageUrl(
+                  size: ProfileSizes.w185.name,
+                  path: person.profilePath,
                 ),
+                placeholderIcon: const Icon(Icons.person),
               ),
             ),
-          if (person.profilePath == null)
-            BlankProfileImage(imgRadius: imgRadius),
-          Container(
-            margin: const EdgeInsets.only(top: 8),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
             child: Column(
               children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 2),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2),
                   child: Center(
                     child: Text(
                       person.name,
