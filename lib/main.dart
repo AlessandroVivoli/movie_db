@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color.fromARGB(255, 17, 25, 37),
         ),
       ),
-      initialRoute: '/home',
+      initialRoute: 'home',
       onGenerateRoute: generateRoute,
     );
   }
