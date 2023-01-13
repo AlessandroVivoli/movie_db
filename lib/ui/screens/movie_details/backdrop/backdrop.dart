@@ -22,9 +22,9 @@ class MovieDetailsBackdrop extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        background: (details.backdropPath != null)
-            ? BackdropImage(imgUrl: details.backdropPath!)
-            : null,
+        background: BackdropImage(
+          imgUrl: details.backdropPath,
+        ),
       ),
     );
   }

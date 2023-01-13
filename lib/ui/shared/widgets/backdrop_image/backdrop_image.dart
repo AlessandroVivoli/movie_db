@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/services/image_service.dart';
 import '../../../../utils/enums.dart';
+import '../custom_image/custom_network_image.dart';
 
 class BackdropImage extends StatelessWidget {
-  final String imgUrl;
+  final String? imgUrl;
 
   const BackdropImage({super.key, required this.imgUrl});
 
@@ -12,20 +13,12 @@ class BackdropImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          margin: const EdgeInsets.only(bottom: 1),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(
-                ImageService.getImageUrl(
-                  size: BackdropSizes.original.name,
-                  path: imgUrl,
-                ),
-              ),
-              fit: BoxFit.cover,
-              alignment: Alignment.center,
-            ),
+        CustomNetworkImage(
+          url: ImageService.getImageUrl(
+            size: BackdropSizes.w1280.name,
+            path: imgUrl,
           ),
+          placeholderIcon: const Icon(Icons.movie),
         ),
         Container(
           decoration: BoxDecoration(
