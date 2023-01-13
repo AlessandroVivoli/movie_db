@@ -39,7 +39,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
           future: widget.movieDetails,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
 
             if (snapshot.hasError) {
