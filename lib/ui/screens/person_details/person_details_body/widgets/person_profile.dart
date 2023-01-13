@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/services/image_service.dart';
 import '../../../../../utils/enums.dart';
+import '../../../../shared/widgets/custom_image/custom_network_image.dart';
 
 class PersonProfile extends StatelessWidget {
   const PersonProfile({
     Key? key,
-    required this.profilePath,
+    this.profilePath,
     this.width = 200,
     this.margin,
   }) : super(key: key);
@@ -25,28 +26,18 @@ class PersonProfile extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: (profilePath != null)
-                ? null
-                : Theme.of(context).colorScheme.primary,
-            image: (profilePath == null)
-                ? null
-                : DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                      ImageService.getImageUrl(
-                        size: ProfileSizes.w185.name,
-                        path: profilePath!,
-                      ),
-                    ),
-                  ),
+            color: Theme.of(context).colorScheme.primary,
           ),
-          child: (profilePath != null)
-              ? null
-              : Center(
-                  child: Icon(
-                  Icons.person,
-                  size: (width! - 50),
-                )),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: CustomNetworkImage(
+              url: ImageService.getImageUrl(
+                size: ProfileSizes.original.name,
+                path: profilePath,
+              ),
+              placeholderIcon: const Icon(Icons.person),
+            ),
+          ),
         ),
       ),
     );
