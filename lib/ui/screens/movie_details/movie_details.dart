@@ -87,7 +87,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                   controller: _scrollController,
                   onPressed: () => Navigator.pushNamed(
                     context,
-                    AppRoute.movie,
+                    AppRoute.play,
                     arguments: VideoService.getVideos(movieId: data.id!),
                   ),
                 )

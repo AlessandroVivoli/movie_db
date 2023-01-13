@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../core/models/movie/details/movie_details.dart';
 import '../core/models/person/details/person_details.dart';
+import '../core/models/video/video.dart';
 import '../ui/screens/home/home.dart';
 import '../ui/screens/movie_details/movie_details.dart';
 import '../ui/screens/person_details/person_details.dart';
+import '../ui/screens/video/video.dart';
 import 'routes.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -24,6 +26,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
       return MaterialPageRoute(
         builder: (context) => PersonDetailsScreen(personDetails: personDetails),
+      );
+    case AppRoute.play:
+      final videoList = settings.arguments as Future<List<Video>>;
+
+      return MaterialPageRoute(
+        builder: (context) => VideoScreen(videoList: videoList),
       );
     default:
       throw Exception('Route ${settings.name} doesn\'t exist');
