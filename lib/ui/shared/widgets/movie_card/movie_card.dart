@@ -32,12 +32,14 @@ class MovieCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: CustomNetworkImage(
-                  url: ImageService.getImageUrl(
-                      size: PosterSizes.w500.name, path: movie.posterPath),
-                  placeholderIcon: const Icon(Icons.movie),
+              child: Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: CustomNetworkImage(
+                    url: ImageService.getImageUrl(
+                        size: PosterSizes.w500.name, path: movie.posterPath),
+                    placeholderIcon: const Icon(Icons.movie),
+                  ),
                 ),
               ),
             ),
