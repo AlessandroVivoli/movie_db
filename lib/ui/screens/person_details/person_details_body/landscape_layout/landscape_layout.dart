@@ -29,19 +29,21 @@ class LandscapeLayout extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
                     child: PersonName(
                       name: personDetails.name,
                       imdbId: personDetails.imdbId,
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        PersonAge(birthday: personDetails.birthday),
+                        PersonAge(
+                          personDetails: personDetails,
+                        ),
                         PersonDepartment(
                           department: personDetails.knownForDepartment!,
                         ),
@@ -49,8 +51,7 @@ class LandscapeLayout extends StatelessWidget {
                     ),
                   ),
                   PersonLifetime(
-                    birthday: personDetails.birthday,
-                    deathday: personDetails.deathdday,
+                    personDetails: personDetails,
                     extendedDate: true,
                   ),
                 ],

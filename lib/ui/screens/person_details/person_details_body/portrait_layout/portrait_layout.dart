@@ -17,31 +17,32 @@ class PortraitLayout extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          margin: const EdgeInsets.only(bottom: 10),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
           child: PersonName(
             name: personDetails.name,
             imdbId: personDetails.imdbId,
           ),
         ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 10),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
           child: Center(
             child: PersonProfile(
               profilePath: personDetails.profilePath,
             ),
           ),
         ),
-        Container(
-          margin: const EdgeInsets.only(top: 10),
+        Padding(
+          padding: const EdgeInsets.only(top: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              PersonAge(birthday: personDetails.birthday),
+              PersonAge(
+                personDetails: personDetails,
+              ),
               PersonLifetime(
-                birthday: personDetails.birthday,
-                deathday: personDetails.deathdday,
+                personDetails: personDetails,
               ),
               PersonDepartment(department: personDetails.knownForDepartment!),
             ],

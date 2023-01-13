@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/models/person/details/person_details.dart';
+
 class PersonAge extends StatelessWidget {
   const PersonAge({
     Key? key,
-    required this.birthday,
+    required this.personDetails,
   }) : super(key: key);
 
-  final String? birthday;
+  final PersonDetails personDetails;
 
   @override
   Widget build(BuildContext context) {
-    final birthdayDate = DateTime.tryParse(birthday ?? '');
-    final age = DateTime.now()
-        .difference((birthdayDate != null) ? birthdayDate : DateTime.now());
-
-    final ageString = (birthdayDate == null)
-        ? 'No age recorded'
-        : '${(age.inDays / 365).floor()}';
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -30,7 +24,7 @@ class PersonAge extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          ageString,
+          personDetails.age,
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontWeight: FontWeight.w600,

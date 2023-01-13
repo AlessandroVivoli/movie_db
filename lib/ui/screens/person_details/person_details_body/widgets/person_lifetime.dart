@@ -1,34 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
+import '../../../../../core/models/person/details/person_details.dart';
 
 class PersonLifetime extends StatelessWidget {
   const PersonLifetime({
     Key? key,
-    required this.birthday,
-    this.deathday,
+    required this.personDetails,
     this.extendedDate = false,
   }) : super(key: key);
 
-  final String? birthday;
-  final String? deathday;
+  final PersonDetails personDetails;
+
   final bool extendedDate;
 
   @override
   Widget build(BuildContext context) {
-    final birthdayDate = DateTime.tryParse(birthday ?? '');
-    final deathdayDate = DateTime.tryParse(deathday ?? '');
-
-    final String pattern = (extendedDate) ? 'yMMMMd' : 'yMMMd';
-
-    final birthdayFormat =
-        (birthdayDate == null) ? '?' : DateFormat(pattern).format(birthdayDate);
-    final deathdayFormat =
-        (deathdayDate == null) ? '?' : DateFormat(pattern).format(deathdayDate);
-
-    final lifetimeFormat = (birthdayDate == null && deathdayDate == null)
-        ? '?'
-        : '$birthdayFormat - $deathdayFormat';
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -41,7 +27,7 @@ class PersonLifetime extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          lifetimeFormat,
+          personDetails.getLifetime(extendedDate),
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontWeight: FontWeight.w600,
