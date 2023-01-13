@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/models/movie/details/movie_details.dart';
 import '../../../../core/services/video_service.dart';
-import '../../../utils/enums.dart';
+import '../../../utils/routes.dart';
 import 'backdrop/backdrop.dart';
 import 'movie_details_wrapper/movie_details_wrapper.dart';
 import 'play_button/play_button.dart';
@@ -87,7 +87,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                   controller: _scrollController,
                   onPressed: () => Navigator.pushNamed(
                     context,
-                    RouteNames.player.name,
+                    AppRoute.movie,
                     arguments: VideoService.getVideos(movieId: data.id!),
                   ),
                 )

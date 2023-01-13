@@ -4,6 +4,7 @@ import '../../../../core/models/person/person.dart';
 import '../../../../core/services/image_service.dart';
 import '../../../../core/services/person_service.dart';
 import '../../../../utils/enums.dart';
+import '../../../../utils/routes.dart';
 import '../blank_profile_image/blank_profile_image.dart';
 
 class PersonCard extends StatelessWidget {
@@ -24,7 +25,7 @@ class PersonCard extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          RouteNames.personDetails.name,
+          AppRoute.person,
           arguments: PersonService.getPersonDetails(id: person.id),
         );
       },

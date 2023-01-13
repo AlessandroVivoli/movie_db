@@ -5,6 +5,7 @@ import '../../../../core/models/movie/movie.dart';
 import '../../../../core/services/image_service.dart';
 import '../../../../core/services/movie_service.dart';
 import '../../../../utils/enums.dart';
+import '../../../../utils/routes.dart';
 import '../rating/rating.dart';
 
 class MovieCard extends StatelessWidget {
@@ -20,7 +21,7 @@ class MovieCard extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            RouteNames.movieDetails.name,
+            AppRoute.movie,
             arguments: MovieService.getMovieDetails(id: movie.id),
           );
         },

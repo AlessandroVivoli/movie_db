@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/services/movie_service.dart';
-import '../../../../utils/enums.dart';
+import '../../../../utils/routes.dart';
 import '../../../shared/widgets/backdrop_image/backdrop_image.dart';
 
 class CarouselItem extends StatelessWidget {
@@ -27,7 +27,7 @@ class CarouselItem extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(
               context,
-              RouteNames.movieDetails.name,
+              AppRoute.movie,
               arguments: MovieService.getMovieDetails(id: id),
             );
           },
