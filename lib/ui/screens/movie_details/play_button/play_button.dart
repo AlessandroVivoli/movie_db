@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class FloatingButton extends StatefulWidget {
+class PlayButton extends StatefulWidget {
   final ScrollController controller;
 
   final void Function()? onPressed;
 
-  const FloatingButton({super.key, required this.controller, this.onPressed});
+  const PlayButton({super.key, required this.controller, this.onPressed});
 
   @override
-  State<StatefulWidget> createState() => _FloatingButtonState();
+  State<StatefulWidget> createState() => _PlayButtonState();
 }
 
-class _FloatingButtonState extends State<FloatingButton> {
+class _PlayButtonState extends State<PlayButton> {
   @override
   void initState() {
     widget.controller.addListener(() => setState(() {}));

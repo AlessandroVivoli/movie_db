@@ -83,7 +83,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                     )
                   ],
                 ),
-                FloatingButton(
+                PlayButton(
                   controller: _scrollController,
                   onPressed: () => Navigator.pushNamed(
                     context,
