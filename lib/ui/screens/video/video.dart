@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import '../../../../core/models/video/video.dart';
 import 'player/player.dart';
 
-class PlayerScreen extends StatelessWidget {
+class VideoScreen extends StatelessWidget {
   final Future<List<Video>> videoList;
 
-  const PlayerScreen({super.key, required this.videoList});
+  const VideoScreen({super.key, required this.videoList});
 
   @override
   Widget build(BuildContext context) {

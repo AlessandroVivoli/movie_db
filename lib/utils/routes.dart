@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../core/models/movie/details/movie_details.dart';
 import '../core/models/person/details/person_details.dart';
 import '../core/models/video/video.dart';
-import '../ui/pages/home_screen/home_screen.dart';
-import '../ui/pages/movie_details_screen/movie_details_screen.dart';
-import '../ui/pages/person_details_screen/person_details_screen.dart';
-import '../ui/pages/player_screen/player_screen.dart';
+import '../ui/screens/home/home.dart';
+import '../ui/screens/movie_details/movie_details.dart';
+import '../ui/screens/person_details/person_details.dart';
+import '../ui/screens/video/video.dart';
 import 'enums.dart';
 
 final Map<String, Widget Function(BuildContext)> routes = {
@@ -30,7 +30,7 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     final videoList = settings.arguments as Future<List<Video>>;
 
     return MaterialPageRoute(
-      builder: (_) => PlayerScreen(videoList: videoList),
+      builder: (_) => VideoScreen(videoList: videoList),
     );
   }
 
