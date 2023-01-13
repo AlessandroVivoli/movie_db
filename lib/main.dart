@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:loggy/loggy.dart';
 
-import 'utils/routes.dart';
+import 'utils/router.dart';
 
 void main() async {
   await dotenv.load();
@@ -67,8 +67,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       initialRoute: '/home',
-      routes: routes,
-      onGenerateRoute: onGenerateRoute,
+      onGenerateRoute: generateRoute,
     );
   }
 }
