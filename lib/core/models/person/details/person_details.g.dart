@@ -10,7 +10,7 @@ _$_PersonDetails _$$_PersonDetailsFromJson(Map<String, dynamic> json) =>
     _$_PersonDetails(
       birthday: json['birthday'] as String?,
       knownForDepartment: json['known_for_department'] as String?,
-      deathdday: json['deathdday'] as String?,
+      deathday: json['deathday'] as String?,
       id: json['id'] as int,
       name: json['name'] as String,
       alsoKnownAs: (json['also_known_as'] as List<dynamic>?)
@@ -30,7 +30,7 @@ Map<String, dynamic> _$$_PersonDetailsToJson(_$_PersonDetails instance) =>
     <String, dynamic>{
       'birthday': instance.birthday,
       'known_for_department': instance.knownForDepartment,
-      'deathdday': instance.deathdday,
+      'deathday': instance.deathday,
       'id': instance.id,
       'name': instance.name,
       'also_known_as': instance.alsoKnownAs,
