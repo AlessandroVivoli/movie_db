@@ -22,7 +22,7 @@ PersonDetails _$PersonDetailsFromJson(Map<String, dynamic> json) {
 mixin _$PersonDetails {
   String? get birthday => throw _privateConstructorUsedError;
   String? get knownForDepartment => throw _privateConstructorUsedError;
-  String? get deathdday => throw _privateConstructorUsedError;
+  String? get deathday => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   List<String>? get alsoKnownAs => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $PersonDetailsCopyWith<$Res> {
   $Res call(
       {String? birthday,
       String? knownForDepartment,
-      String? deathdday,
+      String? deathday,
       int id,
       String name,
       List<String>? alsoKnownAs,
@@ -79,7 +79,7 @@ class _$PersonDetailsCopyWithImpl<$Res, $Val extends PersonDetails>
   $Res call({
     Object? birthday = freezed,
     Object? knownForDepartment = freezed,
-    Object? deathdday = freezed,
+    Object? deathday = freezed,
     Object? id = null,
     Object? name = null,
     Object? alsoKnownAs = freezed,
@@ -101,9 +101,9 @@ class _$PersonDetailsCopyWithImpl<$Res, $Val extends PersonDetails>
           ? _value.knownForDepartment
           : knownForDepartment // ignore: cast_nullable_to_non_nullable
               as String?,
-      deathdday: freezed == deathdday
-          ? _value.deathdday
-          : deathdday // ignore: cast_nullable_to_non_nullable
+      deathday: freezed == deathday
+          ? _value.deathday
+          : deathday // ignore: cast_nullable_to_non_nullable
               as String?,
       id: null == id
           ? _value.id
@@ -164,7 +164,7 @@ abstract class _$$_PersonDetailsCopyWith<$Res>
   $Res call(
       {String? birthday,
       String? knownForDepartment,
-      String? deathdday,
+      String? deathday,
       int id,
       String name,
       List<String>? alsoKnownAs,
@@ -191,7 +191,7 @@ class __$$_PersonDetailsCopyWithImpl<$Res>
   $Res call({
     Object? birthday = freezed,
     Object? knownForDepartment = freezed,
-    Object? deathdday = freezed,
+    Object? deathday = freezed,
     Object? id = null,
     Object? name = null,
     Object? alsoKnownAs = freezed,
@@ -213,9 +213,9 @@ class __$$_PersonDetailsCopyWithImpl<$Res>
           ? _value.knownForDepartment
           : knownForDepartment // ignore: cast_nullable_to_non_nullable
               as String?,
-      deathdday: freezed == deathdday
-          ? _value.deathdday
-          : deathdday // ignore: cast_nullable_to_non_nullable
+      deathday: freezed == deathday
+          ? _value.deathday
+          : deathday // ignore: cast_nullable_to_non_nullable
               as String?,
       id: null == id
           ? _value.id
@@ -267,11 +267,11 @@ class __$$_PersonDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PersonDetails implements _PersonDetails {
+class _$_PersonDetails extends _PersonDetails {
   const _$_PersonDetails(
       {required this.birthday,
       required this.knownForDepartment,
-      required this.deathdday,
+      required this.deathday,
       required this.id,
       required this.name,
       required final List<String>? alsoKnownAs,
@@ -283,7 +283,8 @@ class _$_PersonDetails implements _PersonDetails {
       required this.adult,
       required this.imdbId,
       required this.homepage})
-      : _alsoKnownAs = alsoKnownAs;
+      : _alsoKnownAs = alsoKnownAs,
+        super._();
 
   factory _$_PersonDetails.fromJson(Map<String, dynamic> json) =>
       _$$_PersonDetailsFromJson(json);
@@ -293,7 +294,7 @@ class _$_PersonDetails implements _PersonDetails {
   @override
   final String? knownForDepartment;
   @override
-  final String? deathdday;
+  final String? deathday;
   @override
   final int id;
   @override
@@ -327,7 +328,7 @@ class _$_PersonDetails implements _PersonDetails {
 
   @override
   String toString() {
-    return 'PersonDetails(birthday: $birthday, knownForDepartment: $knownForDepartment, deathdday: $deathdday, id: $id, name: $name, alsoKnownAs: $alsoKnownAs, gender: $gender, biography: $biography, popularity: $popularity, placeOfBirth: $placeOfBirth, profilePath: $profilePath, adult: $adult, imdbId: $imdbId, homepage: $homepage)';
+    return 'PersonDetails(birthday: $birthday, knownForDepartment: $knownForDepartment, deathday: $deathday, id: $id, name: $name, alsoKnownAs: $alsoKnownAs, gender: $gender, biography: $biography, popularity: $popularity, placeOfBirth: $placeOfBirth, profilePath: $profilePath, adult: $adult, imdbId: $imdbId, homepage: $homepage)';
   }
 
   @override
@@ -339,8 +340,8 @@ class _$_PersonDetails implements _PersonDetails {
                 other.birthday == birthday) &&
             (identical(other.knownForDepartment, knownForDepartment) ||
                 other.knownForDepartment == knownForDepartment) &&
-            (identical(other.deathdday, deathdday) ||
-                other.deathdday == deathdday) &&
+            (identical(other.deathday, deathday) ||
+                other.deathday == deathday) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
@@ -366,7 +367,7 @@ class _$_PersonDetails implements _PersonDetails {
       runtimeType,
       birthday,
       knownForDepartment,
-      deathdday,
+      deathday,
       id,
       name,
       const DeepCollectionEquality().hash(_alsoKnownAs),
@@ -393,11 +394,11 @@ class _$_PersonDetails implements _PersonDetails {
   }
 }
 
-abstract class _PersonDetails implements PersonDetails {
+abstract class _PersonDetails extends PersonDetails {
   const factory _PersonDetails(
       {required final String? birthday,
       required final String? knownForDepartment,
-      required final String? deathdday,
+      required final String? deathday,
       required final int id,
       required final String name,
       required final List<String>? alsoKnownAs,
@@ -409,6 +410,7 @@ abstract class _PersonDetails implements PersonDetails {
       required final bool adult,
       required final String? imdbId,
       required final String? homepage}) = _$_PersonDetails;
+  const _PersonDetails._() : super._();
 
   factory _PersonDetails.fromJson(Map<String, dynamic> json) =
       _$_PersonDetails.fromJson;
@@ -418,7 +420,7 @@ abstract class _PersonDetails implements PersonDetails {
   @override
   String? get knownForDepartment;
   @override
-  String? get deathdday;
+  String? get deathday;
   @override
   int get id;
   @override

@@ -53,8 +53,8 @@ class GenreTab extends StatelessWidget {
                 child: TabBarView(
                   children: List<Widget>.generate(
                     data.length,
-                    (index) => Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10),
+                    (index) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       child: FutureBuilder(
                         future: MovieService.getMovies(
                           withGenres: [data[index].id],

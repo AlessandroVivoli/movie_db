@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/models/movie/movie.dart';
 import '../../../../core/services/image_service.dart';
 import '../../../../core/services/movie_service.dart';
 import '../../../../utils/enums.dart';
+import '../../../../utils/routes.dart';
+import '../custom_image/custom_network_image.dart';
 import '../rating/rating.dart';
 
 class MovieCard extends StatelessWidget {
@@ -20,7 +21,7 @@ class MovieCard extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            RouteNames.movieDetails.name,
+            AppRoute.movie,
             arguments: MovieService.getMovieDetails(id: movie.id),
           );
         },
@@ -30,30 +31,25 @@ class MovieCard extends StatelessWidget {
               : MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (movie.posterPath != null)
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        ImageService.getImageUrl(
-                          size: PosterSizes.w500.name,
-                          path: movie.posterPath!,
-                        ),
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                    borderRadius: const BorderRadius.all(Radius.circular(5)),
+            Expanded(
+              child: Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: CustomNetworkImage(
+                    url: ImageService.getImageUrl(
+                        size: PosterSizes.w500.name, path: movie.posterPath),
+                    placeholderIcon: const Icon(Icons.movie),
                   ),
                 ),
               ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 10, bottom: 5),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, bottom: 5),
                     child: Text(
                       '${movie.title}',
                       overflow: (movie.posterPath != null)
