@@ -5,7 +5,7 @@ import '../../../../../utils/routes.dart';
 import '../../backdrop_image/backdrop_image.dart';
 
 class MovieCarouselItem extends StatelessWidget {
-  final String image;
+  final String? image;
   final String title;
   final int id;
 
@@ -20,7 +20,10 @@ class MovieCarouselItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        BackdropImage(imgUrl: image),
+        BackdropImage(
+          imgUrl: image,
+          placeholderIcon: const Icon(Icons.movie),
+        ),
         _Title(title: title),
         const _PlayIcon(),
         GestureDetector(
