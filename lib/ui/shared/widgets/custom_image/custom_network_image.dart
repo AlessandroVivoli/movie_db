@@ -36,7 +36,7 @@ class CustomNetworkImage extends StatelessWidget {
     }
     return Icon(
       placeholderIcon.icon,
-      color: Colors.white,
+      color: placeholderIcon.color ?? Colors.white,
       size: placeholderIcon.size,
     );
   }
