@@ -20,9 +20,9 @@ class _PlayButtonState extends State<PlayButton> {
 
   @override
   Widget build(BuildContext context) {
-    const double defaultTopMargin = 250 - 15;
+    const double defaultTopMargin = 260;
 
-    const double scaleStart = 96;
+    const double scaleStart = (defaultTopMargin - 16) / 2;
     const double scaleEnd = scaleStart / 2;
 
     double top = defaultTopMargin;
