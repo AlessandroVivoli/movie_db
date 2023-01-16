@@ -46,21 +46,24 @@ class MyApp extends StatelessWidget {
           primary: const Color.fromARGB(255, 217, 176, 22),
           background: const Color.fromARGB(255, 17, 25, 37),
           secondary: Colors.grey,
+          surface: const Color.fromARGB(255, 29, 45, 70),
         ),
         appBarTheme: const AppBarTheme(
-            color: Color.fromARGB(255, 17, 25, 37),
-            systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Color.fromARGB(255, 17, 25, 37),
-            )),
+          color: Color.fromARGB(255, 17, 25, 37),
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Color.fromARGB(255, 17, 25, 37),
+          ),
+        ),
         tabBarTheme: const TabBarTheme(
-            indicator: ShapeDecoration(
-          shape: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Color.fromARGB(255, 217, 176, 22),
-              width: 5,
+          indicator: ShapeDecoration(
+            shape: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: Color.fromARGB(255, 217, 176, 22),
+                width: 5,
+              ),
             ),
           ),
-        )),
+        ),
         scaffoldBackgroundColor: const Color.fromARGB(255, 17, 25, 37),
         drawerTheme: const DrawerThemeData(
           backgroundColor: Color.fromARGB(255, 17, 25, 37),
