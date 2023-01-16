@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/services/person_service.dart';
+import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/person_list/person_list.dart';
 
 class TrendingPersonsSection extends StatelessWidget {
@@ -58,35 +60,41 @@ class _TrendingPersonsList extends StatelessWidget {
         child: FutureBuilder(
           future: PersonService.getTrendingPersons(),
           builder: (context, snapshot) {
+            late Widget widget;
+
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
+              widget = const Center(
                 child: CircularProgressIndicator(),
               );
-            }
+            } else {
+              if (snapshot.hasError) {
+                WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Theme.of(context).colorScheme.surface,
+                      content: const ErrorSnackBarContent(
+                        message: 'Could not get trending persons.',
+                      ),
+                    ),
+                  );
+                });
 
-            if (snapshot.hasError) {
-              WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Could not get trending persons'),
-                  ),
+                widget = const Center(
+                  child: ErrorText('Something went wrong.'),
                 );
-              });
-              return const Center(
-                child: Text('Nothing found'),
-              );
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                widget = const Center(
+                  child: Text('Nothing found.'),
+                );
+              } else {
+                widget = Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: PersonList(personList: snapshot.data!),
+                );
+              }
             }
 
-            if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(
-                child: Text('Nothing found'),
-              );
-            }
-
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: PersonList(personList: snapshot.data!),
-            );
+            return widget;
           },
         ),
       ),

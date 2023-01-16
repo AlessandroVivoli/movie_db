@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/services/movie_service.dart';
+import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/movie_list/movie_list.dart';
 
 class TopRatedMoviesSection extends StatelessWidget {
@@ -56,36 +58,41 @@ class _TopRatedMoviesList extends StatelessWidget {
       child: FutureBuilder(
         future: MovieService.getTopRatedMovies(),
         builder: (context, snapshot) {
+          late Widget widget;
+
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
+            widget = const Center(
               child: CircularProgressIndicator(),
             );
-          }
+          } else {
+            if (snapshot.hasError) {
+              WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: Theme.of(context).colorScheme.surface,
+                    content: const ErrorSnackBarContent(
+                      message: 'Could not get top rated movies.',
+                    ),
+                  ),
+                );
+              });
 
-          if (snapshot.hasError) {
-            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Could not get top rated movies'),
-                ),
+              widget = const Center(
+                child: ErrorText('Something went wrong.'),
               );
-            });
-
-            return const Center(
-              child: Text('Has error'),
-            );
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              widget = const Center(
+                child: Text('Nothing found.'),
+              );
+            } else {
+              widget = Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: MovieList(movieList: snapshot.data!),
+              );
+            }
           }
 
-          if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(
-              child: Text('Nothing found'),
-            );
-          }
-
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
-            child: MovieList(movieList: snapshot.data!),
-          );
+          return widget;
         },
       ),
     );

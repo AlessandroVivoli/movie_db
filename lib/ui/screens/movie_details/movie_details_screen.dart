@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../core/models/movie/details/movie_details.dart';
 import '../../../../core/services/video_service.dart';
 import '../../../utils/routes.dart';
+import '../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../shared/widgets/errors/error_text.dart';
 import 'backdrop/backdrop.dart';
 import 'movie_details_wrapper/movie_details_wrapper.dart';
 import 'play_button/play_button.dart';
@@ -34,45 +36,71 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: Scaffold(
-        body: FutureBuilder(
-          future: widget.movieDetails,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
+        body: _MovieDetailsBuilder(
+            widget: widget, scrollController: _scrollController),
+      ),
+    );
+  }
+}
 
-            if (snapshot.hasError) {
-              WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Could not get movie details')),
-                );
-              });
+class _MovieDetailsBuilder extends StatelessWidget {
+  const _MovieDetailsBuilder({
+    Key? key,
+    required this.widget,
+    required ScrollController scrollController,
+  })  : _scrollController = scrollController,
+        super(key: key);
 
-              return Column(
-                children: [
-                  AppBar(),
-                  const Expanded(
-                    child: Center(child: Text('Nothing found')),
+  final MovieDetailsScreen widget;
+  final ScrollController _scrollController;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: widget.movieDetails,
+      builder: (context, snapshot) {
+        late Widget widget;
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          widget = const Center(child: CircularProgressIndicator());
+        } else {
+          if (snapshot.hasError) {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Theme.of(context).colorScheme.surface,
+                  content: const ErrorSnackBarContent(
+                    message: 'Could not get movie details.',
                   ),
-                ],
+                ),
               );
-            }
+            });
 
-            if (!snapshot.hasData) {
-              return Column(
-                children: [
-                  AppBar(),
-                  const Expanded(
-                    child: Center(child: Text('Nothing found')),
+            widget = Column(
+              children: [
+                AppBar(),
+                const Expanded(
+                  child: Center(
+                    child: ErrorText('Something went wrong.'),
                   ),
-                ],
-              );
-            }
-
+                ),
+              ],
+            );
+          } else if (!snapshot.hasData) {
+            widget = Column(
+              children: [
+                AppBar(),
+                const Expanded(
+                  child: Center(child: Text('Nothing found.')),
+                ),
+              ],
+            );
+          } else {
             final data = snapshot.data!;
 
-            return Stack(
+            widget = Stack(
               children: [
                 CustomScrollView(
                   controller: _scrollController,
@@ -93,9 +121,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                 )
               ],
             );
-          },
-        ),
-      ),
+          }
+        }
+
+        return widget;
+      },
     );
   }
 }
