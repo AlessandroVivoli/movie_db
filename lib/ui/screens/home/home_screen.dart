@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../core/services/movie_service.dart';
 import '../../shared/widgets/genre_tab/genre_tab.dart';
-import 'carousel/carousel.dart';
 import 'home_wrapper/home_wrapper.dart';
+import 'movie_carousel/movie_carousel.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.title});
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }
 
-                  return Carousel(
+                  return MovieCarousel(
                     movies: (snapshot.data!).take(6).toList(),
                   );
                 },

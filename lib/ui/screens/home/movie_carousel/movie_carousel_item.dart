@@ -4,12 +4,12 @@ import '../../../../core/services/movie_service.dart';
 import '../../../../utils/routes.dart';
 import '../../../shared/widgets/backdrop_image/backdrop_image.dart';
 
-class CarouselItem extends StatelessWidget {
+class MovieCarouselItem extends StatelessWidget {
   final String image;
   final String title;
   final int id;
 
-  const CarouselItem({
+  const MovieCarouselItem({
     super.key,
     required this.image,
     required this.title,

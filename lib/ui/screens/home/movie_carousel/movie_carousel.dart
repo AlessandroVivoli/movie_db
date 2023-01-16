@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/models/movie/movie.dart';
-import 'carousel_item.dart';
+import 'movie_carousel_item.dart';
 
-class Carousel extends StatefulWidget {
+class MovieCarousel extends StatefulWidget {
   final List<Movie> movies;
   final double? height;
 
-  const Carousel({super.key, this.height, required this.movies});
+  const MovieCarousel({super.key, this.height, required this.movies});
 
   @override
-  State<StatefulWidget> createState() => _CarouselState();
+  State<StatefulWidget> createState() => _MovieCarouselState();
 }
 
-class _CarouselState extends State<Carousel> {
+class _MovieCarouselState extends State<MovieCarousel> {
   late final PageController _controller;
 
   @override
@@ -40,7 +40,7 @@ class _CarouselState extends State<Carousel> {
             itemCount: widget.movies.length,
             pageSnapping: true,
             itemBuilder: (context, pagePosition) {
-              return CarouselItem(
+              return MovieCarouselItem(
                 image: widget.movies[pagePosition].backdropPath ?? '',
                 title: widget.movies[pagePosition].title!,
                 id: widget.movies[pagePosition].id,
