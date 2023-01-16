@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../core/models/video/video.dart';
+import '../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../shared/widgets/errors/error_text.dart';
 import 'player/player.dart';
 
 class VideoScreen extends StatelessWidget {
@@ -29,48 +31,53 @@ class VideoScreen extends StatelessWidget {
       body: FutureBuilder(
         future: videoList,
         builder: (context, snapshot) {
+          late Widget widget;
+
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
+            widget = const Center(
               child: CircularProgressIndicator(),
             );
-          }
+          } else {
+            if (snapshot.hasError) {
+              WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: Theme.of(context).colorScheme.surface,
+                    content: const ErrorSnackBarContent(
+                      message: 'Cannot play movie trailer',
+                    ),
+                  ),
+                );
+              });
 
-          if (snapshot.hasError) {
-            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Cannot play movie trailer')),
+              widget = const Center(
+                child: ErrorText('Something went wrong.'),
               );
-            });
+            } else if (!snapshot.hasData) {
+              widget = const Center(
+                child: Text('No video found.'),
+              );
+            } else {
+              final data = snapshot.data;
 
-            return const Center(
-              child: Text('No video found'),
-            );
+              final videos = data?.where(
+                (video) =>
+                    video.isOfficial && video.isTrailer && video.isYouTube,
+              );
+
+              if (videos == null || videos.isEmpty) {
+                widget = const Center(
+                  child: Text('No video found.'),
+                );
+              } else {
+                final video = videos.first;
+
+                widget = Player(video: video);
+              }
+            }
           }
 
-          if (!snapshot.hasData) {
-            return const Center(
-              child: Text('No video found'),
-            );
-          }
-
-          final data = snapshot.data;
-
-          final videos = data?.where(
-            (video) =>
-                video.official &&
-                video.type == 'Trailer' &&
-                video.site == 'YouTube',
-          );
-
-          if (videos == null || videos.isEmpty) {
-            return const Center(
-              child: Text('No video found'),
-            );
-          }
-
-          final video = videos.first;
-
-          return Player(video: video);
+          return widget;
         },
       ),
     );
