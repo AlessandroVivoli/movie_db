@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/services/movie_service.dart';
-import '../../../../utils/routes.dart';
-import '../backdrop_image/backdrop_image.dart';
+import '../../../../../core/services/movie_service.dart';
+import '../../../../../utils/routes.dart';
+import '../../backdrop_image/backdrop_image.dart';
 
 class MovieCarouselItem extends StatelessWidget {
   final String image;

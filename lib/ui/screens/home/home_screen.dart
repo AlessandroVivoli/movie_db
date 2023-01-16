@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/services/movie_service.dart';
+import '../../shared/widgets/carousel/movie_carousel/movie_carousel.dart';
 import '../../shared/widgets/genre_tab/genre_tab.dart';
-import '../../shared/widgets/movie_carousel/movie_carousel.dart';
 import 'home_wrapper/home_wrapper.dart';
 
 class HomeScreen extends StatefulWidget {

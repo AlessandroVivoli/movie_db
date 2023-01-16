@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/models/movie/movie.dart';
+import '../../../../../core/models/movie/movie.dart';
 import 'movie_carousel_item.dart';
 
 class MovieCarousel extends StatefulWidget {
