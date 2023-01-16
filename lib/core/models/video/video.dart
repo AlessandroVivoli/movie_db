@@ -5,6 +5,8 @@ part 'video.g.dart';
 
 @freezed
 class Video with _$Video {
+  const Video._();
+
   const factory Video({
     required String? iso_649_1,
     required String? iso_3166_1,
@@ -19,4 +21,16 @@ class Video with _$Video {
   }) = _Video;
 
   factory Video.fromJson(Map<String, Object?> json) => _$VideoFromJson(json);
+
+  bool get isOfficial {
+    return official;
+  }
+
+  bool get isTrailer {
+    return type == 'Trailer';
+  }
+
+  bool get isYouTube {
+    return site == 'YouTube';
+  }
 }
