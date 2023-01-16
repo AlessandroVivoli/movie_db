@@ -20,8 +20,8 @@ MovieImages _$MovieImagesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MovieImages {
-  List<MovieImage> get backdrops => throw _privateConstructorUsedError;
-  List<MovieImage> get posters => throw _privateConstructorUsedError;
+  List<ImageModel> get backdrops => throw _privateConstructorUsedError;
+  List<ImageModel> get posters => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $MovieImagesCopyWith<$Res> {
           MovieImages value, $Res Function(MovieImages) then) =
       _$MovieImagesCopyWithImpl<$Res, MovieImages>;
   @useResult
-  $Res call({List<MovieImage> backdrops, List<MovieImage> posters});
+  $Res call({List<ImageModel> backdrops, List<ImageModel> posters});
 }
 
 /// @nodoc
@@ -58,11 +58,11 @@ class _$MovieImagesCopyWithImpl<$Res, $Val extends MovieImages>
       backdrops: null == backdrops
           ? _value.backdrops
           : backdrops // ignore: cast_nullable_to_non_nullable
-              as List<MovieImage>,
+              as List<ImageModel>,
       posters: null == posters
           ? _value.posters
           : posters // ignore: cast_nullable_to_non_nullable
-              as List<MovieImage>,
+              as List<ImageModel>,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$_MovieImagesCopyWith<$Res>
       __$$_MovieImagesCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<MovieImage> backdrops, List<MovieImage> posters});
+  $Res call({List<ImageModel> backdrops, List<ImageModel> posters});
 }
 
 /// @nodoc
@@ -96,11 +96,11 @@ class __$$_MovieImagesCopyWithImpl<$Res>
       backdrops: null == backdrops
           ? _value._backdrops
           : backdrops // ignore: cast_nullable_to_non_nullable
-              as List<MovieImage>,
+              as List<ImageModel>,
       posters: null == posters
           ? _value._posters
           : posters // ignore: cast_nullable_to_non_nullable
-              as List<MovieImage>,
+              as List<ImageModel>,
     ));
   }
 }
@@ -109,25 +109,25 @@ class __$$_MovieImagesCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MovieImages implements _MovieImages {
   const _$_MovieImages(
-      {required final List<MovieImage> backdrops,
-      required final List<MovieImage> posters})
+      {required final List<ImageModel> backdrops,
+      required final List<ImageModel> posters})
       : _backdrops = backdrops,
         _posters = posters;
 
   factory _$_MovieImages.fromJson(Map<String, dynamic> json) =>
       _$$_MovieImagesFromJson(json);
 
-  final List<MovieImage> _backdrops;
+  final List<ImageModel> _backdrops;
   @override
-  List<MovieImage> get backdrops {
+  List<ImageModel> get backdrops {
     if (_backdrops is EqualUnmodifiableListView) return _backdrops;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_backdrops);
   }
 
-  final List<MovieImage> _posters;
+  final List<ImageModel> _posters;
   @override
-  List<MovieImage> get posters {
+  List<ImageModel> get posters {
     if (_posters is EqualUnmodifiableListView) return _posters;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_posters);
@@ -171,16 +171,16 @@ class _$_MovieImages implements _MovieImages {
 
 abstract class _MovieImages implements MovieImages {
   const factory _MovieImages(
-      {required final List<MovieImage> backdrops,
-      required final List<MovieImage> posters}) = _$_MovieImages;
+      {required final List<ImageModel> backdrops,
+      required final List<ImageModel> posters}) = _$_MovieImages;
 
   factory _MovieImages.fromJson(Map<String, dynamic> json) =
       _$_MovieImages.fromJson;
 
   @override
-  List<MovieImage> get backdrops;
+  List<ImageModel> get backdrops;
   @override
-  List<MovieImage> get posters;
+  List<ImageModel> get posters;
   @override
   @JsonKey(ignore: true)
   _$$_MovieImagesCopyWith<_$_MovieImages> get copyWith =>

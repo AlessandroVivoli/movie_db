@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'movie_image.dart';
+part of 'image_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MovieImage _$$_MovieImageFromJson(Map<String, dynamic> json) =>
-    _$_MovieImage(
+_$_ImageModel _$$_ImageModelFromJson(Map<String, dynamic> json) =>
+    _$_ImageModel(
       aspectRatio: (json['aspect_ratio'] as num).toDouble(),
       filePath: json['file_path'] as String,
       height: json['height'] as int,
@@ -17,7 +17,7 @@ _$_MovieImage _$$_MovieImageFromJson(Map<String, dynamic> json) =>
       width: json['width'] as int,
     );
 
-Map<String, dynamic> _$$_MovieImageToJson(_$_MovieImage instance) =>
+Map<String, dynamic> _$$_ImageModelToJson(_$_ImageModel instance) =>
     <String, dynamic>{
       'aspect_ratio': instance.aspectRatio,
       'file_path': instance.filePath,

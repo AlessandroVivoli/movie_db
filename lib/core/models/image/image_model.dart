@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'movie_image.freezed.dart';
-part 'movie_image.g.dart';
+part 'image_model.freezed.dart';
+part 'image_model.g.dart';
 
 @freezed
-class MovieImage with _$MovieImage {
-  const factory MovieImage({
+class ImageModel with _$ImageModel {
+  const factory ImageModel({
     required double aspectRatio,
     required String filePath,
     required int height,
@@ -13,8 +13,8 @@ class MovieImage with _$MovieImage {
     required int voteAverage,
     required int voteCount,
     required int width,
-  }) = _MovieImage;
+  }) = _ImageModel;
 
-  factory MovieImage.fromJson(Map<String, Object?> json) =>
-      _$MovieImageFromJson(json);
+  factory ImageModel.fromJson(Map<String, Object?> json) =>
+      _$ImageModelFromJson(json);
 }

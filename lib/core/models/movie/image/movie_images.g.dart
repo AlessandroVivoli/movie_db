@@ -9,10 +9,10 @@ part of 'movie_images.dart';
 _$_MovieImages _$$_MovieImagesFromJson(Map<String, dynamic> json) =>
     _$_MovieImages(
       backdrops: (json['backdrops'] as List<dynamic>)
-          .map((e) => MovieImage.fromJson(e as Map<String, dynamic>))
+          .map((e) => ImageModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       posters: (json['posters'] as List<dynamic>)
-          .map((e) => MovieImage.fromJson(e as Map<String, dynamic>))
+          .map((e) => ImageModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

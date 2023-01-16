@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'movie_image.dart';
+part of 'image_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-MovieImage _$MovieImageFromJson(Map<String, dynamic> json) {
-  return _MovieImage.fromJson(json);
+ImageModel _$ImageModelFromJson(Map<String, dynamic> json) {
+  return _ImageModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$MovieImage {
+mixin _$ImageModel {
   double get aspectRatio => throw _privateConstructorUsedError;
   String get filePath => throw _privateConstructorUsedError;
   int get height => throw _privateConstructorUsedError;
@@ -30,15 +30,15 @@ mixin _$MovieImage {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $MovieImageCopyWith<MovieImage> get copyWith =>
+  $ImageModelCopyWith<ImageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MovieImageCopyWith<$Res> {
-  factory $MovieImageCopyWith(
-          MovieImage value, $Res Function(MovieImage) then) =
-      _$MovieImageCopyWithImpl<$Res, MovieImage>;
+abstract class $ImageModelCopyWith<$Res> {
+  factory $ImageModelCopyWith(
+          ImageModel value, $Res Function(ImageModel) then) =
+      _$ImageModelCopyWithImpl<$Res, ImageModel>;
   @useResult
   $Res call(
       {double aspectRatio,
@@ -51,9 +51,9 @@ abstract class $MovieImageCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MovieImageCopyWithImpl<$Res, $Val extends MovieImage>
-    implements $MovieImageCopyWith<$Res> {
-  _$MovieImageCopyWithImpl(this._value, this._then);
+class _$ImageModelCopyWithImpl<$Res, $Val extends ImageModel>
+    implements $ImageModelCopyWith<$Res> {
+  _$ImageModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -105,11 +105,11 @@ class _$MovieImageCopyWithImpl<$Res, $Val extends MovieImage>
 }
 
 /// @nodoc
-abstract class _$$_MovieImageCopyWith<$Res>
-    implements $MovieImageCopyWith<$Res> {
-  factory _$$_MovieImageCopyWith(
-          _$_MovieImage value, $Res Function(_$_MovieImage) then) =
-      __$$_MovieImageCopyWithImpl<$Res>;
+abstract class _$$_ImageModelCopyWith<$Res>
+    implements $ImageModelCopyWith<$Res> {
+  factory _$$_ImageModelCopyWith(
+          _$_ImageModel value, $Res Function(_$_ImageModel) then) =
+      __$$_ImageModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -123,11 +123,11 @@ abstract class _$$_MovieImageCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MovieImageCopyWithImpl<$Res>
-    extends _$MovieImageCopyWithImpl<$Res, _$_MovieImage>
-    implements _$$_MovieImageCopyWith<$Res> {
-  __$$_MovieImageCopyWithImpl(
-      _$_MovieImage _value, $Res Function(_$_MovieImage) _then)
+class __$$_ImageModelCopyWithImpl<$Res>
+    extends _$ImageModelCopyWithImpl<$Res, _$_ImageModel>
+    implements _$$_ImageModelCopyWith<$Res> {
+  __$$_ImageModelCopyWithImpl(
+      _$_ImageModel _value, $Res Function(_$_ImageModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -141,7 +141,7 @@ class __$$_MovieImageCopyWithImpl<$Res>
     Object? voteCount = null,
     Object? width = null,
   }) {
-    return _then(_$_MovieImage(
+    return _then(_$_ImageModel(
       aspectRatio: null == aspectRatio
           ? _value.aspectRatio
           : aspectRatio // ignore: cast_nullable_to_non_nullable
@@ -176,8 +176,8 @@ class __$$_MovieImageCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MovieImage implements _MovieImage {
-  const _$_MovieImage(
+class _$_ImageModel implements _ImageModel {
+  const _$_ImageModel(
       {required this.aspectRatio,
       required this.filePath,
       required this.height,
@@ -186,8 +186,8 @@ class _$_MovieImage implements _MovieImage {
       required this.voteCount,
       required this.width});
 
-  factory _$_MovieImage.fromJson(Map<String, dynamic> json) =>
-      _$$_MovieImageFromJson(json);
+  factory _$_ImageModel.fromJson(Map<String, dynamic> json) =>
+      _$$_ImageModelFromJson(json);
 
   @override
   final double aspectRatio;
@@ -206,14 +206,14 @@ class _$_MovieImage implements _MovieImage {
 
   @override
   String toString() {
-    return 'MovieImage(aspectRatio: $aspectRatio, filePath: $filePath, height: $height, iso_639_1: $iso_639_1, voteAverage: $voteAverage, voteCount: $voteCount, width: $width)';
+    return 'ImageModel(aspectRatio: $aspectRatio, filePath: $filePath, height: $height, iso_639_1: $iso_639_1, voteAverage: $voteAverage, voteCount: $voteCount, width: $width)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MovieImage &&
+            other is _$_ImageModel &&
             (identical(other.aspectRatio, aspectRatio) ||
                 other.aspectRatio == aspectRatio) &&
             (identical(other.filePath, filePath) ||
@@ -236,29 +236,29 @@ class _$_MovieImage implements _MovieImage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MovieImageCopyWith<_$_MovieImage> get copyWith =>
-      __$$_MovieImageCopyWithImpl<_$_MovieImage>(this, _$identity);
+  _$$_ImageModelCopyWith<_$_ImageModel> get copyWith =>
+      __$$_ImageModelCopyWithImpl<_$_ImageModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MovieImageToJson(
+    return _$$_ImageModelToJson(
       this,
     );
   }
 }
 
-abstract class _MovieImage implements MovieImage {
-  const factory _MovieImage(
+abstract class _ImageModel implements ImageModel {
+  const factory _ImageModel(
       {required final double aspectRatio,
       required final String filePath,
       required final int height,
       required final String? iso_639_1,
       required final int voteAverage,
       required final int voteCount,
-      required final int width}) = _$_MovieImage;
+      required final int width}) = _$_ImageModel;
 
-  factory _MovieImage.fromJson(Map<String, dynamic> json) =
-      _$_MovieImage.fromJson;
+  factory _ImageModel.fromJson(Map<String, dynamic> json) =
+      _$_ImageModel.fromJson;
 
   @override
   double get aspectRatio;
@@ -276,6 +276,6 @@ abstract class _MovieImage implements MovieImage {
   int get width;
   @override
   @JsonKey(ignore: true)
-  _$$_MovieImageCopyWith<_$_MovieImage> get copyWith =>
+  _$$_ImageModelCopyWith<_$_ImageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
