@@ -32,7 +32,7 @@ class PersonCard extends StatelessWidget {
       child: Column(
         children: [
           CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.primary,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             radius: imgRadius,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(imgRadius),
@@ -43,7 +43,10 @@ class PersonCard extends StatelessWidget {
                   size: ProfileSizes.w185.name,
                   path: person.profilePath,
                 ),
-                placeholderIcon: const Icon(Icons.person),
+                placeholderIcon: const Icon(
+                  Icons.person,
+                  size: 40,
+                ),
               ),
             ),
           ),
