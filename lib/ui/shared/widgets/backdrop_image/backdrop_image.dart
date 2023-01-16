@@ -6,19 +6,26 @@ import '../custom_image/custom_network_image.dart';
 
 class BackdropImage extends StatelessWidget {
   final String? imgUrl;
+  final Icon placeholderIcon;
 
-  const BackdropImage({super.key, required this.imgUrl});
+  const BackdropImage({
+    super.key,
+    required this.imgUrl,
+    required this.placeholderIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CustomNetworkImage(
-          url: ImageService.getImageUrl(
-            size: BackdropSizes.w1280.name,
-            path: imgUrl,
+        Center(
+          child: CustomNetworkImage(
+            url: ImageService.getImageUrl(
+              size: BackdropSizes.w1280.name,
+              path: imgUrl,
+            ),
+            placeholderIcon: placeholderIcon,
           ),
-          placeholderIcon: const Icon(Icons.movie),
         ),
         Container(
           decoration: BoxDecoration(
