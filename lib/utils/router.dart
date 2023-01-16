@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../core/models/movie/details/movie_details.dart';
 import '../core/models/person/details/person_details.dart';
 import '../core/models/video/video.dart';
-import '../ui/screens/home/home.dart';
-import '../ui/screens/movie_details/movie_details.dart';
-import '../ui/screens/person_details/person_details.dart';
-import '../ui/screens/video/video.dart';
+import '../ui/screens/home/home_screen.dart';
+import '../ui/screens/movie_details/movie_details_screen.dart';
+import '../ui/screens/person_details/person_details_screen.dart';
+import '../ui/screens/video/video_screen.dart';
 import 'routes.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
