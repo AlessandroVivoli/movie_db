@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/services/genre_service.dart';
-import '../errors/error_snack_bar_content.dart';
-import '../errors/error_text.dart';
-import 'widgets/genre_tab_controller.dart';
+import '../../../../../core/services/movie_service.dart';
+import '../../errors/error_snack_bar_content.dart';
+import '../../errors/error_text.dart';
+import '../../movie_list/movie_list.dart';
 
-class GenreTab extends StatelessWidget {
-  const GenreTab({super.key});
+class GenreTabBuilder extends StatelessWidget {
+  const GenreTabBuilder({
+    Key? key,
+    required this.genreId,
+  }) : super(key: key);
+
+  final int genreId;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: GenreService.getGenres(),
+      future: MovieService.getMovies(
+        withGenres: [genreId],
+        sortBy: 'popularity.desc',
+      ),
       builder: (context, snapshot) {
         late Widget widget;
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          widget = const Center(child: CircularProgressIndicator());
+          widget = const Center(
+            child: CircularProgressIndicator(),
+          );
         } else {
           if (snapshot.hasError) {
             WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -24,7 +34,7 @@ class GenreTab extends StatelessWidget {
                 SnackBar(
                   backgroundColor: Theme.of(context).colorScheme.surface,
                   content: const ErrorSnackBarContent(
-                    message: 'Could not get genres.',
+                    message: 'Could not get movies.',
                   ),
                 ),
               );
@@ -38,9 +48,10 @@ class GenreTab extends StatelessWidget {
               child: Text('Nothing found.'),
             );
           } else {
-            final data = snapshot.data!;
-
-            widget = GenreTabController(data: data);
+            widget = MovieList(
+              movieList: snapshot.data!,
+              padding: 10,
+            );
           }
         }
 
