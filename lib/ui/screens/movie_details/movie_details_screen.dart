@@ -61,70 +61,57 @@ class _MovieDetailsBuilder extends StatelessWidget {
     return FutureBuilder(
       future: widget.movieDetails,
       builder: (context, snapshot) {
-        late Widget widget;
+        if (snapshot.hasData) {
+          final data = snapshot.data!;
 
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          widget = const Center(child: CircularProgressIndicator());
-        } else {
-          if (snapshot.hasError) {
-            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Theme.of(context).colorScheme.surface,
-                  content: const ErrorSnackBarContent(
-                    message: 'Could not get movie details.',
-                  ),
+          return Stack(
+            children: [
+              CustomScrollView(
+                controller: _scrollController,
+                slivers: [
+                  MovieDetailsBackdrop(details: data),
+                  SliverToBoxAdapter(
+                    child: MovieDetailsWrapper(details: data),
+                  )
+                ],
+              ),
+              PlayButton(
+                controller: _scrollController,
+                onPressed: () => Navigator.pushNamed(
+                  context,
+                  AppRoute.play,
+                  arguments: VideoService.getVideos(movieId: data.id!),
                 ),
-              );
-            });
+              )
+            ],
+          );
+        } else if (snapshot.hasError) {
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                content: const ErrorSnackBarContent(
+                  message: 'Could not get movie details.',
+                ),
+              ),
+            );
+          });
 
-            widget = Column(
-              children: [
-                AppBar(),
-                const Expanded(
-                  child: Center(
-                    child: ErrorText('Something went wrong.'),
-                  ),
+          return Column(
+            children: [
+              AppBar(),
+              const Expanded(
+                child: Center(
+                  child: ErrorText('Something went wrong.'),
                 ),
-              ],
-            );
-          } else if (!snapshot.hasData) {
-            widget = Column(
-              children: [
-                AppBar(),
-                const Expanded(
-                  child: Center(child: Text('Nothing found.')),
-                ),
-              ],
-            );
-          } else {
-            final data = snapshot.data!;
-
-            widget = Stack(
-              children: [
-                CustomScrollView(
-                  controller: _scrollController,
-                  slivers: [
-                    MovieDetailsBackdrop(details: data),
-                    SliverToBoxAdapter(
-                      child: MovieDetailsWrapper(details: data),
-                    )
-                  ],
-                ),
-                PlayButton(
-                  controller: _scrollController,
-                  onPressed: () => Navigator.pushNamed(
-                    context,
-                    AppRoute.play,
-                    arguments: VideoService.getVideos(movieId: data.id!),
-                  ),
-                )
-              ],
-            );
-          }
+              ),
+            ],
+          );
         }
 
-        return widget;
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }

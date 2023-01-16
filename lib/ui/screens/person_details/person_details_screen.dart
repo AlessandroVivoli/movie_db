@@ -34,48 +34,33 @@ class _PersonDetailsBodyBuilder extends StatelessWidget {
     return FutureBuilder(
       future: personDetails,
       builder: (context, snapshot) {
-        late Widget widget;
+        if (snapshot.hasData) {
+          return PersonDetailsBody(personDetails: snapshot.data!);
+        } else if (snapshot.hasError) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                content: const ErrorSnackBarContent(
+                  message: 'Could not get person details.',
+                ),
+              ),
+            );
+          });
 
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          widget = const Center(
-            child: CircularProgressIndicator(),
+          return Column(
+            children: [
+              AppBar(),
+              const Center(
+                child: ErrorText('Something went wrong.'),
+              ),
+            ],
           );
-        } else {
-          if (snapshot.hasError) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Theme.of(context).colorScheme.surface,
-                  content: const ErrorSnackBarContent(
-                    message: 'Could not get person details.',
-                  ),
-                ),
-              );
-            });
-
-            widget = Column(
-              children: [
-                AppBar(),
-                const Center(
-                  child: ErrorText('Something went wrong.'),
-                ),
-              ],
-            );
-          } else if (!snapshot.hasData) {
-            widget = Column(
-              children: [
-                AppBar(),
-                const Center(
-                  child: Text('Nothing found.'),
-                ),
-              ],
-            );
-          } else {
-            widget = PersonDetailsBody(personDetails: snapshot.data!);
-          }
         }
 
-        return widget;
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }

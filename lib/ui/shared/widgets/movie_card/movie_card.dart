@@ -34,7 +34,8 @@ class MovieCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface),
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
                   child: Center(
                     child: CustomNetworkImage(
                       url: ImageService.getImageUrl(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/models/movie/movie.dart';
-import '../carousel_active_dot/carousel_active_dot.dart';
+import '../shared/carousel_active_dot.dart';
 import 'movie_carousel_item.dart';
 
 class MovieCarousel extends StatefulWidget {

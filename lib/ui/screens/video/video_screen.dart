@@ -31,53 +31,48 @@ class VideoScreen extends StatelessWidget {
       body: FutureBuilder(
         future: videoList,
         builder: (context, snapshot) {
-          late Widget widget;
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            widget = const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            if (snapshot.hasError) {
-              WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: Theme.of(context).colorScheme.surface,
-                    content: const ErrorSnackBarContent(
-                      message: 'Cannot play movie trailer',
-                    ),
-                  ),
-                );
-              });
-
-              widget = const Center(
-                child: ErrorText('Something went wrong.'),
-              );
-            } else if (!snapshot.hasData) {
-              widget = const Center(
+          if (snapshot.hasData) {
+            if (snapshot.data!.isEmpty) {
+              return const Center(
                 child: Text('No video found.'),
               );
-            } else {
-              final data = snapshot.data;
-
-              final videos = data?.where(
-                (video) =>
-                    video.isOfficial && video.isTrailer && video.isYouTube,
-              );
-
-              if (videos == null || videos.isEmpty) {
-                widget = const Center(
-                  child: Text('No video found.'),
-                );
-              } else {
-                final video = videos.first;
-
-                widget = Player(video: video);
-              }
             }
+
+            final data = snapshot.data;
+
+            final videos = data!.where(
+              (video) => video.isOfficial && video.isTrailer && video.isYouTube,
+            );
+
+            if (videos.isEmpty) {
+              return const Center(
+                child: Text('No video found.'),
+              );
+            }
+
+            final video = videos.first;
+
+            return Player(video: video);
+          } else if (snapshot.hasError) {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Theme.of(context).colorScheme.surface,
+                  content: const ErrorSnackBarContent(
+                    message: 'Cannot play movie trailer',
+                  ),
+                ),
+              );
+            });
+
+            return const Center(
+              child: ErrorText('Something went wrong.'),
+            );
           }
 
-          return widget;
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );

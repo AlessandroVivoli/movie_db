@@ -45,43 +45,39 @@ class _PersonCarouselBuilder extends StatelessWidget {
     return FutureBuilder(
       future: ImageService.getPersonImages(id: personDetails.id),
       builder: (context, snapshot) {
-        late Widget widget;
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          widget = const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          if (snapshot.hasError) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Theme.of(context).colorScheme.surface,
-                  content: const ErrorSnackBarContent(
-                    message: 'Could not get person images.',
-                  ),
-                ),
-              );
-            });
-
-            widget = const Center(
-              child: ErrorText('Something went wrong.'),
-            );
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            widget = const Center(
+        if (snapshot.hasData) {
+          if (snapshot.data!.isEmpty) {
+            return const Center(
               child: Icon(
                 Icons.person,
                 size: 100,
               ),
             );
-          } else {
-            widget = ImageCarousel(
-              images: snapshot.data!.take(10).toList(),
-            );
           }
+
+          return ImageCarousel(
+            images: snapshot.data!.take(10).toList(),
+          );
+        } else if (snapshot.hasError) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                content: const ErrorSnackBarContent(
+                  message: 'Could not get person images.',
+                ),
+              ),
+            );
+          });
+
+          return const Center(
+            child: ErrorText('Something went wrong.'),
+          );
         }
 
-        return widget;
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }
