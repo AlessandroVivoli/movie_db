@@ -26,19 +26,26 @@ class MovieCard extends StatelessWidget {
           );
         },
         child: Column(
-          mainAxisAlignment: (movie.posterPath != null)
-              ? MainAxisAlignment.spaceBetween
-              : MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Center(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: CustomNetworkImage(
-                    url: ImageService.getImageUrl(
-                        size: PosterSizes.w500.name, path: movie.posterPath),
-                    placeholderIcon: const Icon(Icons.movie),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface),
+                  child: Center(
+                    child: CustomNetworkImage(
+                      url: ImageService.getImageUrl(
+                        size: PosterSizes.w500.name,
+                        path: movie.posterPath,
+                      ),
+                      placeholderIcon: const Icon(
+                        Icons.movie,
+                        size: 50,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -52,9 +59,7 @@ class MovieCard extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 10, bottom: 5),
                     child: Text(
                       '${movie.title}',
-                      overflow: (movie.posterPath != null)
-                          ? TextOverflow.ellipsis
-                          : TextOverflow.visible,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Rating(
