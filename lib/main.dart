@@ -4,10 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:loggy/loggy.dart';
 
+import 'core/providers/session_provider.dart';
 import 'utils/router.dart';
 
 void main() async {
   await dotenv.load();
+
+  await SessionProvider.init();
 
   Loggy.initLoggy(
     logOptions: const LogOptions(
@@ -47,6 +50,13 @@ class MyApp extends StatelessWidget {
           background: const Color.fromARGB(255, 17, 25, 37),
           secondary: Colors.grey,
           surface: const Color.fromARGB(255, 29, 45, 70),
+        ),
+        snackBarTheme: const SnackBarThemeData(
+          backgroundColor: Color.fromARGB(255, 29, 45, 70),
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Color.fromARGB(255, 217, 176, 22),
+          foregroundColor: Colors.white,
         ),
         appBarTheme: const AppBarTheme(
           color: Color.fromARGB(255, 17, 25, 37),
