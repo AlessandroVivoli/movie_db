@@ -3,4 +3,5 @@ abstract class AppRoute {
   static const movie = 'movie';
   static const person = 'person';
   static const play = 'play';
+  static const login = 'login';
 }

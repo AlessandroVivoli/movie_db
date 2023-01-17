@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../core/models/movie/details/movie_details.dart';
 import '../core/models/person/details/person_details.dart';
 import '../core/models/video/video.dart';
+import '../ui/screens/auth/login.dart';
 import '../ui/screens/home/home_screen.dart';
 import '../ui/screens/movie_details/movie_details_screen.dart';
 import '../ui/screens/person_details/person_details_screen.dart';
@@ -32,6 +33,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
       return MaterialPageRoute(
         builder: (context) => VideoScreen(videoList: videoList),
+      );
+    case AppRoute.login:
+      return MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
       );
     default:
       throw Exception('Route ${settings.name} doesn\'t exist');
