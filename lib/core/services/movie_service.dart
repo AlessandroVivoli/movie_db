@@ -1,5 +1,6 @@
 import '../models/movie/details/movie_details.dart';
 import '../models/movie/movie.dart';
+import '../models/movie/movie_list.dart';
 import '../providers/dio_provider.dart';
 
 class MovieService {
@@ -59,5 +60,41 @@ class MovieService {
         .then((res) => List<Map<String, Object?>>.from(res.data['cast']))
         .then((rawList) => rawList.map(Movie.fromJson))
         .then((movies) => movies.toList());
+  }
+
+  static Future<MovieListModel> getFavoriteMovies({
+    required int accountId,
+    required String sessionId,
+    int? page,
+  }) {
+    return DioProvider.dio
+        .get(
+          '/account/$accountId/favorite/movies',
+          queryParameters: {
+            'session_id': sessionId,
+            'sort_by': 'created_at.desc',
+            'page': '$page',
+          },
+        )
+        .then((res) => Map<String, Object>.from(res.data))
+        .then(MovieListModel.fromJson);
+  }
+
+  static Future<MovieListModel> getRatedMovies({
+    required int accountId,
+    required String sessionId,
+    int? page,
+  }) {
+    return DioProvider.dio
+        .get(
+          '/account/$accountId/rated/movies',
+          queryParameters: {
+            'session_id': sessionId,
+            'sort_by': 'created_at.desc',
+            'page': '$page',
+          },
+        )
+        .then((res) => Map<String, Object?>.from(res.data))
+        .then(MovieListModel.fromJson);
   }
 }
