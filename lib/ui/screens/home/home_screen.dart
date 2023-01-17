@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../core/services/movie_service.dart';
+import '../../shared/widgets/account_drawer/account_drawer.dart';
 import '../../shared/widgets/carousel/movie_carousel/movie_carousel.dart';
 import '../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../shared/widgets/errors/error_text.dart';
@@ -23,7 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       top: false,
       child: Scaffold(
-        drawer: const Drawer(),
+        drawer: const Drawer(
+          child: AccountDrawer(),
+        ),
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
