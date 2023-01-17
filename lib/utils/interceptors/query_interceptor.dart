@@ -6,7 +6,7 @@ class QueryInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     options.queryParameters.addAll({
       'api_key': dotenv.env['TMDB_API_KEY'],
-      'language': 'en_US',
+      'language': 'en-US',
     });
 
     super.onRequest(options, handler);
