@@ -64,6 +64,15 @@ class MyApp extends StatelessWidget {
             statusBarColor: Color.fromARGB(255, 17, 25, 37),
           ),
         ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            minimumSize: const Size.fromHeight(40),
+            side: const BorderSide(
+              color: Color.fromARGB(255, 217, 176, 22),
+              width: 2,
+            ),
+          ),
+        ),
         tabBarTheme: const TabBarTheme(
           indicator: ShapeDecoration(
             shape: UnderlineInputBorder(
