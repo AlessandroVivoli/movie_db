@@ -46,9 +46,11 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      bottom: false,
+      top: false,
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.keyboard_double_arrow_left),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -63,6 +65,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  const Center(
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   UsernameTextField(
                     usernameController: _usernameController,
                     nextNode: _passwordNode,
