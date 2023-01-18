@@ -9,8 +9,10 @@ class GenreTabBuilder extends StatelessWidget {
   const GenreTabBuilder({
     Key? key,
     required this.genreId,
+    this.includeAdult,
   }) : super(key: key);
 
+  final bool? includeAdult;
   final int genreId;
 
   @override
@@ -19,6 +21,7 @@ class GenreTabBuilder extends StatelessWidget {
       future: MovieService.getMovies(
         withGenres: [genreId],
         sortBy: 'popularity.desc',
+        includeAdult: includeAdult,
       ),
       builder: (context, snapshot) {
         if (snapshot.hasData) {

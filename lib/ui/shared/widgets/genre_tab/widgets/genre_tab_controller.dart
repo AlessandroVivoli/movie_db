@@ -7,9 +7,11 @@ class GenreTabController extends StatelessWidget {
   const GenreTabController({
     Key? key,
     required this.data,
+    this.includeAdult,
   }) : super(key: key);
 
   final List<Genre> data;
+  final bool? includeAdult;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,10 @@ class GenreTabController extends StatelessWidget {
                 data.length,
                 (index) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: GenreTabBuilder(genreId: data[index].id),
+                  child: GenreTabBuilder(
+                    genreId: data[index].id,
+                    includeAdult: includeAdult,
+                  ),
                 ),
               ),
             ),

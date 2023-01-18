@@ -6,7 +6,9 @@ import '../errors/error_text.dart';
 import 'widgets/genre_tab_controller.dart';
 
 class GenreTab extends StatelessWidget {
-  const GenreTab({super.key});
+  const GenreTab({super.key, this.includeAdult});
+
+  final bool? includeAdult;
 
   @override
   Widget build(BuildContext context) {
