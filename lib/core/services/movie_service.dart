@@ -25,6 +25,7 @@ class MovieService {
   static Future<List<Movie>> getMovies({
     List<int>? withGenres,
     String? sortBy,
+    bool? includeAdult,
   }) {
     return DioProvider.dio
         .get(
@@ -32,6 +33,7 @@ class MovieService {
           queryParameters: {
             'sort_by': sortBy,
             'with_genres': withGenres?.join(','),
+            'include_adult': includeAdult ?? false,
           },
         )
         .then((res) => List<Map<String, Object?>>.from(res.data['results']))
