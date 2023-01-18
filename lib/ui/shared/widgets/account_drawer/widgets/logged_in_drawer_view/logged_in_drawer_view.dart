@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/models/account/account_details.dart';
+import '../../../../../../core/models/account/account_details.dart';
 
 class LoggedInDrawerView extends StatelessWidget {
   const LoggedInDrawerView(
@@ -12,17 +12,17 @@ class LoggedInDrawerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.zero,
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       children: [
-        DrawerHeader(
-          child: Text('Hello ${accountDetails.name}'),
+        ListTile(
+          title: Text('Hello, ${accountDetails.username}'),
         ),
-        TextButton.icon(
+        OutlinedButton.icon(
           onPressed: () {},
           icon: const Icon(Icons.person),
           label: const Text('Profile'),
         ),
-        TextButton.icon(
+        OutlinedButton.icon(
           onPressed: onLogout,
           icon: const Icon(Icons.logout),
           label: const Text('Logout'),
