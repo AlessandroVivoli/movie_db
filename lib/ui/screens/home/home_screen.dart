@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../core/models/account/account_details.dart';
+import '../../../core/providers/session_provider.dart';
+import '../../../core/services/account_service.dart';
+import '../../../core/services/auth_service.dart';
 import '../../../core/services/movie_service.dart';
 import '../../shared/widgets/account_drawer/account_drawer.dart';
 import '../../shared/widgets/carousel/movie_carousel/movie_carousel.dart';
@@ -19,13 +23,77 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  AccountDetails? _accountDetails;
+  String? _sessionId;
+
+  late final GlobalKey<ScaffoldState> _scaffoldKey;
+
+  @override
+  void initState() {
+    _sessionId = SessionProvider.sessionId;
+    _scaffoldKey = GlobalKey();
+    _accountDetails = null;
+
+    if (_sessionId != null) {
+      AccountService.getAccountDetails(sessionId: _sessionId!).then(
+        (value) => setState(() {
+          _accountDetails = value;
+        }),
+      );
+    }
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
       child: Scaffold(
-        drawer: const Drawer(
-          child: AccountDrawer(),
+        key: _scaffoldKey,
+        drawer: Drawer(
+          child: AccountDrawer(
+            accountDetails: _accountDetails,
+            onLogin: () async {
+              if (_scaffoldKey.currentState != null) {
+                _scaffoldKey.currentState!.closeDrawer();
+              }
+
+              _sessionId = SessionProvider.sessionId;
+
+              final newAccountDetails = await AccountService.getAccountDetails(
+                sessionId: _sessionId!,
+              );
+
+              setState(() {
+                _accountDetails = newAccountDetails;
+              });
+            },
+            onLogout: () async {
+              bool success = await AuthService.logout(
+                sessionId: _sessionId!,
+              );
+
+              if (success) {
+                await SessionProvider.deleteSession();
+
+                return setState(() {
+                  _sessionId = null;
+                  _accountDetails = null;
+                });
+              }
+
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: ErrorSnackBarContent(
+                      message: 'Could not logout.',
+                    ),
+                  ),
+                );
+              });
+            },
+          ),
         ),
         body: CustomScrollView(
           slivers: [
@@ -47,10 +115,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 background: _TrendingMoviesBuilder(),
               ),
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: LimitedBox(
                 maxHeight: 300,
-                child: GenreTab(),
+                child: GenreTab(
+                  includeAdult: _accountDetails?.includeAdult,
+                ),
               ),
             ),
             const SliverToBoxAdapter(child: HomeWrapper()),
