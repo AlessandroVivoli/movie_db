@@ -6,6 +6,7 @@ import 'package:loggy/loggy.dart';
 
 import 'core/providers/session_provider.dart';
 import 'utils/router.dart';
+import 'utils/routes.dart';
 
 void main() async {
   await dotenv.load();
@@ -88,7 +89,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color.fromARGB(255, 17, 25, 37),
         ),
       ),
-      initialRoute: 'home',
+      initialRoute: AppRoute.home,
       onGenerateRoute: generateRoute,
     );
   }
