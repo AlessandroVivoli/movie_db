@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
           foregroundColor: Colors.white,
           child: const Icon(Icons.keyboard_double_arrow_left),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context, true);
           },
         ),
         body: Center(
@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         formKey: _formKey,
                         usernameController: _usernameController,
                         passwordController: _passwordController,
-                        onSubmit: () => Navigator.pop(context),
+                        onSubmit: () => Navigator.pop(context, false),
                         onPressed: () => setState(() {
                           _isLoggingIn = true;
                         }),

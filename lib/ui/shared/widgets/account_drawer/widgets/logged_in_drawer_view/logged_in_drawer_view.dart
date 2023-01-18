@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/models/account/account_details.dart';
 
 class LoggedInDrawerView extends StatelessWidget {
-  const LoggedInDrawerView(
-      {super.key, this.onLogout, required this.accountDetails});
+  const LoggedInDrawerView({
+    super.key,
+    this.onLogout,
+    this.onProfilePressed,
+    required this.accountDetails,
+  });
 
   final void Function()? onLogout;
+  final void Function()? onProfilePressed;
   final AccountDetails accountDetails;
 
   @override
@@ -18,7 +23,7 @@ class LoggedInDrawerView extends StatelessWidget {
           title: Text('Hello, ${accountDetails.username}'),
         ),
         OutlinedButton.icon(
-          onPressed: () {},
+          onPressed: onProfilePressed,
           icon: const Icon(Icons.person),
           label: const Text('Profile'),
         ),

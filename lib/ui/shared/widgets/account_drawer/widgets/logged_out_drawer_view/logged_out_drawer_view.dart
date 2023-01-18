@@ -13,10 +13,11 @@ class LoggedOutDrawerView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       children: [
         OutlinedButton.icon(
-          onPressed: () =>
-              Navigator.pushNamed(context, AppRoute.login).then((_) {
-            if (onLogin != null) onLogin!();
-          }),
+          onPressed: () => Navigator.pushNamed(context, AppRoute.login).then(
+            (isCancel) {
+              if (onLogin != null && !(isCancel as bool)) onLogin!();
+            },
+          ),
           icon: const Icon(Icons.login),
           label: const Text('Login'),
         ),
