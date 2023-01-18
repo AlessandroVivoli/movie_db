@@ -7,6 +7,7 @@ import '../../../../utils/enums.dart';
 import '../../../../utils/routes.dart';
 import '../custom_image/custom_network_image.dart';
 import '../rating/rating.dart';
+import '../stroke_text/stroke_text.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -32,22 +33,32 @@ class MovieCard extends StatelessWidget {
             Expanded(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-                  child: Center(
-                    child: CustomNetworkImage(
-                      url: ImageService.getImageUrl(
-                        size: PosterSizes.w500.name,
-                        path: movie.posterPath,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surface,
                       ),
-                      placeholderIcon: const Icon(
-                        Icons.movie,
-                        size: 50,
+                      child: Center(
+                        child: CustomNetworkImage(
+                          url: ImageService.getImageUrl(
+                            size: PosterSizes.w500.name,
+                            path: movie.posterPath,
+                          ),
+                          placeholderIcon: const Icon(
+                            Icons.movie,
+                            size: 50,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    if (movie.adult)
+                      const Positioned(
+                        top: 8,
+                        right: 8,
+                        child: StrokeText('18+'),
+                      ),
+                  ],
                 ),
               ),
             ),
