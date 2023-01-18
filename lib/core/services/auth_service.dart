@@ -54,7 +54,7 @@ class AuthService {
     String message = '';
     String? sessionId;
 
-    final token = await AuthService.createRequestToken().catchError((_) {
+    final token = await createRequestToken().catchError((_) {
       message = 'Could not get request token.';
 
       return const RequestToken(
@@ -65,7 +65,7 @@ class AuthService {
     });
 
     if (token.success) {
-      final validatedToken = await AuthService.validateTokenWithLogin(
+      final validatedToken = await validateTokenWithLogin(
         requestToken: token.requestToken,
         username: username,
         password: password,
@@ -86,7 +86,7 @@ class AuthService {
       });
 
       if (validatedToken.success) {
-        final session = await AuthService.createSessionId(
+        final session = await createSessionId(
           requestToken: validatedToken.requestToken,
         ).catchError((_) {
           return const SessionId(success: false, sessionId: '');
