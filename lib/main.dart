@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:loggy/loggy.dart';
 
 import 'core/providers/session_provider.dart';
 import 'utils/router.dart';
 import 'utils/routes.dart';
+import 'utils/themes.dart';
 
 void main() async {
   await dotenv.load();
@@ -45,50 +45,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       color: const Color.fromARGB(255, 17, 25, 37),
       title: 'FlutterMovie',
-      theme: ThemeData(
-        colorScheme: const ColorScheme.dark().copyWith(
-          primary: const Color.fromARGB(255, 217, 176, 22),
-          background: const Color.fromARGB(255, 17, 25, 37),
-          secondary: Colors.grey,
-          surface: const Color.fromARGB(255, 29, 45, 70),
-        ),
-        snackBarTheme: const SnackBarThemeData(
-          backgroundColor: Color.fromARGB(255, 29, 45, 70),
-        ),
-        floatingActionButtonTheme: const FloatingActionButtonThemeData(
-          backgroundColor: Color.fromARGB(255, 217, 176, 22),
-          foregroundColor: Colors.white,
-        ),
-        appBarTheme: const AppBarTheme(
-          color: Color.fromARGB(255, 17, 25, 37),
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Color.fromARGB(255, 17, 25, 37),
-          ),
-        ),
-        outlinedButtonTheme: OutlinedButtonThemeData(
-          style: OutlinedButton.styleFrom(
-            minimumSize: const Size.fromHeight(40),
-            side: const BorderSide(
-              color: Color.fromARGB(255, 217, 176, 22),
-              width: 2,
-            ),
-          ),
-        ),
-        tabBarTheme: const TabBarTheme(
-          indicator: ShapeDecoration(
-            shape: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(255, 217, 176, 22),
-                width: 5,
-              ),
-            ),
-          ),
-        ),
-        scaffoldBackgroundColor: const Color.fromARGB(255, 17, 25, 37),
-        drawerTheme: const DrawerThemeData(
-          backgroundColor: Color.fromARGB(255, 17, 25, 37),
-        ),
-      ),
+      theme: mainTheme,
       initialRoute: AppRoute.home,
       onGenerateRoute: generateRoute,
     );
