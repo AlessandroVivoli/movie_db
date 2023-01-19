@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/services/person_service.dart';
+import '../../../../../utils/constants.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/person_list/person_list.dart';
@@ -58,7 +59,7 @@ class _TrendingPersonsList extends StatelessWidget {
       child: SizedBox(
         height: 130,
         child: FutureBuilder(
-          future: PersonService.getTrendingPersons(),
+          future: PersonService.getTrendingPersons(timeWindow: TimeWindow.week),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data!.isEmpty) {

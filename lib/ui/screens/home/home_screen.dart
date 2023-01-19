@@ -6,6 +6,7 @@ import '../../../core/providers/session_provider.dart';
 import '../../../core/services/account_service.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../core/services/movie_service.dart';
+import '../../../utils/constants.dart';
 import '../../shared/widgets/account_drawer/account_drawer.dart';
 import '../../shared/widgets/carousel/movie_carousel/movie_carousel.dart';
 import '../../shared/widgets/errors/error_snack_bar_content.dart';
@@ -139,7 +140,7 @@ class _TrendingMoviesBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: MovieService.getTrendingMovies(timeWindow: 'week'),
+      future: MovieService.getTrendingMovies(timeWindow: TimeWindow.week),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.isEmpty) {

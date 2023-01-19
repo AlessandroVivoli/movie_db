@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/services/movie_service.dart';
+import '../../../../../utils/constants.dart';
 import '../../errors/error_snack_bar_content.dart';
 import '../../errors/error_text.dart';
 import '../../movie_list/movie_list.dart';
@@ -20,7 +21,7 @@ class GenreTabBuilder extends StatelessWidget {
     return FutureBuilder(
       future: MovieService.getMovies(
         withGenres: [genreId],
-        sortBy: 'popularity.desc',
+        sortBy: SortBy.popularityDesc,
         includeAdult: includeAdult,
       ),
       builder: (context, snapshot) {
