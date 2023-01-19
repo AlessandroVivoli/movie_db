@@ -2,6 +2,7 @@ import '../models/genre/genre.dart';
 import '../providers/dio_provider.dart';
 
 class GenreService {
+  /// Returns the [List] of [Genre] from the api.
   static Future<List<Genre>> getGenres() {
     return DioProvider.dio
         .get('/genre/movie/list')
