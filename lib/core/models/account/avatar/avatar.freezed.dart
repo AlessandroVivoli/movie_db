@@ -21,6 +21,7 @@ Avatar _$AvatarFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Avatar {
   Gravatar get gravatar => throw _privateConstructorUsedError;
+  TMDB get tmdb => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -32,9 +33,10 @@ abstract class $AvatarCopyWith<$Res> {
   factory $AvatarCopyWith(Avatar value, $Res Function(Avatar) then) =
       _$AvatarCopyWithImpl<$Res, Avatar>;
   @useResult
-  $Res call({Gravatar gravatar});
+  $Res call({Gravatar gravatar, TMDB tmdb});
 
   $GravatarCopyWith<$Res> get gravatar;
+  $TMDBCopyWith<$Res> get tmdb;
 }
 
 /// @nodoc
@@ -51,12 +53,17 @@ class _$AvatarCopyWithImpl<$Res, $Val extends Avatar>
   @override
   $Res call({
     Object? gravatar = null,
+    Object? tmdb = null,
   }) {
     return _then(_value.copyWith(
       gravatar: null == gravatar
           ? _value.gravatar
           : gravatar // ignore: cast_nullable_to_non_nullable
               as Gravatar,
+      tmdb: null == tmdb
+          ? _value.tmdb
+          : tmdb // ignore: cast_nullable_to_non_nullable
+              as TMDB,
     ) as $Val);
   }
 
@@ -67,6 +74,14 @@ class _$AvatarCopyWithImpl<$Res, $Val extends Avatar>
       return _then(_value.copyWith(gravatar: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TMDBCopyWith<$Res> get tmdb {
+    return $TMDBCopyWith<$Res>(_value.tmdb, (value) {
+      return _then(_value.copyWith(tmdb: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -75,10 +90,12 @@ abstract class _$$_AvatarCopyWith<$Res> implements $AvatarCopyWith<$Res> {
       __$$_AvatarCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Gravatar gravatar});
+  $Res call({Gravatar gravatar, TMDB tmdb});
 
   @override
   $GravatarCopyWith<$Res> get gravatar;
+  @override
+  $TMDBCopyWith<$Res> get tmdb;
 }
 
 /// @nodoc
@@ -92,12 +109,17 @@ class __$$_AvatarCopyWithImpl<$Res>
   @override
   $Res call({
     Object? gravatar = null,
+    Object? tmdb = null,
   }) {
     return _then(_$_Avatar(
       gravatar: null == gravatar
           ? _value.gravatar
           : gravatar // ignore: cast_nullable_to_non_nullable
               as Gravatar,
+      tmdb: null == tmdb
+          ? _value.tmdb
+          : tmdb // ignore: cast_nullable_to_non_nullable
+              as TMDB,
     ));
   }
 }
@@ -105,17 +127,19 @@ class __$$_AvatarCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Avatar implements _Avatar {
-  const _$_Avatar({required this.gravatar});
+  const _$_Avatar({required this.gravatar, required this.tmdb});
 
   factory _$_Avatar.fromJson(Map<String, dynamic> json) =>
       _$$_AvatarFromJson(json);
 
   @override
   final Gravatar gravatar;
+  @override
+  final TMDB tmdb;
 
   @override
   String toString() {
-    return 'Avatar(gravatar: $gravatar)';
+    return 'Avatar(gravatar: $gravatar, tmdb: $tmdb)';
   }
 
   @override
@@ -124,12 +148,13 @@ class _$_Avatar implements _Avatar {
         (other.runtimeType == runtimeType &&
             other is _$_Avatar &&
             (identical(other.gravatar, gravatar) ||
-                other.gravatar == gravatar));
+                other.gravatar == gravatar) &&
+            (identical(other.tmdb, tmdb) || other.tmdb == tmdb));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, gravatar);
+  int get hashCode => Object.hash(runtimeType, gravatar, tmdb);
 
   @JsonKey(ignore: true)
   @override
@@ -146,12 +171,15 @@ class _$_Avatar implements _Avatar {
 }
 
 abstract class _Avatar implements Avatar {
-  const factory _Avatar({required final Gravatar gravatar}) = _$_Avatar;
+  const factory _Avatar(
+      {required final Gravatar gravatar, required final TMDB tmdb}) = _$_Avatar;
 
   factory _Avatar.fromJson(Map<String, dynamic> json) = _$_Avatar.fromJson;
 
   @override
   Gravatar get gravatar;
+  @override
+  TMDB get tmdb;
   @override
   @JsonKey(ignore: true)
   _$$_AvatarCopyWith<_$_Avatar> get copyWith =>
