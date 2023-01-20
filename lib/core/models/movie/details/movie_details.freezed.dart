@@ -46,6 +46,7 @@ mixin _$MovieDetails {
   bool? get video => throw _privateConstructorUsedError;
   double? get voteAverage => throw _privateConstructorUsedError;
   int? get voteCount => throw _privateConstructorUsedError;
+  MovieAccountState? get state => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -82,7 +83,10 @@ abstract class $MovieDetailsCopyWith<$Res> {
       String? tagline,
       bool? video,
       double? voteAverage,
-      int? voteCount});
+      int? voteCount,
+      MovieAccountState? state});
+
+  $MovieAccountStateCopyWith<$Res>? get state;
 }
 
 /// @nodoc
@@ -121,6 +125,7 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
     Object? video = freezed,
     Object? voteAverage = freezed,
     Object? voteCount = freezed,
+    Object? state = freezed,
   }) {
     return _then(_value.copyWith(
       adult: freezed == adult
@@ -215,7 +220,23 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      state: freezed == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as MovieAccountState?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MovieAccountStateCopyWith<$Res>? get state {
+    if (_value.state == null) {
+      return null;
+    }
+
+    return $MovieAccountStateCopyWith<$Res>(_value.state!, (value) {
+      return _then(_value.copyWith(state: value) as $Val);
+    });
   }
 }
 
@@ -250,7 +271,11 @@ abstract class _$$_MovieDetailsCopyWith<$Res>
       String? tagline,
       bool? video,
       double? voteAverage,
-      int? voteCount});
+      int? voteCount,
+      MovieAccountState? state});
+
+  @override
+  $MovieAccountStateCopyWith<$Res>? get state;
 }
 
 /// @nodoc
@@ -287,6 +312,7 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
     Object? video = freezed,
     Object? voteAverage = freezed,
     Object? voteCount = freezed,
+    Object? state = freezed,
   }) {
     return _then(_$_MovieDetails(
       adult: freezed == adult
@@ -381,6 +407,10 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      state: freezed == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as MovieAccountState?,
     ));
   }
 }
@@ -411,7 +441,8 @@ class _$_MovieDetails implements _MovieDetails {
       required this.tagline,
       required this.video,
       required this.voteAverage,
-      required this.voteCount})
+      required this.voteCount,
+      required this.state})
       : _genres = genres,
         _productionCompanies = productionCompanies,
         _productionCountries = productionCountries,
@@ -498,10 +529,12 @@ class _$_MovieDetails implements _MovieDetails {
   final double? voteAverage;
   @override
   final int? voteCount;
+  @override
+  final MovieAccountState? state;
 
   @override
   String toString() {
-    return 'MovieDetails(adult: $adult, backdropPath: $backdropPath, budget: $budget, genres: $genres, homepage: $homepage, id: $id, imdbId: $imdbId, originalLanguage: $originalLanguage, originalTitle: $originalTitle, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, productionCountries: $productionCountries, releaseDate: $releaseDate, revenue: $revenue, runtime: $runtime, spokenLanguages: $spokenLanguages, status: $status, tagline: $tagline, video: $video, voteAverage: $voteAverage, voteCount: $voteCount)';
+    return 'MovieDetails(adult: $adult, backdropPath: $backdropPath, budget: $budget, genres: $genres, homepage: $homepage, id: $id, imdbId: $imdbId, originalLanguage: $originalLanguage, originalTitle: $originalTitle, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, productionCountries: $productionCountries, releaseDate: $releaseDate, revenue: $revenue, runtime: $runtime, spokenLanguages: $spokenLanguages, status: $status, tagline: $tagline, video: $video, voteAverage: $voteAverage, voteCount: $voteCount, state: $state)';
   }
 
   @override
@@ -544,7 +577,8 @@ class _$_MovieDetails implements _MovieDetails {
             (identical(other.voteAverage, voteAverage) ||
                 other.voteAverage == voteAverage) &&
             (identical(other.voteCount, voteCount) ||
-                other.voteCount == voteCount));
+                other.voteCount == voteCount) &&
+            (identical(other.state, state) || other.state == state));
   }
 
   @JsonKey(ignore: true)
@@ -573,7 +607,8 @@ class _$_MovieDetails implements _MovieDetails {
         tagline,
         video,
         voteAverage,
-        voteCount
+        voteCount,
+        state
       ]);
 
   @JsonKey(ignore: true)
@@ -614,7 +649,8 @@ abstract class _MovieDetails implements MovieDetails {
       required final String? tagline,
       required final bool? video,
       required final double? voteAverage,
-      required final int? voteCount}) = _$_MovieDetails;
+      required final int? voteCount,
+      required final MovieAccountState? state}) = _$_MovieDetails;
 
   factory _MovieDetails.fromJson(Map<String, dynamic> json) =
       _$_MovieDetails.fromJson;
@@ -665,6 +701,8 @@ abstract class _MovieDetails implements MovieDetails {
   double? get voteAverage;
   @override
   int? get voteCount;
+  @override
+  MovieAccountState? get state;
   @override
   @JsonKey(ignore: true)
   _$$_MovieDetailsCopyWith<_$_MovieDetails> get copyWith =>

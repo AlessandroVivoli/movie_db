@@ -4,6 +4,7 @@ import '../../genre/genre.dart';
 import '../../production_company/production_company.dart';
 import '../../production_country/production_country.dart';
 import '../../spoken_language/spoken_language.dart';
+import '../account_state/movie_account_state.dart';
 
 part 'movie_details.freezed.dart';
 part 'movie_details.g.dart';
@@ -34,6 +35,7 @@ class MovieDetails with _$MovieDetails {
     required bool? video,
     required double? voteAverage,
     required int? voteCount,
+    required MovieAccountState? state,
   }) = _MovieDetails;
 
   factory MovieDetails.fromJson(Map<String, Object?> json) =>

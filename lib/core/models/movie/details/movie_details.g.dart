@@ -39,6 +39,9 @@ _$_MovieDetails _$$_MovieDetailsFromJson(Map<String, dynamic> json) =>
       video: json['video'] as bool?,
       voteAverage: (json['vote_average'] as num?)?.toDouble(),
       voteCount: json['vote_count'] as int?,
+      state: json['state'] == null
+          ? null
+          : MovieAccountState.fromJson(json['state'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_MovieDetailsToJson(_$_MovieDetails instance) =>
@@ -69,4 +72,5 @@ Map<String, dynamic> _$$_MovieDetailsToJson(_$_MovieDetails instance) =>
       'video': instance.video,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
+      'state': instance.state?.toJson(),
     };
