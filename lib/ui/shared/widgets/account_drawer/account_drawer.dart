@@ -27,10 +27,14 @@ class AccountDrawer extends StatelessWidget {
           : LoggedInDrawerView(
               accountDetails: accountDetails!,
               onLogout: onLogout,
-              onProfilePressed: () => Navigator.of(context).pushNamed(
-                AppRoute.account,
-                arguments: accountDetails!,
-              ),
+              onProfilePressed: () {
+                Scaffold.of(context).closeDrawer();
+
+                Navigator.of(context).pushNamed(
+                  AppRoute.account,
+                  arguments: accountDetails!,
+                );
+              },
             ),
     );
   }
