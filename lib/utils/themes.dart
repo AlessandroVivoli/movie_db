@@ -23,7 +23,6 @@ ThemeData mainTheme = ThemeData(
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      minimumSize: const Size.fromHeight(40),
       side: const BorderSide(
         color: Color.fromARGB(255, 217, 176, 22),
         width: 2,
