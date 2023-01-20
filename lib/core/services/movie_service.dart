@@ -1,4 +1,7 @@
+import 'package:dio/dio.dart';
+
 import '../../utils/constants.dart';
+import '../models/movie/account_state/movie_account_state.dart';
 import '../models/movie/details/movie_details.dart';
 import '../models/movie/movie.dart';
 import '../models/movie/movie_list.dart';
@@ -84,11 +87,26 @@ class MovieService {
         .then((movies) => movies.toList());
   }
 
+  static Future<MovieAccountState> getAccountMovieState({
+    required int id,
+    required String sessionId,
+  }) {
+    return DioProvider.dio
+        .get(
+          '/movie/$id/account_states',
+          queryParameters: {
+            'session_id': sessionId,
+          },
+        )
+        .then((res) => Map<String, Object?>.from(res.data))
+        .then(MovieAccountState.fromJson);
+  }
+
   /// Returns the user favorite movie list.
   static Future<MovieListModel> getFavoriteMovies({
     required int accountId,
     required String sessionId,
-    int? page,
+    int page = 1,
   }) {
     return DioProvider.dio
         .get(
@@ -99,7 +117,26 @@ class MovieService {
             'page': '$page',
           },
         )
-        .then((res) => Map<String, Object>.from(res.data))
+        .then((res) => Map<String, Object?>.from(res.data))
+        .then(MovieListModel.fromJson);
+  }
+
+  /// Returns the user movie watchlist.
+  static Future<MovieListModel> getMovieWatchlist({
+    required int accountId,
+    required String sessionId,
+    int page = 1,
+  }) {
+    return DioProvider.dio
+        .get(
+          '/account/$accountId/watchlist/movies',
+          queryParameters: {
+            'session_id': sessionId,
+            'sort_by': 'created_at.desc',
+            'page': '$page',
+          },
+        )
+        .then((res) => Map<String, Object?>.from(res.data))
         .then(MovieListModel.fromJson);
   }
 
@@ -107,7 +144,7 @@ class MovieService {
   static Future<MovieListModel> getRatedMovies({
     required int accountId,
     required String sessionId,
-    int? page,
+    int page = 1,
   }) {
     return DioProvider.dio
         .get(
@@ -120,5 +157,39 @@ class MovieService {
         )
         .then((res) => Map<String, Object?>.from(res.data))
         .then(MovieListModel.fromJson);
+  }
+
+  static Future<int> rateMovie({
+    required int id,
+    required String sessionId,
+    required double rating,
+  }) {
+    return DioProvider.dio
+        .post(
+          '/movie/$id/rating',
+          queryParameters: {
+            'session_id': sessionId,
+          },
+          data: {
+            'value': rating,
+          },
+          options: Options(contentType: 'application/json;charset=utf-8'),
+        )
+        .then((res) => res.data['status_code']);
+  }
+
+  static Future<int> deleteRating({
+    required int id,
+    required String sessionId,
+  }) {
+    return DioProvider.dio
+        .delete(
+          '/movie/$id/rating',
+          queryParameters: {
+            'session_id': sessionId,
+          },
+          options: Options(contentType: 'application/json;charset=utf-8'),
+        )
+        .then((res) => res.data['status_code']);
   }
 }
