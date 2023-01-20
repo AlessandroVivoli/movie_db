@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/models/movie/details/movie_details.dart';
+import '../../../../core/providers/session_provider.dart';
+import 'widgets/movie_account_actions/movie_account_actions.dart';
 import 'widgets/movie_casts.dart';
 import 'widgets/movie_description.dart';
 import 'widgets/movie_genres.dart';
@@ -26,6 +28,10 @@ class MovieDetailsWrapper extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MovieRating(details.voteAverage!),
+              if (SessionProvider.sessionId != null)
+                MovieAccountActions(
+                  movieDetails: details,
+                ),
               MovieDescription(details.overview!),
               MovieInfo(
                 budget: details.budget!,
