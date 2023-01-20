@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/models/movie/movie.dart';
 import '../../../../core/services/image_service.dart';
-import '../../../../core/services/movie_service.dart';
 import '../../../../utils/enums.dart';
 import '../../../../utils/routes.dart';
 import '../custom_image/custom_network_image.dart';
@@ -12,19 +11,31 @@ import '../stroke_text/stroke_text.dart';
 class MovieCard extends StatelessWidget {
   final Movie movie;
 
-  const MovieCard({super.key, required this.movie});
+  final void Function()? onReturn;
+  final bool refreshOnReturn;
+
+  const MovieCard({
+    super.key,
+    required this.movie,
+    this.onReturn,
+    this.refreshOnReturn = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 120),
       child: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(
+        onTap: () async {
+          await Navigator.pushNamed(
             context,
             AppRoute.movie,
-            arguments: MovieService.getMovieDetails(id: movie.id),
+            arguments: movie.id,
           );
+
+          if (onReturn != null) {
+            onReturn!();
+          }
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
