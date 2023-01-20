@@ -40,7 +40,10 @@ class ImageCarouselItem extends StatelessWidget {
         );
       },
       child: BackdropImage(
-        imgUrl: image,
+        imgUrl: ImageService.getImageUrl(
+          size: BackdropSizes.original.name,
+          path: image,
+        ),
         placeholderIcon: const Icon(Icons.person),
       ),
     );

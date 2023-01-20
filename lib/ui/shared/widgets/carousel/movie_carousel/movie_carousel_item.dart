@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/services/image_service.dart';
 import '../../../../../core/services/movie_service.dart';
+import '../../../../../utils/enums.dart';
 import '../../../../../utils/routes.dart';
 import '../../backdrop_image/backdrop_image.dart';
 
@@ -21,7 +23,10 @@ class MovieCarouselItem extends StatelessWidget {
     return Stack(
       children: [
         BackdropImage(
-          imgUrl: image,
+          imgUrl: ImageService.getImageUrl(
+            size: BackdropSizes.original.name,
+            path: image,
+          ),
           placeholderIcon: const Icon(Icons.movie),
         ),
         _Title(title: title),
@@ -31,7 +36,9 @@ class MovieCarouselItem extends StatelessWidget {
             Navigator.pushNamed(
               context,
               AppRoute.movie,
-              arguments: MovieService.getMovieDetails(id: id),
+              arguments: [
+                MovieService.getMovieDetails(id: id),
+              ],
             );
           },
         ),
