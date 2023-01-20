@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/services/image_service.dart';
-import '../../../../utils/enums.dart';
 import '../custom_image/custom_network_image.dart';
 
 class BackdropImage extends StatelessWidget {
@@ -20,10 +18,7 @@ class BackdropImage extends StatelessWidget {
       children: [
         Center(
           child: CustomNetworkImage(
-            url: ImageService.getImageUrl(
-              size: BackdropSizes.w1280.name,
-              path: imgUrl,
-            ),
+            url: imgUrl,
             placeholderIcon: placeholderIcon,
           ),
         ),
