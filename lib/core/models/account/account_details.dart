@@ -7,6 +7,8 @@ part 'account_details.g.dart';
 
 @freezed
 class AccountDetails with _$AccountDetails {
+  const AccountDetails._();
+
   const factory AccountDetails({
     required Avatar avatar,
     required int id,
@@ -19,4 +21,10 @@ class AccountDetails with _$AccountDetails {
 
   factory AccountDetails.fromJson(Map<String, Object?> json) =>
       _$AccountDetailsFromJson(json);
+
+  String get profilePath {
+    if (avatar.tmdb.avatarPath != null) return avatar.tmdb.avatarPath!;
+
+    return avatar.gravatar.hash;
+  }
 }

@@ -189,7 +189,7 @@ class __$$_AccountDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AccountDetails implements _AccountDetails {
+class _$_AccountDetails extends _AccountDetails {
   const _$_AccountDetails(
       {required this.avatar,
       required this.id,
@@ -197,7 +197,8 @@ class _$_AccountDetails implements _AccountDetails {
       required this.iso_3166_1,
       required this.name,
       required this.includeAdult,
-      required this.username});
+      required this.username})
+      : super._();
 
   factory _$_AccountDetails.fromJson(Map<String, dynamic> json) =>
       _$$_AccountDetailsFromJson(json);
@@ -259,7 +260,7 @@ class _$_AccountDetails implements _AccountDetails {
   }
 }
 
-abstract class _AccountDetails implements AccountDetails {
+abstract class _AccountDetails extends AccountDetails {
   const factory _AccountDetails(
       {required final Avatar avatar,
       required final int id,
@@ -268,6 +269,7 @@ abstract class _AccountDetails implements AccountDetails {
       required final String? name,
       required final bool includeAdult,
       required final String username}) = _$_AccountDetails;
+  const _AccountDetails._() : super._();
 
   factory _AccountDetails.fromJson(Map<String, dynamic> json) =
       _$_AccountDetails.fromJson;
