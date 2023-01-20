@@ -7,6 +7,8 @@ class Rating extends StatelessWidget {
   final MainAxisAlignment? alignment;
   final int? digits;
 
+  final void Function(int index)? onRate;
+
   const Rating({
     super.key,
     required this.rating,
@@ -14,6 +16,7 @@ class Rating extends StatelessWidget {
     this.size = 10,
     this.alignment = MainAxisAlignment.center,
     this.digits = 1,
+    this.onRate,
   });
 
   @override
@@ -88,10 +91,31 @@ class Rating extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: goldenStars,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: List<Widget>.generate(
+                  5,
+                  (index) => GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      onTap(index);
+                    },
+                    child: SizedBox(
+                      height: size,
+                      width: size! + padding! * 2,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ],
       ),
     );
+  }
+
+  onTap(int index) {
+    if (onRate != null) onRate!(index);
   }
 }
