@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../core/models/movie/details/movie_details.dart';
+import '../../../../core/services/image_service.dart';
+import '../../../../utils/enums.dart';
 import '../../../shared/widgets/backdrop_image/backdrop_image.dart';
 
 class MovieDetailsBackdrop extends StatelessWidget {
@@ -35,7 +37,10 @@ class MovieDetailsBackdrop extends StatelessWidget {
         ),
         centerTitle: true,
         background: BackdropImage(
-          imgUrl: details.backdropPath,
+          imgUrl: ImageService.getImageUrl(
+            size: BackdropSizes.original.name,
+            path: details.backdropPath,
+          ),
           placeholderIcon: const Icon(
             Icons.movie,
             size: 100,
