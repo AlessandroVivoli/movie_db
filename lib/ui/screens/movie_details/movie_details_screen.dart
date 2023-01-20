@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/models/movie/details/movie_details.dart';
 import '../../../../core/services/video_service.dart';
+import '../../../core/models/movie/account_state/movie_account_state.dart';
+import '../../../core/models/movie/details/movie_details.dart';
+import '../../../core/providers/session_provider.dart';
+import '../../../core/services/movie_service.dart';
 import '../../../utils/routes.dart';
 import '../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../shared/widgets/errors/error_text.dart';
@@ -10,9 +13,12 @@ import 'movie_details_wrapper/movie_details_wrapper.dart';
 import 'play_button/play_button.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
-  final Future<MovieDetails> movieDetails;
+  final int movieId;
 
-  const MovieDetailsScreen({super.key, required this.movieDetails});
+  const MovieDetailsScreen({
+    super.key,
+    required this.movieId,
+  });
 
   @override
   State<StatefulWidget> createState() => _MovieDetailsScreenState();
@@ -39,7 +45,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
       top: false,
       child: Scaffold(
         body: _MovieDetailsBuilder(
-            widget: widget, scrollController: _scrollController),
+          widget: widget,
+          scrollController: _scrollController,
+        ),
       ),
     );
   }
@@ -49,17 +57,16 @@ class _MovieDetailsBuilder extends StatelessWidget {
   const _MovieDetailsBuilder({
     Key? key,
     required this.widget,
-    required ScrollController scrollController,
-  })  : _scrollController = scrollController,
-        super(key: key);
+    required this.scrollController,
+  }) : super(key: key);
 
   final MovieDetailsScreen widget;
-  final ScrollController _scrollController;
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: widget.movieDetails,
+      future: getMovieDetails(widget.movieId),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final data = snapshot.data!;
@@ -67,16 +74,18 @@ class _MovieDetailsBuilder extends StatelessWidget {
           return Stack(
             children: [
               CustomScrollView(
-                controller: _scrollController,
+                controller: scrollController,
                 slivers: [
                   MovieDetailsBackdrop(details: data),
                   SliverToBoxAdapter(
-                    child: MovieDetailsWrapper(details: data),
+                    child: MovieDetailsWrapper(
+                      details: data,
+                    ),
                   )
                 ],
               ),
               PlayButton(
-                controller: _scrollController,
+                controller: scrollController,
                 onPressed: () => Navigator.pushNamed(
                   context,
                   AppRoute.play,
@@ -113,6 +122,23 @@ class _MovieDetailsBuilder extends StatelessWidget {
           child: CircularProgressIndicator(),
         );
       },
+    );
+  }
+
+  Future<MovieDetails> getMovieDetails(int id) async {
+    final sessionId = SessionProvider.sessionId;
+
+    MovieAccountState? state;
+
+    if (sessionId != null) {
+      state = await MovieService.getAccountMovieState(
+        id: id,
+        sessionId: sessionId,
+      );
+    }
+
+    return MovieService.getMovieDetails(id: id).then(
+      (details) => details.copyWith(state: state),
     );
   }
 }
