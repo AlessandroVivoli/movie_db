@@ -20,7 +20,6 @@ class SortBy {
 
   @override
   String toString() {
-    // TODO: implement toString
     return _value;
   }
 }
