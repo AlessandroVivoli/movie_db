@@ -13,7 +13,7 @@ class ImageService {
   static String? getImageUrl({required String size, required String? path}) {
     if (path == null) return null;
 
-    return '${dotenv.env['BASE_IMG_URL']}$size$path';
+    return '${dotenv.get('BASE_IMG_URL')}$size$path';
   }
 
   /// Returns [MovieImages] future using the provided movie [id].

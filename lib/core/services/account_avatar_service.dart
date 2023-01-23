@@ -11,6 +11,6 @@ class AccountAvatarService {
       sizeString = '?s=$size';
     }
 
-    return '${dotenv.env['BASE_GRAVATAR_URL']}$hash$sizeString';
+    return '${dotenv.get('BASE_GRAVATAR_URL')}$hash$sizeString';
   }
 }

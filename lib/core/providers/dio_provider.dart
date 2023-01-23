@@ -10,7 +10,7 @@ class DioProvider {
 
   static Dio _init() {
     return Dio(
-      BaseOptions(baseUrl: dotenv.env['BASE_URL']!),
+      BaseOptions(baseUrl: dotenv.get('BASE_URL')),
     )..interceptors.addAll(
         [
           QueryInterceptor(),
