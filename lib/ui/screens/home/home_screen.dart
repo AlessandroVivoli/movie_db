@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:loggy/loggy.dart';
 
-import '../../../core/models/account/account_details.dart';
+import '../../../core/providers/general_providers.dart';
 import '../../../core/providers/session_provider.dart';
 import '../../../core/services/account_service.dart';
-import '../../../core/services/auth_service.dart';
 import '../../../core/services/movie_service.dart';
 import '../../../utils/constants.dart';
 import '../../shared/widgets/account_drawer/account_drawer.dart';
@@ -14,85 +16,39 @@ import '../../shared/widgets/errors/error_text.dart';
 import '../../shared/widgets/genre_tab/genre_tab.dart';
 import 'home_wrapper/home_wrapper.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends HookConsumerWidget {
   const HomeScreen({super.key, required this.title});
 
   final String title;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    String? sessionId;
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
-class _HomeScreenState extends State<HomeScreen> {
-  AccountDetails? _accountDetails;
-  String? _sessionId;
+    useEffect(() {
+      sessionId = SessionProvider.sessionId;
 
-  late final GlobalKey<ScaffoldState> _scaffoldKey;
+      if (sessionId != null) {
+        AccountService.getAccountDetails(sessionId: sessionId!).then(
+          (value) =>
+              ref.read(accountDetailsStateProvider.notifier).state = value,
+        );
+      }
 
-  @override
-  void initState() {
-    _sessionId = SessionProvider.sessionId;
-    _scaffoldKey = GlobalKey();
-    _accountDetails = null;
+      return null;
+    }, []);
 
-    if (_sessionId != null) {
-      AccountService.getAccountDetails(sessionId: _sessionId!).then(
-        (value) => setState(() {
-          _accountDetails = value;
-        }),
-      );
-    }
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return SafeArea(
       top: false,
       child: Scaffold(
-        key: _scaffoldKey,
+        key: scaffoldKey,
         drawer: Drawer(
           child: AccountDrawer(
-            accountDetails: _accountDetails,
             onLogin: () async {
-              if (_scaffoldKey.currentState != null) {
-                _scaffoldKey.currentState!.closeDrawer();
+              if (scaffoldKey.currentState != null) {
+                scaffoldKey.currentState!.closeDrawer();
               }
-
-              _sessionId = SessionProvider.sessionId;
-
-              final newAccountDetails = await AccountService.getAccountDetails(
-                sessionId: _sessionId!,
-              );
-
-              setState(() {
-                _accountDetails = newAccountDetails;
-              });
-            },
-            onLogout: () async {
-              bool success = await AuthService.logout(
-                sessionId: _sessionId!,
-              );
-
-              if (success) {
-                await SessionProvider.deleteSession();
-
-                return setState(() {
-                  _sessionId = null;
-                  _accountDetails = null;
-                });
-              }
-
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: ErrorSnackBarContent(
-                      message: 'Could not logout.',
-                    ),
-                  ),
-                );
-              });
             },
           ),
         ),
@@ -102,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
               systemOverlayStyle: const SystemUiOverlayStyle(
                 statusBarColor: Colors.transparent,
               ),
-              title: Text(widget.title),
+              title: Text(title),
               centerTitle: true,
               actions: [
                 IconButton(
@@ -116,12 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 background: _TrendingMoviesBuilder(),
               ),
             ),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: LimitedBox(
                 maxHeight: 300,
-                child: GenreTab(
-                  includeAdult: _accountDetails?.includeAdult,
-                ),
+                child: GenreTab(),
               ),
             ),
             const SliverToBoxAdapter(child: HomeWrapper()),
@@ -132,47 +86,50 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class _TrendingMoviesBuilder extends StatelessWidget {
-  const _TrendingMoviesBuilder({
-    Key? key,
-  }) : super(key: key);
+final _movieFutureProvider = FutureProvider.autoDispose(
+  (ref) => MovieService.getTrendingMovies(timeWindow: TimeWindow.week),
+);
+
+class _TrendingMoviesBuilder extends ConsumerWidget {
+  const _TrendingMoviesBuilder({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: MovieService.getTrendingMovies(timeWindow: TimeWindow.week),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          if (snapshot.data!.isEmpty) {
-            return const Center(
-              child: Text('Nothing found.'),
-            );
-          }
+  Widget build(BuildContext context, WidgetRef ref) {
+    final trendingMovies = ref.watch(_movieFutureProvider);
 
-          return MovieCarousel(
-            movies: (snapshot.data!).take(6).toList(),
-          );
-        } else if (snapshot.hasError) {
-          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                backgroundColor: Theme.of(context).colorScheme.surface,
-                content: const ErrorSnackBarContent(
-                  message: 'Could not get trending movies.',
-                ),
-              ),
-            );
-          });
+    return trendingMovies.when(
+      data: (movies) {
+        final movieList = movies.take(6).toList();
 
+        if (movieList.isEmpty) {
           return const Center(
-            child: ErrorText('Something went wrong.'),
+            child: Text('Nothing found.'),
           );
         }
 
+        return MovieCarousel(movies: movies.take(6).toList());
+      },
+      error: (error, stackTrace) {
+        logError('Could not get trending movies.', error, stackTrace);
+
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              content: const ErrorSnackBarContent(
+                message: 'Could not get trending movies.',
+              ),
+            ),
+          );
+        });
+
         return const Center(
-          child: CircularProgressIndicator(),
+          child: ErrorText('Something went wrong.'),
         );
       },
+      loading: () => const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }
