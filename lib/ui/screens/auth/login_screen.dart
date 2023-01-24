@@ -1,50 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../shared/widgets/errors/error_snack_bar_content.dart';
 import 'widgets/password_text_field.dart';
 import 'widgets/submit_button.dart';
 import 'widgets/username_text_field.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  late final TextEditingController _usernameController;
-  late final TextEditingController _passwordController;
-  late final FocusNode _passwordNode;
-
-  late final GlobalKey<FormState> _formKey;
-
-  late bool _isLoggingIn;
-
-  @override
-  void initState() {
-    _usernameController = TextEditingController();
-    _passwordController = TextEditingController();
-    _passwordNode = FocusNode();
-
-    _isLoggingIn = false;
-
-    _formKey = GlobalKey();
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _passwordNode.dispose();
-    _usernameController.dispose();
-    _passwordController.dispose();
-
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> formKey = GlobalKey();
+
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -59,75 +26,68 @@ class _LoginScreenState extends State<LoginScreen> {
           child: SizedBox(
             width: 250,
             child: Form(
-              key: _formKey,
+              key: formKey,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Center(
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  UsernameTextField(
-                    usernameController: _usernameController,
-                    nextNode: _passwordNode,
-                  ),
-                  const SizedBox(height: 10),
-                  PasswordTextField(
-                    passwordController: _passwordController,
-                    passwordNode: _passwordNode,
-                  ),
-                  const SizedBox(height: 10),
-                  if (!_isLoggingIn)
-                    SizedBox(
-                      height: 40,
-                      child: SubmitButton(
-                        formKey: _formKey,
-                        usernameController: _usernameController,
-                        passwordController: _passwordController,
-                        onSubmit: () => Navigator.pop(context, false),
-                        onPressed: () => setState(() {
-                          _isLoggingIn = true;
-                        }),
-                        onError: (message) {
-                          ScaffoldMessenger.of(context)
-                            ..removeCurrentSnackBar()
-                            ..showSnackBar(
-                              SnackBar(
-                                content: ErrorSnackBarContent(
-                                  message: message,
-                                ),
-                              ),
-                            );
-
-                          setState(() {
-                            _isLoggingIn = false;
-                          });
-                        },
-                      ),
-                    ),
-                  if (_isLoggingIn)
-                    const SizedBox(
-                      height: 40,
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                ],
+              child: _FormWidgets(
+                formKey: formKey,
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _FormWidgets extends HookWidget {
+  const _FormWidgets({
+    Key? key,
+    required this.formKey,
+  }) : super(key: key);
+
+  final GlobalKey<FormState> formKey;
+
+  @override
+  Widget build(BuildContext context) {
+    final usernameController = useTextEditingController(text: null);
+    final passwordController = useTextEditingController(text: null);
+    final passwordNode = useFocusNode();
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const Center(
+          child: Text(
+            'Login',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        UsernameTextField(
+          usernameController: usernameController,
+          nextNode: passwordNode,
+        ),
+        const SizedBox(height: 10),
+        PasswordTextField(
+          passwordController: passwordController,
+          passwordNode: passwordNode,
+        ),
+        const SizedBox(height: 10),
+        SizedBox(
+          height: 40,
+          child: SubmitButton(
+            formKey: formKey,
+            usernameController: usernameController,
+            passwordController: passwordController,
+          ),
+        ),
+      ],
     );
   }
 }
