@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../core/providers/session_provider.dart';
 import '../../../../core/services/auth_service.dart';
+import '../../../shared/widgets/errors/error_snack_bar_content.dart';
 
-class SubmitButton extends StatelessWidget {
+class SubmitButton extends HookWidget {
   const SubmitButton({
     super.key,
     required this.formKey,
     required this.usernameController,
     required this.passwordController,
-    required this.onPressed,
-    required this.onError,
-    required this.onSubmit,
   });
 
   final GlobalKey<FormState> formKey;
   final TextEditingController usernameController;
   final TextEditingController passwordController;
 
-  final void Function() onPressed;
-  final void Function(String message) onError;
-  final void Function() onSubmit;
-
   @override
   Widget build(BuildContext context) {
+    final isLoggingIn = useState(false);
+
+    if (isLoggingIn.value) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
     return TextButton(
       style: TextButton.styleFrom(
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -34,22 +37,36 @@ class SubmitButton extends StatelessWidget {
           return;
         }
 
-        final request = AuthService.login(
+        isLoggingIn.value = true;
+
+        final response = await AuthService.login(
           username: usernameController.text,
           password: passwordController.text,
         );
 
-        onPressed();
-
-        final response = await request;
-
         if (!response.success) {
-          return onError(response.message);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            ScaffoldMessenger.of(context)
+              ..removeCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content: ErrorSnackBarContent(
+                    message: response.message,
+                  ),
+                ),
+              );
+          });
+
+          isLoggingIn.value = false;
+
+          return;
         }
 
         SessionProvider.setSession(response.sessionId!);
 
-        onSubmit();
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.pop(context, false);
+        });
       },
       child: const Text('Submit'),
     );
