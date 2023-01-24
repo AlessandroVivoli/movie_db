@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:loggy/loggy.dart';
 
 import '../../../../../core/services/movie_service.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
@@ -46,50 +48,55 @@ class _TopRatedMoviesText extends StatelessWidget {
   }
 }
 
-class _TopRatedMoviesList extends StatelessWidget {
+final _topRatedMovieFutureProvider = FutureProvider.autoDispose(
+  (ref) => MovieService.getTopRatedMovies(),
+);
+
+class _TopRatedMoviesList extends ConsumerWidget {
   const _TopRatedMoviesList({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final topRateMovies = ref.watch(_topRatedMovieFutureProvider);
+
     return LimitedBox(
       maxHeight: 250,
-      child: FutureBuilder(
-        future: MovieService.getTopRatedMovies(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data!.isEmpty) {
-              return const Center(
-                child: Text('Nothing found.'),
-              );
-            }
-
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: MovieList(movieList: snapshot.data!),
-            );
-          } else if (snapshot.hasError) {
-            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Theme.of(context).colorScheme.surface,
-                  content: const ErrorSnackBarContent(
-                    message: 'Could not get top rated movies.',
-                  ),
-                ),
-              );
-            });
-
+      child: topRateMovies.when(
+        data: (movies) {
+          if (movies.isEmpty) {
             return const Center(
-              child: ErrorText('Something went wrong.'),
+              child: Text('Nothing found.'),
             );
           }
 
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            child: MovieList(movieList: movies),
           );
         },
+        error: (error, stackTrace) {
+          logError('Could not get top rated movies.', error, stackTrace);
+
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                content: const ErrorSnackBarContent(
+                  message: 'Could not get top rated movies.',
+                ),
+              ),
+            );
+          });
+
+          return const Center(
+            child: ErrorText('Something went wrong.'),
+          );
+        },
+        loading: () => const Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }
