@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/services/image_service.dart';
+import '../../../../../core/providers/service_providers.dart';
 import '../../../../../utils/enums.dart';
 import '../../backdrop_image/backdrop_image.dart';
 import '../../custom_image/custom_network_image.dart';
 
-class ImageCarouselItem extends StatelessWidget {
+class ImageCarouselItem extends ConsumerWidget {
   final String image;
 
   const ImageCarouselItem({super.key, required this.image});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final imageService = ref.watch(imageServiceProvider);
+
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -27,7 +30,7 @@ class ImageCarouselItem extends StatelessWidget {
                     maxScale: 4,
                     child: CustomNetworkImage(
                       placeholderIcon: const Icon(Icons.person),
-                      url: ImageService.getImageUrl(
+                      url: imageService.getImageUrl(
                         size: ProfileSizes.original.name,
                         path: image,
                       ),
@@ -40,7 +43,7 @@ class ImageCarouselItem extends StatelessWidget {
         );
       },
       child: BackdropImage(
-        imgUrl: ImageService.getImageUrl(
+        imgUrl: imageService.getImageUrl(
           size: BackdropSizes.original.name,
           path: image,
         ),

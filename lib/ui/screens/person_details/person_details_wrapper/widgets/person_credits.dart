@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/services/movie_service.dart';
+import '../../../../../core/providers/service_providers.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/movie_list/movie_list.dart';
@@ -32,7 +33,7 @@ class PersonCredits extends StatelessWidget {
   }
 }
 
-class _CreditsList extends StatelessWidget {
+class _CreditsList extends ConsumerWidget {
   const _CreditsList({
     Key? key,
     required this.id,
@@ -41,11 +42,13 @@ class _CreditsList extends StatelessWidget {
   final int id;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final movieService = ref.watch(movieServiceProvider);
+
     return SizedBox(
       height: 250,
       child: FutureBuilder(
-        future: MovieService.getPersonCredits(personId: id),
+        future: movieService.getPersonCredits(personId: id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!.isEmpty) {

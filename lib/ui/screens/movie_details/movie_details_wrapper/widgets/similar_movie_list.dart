@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/models/movie/details/movie_details.dart';
-import '../../../../../core/services/movie_service.dart';
+import '../../../../../core/providers/service_providers.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/movie_list/movie_list.dart';
@@ -41,7 +42,7 @@ class SimilarMovieList extends StatelessWidget {
   }
 }
 
-class _SimilarMoviesBuilder extends StatelessWidget {
+class _SimilarMoviesBuilder extends ConsumerWidget {
   const _SimilarMoviesBuilder({
     Key? key,
     required this.details,
@@ -50,9 +51,11 @@ class _SimilarMoviesBuilder extends StatelessWidget {
   final MovieDetails details;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final movieService = ref.watch(movieServiceProvider);
+
     return FutureBuilder(
-      future: MovieService.getSimilarMovies(id: details.id),
+      future: movieService.getSimilarMovies(id: details.id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.isEmpty) {

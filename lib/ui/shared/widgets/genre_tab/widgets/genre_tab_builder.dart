@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/services/movie_service.dart';
+import '../../../../../core/providers/service_providers.dart';
 import '../../../../../utils/constants.dart';
 import '../../errors/error_snack_bar_content.dart';
 import '../../errors/error_text.dart';
 import '../../movie_list/movie_list.dart';
 
-class GenreTabBuilder extends StatelessWidget {
+class GenreTabBuilder extends ConsumerWidget {
   const GenreTabBuilder({
     Key? key,
     required this.genreId,
@@ -17,9 +18,11 @@ class GenreTabBuilder extends StatelessWidget {
   final int genreId;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final movieService = ref.watch(movieServiceProvider);
+
     return FutureBuilder(
-      future: MovieService.getMovies(
+      future: movieService.getMovies(
         withGenres: [genreId],
         sortBy: SortBy.popularityDesc,
         includeAdult: includeAdult,

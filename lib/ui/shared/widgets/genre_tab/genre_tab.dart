@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
-import '../../../../core/services/genre_service.dart';
+import '../../../../core/providers/service_providers.dart';
 import '../errors/error_snack_bar_content.dart';
 import '../errors/error_text.dart';
 import 'widgets/genre_tab_controller.dart';
 
 final _genreFutureProvider = FutureProvider.autoDispose(
-  (ref) => GenreService.getGenres(),
+  (ref) => ref.watch(genreServiceProvider).getGenres(),
 );
 
 class GenreTab extends ConsumerWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
-import '../../../../../core/services/movie_service.dart';
+import '../../../../../core/providers/service_providers.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/movie_list/movie_list.dart';
@@ -49,7 +49,7 @@ class _TopRatedMoviesText extends StatelessWidget {
 }
 
 final _topRatedMovieFutureProvider = FutureProvider.autoDispose(
-  (ref) => MovieService.getTopRatedMovies(),
+  (ref) => ref.watch(movieServiceProvider).getTopRatedMovies(),
 );
 
 class _TopRatedMoviesList extends ConsumerWidget {

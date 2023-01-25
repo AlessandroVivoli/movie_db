@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/models/movie/details/movie_details.dart';
-import '../../../../../core/services/person_service.dart';
+import '../../../../../core/providers/service_providers.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/person_list/person_list.dart';
@@ -38,7 +39,7 @@ class MovieCasts extends StatelessWidget {
   }
 }
 
-class _CastBuilder extends StatelessWidget {
+class _CastBuilder extends ConsumerWidget {
   const _CastBuilder({
     Key? key,
     required this.details,
@@ -47,9 +48,11 @@ class _CastBuilder extends StatelessWidget {
   final MovieDetails details;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final personService = ref.watch(personServiceProvider);
+
     return FutureBuilder(
-      future: PersonService.getCast(movieId: details.id),
+      future: personService.getCast(movieId: details.id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.isEmpty) {

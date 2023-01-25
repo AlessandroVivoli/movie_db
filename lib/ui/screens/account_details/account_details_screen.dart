@@ -3,8 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/providers/general_providers.dart';
-import '../../../core/services/account_avatar_service.dart';
-import '../../../core/services/image_service.dart';
+import '../../../core/providers/service_providers.dart';
 import '../../../utils/enums.dart';
 import '../../shared/widgets/backdrop_image/backdrop_image.dart';
 import 'account_details_wrapper/account_details_wrapper.dart';
@@ -15,6 +14,8 @@ class AccountDetailsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final accountDetails = ref.watch(accountDetailsStateProvider)!;
+    final accountAvatarService = ref.watch(accountAvatarServiceProvider);
+    final imageService = ref.watch(imageServiceProvider);
 
     return SafeArea(
       top: false,
@@ -35,11 +36,11 @@ class AccountDetailsScreen extends ConsumerWidget {
                 centerTitle: true,
                 background: BackdropImage(
                   imgUrl: (accountDetails.avatar.tmdb.avatarPath != null)
-                      ? ImageService.getImageUrl(
+                      ? imageService.getImageUrl(
                           size: ProfileSizes.original.name,
                           path: accountDetails.profilePath,
                         )
-                      : AccountAvatarService.getAccountAvatar(
+                      : accountAvatarService.getAccountAvatar(
                           hash: accountDetails.profilePath,
                           size: 2000,
                         ),

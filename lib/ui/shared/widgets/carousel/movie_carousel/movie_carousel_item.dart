@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/services/image_service.dart';
+import '../../../../../core/providers/service_providers.dart';
 import '../../../../../utils/enums.dart';
 import '../../../../../utils/routes.dart';
 import '../../backdrop_image/backdrop_image.dart';
 
-class MovieCarouselItem extends StatelessWidget {
+class MovieCarouselItem extends ConsumerWidget {
   final String? image;
   final String title;
   final int id;
@@ -18,11 +19,13 @@ class MovieCarouselItem extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final imageService = ref.watch(imageServiceProvider);
+
     return Stack(
       children: [
         BackdropImage(
-          imgUrl: ImageService.getImageUrl(
+          imgUrl: imageService.getImageUrl(
             size: BackdropSizes.original.name,
             path: image,
           ),

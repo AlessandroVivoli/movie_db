@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/services/video_service.dart';
 import '../../../core/models/movie/account_state/movie_account_state.dart';
 import '../../../core/models/movie/details/movie_details.dart';
+import '../../../core/providers/service_providers.dart';
 import '../../../core/providers/session_provider.dart';
 import '../../../core/services/movie_service.dart';
 import '../../../utils/routes.dart';
@@ -37,7 +38,7 @@ class MovieDetailsScreen extends HookWidget {
   }
 }
 
-class _MovieDetailsBuilder extends StatelessWidget {
+class _MovieDetailsBuilder extends ConsumerWidget {
   const _MovieDetailsBuilder({
     Key? key,
     required this.movieId,
@@ -48,9 +49,12 @@ class _MovieDetailsBuilder extends StatelessWidget {
   final ScrollController scrollController;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final movieService = ref.watch(movieServiceProvider);
+    final videoService = ref.watch(videoServiceProvider);
+
     return FutureBuilder(
-      future: getMovieDetails(movieId),
+      future: getMovieDetails(movieId, movieService),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final data = snapshot.data!;
@@ -73,7 +77,7 @@ class _MovieDetailsBuilder extends StatelessWidget {
                 onPressed: () => Navigator.pushNamed(
                   context,
                   AppRoute.play,
-                  arguments: VideoService.getVideos(movieId: data.id),
+                  arguments: videoService.getVideos(movieId: data.id),
                 ),
               )
             ],
@@ -109,20 +113,23 @@ class _MovieDetailsBuilder extends StatelessWidget {
     );
   }
 
-  Future<MovieDetails> getMovieDetails(int id) async {
+  Future<MovieDetails> getMovieDetails(
+    int id,
+    MovieService movieService,
+  ) async {
     final sessionId = SessionProvider.sessionId;
 
     MovieAccountState? state;
 
     if (sessionId != null) {
-      state = await MovieService.getAccountMovieState(
+      state = await movieService.getAccountMovieState(
         id: id,
         sessionId: sessionId,
       );
     }
 
-    return MovieService.getMovieDetails(id: id).then(
-      (details) => details.copyWith(state: state),
-    );
+    return movieService.getMovieDetails(id: id).then(
+          (details) => details.copyWith(state: state),
+        );
   }
 }

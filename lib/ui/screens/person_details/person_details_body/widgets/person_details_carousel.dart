@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/models/person/details/person_details.dart';
-import '../../../../../core/services/image_service.dart';
+import '../../../../../core/providers/service_providers.dart';
 import '../../../../shared/widgets/carousel/image_carousel/image_carousel.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
@@ -32,7 +33,7 @@ class PersonDetailsCarousel extends StatelessWidget {
   }
 }
 
-class _PersonCarouselBuilder extends StatelessWidget {
+class _PersonCarouselBuilder extends ConsumerWidget {
   const _PersonCarouselBuilder({
     Key? key,
     required this.personDetails,
@@ -41,9 +42,11 @@ class _PersonCarouselBuilder extends StatelessWidget {
   final PersonDetails personDetails;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final imageService = ref.watch(imageServiceProvider);
+
     return FutureBuilder(
-      future: ImageService.getPersonImages(id: personDetails.id),
+      future: imageService.getPersonImages(id: personDetails.id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.isEmpty) {

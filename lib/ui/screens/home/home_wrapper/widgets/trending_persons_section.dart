@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
-import '../../../../../core/services/person_service.dart';
+import '../../../../../core/providers/service_providers.dart';
 import '../../../../../utils/constants.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
@@ -50,7 +50,9 @@ class _TrendingPersonsText extends StatelessWidget {
 }
 
 final _trendingPersonsFutureProvider = FutureProvider.autoDispose(
-  (ref) => PersonService.getTrendingPersons(timeWindow: TimeWindow.week),
+  (ref) => ref
+      .watch(personServiceProvider)
+      .getTrendingPersons(timeWindow: TimeWindow.week),
 );
 
 class _TrendingPersonsList extends ConsumerWidget {

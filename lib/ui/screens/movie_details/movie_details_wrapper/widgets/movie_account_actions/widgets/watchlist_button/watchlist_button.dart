@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../../../../core/providers/service_providers.dart';
 import '../../../../../../../../core/providers/session_provider.dart';
-import '../../../../../../../../core/services/account_service.dart';
 import '../../../../../../../shared/widgets/errors/error_snack_bar_content.dart';
 
-class WatchlistButton extends HookWidget {
+class WatchlistButton extends HookConsumerWidget {
   const WatchlistButton({
     super.key,
     required this.accountId,
@@ -18,7 +19,9 @@ class WatchlistButton extends HookWidget {
   final bool watchlist;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final accountService = ref.watch(accountServiceProvider);
+
     final isWatchlist = useState(watchlist);
 
     return IconButton(
@@ -32,12 +35,14 @@ class WatchlistButton extends HookWidget {
             : Colors.white,
       ),
       onPressed: () async {
-        final code = await AccountService.addMovieToWatchList(
+        final code = await accountService
+            .addMovieToWatchList(
           accountId: accountId,
           movieId: movieId,
           sessionId: SessionProvider.sessionId!,
           watchlist: !isWatchlist.value,
-        ).catchError((_) {
+        )
+            .catchError((_) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: ErrorSnackBarContent(

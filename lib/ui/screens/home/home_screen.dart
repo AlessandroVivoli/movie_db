@@ -5,9 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
 import '../../../core/providers/general_providers.dart';
+import '../../../core/providers/service_providers.dart';
 import '../../../core/providers/session_provider.dart';
-import '../../../core/services/account_service.dart';
-import '../../../core/services/movie_service.dart';
 import '../../../utils/constants.dart';
 import '../../shared/widgets/account_drawer/account_drawer.dart';
 import '../../shared/widgets/carousel/movie_carousel/movie_carousel.dart';
@@ -23,17 +22,20 @@ class HomeScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String? sessionId;
+    final accountService = ref.watch(accountServiceProvider);
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
-    useEffect(() {
-      sessionId = SessionProvider.sessionId;
+    String? sessionId = SessionProvider.sessionId;
 
+    useEffect(() {
       if (sessionId != null) {
-        AccountService.getAccountDetails(sessionId: sessionId!).then(
-          (value) =>
-              ref.read(accountDetailsStateProvider.notifier).state = value,
-        );
+        accountService.getAccountDetails(sessionId: sessionId).then(
+              (value) => ref
+                  .read(
+                    accountDetailsStateProvider.notifier,
+                  )
+                  .state = value,
+            );
       }
 
       return null;
@@ -86,8 +88,10 @@ class HomeScreen extends HookConsumerWidget {
   }
 }
 
-final _movieFutureProvider = FutureProvider.autoDispose(
-  (ref) => MovieService.getTrendingMovies(timeWindow: TimeWindow.week),
+final movieFutureProvider = FutureProvider.autoDispose(
+  (ref) => ref
+      .watch(movieServiceProvider)
+      .getTrendingMovies(timeWindow: TimeWindow.week),
 );
 
 class _TrendingMoviesBuilder extends ConsumerWidget {
@@ -95,7 +99,7 @@ class _TrendingMoviesBuilder extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final trendingMovies = ref.watch(_movieFutureProvider);
+    final trendingMovies = ref.watch(movieFutureProvider);
 
     return trendingMovies.when(
       data: (movies) {

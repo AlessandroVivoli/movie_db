@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../core/providers/service_providers.dart';
 import '../../../../core/providers/session_provider.dart';
-import '../../../../core/services/auth_service.dart';
 import '../../../shared/widgets/errors/error_snack_bar_content.dart';
 
-class SubmitButton extends HookWidget {
+class SubmitButton extends HookConsumerWidget {
   const SubmitButton({
     super.key,
     required this.formKey,
@@ -18,7 +19,9 @@ class SubmitButton extends HookWidget {
   final TextEditingController passwordController;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authService = ref.watch(authServiceProvider);
+
     final isLoggingIn = useState(false);
 
     if (isLoggingIn.value) {
@@ -39,7 +42,7 @@ class SubmitButton extends HookWidget {
 
         isLoggingIn.value = true;
 
-        final response = await AuthService.login(
+        final response = await authService.login(
           username: usernameController.text,
           password: passwordController.text,
         );

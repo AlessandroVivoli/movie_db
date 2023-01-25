@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
 import '../../../../../core/models/account/account_details.dart';
+import '../../../../../core/providers/service_providers.dart';
 import '../../../../../core/providers/session_provider.dart';
-import '../../../../../core/services/movie_service.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/paged_movie_list/paged_movie_list.dart';
 
-class FavoriteMoviesSection extends HookWidget {
+class FavoriteMoviesSection extends HookConsumerWidget {
   const FavoriteMoviesSection({
     Key? key,
     required this.accountDetails,
@@ -20,7 +21,9 @@ class FavoriteMoviesSection extends HookWidget {
   final void Function()? onReturn;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final movieService = ref.watch(movieServiceProvider);
+
     final page = useState(1);
 
     return Padding(
@@ -40,7 +43,7 @@ class FavoriteMoviesSection extends HookWidget {
           SizedBox(
             height: 290,
             child: FutureBuilder(
-              future: MovieService.getFavoriteMovies(
+              future: movieService.getFavoriteMovies(
                 accountId: accountDetails.id,
                 sessionId: SessionProvider.sessionId!,
                 page: page.value,

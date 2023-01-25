@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/models/person/person.dart';
-import '../../../../core/services/image_service.dart';
-import '../../../../core/services/person_service.dart';
-import '../../../../utils/enums.dart';
+import '../../../../core/providers/service_providers.dart';
 import '../../../../utils/routes.dart';
-import '../custom_image/custom_network_image.dart';
+import 'widgets/person_card_wrapper.dart';
 
-class PersonCard extends StatelessWidget {
+class PersonCard extends ConsumerWidget {
   final Person person;
   final double imgRadius;
   final double imgBorderWidth;
@@ -20,67 +19,18 @@ class PersonCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final personService = ref.watch(personServiceProvider);
+
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(
           context,
           AppRoute.person,
-          arguments: PersonService.getPersonDetails(id: person.id),
+          arguments: personService.getPersonDetails(id: person.id),
         );
       },
-      child: Column(
-        children: [
-          CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.surface,
-            radius: imgRadius,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(imgRadius),
-              child: CustomNetworkImage(
-                width: imgRadius * 2,
-                height: imgRadius * 2,
-                url: ImageService.getImageUrl(
-                  size: ProfileSizes.w185.name,
-                  path: person.profilePath,
-                ),
-                placeholderIcon: const Icon(
-                  Icons.person,
-                  size: 40,
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 2),
-                  child: Center(
-                    child: Text(
-                      person.name,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                if (person.knownForDepartment != null)
-                  Center(
-                    child: Text(
-                      'Trending for ${person.knownForDepartment!}',
-                      style: const TextStyle(
-                        fontSize: 10,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        ],
-      ),
+      child: PersonCardWrapper(imgRadius: imgRadius, person: person),
     );
   }
 }

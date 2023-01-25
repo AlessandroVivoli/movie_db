@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../../../core/providers/service_providers.dart';
 import '../../../../../../../core/providers/session_provider.dart';
-import '../../../../../../../core/services/account_service.dart';
 import '../../../../../../shared/widgets/errors/error_snack_bar_content.dart';
 
-class FavoriteButton extends HookWidget {
+class FavoriteButton extends HookConsumerWidget {
   const FavoriteButton({
     super.key,
     required this.favorite,
@@ -19,7 +20,9 @@ class FavoriteButton extends HookWidget {
   final int accountId;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final accountService = ref.watch(accountServiceProvider);
+
     final favorited = useState(favorite);
 
     final controller = useAnimationController(
@@ -40,12 +43,14 @@ class FavoriteButton extends HookWidget {
 
     return IconButton(
       onPressed: () async {
-        final code = await AccountService.markMovieAsFavorite(
+        final code = await accountService
+            .markMovieAsFavorite(
           accountId: accountId,
           favorite: !favorited.value,
           movieId: movieId,
           sessionId: SessionProvider.sessionId!,
-        ).catchError((_) {
+        )
+            .catchError((_) {
           ScaffoldMessenger.of(context)
             ..removeCurrentSnackBar()
             ..showSnackBar(

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../../../../../core/providers/service_providers.dart';
 import '../../../../../../../../../core/providers/session_provider.dart';
 import '../../../../../../../../../core/services/movie_service.dart';
 import '../../../../../../../../shared/widgets/errors/error_snack_bar_content.dart';
 
-class DeleteButton extends HookWidget {
+class DeleteButton extends HookConsumerWidget {
   const DeleteButton({
     super.key,
     required this.rating,
@@ -18,13 +20,16 @@ class DeleteButton extends HookWidget {
   final int movieId;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final movieService = ref.watch(movieServiceProvider);
+
     final loading = useState(false);
 
     if (!loading.value) {
       return OutlinedButton(
-        onPressed:
-            (originalRating > 0) ? () => onDelete(loading, context) : null,
+        onPressed: (originalRating > 0)
+            ? () => onDelete(loading, context, movieService)
+            : null,
         style: OutlinedButton.styleFrom(
           foregroundColor: Colors.red,
           side: BorderSide(
@@ -43,18 +48,23 @@ class DeleteButton extends HookWidget {
     );
   }
 
-  void onDelete(ValueNotifier<bool> loading, BuildContext context) async {
+  void onDelete(
+    ValueNotifier<bool> loading,
+    BuildContext context,
+    MovieService movieService,
+  ) async {
     loading.value = true;
 
-    final code = await MovieService.deleteRating(
-      id: movieId,
-      sessionId: SessionProvider.sessionId!,
-    ).catchError((_) {
+    final code = await movieService
+        .deleteRating(id: movieId, sessionId: SessionProvider.sessionId!)
+        .catchError((_) {
       ScaffoldMessenger.of(context)
         ..removeCurrentSnackBar()
         ..showSnackBar(
           const SnackBar(
-            content: ErrorSnackBarContent(message: 'Could not delete rating.'),
+            content: ErrorSnackBarContent(
+              message: 'Could not delete rating.',
+            ),
           ),
         );
 
