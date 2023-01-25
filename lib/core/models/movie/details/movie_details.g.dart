@@ -8,14 +8,14 @@ part of 'movie_details.dart';
 
 _$_MovieDetails _$$_MovieDetailsFromJson(Map<String, dynamic> json) =>
     _$_MovieDetails(
-      adult: json['adult'] as bool?,
+      adult: json['adult'] as bool,
       backdropPath: json['backdrop_path'] as String?,
-      budget: json['budget'] as int?,
-      genres: (json['genres'] as List<dynamic>?)
-          ?.map((e) => Genre.fromJson(e as Map<String, dynamic>))
+      budget: json['budget'] as int,
+      genres: (json['genres'] as List<dynamic>)
+          .map((e) => Genre.fromJson(e as Map<String, dynamic>))
           .toList(),
       homepage: json['homepage'] as String?,
-      id: json['id'] as int?,
+      id: json['id'] as int,
       imdbId: json['imdb_id'] as String?,
       originalLanguage: json['original_language'] as String?,
       originalTitle: json['original_title'] as String?,
@@ -29,16 +29,16 @@ _$_MovieDetails _$$_MovieDetailsFromJson(Map<String, dynamic> json) =>
           ?.map((e) => ProductionCountry.fromJson(e as Map<String, dynamic>))
           .toList(),
       releaseDate: json['release_date'] as String?,
-      revenue: json['revenue'] as int?,
-      runtime: json['runtime'] as int?,
+      revenue: json['revenue'] as int,
+      runtime: json['runtime'] as int,
       spokenLanguages: (json['spoken_languages'] as List<dynamic>)
           .map((e) => SpokenLanguage.fromJson(e as Map<String, dynamic>))
           .toList(),
       status: json['status'] as String?,
       tagline: json['tagline'] as String?,
-      video: json['video'] as bool?,
-      voteAverage: (json['vote_average'] as num?)?.toDouble(),
-      voteCount: json['vote_count'] as int?,
+      video: json['video'] as bool,
+      voteAverage: (json['vote_average'] as num).toDouble(),
+      voteCount: json['vote_count'] as int,
       state: json['state'] == null
           ? null
           : MovieAccountState.fromJson(json['state'] as Map<String, dynamic>),
@@ -49,7 +49,7 @@ Map<String, dynamic> _$$_MovieDetailsToJson(_$_MovieDetails instance) =>
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
       'budget': instance.budget,
-      'genres': instance.genres?.map((e) => e.toJson()).toList(),
+      'genres': instance.genres.map((e) => e.toJson()).toList(),
       'homepage': instance.homepage,
       'id': instance.id,
       'imdb_id': instance.imdbId,

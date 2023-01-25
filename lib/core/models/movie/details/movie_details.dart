@@ -12,12 +12,12 @@ part 'movie_details.g.dart';
 @freezed
 class MovieDetails with _$MovieDetails {
   const factory MovieDetails({
-    required bool? adult,
+    required bool adult,
     required String? backdropPath,
-    required int? budget,
-    required List<Genre>? genres,
+    required int budget,
+    required List<Genre> genres,
     required String? homepage,
-    required int? id,
+    required int id,
     required String? imdbId,
     required String? originalLanguage,
     required String? originalTitle,
@@ -27,14 +27,14 @@ class MovieDetails with _$MovieDetails {
     required List<ProductionCompany>? productionCompanies,
     required List<ProductionCountry>? productionCountries,
     required String? releaseDate,
-    required int? revenue,
-    required int? runtime,
+    required int revenue,
+    required int runtime,
     required List<SpokenLanguage> spokenLanguages,
     required String? status,
     required String? tagline,
-    required bool? video,
-    required double? voteAverage,
-    required int? voteCount,
+    required bool video,
+    required double voteAverage,
+    required int voteCount,
     required MovieAccountState? state,
   }) = _MovieDetails;
 

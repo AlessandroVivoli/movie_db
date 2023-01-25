@@ -20,12 +20,12 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MovieDetails {
-  bool? get adult => throw _privateConstructorUsedError;
+  bool get adult => throw _privateConstructorUsedError;
   String? get backdropPath => throw _privateConstructorUsedError;
-  int? get budget => throw _privateConstructorUsedError;
-  List<Genre>? get genres => throw _privateConstructorUsedError;
+  int get budget => throw _privateConstructorUsedError;
+  List<Genre> get genres => throw _privateConstructorUsedError;
   String? get homepage => throw _privateConstructorUsedError;
-  int? get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String? get imdbId => throw _privateConstructorUsedError;
   String? get originalLanguage => throw _privateConstructorUsedError;
   String? get originalTitle => throw _privateConstructorUsedError;
@@ -37,15 +37,15 @@ mixin _$MovieDetails {
   List<ProductionCountry>? get productionCountries =>
       throw _privateConstructorUsedError;
   String? get releaseDate => throw _privateConstructorUsedError;
-  int? get revenue => throw _privateConstructorUsedError;
-  int? get runtime => throw _privateConstructorUsedError;
+  int get revenue => throw _privateConstructorUsedError;
+  int get runtime => throw _privateConstructorUsedError;
   List<SpokenLanguage> get spokenLanguages =>
       throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   String? get tagline => throw _privateConstructorUsedError;
-  bool? get video => throw _privateConstructorUsedError;
-  double? get voteAverage => throw _privateConstructorUsedError;
-  int? get voteCount => throw _privateConstructorUsedError;
+  bool get video => throw _privateConstructorUsedError;
+  double get voteAverage => throw _privateConstructorUsedError;
+  int get voteCount => throw _privateConstructorUsedError;
   MovieAccountState? get state => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -61,12 +61,12 @@ abstract class $MovieDetailsCopyWith<$Res> {
       _$MovieDetailsCopyWithImpl<$Res, MovieDetails>;
   @useResult
   $Res call(
-      {bool? adult,
+      {bool adult,
       String? backdropPath,
-      int? budget,
-      List<Genre>? genres,
+      int budget,
+      List<Genre> genres,
       String? homepage,
-      int? id,
+      int id,
       String? imdbId,
       String? originalLanguage,
       String? originalTitle,
@@ -76,14 +76,14 @@ abstract class $MovieDetailsCopyWith<$Res> {
       List<ProductionCompany>? productionCompanies,
       List<ProductionCountry>? productionCountries,
       String? releaseDate,
-      int? revenue,
-      int? runtime,
+      int revenue,
+      int runtime,
       List<SpokenLanguage> spokenLanguages,
       String? status,
       String? tagline,
-      bool? video,
-      double? voteAverage,
-      int? voteCount,
+      bool video,
+      double voteAverage,
+      int voteCount,
       MovieAccountState? state});
 
   $MovieAccountStateCopyWith<$Res>? get state;
@@ -102,12 +102,12 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? adult = freezed,
+    Object? adult = null,
     Object? backdropPath = freezed,
-    Object? budget = freezed,
-    Object? genres = freezed,
+    Object? budget = null,
+    Object? genres = null,
     Object? homepage = freezed,
-    Object? id = freezed,
+    Object? id = null,
     Object? imdbId = freezed,
     Object? originalLanguage = freezed,
     Object? originalTitle = freezed,
@@ -117,41 +117,41 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
     Object? productionCompanies = freezed,
     Object? productionCountries = freezed,
     Object? releaseDate = freezed,
-    Object? revenue = freezed,
-    Object? runtime = freezed,
+    Object? revenue = null,
+    Object? runtime = null,
     Object? spokenLanguages = null,
     Object? status = freezed,
     Object? tagline = freezed,
-    Object? video = freezed,
-    Object? voteAverage = freezed,
-    Object? voteCount = freezed,
+    Object? video = null,
+    Object? voteAverage = null,
+    Object? voteCount = null,
     Object? state = freezed,
   }) {
     return _then(_value.copyWith(
-      adult: freezed == adult
+      adult: null == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
       backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      budget: freezed == budget
+      budget: null == budget
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
-              as int?,
-      genres: freezed == genres
+              as int,
+      genres: null == genres
           ? _value.genres
           : genres // ignore: cast_nullable_to_non_nullable
-              as List<Genre>?,
+              as List<Genre>,
       homepage: freezed == homepage
           ? _value.homepage
           : homepage // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       imdbId: freezed == imdbId
           ? _value.imdbId
           : imdbId // ignore: cast_nullable_to_non_nullable
@@ -188,14 +188,14 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      revenue: freezed == revenue
+      revenue: null == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
-              as int?,
-      runtime: freezed == runtime
+              as int,
+      runtime: null == runtime
           ? _value.runtime
           : runtime // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       spokenLanguages: null == spokenLanguages
           ? _value.spokenLanguages
           : spokenLanguages // ignore: cast_nullable_to_non_nullable
@@ -208,18 +208,18 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
           ? _value.tagline
           : tagline // ignore: cast_nullable_to_non_nullable
               as String?,
-      video: freezed == video
+      video: null == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      voteAverage: freezed == voteAverage
+              as bool,
+      voteAverage: null == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as double?,
-      voteCount: freezed == voteCount
+              as double,
+      voteCount: null == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
@@ -249,12 +249,12 @@ abstract class _$$_MovieDetailsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool? adult,
+      {bool adult,
       String? backdropPath,
-      int? budget,
-      List<Genre>? genres,
+      int budget,
+      List<Genre> genres,
       String? homepage,
-      int? id,
+      int id,
       String? imdbId,
       String? originalLanguage,
       String? originalTitle,
@@ -264,14 +264,14 @@ abstract class _$$_MovieDetailsCopyWith<$Res>
       List<ProductionCompany>? productionCompanies,
       List<ProductionCountry>? productionCountries,
       String? releaseDate,
-      int? revenue,
-      int? runtime,
+      int revenue,
+      int runtime,
       List<SpokenLanguage> spokenLanguages,
       String? status,
       String? tagline,
-      bool? video,
-      double? voteAverage,
-      int? voteCount,
+      bool video,
+      double voteAverage,
+      int voteCount,
       MovieAccountState? state});
 
   @override
@@ -289,12 +289,12 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? adult = freezed,
+    Object? adult = null,
     Object? backdropPath = freezed,
-    Object? budget = freezed,
-    Object? genres = freezed,
+    Object? budget = null,
+    Object? genres = null,
     Object? homepage = freezed,
-    Object? id = freezed,
+    Object? id = null,
     Object? imdbId = freezed,
     Object? originalLanguage = freezed,
     Object? originalTitle = freezed,
@@ -304,41 +304,41 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
     Object? productionCompanies = freezed,
     Object? productionCountries = freezed,
     Object? releaseDate = freezed,
-    Object? revenue = freezed,
-    Object? runtime = freezed,
+    Object? revenue = null,
+    Object? runtime = null,
     Object? spokenLanguages = null,
     Object? status = freezed,
     Object? tagline = freezed,
-    Object? video = freezed,
-    Object? voteAverage = freezed,
-    Object? voteCount = freezed,
+    Object? video = null,
+    Object? voteAverage = null,
+    Object? voteCount = null,
     Object? state = freezed,
   }) {
     return _then(_$_MovieDetails(
-      adult: freezed == adult
+      adult: null == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
       backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      budget: freezed == budget
+      budget: null == budget
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
-              as int?,
-      genres: freezed == genres
+              as int,
+      genres: null == genres
           ? _value._genres
           : genres // ignore: cast_nullable_to_non_nullable
-              as List<Genre>?,
+              as List<Genre>,
       homepage: freezed == homepage
           ? _value.homepage
           : homepage // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       imdbId: freezed == imdbId
           ? _value.imdbId
           : imdbId // ignore: cast_nullable_to_non_nullable
@@ -375,14 +375,14 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      revenue: freezed == revenue
+      revenue: null == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
-              as int?,
-      runtime: freezed == runtime
+              as int,
+      runtime: null == runtime
           ? _value.runtime
           : runtime // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       spokenLanguages: null == spokenLanguages
           ? _value._spokenLanguages
           : spokenLanguages // ignore: cast_nullable_to_non_nullable
@@ -395,18 +395,18 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
           ? _value.tagline
           : tagline // ignore: cast_nullable_to_non_nullable
               as String?,
-      video: freezed == video
+      video: null == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      voteAverage: freezed == voteAverage
+              as bool,
+      voteAverage: null == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as double?,
-      voteCount: freezed == voteCount
+              as double,
+      voteCount: null == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
@@ -422,7 +422,7 @@ class _$_MovieDetails implements _MovieDetails {
       {required this.adult,
       required this.backdropPath,
       required this.budget,
-      required final List<Genre>? genres,
+      required final List<Genre> genres,
       required this.homepage,
       required this.id,
       required this.imdbId,
@@ -452,25 +452,23 @@ class _$_MovieDetails implements _MovieDetails {
       _$$_MovieDetailsFromJson(json);
 
   @override
-  final bool? adult;
+  final bool adult;
   @override
   final String? backdropPath;
   @override
-  final int? budget;
-  final List<Genre>? _genres;
+  final int budget;
+  final List<Genre> _genres;
   @override
-  List<Genre>? get genres {
-    final value = _genres;
-    if (value == null) return null;
+  List<Genre> get genres {
     if (_genres is EqualUnmodifiableListView) return _genres;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_genres);
   }
 
   @override
   final String? homepage;
   @override
-  final int? id;
+  final int id;
   @override
   final String? imdbId;
   @override
@@ -508,9 +506,9 @@ class _$_MovieDetails implements _MovieDetails {
   @override
   final String? releaseDate;
   @override
-  final int? revenue;
+  final int revenue;
   @override
-  final int? runtime;
+  final int runtime;
   final List<SpokenLanguage> _spokenLanguages;
   @override
   List<SpokenLanguage> get spokenLanguages {
@@ -524,11 +522,11 @@ class _$_MovieDetails implements _MovieDetails {
   @override
   final String? tagline;
   @override
-  final bool? video;
+  final bool video;
   @override
-  final double? voteAverage;
+  final double voteAverage;
   @override
-  final int? voteCount;
+  final int voteCount;
   @override
   final MovieAccountState? state;
 
@@ -627,12 +625,12 @@ class _$_MovieDetails implements _MovieDetails {
 
 abstract class _MovieDetails implements MovieDetails {
   const factory _MovieDetails(
-      {required final bool? adult,
+      {required final bool adult,
       required final String? backdropPath,
-      required final int? budget,
-      required final List<Genre>? genres,
+      required final int budget,
+      required final List<Genre> genres,
       required final String? homepage,
-      required final int? id,
+      required final int id,
       required final String? imdbId,
       required final String? originalLanguage,
       required final String? originalTitle,
@@ -642,31 +640,31 @@ abstract class _MovieDetails implements MovieDetails {
       required final List<ProductionCompany>? productionCompanies,
       required final List<ProductionCountry>? productionCountries,
       required final String? releaseDate,
-      required final int? revenue,
-      required final int? runtime,
+      required final int revenue,
+      required final int runtime,
       required final List<SpokenLanguage> spokenLanguages,
       required final String? status,
       required final String? tagline,
-      required final bool? video,
-      required final double? voteAverage,
-      required final int? voteCount,
+      required final bool video,
+      required final double voteAverage,
+      required final int voteCount,
       required final MovieAccountState? state}) = _$_MovieDetails;
 
   factory _MovieDetails.fromJson(Map<String, dynamic> json) =
       _$_MovieDetails.fromJson;
 
   @override
-  bool? get adult;
+  bool get adult;
   @override
   String? get backdropPath;
   @override
-  int? get budget;
+  int get budget;
   @override
-  List<Genre>? get genres;
+  List<Genre> get genres;
   @override
   String? get homepage;
   @override
-  int? get id;
+  int get id;
   @override
   String? get imdbId;
   @override
@@ -686,9 +684,9 @@ abstract class _MovieDetails implements MovieDetails {
   @override
   String? get releaseDate;
   @override
-  int? get revenue;
+  int get revenue;
   @override
-  int? get runtime;
+  int get runtime;
   @override
   List<SpokenLanguage> get spokenLanguages;
   @override
@@ -696,11 +694,11 @@ abstract class _MovieDetails implements MovieDetails {
   @override
   String? get tagline;
   @override
-  bool? get video;
+  bool get video;
   @override
-  double? get voteAverage;
+  double get voteAverage;
   @override
-  int? get voteCount;
+  int get voteCount;
   @override
   MovieAccountState? get state;
   @override
