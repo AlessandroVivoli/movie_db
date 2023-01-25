@@ -49,7 +49,7 @@ class _CastBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: PersonService.getCast(movieId: details.id!),
+      future: PersonService.getCast(movieId: details.id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.isEmpty) {

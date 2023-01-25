@@ -28,7 +28,7 @@ class MovieGenres extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
-          child: GenreList(genres: details.genres!),
+          child: GenreList(genres: details.genres),
         ),
       ],
     );

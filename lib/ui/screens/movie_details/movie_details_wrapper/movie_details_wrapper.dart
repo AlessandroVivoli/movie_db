@@ -27,15 +27,15 @@ class MovieDetailsWrapper extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MovieRating(details.voteAverage!),
+              MovieRating(details.voteAverage),
               if (SessionProvider.sessionId != null)
                 MovieAccountActions(
                   movieDetails: details,
                 ),
               MovieDescription(details.overview!),
               MovieInfo(
-                budget: details.budget!,
-                runtime: details.runtime!,
+                budget: details.budget,
+                runtime: details.runtime,
                 releaseDate: details.releaseDate!,
               ),
               MovieGenres(details: details),

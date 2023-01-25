@@ -52,7 +52,7 @@ class _SimilarMoviesBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: MovieService.getSimilarMovies(id: details.id!),
+      future: MovieService.getSimilarMovies(id: details.id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.isEmpty) {
