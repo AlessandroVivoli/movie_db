@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../../../../../core/models/movie/account_state/rate/movie_rate.dart';
 import '../../../../../../../../../core/providers/session_provider.dart';
 import '../../../../../../../../../core/services/movie_service.dart';
 import '../../../../../../../../shared/widgets/errors/error_snack_bar_content.dart';
 
-class ConfirmButton extends StatefulWidget {
+class ConfirmButton extends HookWidget {
   final double rating;
   final double originalRating;
   final int movieId;
@@ -18,32 +19,19 @@ class ConfirmButton extends StatefulWidget {
   });
 
   @override
-  State<ConfirmButton> createState() => _ConfirmButtonState();
-}
-
-class _ConfirmButtonState extends State<ConfirmButton> {
-  late bool loading;
-
-  @override
-  void initState() {
-    loading = false;
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (!loading) {
+    final loading = useState(false);
+
+    if (!loading.value) {
       return OutlinedButton(
-        onPressed: (widget.rating > 0 && widget.originalRating != widget.rating)
-            ? onConfirm
+        onPressed: (rating > 0 && originalRating != rating)
+            ? () => onConfirm(loading, context)
             : null,
         style: OutlinedButton.styleFrom(
           side: BorderSide(
-            color:
-                (widget.rating == 0 || widget.originalRating == widget.rating)
-                    ? Colors.grey
-                    : Theme.of(context).colorScheme.primary,
+            color: (rating == 0 || originalRating == rating)
+                ? Colors.grey
+                : Theme.of(context).colorScheme.primary,
             width: 2,
           ),
         ),
@@ -56,15 +44,13 @@ class _ConfirmButtonState extends State<ConfirmButton> {
     );
   }
 
-  void onConfirm() async {
-    setState(() {
-      loading = true;
-    });
+  void onConfirm(ValueNotifier<bool> loading, BuildContext context) async {
+    loading.value = true;
 
     final code = await MovieService.rateMovie(
-      id: widget.movieId,
+      id: movieId,
       sessionId: SessionProvider.sessionId!,
-      rating: widget.rating,
+      rating: rating,
     ).catchError((_) {
       ScaffoldMessenger.of(context)
         ..removeCurrentSnackBar()
@@ -77,10 +63,12 @@ class _ConfirmButtonState extends State<ConfirmButton> {
       return -1;
     });
 
-    if (code == -1 && mounted) {
-      Navigator.pop(context, false);
-    } else if (mounted) {
-      Navigator.pop(context, MovieRate(value: widget.rating));
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (code == -1) {
+        return Navigator.pop(context, false);
+      }
+
+      return Navigator.pop(context, MovieRate(value: rating));
+    });
   }
 }

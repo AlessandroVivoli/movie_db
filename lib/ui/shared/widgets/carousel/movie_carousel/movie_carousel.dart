@@ -1,50 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../core/models/movie/movie.dart';
 import '../shared/carousel_active_dot.dart';
 import 'movie_carousel_item.dart';
 
-class MovieCarousel extends StatefulWidget {
+class MovieCarousel extends HookWidget {
   final List<Movie> movies;
   final double? height;
 
   const MovieCarousel({super.key, this.height, required this.movies});
 
   @override
-  State<StatefulWidget> createState() => _MovieCarouselState();
-}
-
-class _MovieCarouselState extends State<MovieCarousel> {
-  late final PageController _controller;
-
-  @override
-  void initState() {
-    _controller = PageController();
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final controller = usePageController();
+
     return SizedBox(
-      height: widget.height,
+      height: height,
       child: Stack(
         children: [
           PageView.builder(
-            controller: _controller,
-            itemCount: widget.movies.length,
+            controller: controller,
+            itemCount: movies.length,
             pageSnapping: true,
             itemBuilder: (context, index) {
               return MovieCarouselItem(
-                image: widget.movies[index].backdropPath,
-                title: widget.movies[index].title!,
-                id: widget.movies[index].id,
+                image: movies[index].backdropPath,
+                title: movies[index].title!,
+                id: movies[index].id,
               );
             },
           ),
@@ -57,11 +40,11 @@ class _MovieCarouselState extends State<MovieCarousel> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: List<Widget>.generate(
-                widget.movies.length,
+                movies.length,
                 (index) => Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: InkWell(
-                    onTap: () => _controller.animateToPage(
+                    onTap: () => controller.animateToPage(
                       index,
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.easeOutCubic,
@@ -76,8 +59,8 @@ class _MovieCarouselState extends State<MovieCarousel> {
             ),
           ),
           CarouselActiveDot(
-            controller: _controller,
-            length: widget.movies.length,
+            controller: controller,
+            length: movies.length,
             radius: 3,
             padding: 5,
           ),

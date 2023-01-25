@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class UsernameTextField extends StatefulWidget {
+class UsernameTextField extends HookWidget {
   const UsernameTextField({
     super.key,
     required this.usernameController,
@@ -12,34 +13,15 @@ class UsernameTextField extends StatefulWidget {
   final FocusNode nextNode;
 
   @override
-  State<UsernameTextField> createState() => _UsernameTextFieldState();
-}
-
-class _UsernameTextFieldState extends State<UsernameTextField> {
-  late final FocusNode _currentNode;
-  late final GlobalKey<FormFieldState> _formFieldKey;
-
-  @override
-  void initState() {
-    _currentNode = FocusNode();
-    _formFieldKey = GlobalKey();
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _currentNode.dispose();
-
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final currentNode = useFocusNode();
+
+    final GlobalKey<FormFieldState> formFieldKey = GlobalKey();
+
     return TextFormField(
-      key: _formFieldKey,
-      focusNode: _currentNode,
-      controller: widget.usernameController,
+      key: formFieldKey,
+      focusNode: currentNode,
+      controller: usernameController,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Username field is required!';
@@ -48,13 +30,13 @@ class _UsernameTextFieldState extends State<UsernameTextField> {
         return null;
       },
       onFieldSubmitted: (value) {
-        _formFieldKey.currentState?.validate();
+        formFieldKey.currentState?.validate();
 
         if (value.isEmpty) {
-          return _currentNode.requestFocus();
+          return currentNode.requestFocus();
         }
 
-        widget.nextNode.requestFocus();
+        nextNode.requestFocus();
       },
       decoration: const InputDecoration(
         border: OutlineInputBorder(),

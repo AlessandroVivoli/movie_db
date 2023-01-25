@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../../../../core/models/movie/account_state/rate/movie_rate.dart';
 import 'widgets/rating_dialog.dart';
 
-class RateButton extends StatefulWidget {
+class RateButton extends HookWidget {
   const RateButton({
     super.key,
     required this.rated,
@@ -14,30 +15,24 @@ class RateButton extends StatefulWidget {
   final int movieId;
 
   @override
-  State<RateButton> createState() => _RateButtonState();
-}
-
-class _RateButtonState extends State<RateButton> {
-  late MovieRate _rate;
-
-  @override
-  void initState() {
-    try {
-      _rate = MovieRate.fromJson(widget.rated);
-    } catch (e) {
-      _rate = const MovieRate(value: 0);
-    }
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final rate = useState(const MovieRate(value: 0));
+
+    useEffect(() {
+      try {
+        rate.value = MovieRate.fromJson(rated);
+      } catch (e) {
+        return null;
+      }
+
+      return null;
+    }, []);
+
     return SizedBox(
       width: 100,
       child: OutlinedButton.icon(
         icon: Icon(
-          (_rate.value == 0) ? Icons.star_border : Icons.star,
+          (rate.value.value == 0) ? Icons.star_border : Icons.star,
         ),
         label: const Text('Rate'),
         onPressed: () async {
@@ -45,8 +40,8 @@ class _RateButtonState extends State<RateButton> {
             context: context,
             builder: (context) {
               return RatingDialog(
-                rating: _rate.value,
-                movieId: widget.movieId,
+                rating: rate.value.value,
+                movieId: movieId,
               );
             },
           );
@@ -54,14 +49,10 @@ class _RateButtonState extends State<RateButton> {
           if (data != null) {
             if (data is bool) {
               if (data) {
-                setState(() {
-                  _rate = const MovieRate(value: 0);
-                });
+                rate.value = const MovieRate(value: 0);
               }
             } else if (data is MovieRate) {
-              setState(() {
-                _rate = data;
-              });
+              rate.value = data;
             }
           }
         },

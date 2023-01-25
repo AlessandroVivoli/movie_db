@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../core/models/movie/movie_list.dart';
 import '../movie_list/movie_list.dart';
 
-class PagedMovieList extends StatefulWidget {
+class PagedMovieList extends HookWidget {
   const PagedMovieList({
     super.key,
     required this.movieList,
@@ -18,36 +19,17 @@ class PagedMovieList extends StatefulWidget {
   final bool? refreshOnReturn;
 
   @override
-  State<PagedMovieList> createState() => _PagedMovieListState();
-}
-
-class _PagedMovieListState extends State<PagedMovieList> {
-  late final ScrollController _scrollController;
-
-  @override
-  void initState() {
-    _scrollController = ScrollController();
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final scrollController = useScrollController();
+
     return Column(
       children: [
         Expanded(
           child: MovieList(
-            movieList: widget.movieList.results,
-            controller: _scrollController,
-            onReturn: widget.onReturn,
-            refreshOnReturn: widget.refreshOnReturn,
+            movieList: movieList.results,
+            controller: scrollController,
+            onReturn: onReturn,
+            refreshOnReturn: refreshOnReturn,
           ),
         ),
         SizedBox(
@@ -57,21 +39,24 @@ class _PagedMovieListState extends State<PagedMovieList> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               IconButton(
-                onPressed:
-                    (widget.onPageChanged == null || widget.movieList.page == 1)
-                        ? null
-                        : () {
-                            onPageChanged(widget.movieList.page - 1);
-                          },
-                icon: const Icon(Icons.chevron_left),
-              ),
-              Text('${widget.movieList.page}'),
-              IconButton(
-                onPressed: (widget.onPageChanged == null ||
-                        widget.movieList.page >= widget.movieList.totalPages)
+                onPressed: (onPageChanged == null || movieList.page == 1)
                     ? null
                     : () {
-                        onPageChanged(widget.movieList.page + 1);
+                        onPageChanged!(movieList.page - 1);
+
+                        scrollController.jumpTo(0);
+                      },
+                icon: const Icon(Icons.chevron_left),
+              ),
+              Text('${movieList.page}'),
+              IconButton(
+                onPressed: (onPageChanged == null ||
+                        movieList.page >= movieList.totalPages)
+                    ? null
+                    : () {
+                        onPageChanged!(movieList.page + 1);
+
+                        scrollController.jumpTo(0);
                       },
                 icon: const Icon(Icons.chevron_right),
               ),
@@ -80,11 +65,5 @@ class _PagedMovieListState extends State<PagedMovieList> {
         ),
       ],
     );
-  }
-
-  onPageChanged(int page) async {
-    widget.onPageChanged!(page);
-
-    _scrollController.jumpTo(0);
   }
 }

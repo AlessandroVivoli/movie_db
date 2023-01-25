@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class PlayButton extends StatefulWidget {
+import '../../../../core/hooks/play_button_hook.dart';
+
+class PlayButton extends HookWidget {
   final ScrollController controller;
 
   final void Function()? onPressed;
@@ -8,46 +11,25 @@ class PlayButton extends StatefulWidget {
   const PlayButton({super.key, required this.controller, this.onPressed});
 
   @override
-  State<StatefulWidget> createState() => _PlayButtonState();
-}
-
-class _PlayButtonState extends State<PlayButton> {
-  @override
-  void initState() {
-    widget.controller.addListener(() => setState(() {}));
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    const double defaultTopMargin = 260;
+    final offset = useState(controller.offset);
+    final playButtonScale = usePlayButtonScale(controller, offset.value).value;
 
-    const double scaleStart = (defaultTopMargin - 16) / 2;
-    const double scaleEnd = scaleStart / 2;
-
-    double top = defaultTopMargin;
-    double scale = 1;
-    if (widget.controller.hasClients) {
-      double offset = widget.controller.offset;
-      top -= offset;
-
-      if (offset < defaultTopMargin - scaleStart) {
-        scale = 1;
-      } else if (offset < defaultTopMargin - scaleEnd) {
-        scale = (defaultTopMargin - scaleEnd - offset) / scaleEnd;
-      } else {
-        scale = 0;
-      }
-    }
+    useEffect(() {
+      controller.addListener(() {
+        offset.value = controller.offset;
+      });
+      return null;
+    }, []);
 
     return Positioned(
-      top: top,
+      top: playButtonScale.top,
       right: 16,
       child: Transform(
-        transform: Matrix4.identity()..scale(scale),
+        transform: Matrix4.identity()..scale(playButtonScale.scale),
         alignment: Alignment.center,
         child: FloatingActionButton(
-          onPressed: widget.onPressed,
+          onPressed: onPressed,
           backgroundColor: Theme.of(context).colorScheme.primary,
           foregroundColor: Colors.white,
           child: const Icon(Icons.play_arrow),

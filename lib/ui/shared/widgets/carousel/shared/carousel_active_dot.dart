@@ -1,55 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class CarouselActiveDot extends StatefulWidget {
+import '../../../../../core/hooks/active_dot_hook.dart';
+
+class CarouselActiveDot extends HookWidget {
   final PageController controller;
   final int length;
 
-  final int? radius;
-  final int? padding;
+  final double radius;
+  final double padding;
 
   const CarouselActiveDot({
-    Key? key,
+    super.key,
     required this.controller,
     required this.length,
-    int? radius,
-    int? padding,
-  })  : radius = radius ?? 3,
-        padding = padding ?? 5,
-        super(key: key);
-
-  @override
-  State<CarouselActiveDot> createState() => _CarouselActiveDotState();
-}
-
-class _CarouselActiveDotState extends State<CarouselActiveDot> {
-  late double _activePage;
-
-  @override
-  void initState() {
-    _activePage = 0;
-
-    widget.controller.addListener(() {
-      setState(() {
-        _activePage = widget.controller.page ?? 0;
-      });
-    });
-    super.initState();
-  }
+    this.radius = 3,
+    this.padding = 5,
+  });
 
   @override
   Widget build(BuildContext context) {
-    double dotComposite = (widget.padding! * 2 + widget.radius! * 2.0);
-    double screenWidth = MediaQuery.of(context).size.width;
-    double calculatedWidth = (screenWidth - dotComposite * widget.length);
-    double startPosition = calculatedWidth / 2;
-    double left = startPosition + (dotComposite * _activePage);
+    final activePage = useState<double>(0);
+
+    final activeDot = useActiveDot(
+      screenWidth: MediaQuery.of(context).size.width,
+      activePage: activePage.value,
+      padding: padding,
+      radius: radius,
+      length: length,
+    );
+
+    useEffect(() {
+      controller.addListener(() {
+        activePage.value = controller.page ?? 0;
+      });
+
+      return null;
+    }, []);
 
     return Positioned(
-      bottom: (20 - widget.radius! * 2) / 2,
-      left: left,
-      width: dotComposite,
+      bottom: (20 - radius * 2) / 2,
+      left: activeDot.value.left,
+      width: activeDot.value.dotComposite,
       child: CircleAvatar(
-        radius: widget.radius! * 1,
+        radius: radius * 1,
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
     );

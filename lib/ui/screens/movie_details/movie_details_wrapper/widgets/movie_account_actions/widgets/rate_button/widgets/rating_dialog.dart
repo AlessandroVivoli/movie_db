@@ -1,31 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../../../../shared/widgets/rating/rating.dart';
 import 'confirm_button.dart';
 import 'delete_button.dart';
 
-class RatingDialog extends StatefulWidget {
+class RatingDialog extends HookWidget {
   const RatingDialog({super.key, required this.rating, required this.movieId});
 
   final double rating;
   final int movieId;
 
   @override
-  State<RatingDialog> createState() => _RatingDialogState();
-}
-
-class _RatingDialogState extends State<RatingDialog> {
-  late double _rating;
-
-  @override
-  void initState() {
-    _rating = widget.rating;
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final rating = useState(this.rating);
+
     return Center(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5),
@@ -40,11 +29,9 @@ class _RatingDialogState extends State<RatingDialog> {
             children: [
               Rating(
                 size: 20,
-                rating: _rating,
+                rating: rating.value,
                 onRate: (index) {
-                  setState(() {
-                    _rating = (index + 1) * 2;
-                  });
+                  rating.value = (index + 1) * 2;
                 },
               ),
               Row(
@@ -54,18 +41,18 @@ class _RatingDialogState extends State<RatingDialog> {
                     width: 80,
                     height: 36,
                     child: DeleteButton(
-                      rating: _rating,
-                      movieId: widget.movieId,
-                      originalRating: widget.rating,
+                      rating: rating.value,
+                      movieId: movieId,
+                      originalRating: this.rating,
                     ),
                   ),
                   SizedBox(
                     width: 90,
                     height: 36,
                     child: ConfirmButton(
-                      rating: _rating,
-                      movieId: widget.movieId,
-                      originalRating: widget.rating,
+                      rating: rating.value,
+                      movieId: movieId,
+                      originalRating: this.rating,
                     ),
                   ),
                 ],

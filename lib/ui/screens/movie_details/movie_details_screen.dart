@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../core/services/video_service.dart';
 import '../../../core/models/movie/account_state/movie_account_state.dart';
@@ -12,7 +13,7 @@ import 'backdrop/backdrop.dart';
 import 'movie_details_wrapper/movie_details_wrapper.dart';
 import 'play_button/play_button.dart';
 
-class MovieDetailsScreen extends StatefulWidget {
+class MovieDetailsScreen extends HookWidget {
   final int movieId;
 
   const MovieDetailsScreen({
@@ -21,32 +22,15 @@ class MovieDetailsScreen extends StatefulWidget {
   });
 
   @override
-  State<StatefulWidget> createState() => _MovieDetailsScreenState();
-}
-
-class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
-  late final ScrollController _scrollController;
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final scrollController = useScrollController();
+
     return SafeArea(
       top: false,
       child: Scaffold(
         body: _MovieDetailsBuilder(
-          widget: widget,
-          scrollController: _scrollController,
+          movieId: movieId,
+          scrollController: scrollController,
         ),
       ),
     );
@@ -56,17 +40,17 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
 class _MovieDetailsBuilder extends StatelessWidget {
   const _MovieDetailsBuilder({
     Key? key,
-    required this.widget,
+    required this.movieId,
     required this.scrollController,
   }) : super(key: key);
 
-  final MovieDetailsScreen widget;
+  final int movieId;
   final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: getMovieDetails(widget.movieId),
+      future: getMovieDetails(movieId),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final data = snapshot.data!;
@@ -89,7 +73,7 @@ class _MovieDetailsBuilder extends StatelessWidget {
                 onPressed: () => Navigator.pushNamed(
                   context,
                   AppRoute.play,
-                  arguments: VideoService.getVideos(movieId: data.id!),
+                  arguments: VideoService.getVideos(movieId: data.id),
                 ),
               )
             ],

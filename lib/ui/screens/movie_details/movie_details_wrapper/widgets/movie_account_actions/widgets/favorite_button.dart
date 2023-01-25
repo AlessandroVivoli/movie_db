@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../../../core/providers/session_provider.dart';
 import '../../../../../../../core/services/account_service.dart';
 import '../../../../../../shared/widgets/errors/error_snack_bar_content.dart';
 
-class FavoriteButton extends StatefulWidget {
+class FavoriteButton extends HookWidget {
   const FavoriteButton({
     super.key,
     required this.favorite,
@@ -18,104 +19,67 @@ class FavoriteButton extends StatefulWidget {
   final int accountId;
 
   @override
-  State<FavoriteButton> createState() => _FavoriteButtonState();
-}
+  Widget build(BuildContext context) {
+    final favorited = useState(favorite);
 
-class _FavoriteButtonState extends State<FavoriteButton>
-    with TickerProviderStateMixin {
-  late bool _favorite;
-
-  late final AnimationController _controller;
-  late final Animation<double> _animation;
-
-  @override
-  void initState() {
-    _favorite = widget.favorite;
-
-    _controller = AnimationController(
-      vsync: this,
+    final controller = useAnimationController(
       duration: const Duration(milliseconds: 250),
       lowerBound: .15,
       upperBound: .6,
     );
 
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.elasticOut,
+    controller.forward();
+    controller.stop();
+
+    final animation = useMemoized(
+      () => CurvedAnimation(
+        parent: controller,
+        curve: Curves.elasticOut,
+      ),
     );
 
-    if (_favorite) {
-      _controller.reverse();
-    } else {
-      _controller.forward();
-    }
-
-    _controller.stop();
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return IconButton(
-      onPressed: onFavorite,
+      onPressed: () async {
+        final code = await AccountService.markMovieAsFavorite(
+          accountId: accountId,
+          favorite: !favorited.value,
+          movieId: movieId,
+          sessionId: SessionProvider.sessionId!,
+        ).catchError((_) {
+          ScaffoldMessenger.of(context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: ErrorSnackBarContent(
+                  message: (favorite)
+                      ? 'Could not remove movie from favorites.'
+                      : 'Could not add movie to favorites.',
+                ),
+              ),
+            );
+
+          return -1;
+        });
+
+        if (code != -1) {
+          favorited.value = !favorited.value;
+        }
+      },
       icon: ScaleTransition(
-        scale: _animation,
+        scale: animation,
         child: FaIcon(
-          buildIcon(),
-          color: buildColor(),
+          buildIcon(favorited.value),
+          color: buildColor(favorited.value, context),
         ),
       ),
     );
   }
 
-  void onFavorite() async {
-    final code = await AccountService.markMovieAsFavorite(
-      accountId: widget.accountId,
-      favorite: !_favorite,
-      movieId: widget.movieId,
-      sessionId: SessionProvider.sessionId!,
-    ).catchError((_) {
-      ScaffoldMessenger.of(context)
-        ..removeCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            content: ErrorSnackBarContent(
-              message: (_favorite)
-                  ? 'Could not remove movie from favorites.'
-                  : 'Could not add movie to favorites.',
-            ),
-          ),
-        );
-
-      return -1;
-    });
-
-    if (code != -1) {
-      setState(() {
-        _favorite = !_favorite;
-
-        if (!_favorite) {
-          _controller.forward();
-        } else {
-          _controller.reverse();
-        }
-      });
-    }
+  IconData? buildIcon(bool favorite) {
+    return (favorite) ? FontAwesomeIcons.solidHeart : FontAwesomeIcons.heart;
   }
 
-  IconData? buildIcon() {
-    return (_favorite) ? FontAwesomeIcons.solidHeart : FontAwesomeIcons.heart;
-  }
-
-  Color? buildColor() {
-    return (_favorite) ? Colors.pink : Theme.of(context).colorScheme.primary;
+  Color? buildColor(bool favorite, BuildContext context) {
+    return (favorite) ? Colors.pink : Theme.of(context).colorScheme.primary;
   }
 }

@@ -1,49 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../core/models/image/image_model.dart';
 import '../shared/carousel_active_dot.dart';
 import 'image_carousel_item.dart';
 
-class ImageCarousel extends StatefulWidget {
+class ImageCarousel extends HookWidget {
   final List<ImageModel> images;
   final double? height;
 
   const ImageCarousel({super.key, required this.images, this.height});
 
   @override
-  State<ImageCarousel> createState() => _ImageCarouselState();
-}
-
-class _ImageCarouselState extends State<ImageCarousel> {
-  late final PageController _controller;
-
-  @override
-  void initState() {
-    _controller = PageController();
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final controller = usePageController();
+
     return SizedBox(
-      height: widget.height,
+      height: height,
       child: Stack(
         children: [
           PageView.builder(
-            controller: _controller,
-            itemCount: widget.images.length,
+            controller: controller,
+            itemCount: images.length,
             pageSnapping: true,
             itemBuilder: (context, index) {
               return ImageCarouselItem(
-                image: widget.images[index].filePath,
+                image: images[index].filePath,
               );
             },
           ),
@@ -56,11 +38,11 @@ class _ImageCarouselState extends State<ImageCarousel> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: List<Widget>.generate(
-                widget.images.length,
+                images.length,
                 (index) => Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: InkWell(
-                    onTap: () => _controller.animateToPage(
+                    onTap: () => controller.animateToPage(
                       index,
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.easeOutCubic,
@@ -75,8 +57,8 @@ class _ImageCarouselState extends State<ImageCarousel> {
             ),
           ),
           CarouselActiveDot(
-            controller: _controller,
-            length: widget.images.length,
+            controller: controller,
+            length: images.length,
             radius: 3,
             padding: 5,
           ),

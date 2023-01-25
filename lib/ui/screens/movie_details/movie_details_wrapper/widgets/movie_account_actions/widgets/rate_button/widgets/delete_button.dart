@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../../../../../core/providers/session_provider.dart';
 import '../../../../../../../../../core/services/movie_service.dart';
 import '../../../../../../../../shared/widgets/errors/error_snack_bar_content.dart';
 
-class DeleteButton extends StatefulWidget {
+class DeleteButton extends HookWidget {
   const DeleteButton({
     super.key,
     required this.rating,
@@ -17,28 +18,17 @@ class DeleteButton extends StatefulWidget {
   final int movieId;
 
   @override
-  State<DeleteButton> createState() => _DeleteButtonState();
-}
-
-class _DeleteButtonState extends State<DeleteButton> {
-  late bool loading;
-
-  @override
-  void initState() {
-    loading = false;
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (!loading) {
+    final loading = useState(false);
+
+    if (!loading.value) {
       return OutlinedButton(
-        onPressed: (widget.originalRating > 0) ? onDelete : null,
+        onPressed:
+            (originalRating > 0) ? () => onDelete(loading, context) : null,
         style: OutlinedButton.styleFrom(
           foregroundColor: Colors.red,
           side: BorderSide(
-            color: (widget.originalRating > 0) ? Colors.red : Colors.grey,
+            color: (originalRating > 0) ? Colors.red : Colors.grey,
             width: 2,
           ),
         ),
@@ -53,13 +43,11 @@ class _DeleteButtonState extends State<DeleteButton> {
     );
   }
 
-  void onDelete() async {
-    setState(() {
-      loading = true;
-    });
+  void onDelete(ValueNotifier<bool> loading, BuildContext context) async {
+    loading.value = true;
 
     final code = await MovieService.deleteRating(
-      id: widget.movieId,
+      id: movieId,
       sessionId: SessionProvider.sessionId!,
     ).catchError((_) {
       ScaffoldMessenger.of(context)
@@ -73,10 +61,12 @@ class _DeleteButtonState extends State<DeleteButton> {
       return -1;
     });
 
-    if (code == -1 && mounted) {
-      Navigator.pop(context, false);
-    } else if (mounted) {
-      Navigator.pop(context, true);
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (code == -1) {
+        return Navigator.pop(context, false);
+      }
+
+      return Navigator.pop(context, true);
+    });
   }
 }

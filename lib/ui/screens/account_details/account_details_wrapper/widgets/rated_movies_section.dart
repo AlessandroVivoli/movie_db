@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../core/models/account/account_details.dart';
 import '../../../../../core/providers/session_provider.dart';
@@ -7,7 +8,7 @@ import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/paged_movie_list/paged_movie_list.dart';
 
-class RatedMoviesSection extends StatefulWidget {
+class RatedMoviesSection extends HookWidget {
   const RatedMoviesSection(
       {super.key, required this.accountDetails, this.onReturn});
 
@@ -15,21 +16,9 @@ class RatedMoviesSection extends StatefulWidget {
   final void Function()? onReturn;
 
   @override
-  State<RatedMoviesSection> createState() => _RatedMoviesSectionState();
-}
-
-class _RatedMoviesSectionState extends State<RatedMoviesSection> {
-  late int _page;
-
-  @override
-  void initState() {
-    _page = 1;
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final page = useState(1);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -48,9 +37,9 @@ class _RatedMoviesSectionState extends State<RatedMoviesSection> {
             height: 290,
             child: FutureBuilder(
               future: MovieService.getRatedMovies(
-                accountId: widget.accountDetails.id,
+                accountId: accountDetails.id,
                 sessionId: SessionProvider.sessionId!,
-                page: _page,
+                page: page.value,
               ),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
@@ -62,11 +51,11 @@ class _RatedMoviesSectionState extends State<RatedMoviesSection> {
 
                   return PagedMovieList(
                     movieList: snapshot.data!,
-                    onPageChanged: (page) => setState(() {
-                      _page = page;
-                    }),
+                    onPageChanged: (index) {
+                      page.value = index;
+                    },
                     refreshOnReturn: true,
-                    onReturn: widget.onReturn,
+                    onReturn: onReturn,
                   );
                 }
 
