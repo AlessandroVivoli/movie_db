@@ -4,13 +4,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
 import '../../../../../core/models/account/account_details.dart';
+import '../../../../../core/models/movie/account_movie_arguments.dart';
 import '../../../../../core/providers/movie_provider.dart';
 import '../../../../../core/providers/session_provider.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/paged_movie_list/paged_movie_list.dart';
 
-class FavoriteMoviesSection extends HookConsumerWidget {
+class FavoriteMoviesSection extends StatelessWidget {
   const FavoriteMoviesSection({
     Key? key,
     required this.accountDetails,
@@ -21,11 +22,7 @@ class FavoriteMoviesSection extends HookConsumerWidget {
   final void Function()? onReturn;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final movieService = ref.watch(movieServiceProvider);
-
-    final page = useState(1);
-
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -42,56 +39,80 @@ class FavoriteMoviesSection extends HookConsumerWidget {
           const SizedBox(height: 10),
           SizedBox(
             height: 290,
-            child: FutureBuilder(
-              future: movieService.getFavoriteMovies(
-                accountId: accountDetails.id,
-                sessionId: SessionProvider.sessionId!,
-                page: page.value,
-              ),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  if (snapshot.data!.results.isEmpty) {
-                    return const Center(
-                      child: Text('Nothing found.'),
-                    );
-                  }
-
-                  return PagedMovieList(
-                    movieList: snapshot.data!,
-                    onPageChanged: (index) {
-                      page.value = index;
-                    },
-                    refreshOnReturn: true,
-                    onReturn: onReturn,
-                  );
-                }
-
-                if (snapshot.hasError) {
-                  logError(snapshot.stackTrace);
-
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: ErrorSnackBarContent(
-                          message: 'Could not get favorite movies.',
-                        ),
-                      ),
-                    );
-                  });
-
-                  return const Center(
-                    child: ErrorText('Something went wrong.'),
-                  );
-                }
-
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-            ),
+            child: _FavoriteMoviesHookBuilder(
+                accountDetails: accountDetails, onReturn: onReturn),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _FavoriteMoviesHookBuilder extends HookConsumerWidget {
+  const _FavoriteMoviesHookBuilder({
+    Key? key,
+    required this.accountDetails,
+    required this.onReturn,
+  }) : super(key: key);
+
+  final AccountDetails accountDetails;
+  final void Function()? onReturn;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final page = useState(1);
+
+    return Consumer(
+      builder: (context, ref, child) {
+        final favoriteMovies = ref.watch(
+          getFavoriteMoviesProvider(
+            AccountMovieArguments(
+              accountId: accountDetails.id,
+              sessionId: SessionProvider.sessionId!,
+              page: page.value,
+            ),
+          ),
+        );
+
+        return favoriteMovies.when(
+          data: (movies) {
+            if (movies.totalResults == 0) {
+              return const Center(
+                child: Text('Nothing found.'),
+              );
+            }
+
+            return PagedMovieList(
+              movieList: movies,
+              onPageChanged: (index) {
+                page.value = index;
+              },
+              refreshOnReturn: true,
+              onReturn: onReturn,
+            );
+          },
+          error: (error, stackTrace) {
+            logError('Could not get favorite movies.', error, stackTrace);
+
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: ErrorSnackBarContent(
+                    message: 'Could not get favorite movies.',
+                  ),
+                ),
+              );
+            });
+
+            return const Center(
+              child: ErrorText('Something went wrong.'),
+            );
+          },
+          loading: () => const Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
     );
   }
 }
