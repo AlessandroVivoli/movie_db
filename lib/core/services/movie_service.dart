@@ -6,6 +6,7 @@ import '../models/movie/account_state/movie_account_state.dart';
 import '../models/movie/details/movie_details.dart';
 import '../models/movie/movie.dart';
 import '../models/movie/movie_list.dart';
+import '../models/sort_by/sort_by.dart';
 import '../providers/dio_provider.dart';
 
 class MovieService implements IMovieService {
@@ -32,7 +33,7 @@ class MovieService implements IMovieService {
   @override
   Future<List<Movie>> getMovies({
     List<int>? withGenres,
-    SortBy sortBy = SortBy.popularityDesc,
+    SortBy sortBy = Sorts.popularityDesc,
     bool? includeAdult,
   }) {
     return DioProvider.dio
