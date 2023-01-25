@@ -2,10 +2,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../utils/constants.dart';
 import '../interfaces/i_movie_service.dart';
+import '../models/movie/account_movie_arguments.dart';
 import '../models/movie/account_state/movie_account_state.dart';
 import '../models/movie/details/movie_details.dart';
 import '../models/movie/movie.dart';
 import '../models/movie/movie_arguments.dart';
+import '../models/movie/movie_list.dart';
 import '../services/movie_service.dart';
 import 'session_provider.dart';
 
@@ -58,3 +60,30 @@ final getMovieDetailsProvider = FutureProvider.family<MovieDetails, int>(
 final getPersonCreditsProvider = FutureProvider.family<List<Movie>, int>(
     (ref, personId) =>
         ref.watch(movieServiceProvider).getPersonCredits(personId: personId));
+
+final getFavoriteMoviesProvider =
+    FutureProvider.family<MovieListModel, AccountMovieArguments>(
+  (ref, args) => ref.watch(movieServiceProvider).getFavoriteMovies(
+        accountId: args.accountId,
+        sessionId: args.sessionId,
+        page: args.page,
+      ),
+);
+
+final getRatedMoviesProvider =
+    FutureProvider.family<MovieListModel, AccountMovieArguments>(
+  (ref, args) => ref.watch(movieServiceProvider).getRatedMovies(
+        accountId: args.accountId,
+        sessionId: args.sessionId,
+        page: args.page,
+      ),
+);
+
+final getMovieWatchlistProvider =
+    FutureProvider.family<MovieListModel, AccountMovieArguments>(
+  (ref, args) => ref.watch(movieServiceProvider).getMovieWatchlist(
+        accountId: args.accountId,
+        sessionId: args.sessionId,
+        page: args.page,
+      ),
+);
