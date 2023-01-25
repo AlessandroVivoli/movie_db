@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../core/models/account/account_details.dart';
 import '../core/models/person/details/person_details.dart';
 import '../core/models/video/video.dart';
 import '../ui/screens/account_details/account_details_screen.dart';
@@ -57,12 +56,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     // AccountDetailsScreen
     case AppRoute.account:
-      final accountDetails = settings.arguments as AccountDetails;
-
       return MaterialPageRoute(
-        builder: (context) => AccountDetailsScreen(
-          accountDetails: accountDetails,
-        ),
+        builder: (context) => const AccountDetailsScreen(),
       );
     default:
       throw Exception('Route ${settings.name} doesn\'t exist');
