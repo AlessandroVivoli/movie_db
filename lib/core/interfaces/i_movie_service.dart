@@ -3,6 +3,7 @@ import '../models/movie/account_state/movie_account_state.dart';
 import '../models/movie/details/movie_details.dart';
 import '../models/movie/movie.dart';
 import '../models/movie/movie_list.dart';
+import '../models/sort_by/sort_by.dart';
 
 abstract class IMovieService {
   /// Returns trending [List] of [Movie] future.
@@ -29,7 +30,7 @@ abstract class IMovieService {
   /// it is `true`. Defaults to `false`.
   Future<List<Movie>> getMovies({
     List<int>? withGenres,
-    SortBy sortBy = SortBy.popularityDesc,
+    SortBy sortBy = Sorts.popularityDesc,
     bool? includeAdult,
   });
 
