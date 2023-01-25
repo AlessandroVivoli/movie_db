@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../core/models/movie/details/movie_details.dart';
-import '../../../../../../core/providers/session_provider.dart';
-import '../../../../../../core/services/account_service.dart';
+import '../../../../../../core/providers/general_providers.dart';
 import 'widgets/favorite_button.dart';
 import 'widgets/rate_button/rate_button.dart';
 import 'widgets/watchlist_button/watchlist_button.dart';
 
-class MovieAccountActions extends StatefulWidget {
+class MovieAccountActions extends ConsumerWidget {
   const MovieAccountActions({
     super.key,
     required this.movieDetails,
@@ -18,34 +18,9 @@ class MovieAccountActions extends StatefulWidget {
   final void Function(bool favorite)? onFavoritePressed;
 
   @override
-  State<MovieAccountActions> createState() => _MovieAccountActionsState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final accountDetails = ref.watch(accountDetailsStateProvider)!;
 
-class _MovieAccountActionsState extends State<MovieAccountActions> {
-  late int _accountId;
-
-  @override
-  void initState() {
-    _accountId = 0;
-
-    AccountService.getAccountDetails(
-      sessionId: SessionProvider.sessionId!,
-    ).then(
-      (value) {
-        setState(() {
-          _accountId = value.id;
-        });
-      },
-      onError: (error) {
-        return null;
-      },
-    );
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10, top: 10),
       child: Row(
@@ -53,20 +28,20 @@ class _MovieAccountActionsState extends State<MovieAccountActions> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           RateButton(
-            rated: widget.movieDetails.state!.rated,
-            movieId: widget.movieDetails.id!,
+            rated: movieDetails.state!.rated,
+            movieId: movieDetails.id,
           ),
           Row(
             children: [
               FavoriteButton(
-                accountId: _accountId,
-                movieId: widget.movieDetails.id!,
-                favorite: widget.movieDetails.state!.favorite,
+                accountId: accountDetails.id,
+                movieId: movieDetails.id,
+                favorite: movieDetails.state!.favorite,
               ),
               WatchlistButton(
-                accountId: _accountId,
-                movieId: widget.movieDetails.id!,
-                watchlist: widget.movieDetails.state!.watchlist,
+                accountId: accountDetails.id,
+                movieId: movieDetails.id,
+                watchlist: movieDetails.state!.watchlist,
               ),
             ],
           ),
