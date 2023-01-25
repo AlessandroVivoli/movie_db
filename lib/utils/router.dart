@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../core/models/person/details/person_details.dart';
-import '../core/models/video/video.dart';
 import '../ui/screens/account_details/account_details_screen.dart';
 import '../ui/screens/auth/login_screen.dart';
 import '../ui/screens/home/home_screen.dart';
@@ -30,21 +28,21 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     // PersonDetailsScreen
     case AppRoute.person:
-      final personDetails = settings.arguments as Future<PersonDetails>;
+      final personId = settings.arguments as int;
 
       return MaterialPageRoute(
         builder: (context) => PersonDetailsScreen(
-          personDetails: personDetails,
+          personId: personId,
         ),
       );
 
     // VideoScreen
     case AppRoute.play:
-      final videoList = settings.arguments as Future<List<Video>>;
+      final movieId = settings.arguments as int;
 
       return MaterialPageRoute(
         builder: (context) => VideoScreen(
-          videoList: videoList,
+          movieId: movieId,
         ),
       );
 

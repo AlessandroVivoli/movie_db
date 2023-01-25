@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/models/person/person.dart';
-import '../../../../../core/providers/service_providers.dart';
+import '../../../../../core/providers/image_provider.dart';
 import '../../../../../utils/enums.dart';
 import '../../custom_image/custom_network_image.dart';
 

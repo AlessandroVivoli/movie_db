@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/models/movie/details/movie_details.dart';
-import '../../../../core/providers/service_providers.dart';
+import '../../../../core/providers/image_provider.dart';
 import '../../../../utils/enums.dart';
 import '../../../shared/widgets/backdrop_image/backdrop_image.dart';
 

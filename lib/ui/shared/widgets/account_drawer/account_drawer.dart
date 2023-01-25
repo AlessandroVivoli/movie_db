@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../core/providers/account_provider.dart';
+import '../../../../core/providers/auth_provider.dart';
 import '../../../../core/providers/general_providers.dart';
-import '../../../../core/providers/service_providers.dart';
 import '../../../../core/providers/session_provider.dart';
 import '../../../../utils/routes.dart';
 import '../errors/error_snack_bar_content.dart';

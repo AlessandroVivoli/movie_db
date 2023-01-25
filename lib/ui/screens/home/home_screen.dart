@@ -4,8 +4,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
+import '../../../core/providers/account_provider.dart';
 import '../../../core/providers/general_providers.dart';
-import '../../../core/providers/service_providers.dart';
+import '../../../core/providers/movie_provider.dart';
 import '../../../core/providers/session_provider.dart';
 import '../../../utils/constants.dart';
 import '../../shared/widgets/account_drawer/account_drawer.dart';
@@ -29,13 +30,13 @@ class HomeScreen extends HookConsumerWidget {
 
     useEffect(() {
       if (sessionId != null) {
-        accountService.getAccountDetails(sessionId: sessionId).then(
-              (value) => ref
-                  .read(
-                    accountDetailsStateProvider.notifier,
-                  )
-                  .state = value,
-            );
+        accountService
+            .getAccountDetails(sessionId: sessionId)
+            .then((value) => ref
+                .read(
+                  accountDetailsStateProvider.notifier,
+                )
+                .state = value);
       }
 
       return null;
@@ -88,18 +89,14 @@ class HomeScreen extends HookConsumerWidget {
   }
 }
 
-final movieFutureProvider = FutureProvider.autoDispose(
-  (ref) => ref
-      .watch(movieServiceProvider)
-      .getTrendingMovies(timeWindow: TimeWindow.week),
-);
-
 class _TrendingMoviesBuilder extends ConsumerWidget {
   const _TrendingMoviesBuilder({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final trendingMovies = ref.watch(movieFutureProvider);
+    final trendingMovies = ref.watch(
+      getTrendingMoviesProvider(TimeWindow.week),
+    );
 
     return trendingMovies.when(
       data: (movies) {

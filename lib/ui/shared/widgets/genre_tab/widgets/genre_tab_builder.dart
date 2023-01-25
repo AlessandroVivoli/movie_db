@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:loggy/loggy.dart';
 
-import '../../../../../core/providers/service_providers.dart';
+import '../../../../../core/models/movie/movie_arguments.dart';
+import '../../../../../core/providers/movie_provider.dart';
 import '../../../../../utils/constants.dart';
 import '../../errors/error_snack_bar_content.dart';
 import '../../errors/error_text.dart';
@@ -19,47 +21,50 @@ class GenreTabBuilder extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final movieService = ref.watch(movieServiceProvider);
-
-    return FutureBuilder(
-      future: movieService.getMovies(
-        withGenres: [genreId],
-        sortBy: SortBy.popularityDesc,
-        includeAdult: includeAdult,
+    final movieList = ref.watch(
+      getMoviesProvider(
+        MovieArguments(
+          withGenres: [genreId],
+          includeAdult: includeAdult,
+          sortBy: Sorts.popularityDesc,
+        ),
       ),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          if (snapshot.data!.isEmpty) {
-            return const Center(
-              child: Text('Nothing found.'),
-            );
-          }
+    );
 
-          return MovieList(
-            movieList: snapshot.data!,
-            padding: 10,
-          );
-        } else if (snapshot.hasError) {
-          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                backgroundColor: Theme.of(context).colorScheme.surface,
-                content: const ErrorSnackBarContent(
-                  message: 'Could not get movies.',
-                ),
-              ),
-            );
-          });
-
+    return movieList.when(
+      data: (movies) {
+        if (movies.isEmpty) {
           return const Center(
-            child: ErrorText('Something went wrong.'),
+            child: Text('Nothing found.'),
           );
         }
 
-        return const Center(
-          child: CircularProgressIndicator(),
+        return MovieList(
+          movieList: movies,
+          padding: 10,
         );
       },
+      error: (error, stackTrace) {
+        logError('Could not get movies.');
+
+        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              content: const ErrorSnackBarContent(
+                message: 'Could not get movies.',
+              ),
+            ),
+          );
+        });
+
+        return const Center(
+          child: ErrorText('Something went wrong.'),
+        );
+      },
+      loading: () => const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

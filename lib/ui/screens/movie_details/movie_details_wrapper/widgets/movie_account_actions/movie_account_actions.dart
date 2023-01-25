@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../core/models/movie/details/movie_details.dart';
-import '../../../../../../core/providers/general_providers.dart';
 import 'widgets/favorite_button.dart';
 import 'widgets/rate_button/rate_button.dart';
 import 'widgets/watchlist_button/watchlist_button.dart';
 
-class MovieAccountActions extends ConsumerWidget {
+class MovieAccountActions extends StatelessWidget {
   const MovieAccountActions({
     super.key,
     required this.movieDetails,
@@ -18,9 +16,7 @@ class MovieAccountActions extends ConsumerWidget {
   final void Function(bool favorite)? onFavoritePressed;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final accountDetails = ref.watch(accountDetailsStateProvider)!;
-
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10, top: 10),
       child: Row(
@@ -34,12 +30,10 @@ class MovieAccountActions extends ConsumerWidget {
           Row(
             children: [
               FavoriteButton(
-                accountId: accountDetails.id,
                 movieId: movieDetails.id,
                 favorite: movieDetails.state!.favorite,
               ),
               WatchlistButton(
-                accountId: accountDetails.id,
                 movieId: movieDetails.id,
                 watchlist: movieDetails.state!.watchlist,
               ),

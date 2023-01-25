@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
 import '../../../../../core/models/account/account_details.dart';
-import '../../../../../core/providers/service_providers.dart';
+import '../../../../../core/providers/movie_provider.dart';
 import '../../../../../core/providers/session_provider.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';

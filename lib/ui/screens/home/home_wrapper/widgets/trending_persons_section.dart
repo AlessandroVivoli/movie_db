@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
-import '../../../../../core/providers/service_providers.dart';
+import '../../../../../core/providers/person_provider.dart';
 import '../../../../../utils/constants.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
@@ -49,12 +49,6 @@ class _TrendingPersonsText extends StatelessWidget {
   }
 }
 
-final _trendingPersonsFutureProvider = FutureProvider.autoDispose(
-  (ref) => ref
-      .watch(personServiceProvider)
-      .getTrendingPersons(timeWindow: TimeWindow.week),
-);
-
 class _TrendingPersonsList extends ConsumerWidget {
   const _TrendingPersonsList({
     Key? key,
@@ -62,7 +56,9 @@ class _TrendingPersonsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final trendingPresons = ref.watch(_trendingPersonsFutureProvider);
+    final trendingPresons = ref.watch(
+      getTrendingPersonsProvider(TimeWindow.week),
+    );
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),

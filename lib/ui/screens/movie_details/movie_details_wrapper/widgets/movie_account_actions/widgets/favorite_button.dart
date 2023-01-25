@@ -3,7 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../../core/providers/service_providers.dart';
+import '../../../../../../../core/providers/account_provider.dart';
+import '../../../../../../../core/providers/general_providers.dart';
 import '../../../../../../../core/providers/session_provider.dart';
 import '../../../../../../shared/widgets/errors/error_snack_bar_content.dart';
 
@@ -12,15 +13,14 @@ class FavoriteButton extends HookConsumerWidget {
     super.key,
     required this.favorite,
     required this.movieId,
-    required this.accountId,
   });
 
   final bool favorite;
   final int movieId;
-  final int accountId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final accountId = ref.watch(accountDetailsStateProvider)!.id;
     final accountService = ref.watch(accountServiceProvider);
 
     final favorited = useState(favorite);

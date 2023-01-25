@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/providers/service_providers.dart';
+import '../../../../../core/providers/image_provider.dart';
 import '../../../../../utils/enums.dart';
 import '../../../../../utils/routes.dart';
 import '../../backdrop_image/backdrop_image.dart';

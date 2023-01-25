@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/models/person/person.dart';
-import '../../../../core/providers/service_providers.dart';
 import '../../../../utils/routes.dart';
 import 'widgets/person_card_wrapper.dart';
 
-class PersonCard extends ConsumerWidget {
+class PersonCard extends StatelessWidget {
   final Person person;
   final double imgRadius;
   final double imgBorderWidth;
@@ -19,15 +17,13 @@ class PersonCard extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final personService = ref.watch(personServiceProvider);
-
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(
           context,
           AppRoute.person,
-          arguments: personService.getPersonDetails(id: person.id),
+          arguments: person.id,
         );
       },
       child: PersonCardWrapper(imgRadius: imgRadius, person: person),

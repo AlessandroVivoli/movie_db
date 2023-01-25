@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
-import '../../../../../core/providers/service_providers.dart';
+import '../../../../../core/providers/movie_provider.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/movie_list/movie_list.dart';
@@ -48,10 +48,6 @@ class _TopRatedMoviesText extends StatelessWidget {
   }
 }
 
-final _topRatedMovieFutureProvider = FutureProvider.autoDispose(
-  (ref) => ref.watch(movieServiceProvider).getTopRatedMovies(),
-);
-
 class _TopRatedMoviesList extends ConsumerWidget {
   const _TopRatedMoviesList({
     Key? key,
@@ -59,11 +55,11 @@ class _TopRatedMoviesList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final topRateMovies = ref.watch(_topRatedMovieFutureProvider);
+    final topRatedMovies = ref.watch(getTopRatedMoviesProvider);
 
     return LimitedBox(
       maxHeight: 250,
-      child: topRateMovies.when(
+      child: topRatedMovies.when(
         data: (movies) {
           if (movies.isEmpty) {
             return const Center(

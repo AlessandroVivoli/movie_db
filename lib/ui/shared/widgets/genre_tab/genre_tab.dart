@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
-import '../../../../core/providers/service_providers.dart';
+import '../../../../core/providers/genre_provider.dart';
 import '../errors/error_snack_bar_content.dart';
 import '../errors/error_text.dart';
 import 'widgets/genre_tab_controller.dart';
-
-final _genreFutureProvider = FutureProvider.autoDispose(
-  (ref) => ref.watch(genreServiceProvider).getGenres(),
-);
 
 class GenreTab extends ConsumerWidget {
   const GenreTab({super.key, this.includeAdult});
@@ -18,7 +14,7 @@ class GenreTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final genres = ref.watch(_genreFutureProvider);
+    final genres = ref.watch(getGenresProvider);
 
     return genres.when(
       data: (genreList) {

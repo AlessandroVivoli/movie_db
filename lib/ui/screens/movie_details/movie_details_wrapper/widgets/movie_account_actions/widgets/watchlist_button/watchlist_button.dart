@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../../../core/providers/service_providers.dart';
+import '../../../../../../../../core/providers/account_provider.dart';
+import '../../../../../../../../core/providers/general_providers.dart';
 import '../../../../../../../../core/providers/session_provider.dart';
 import '../../../../../../../shared/widgets/errors/error_snack_bar_content.dart';
 
 class WatchlistButton extends HookConsumerWidget {
   const WatchlistButton({
     super.key,
-    required this.accountId,
     required this.movieId,
     required this.watchlist,
   });
 
-  final int accountId;
   final int movieId;
   final bool watchlist;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final accountId = ref.watch(accountDetailsStateProvider)!.id;
     final accountService = ref.watch(accountServiceProvider);
 
     final isWatchlist = useState(watchlist);

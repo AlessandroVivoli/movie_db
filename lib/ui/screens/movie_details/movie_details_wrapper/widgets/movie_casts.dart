@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:loggy/loggy.dart';
 
 import '../../../../../core/models/movie/details/movie_details.dart';
-import '../../../../../core/providers/service_providers.dart';
+import '../../../../../core/providers/person_provider.dart';
 import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/person_list/person_list.dart';
@@ -49,43 +50,42 @@ class _CastBuilder extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final personService = ref.watch(personServiceProvider);
+    final cast = ref.watch(getCastProvider(details.id));
 
-    return FutureBuilder(
-      future: personService.getCast(movieId: details.id),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          if (snapshot.data!.isEmpty) {
-            return const Center(
-              child: Text('Nothing found.'),
-            );
-          }
-
-          return PersonList(
-            personList: snapshot.data!,
-            padding: 10,
-          );
-        } else if (snapshot.hasError) {
-          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                backgroundColor: Theme.of(context).colorScheme.surface,
-                content: const ErrorSnackBarContent(
-                  message: 'Could not get cast.',
-                ),
-              ),
-            );
-          });
-
+    return cast.when(
+      data: (castList) {
+        if (castList.isEmpty) {
           return const Center(
-            child: ErrorText('Something went wrong.'),
+            child: Text('Nothing found.'),
           );
         }
 
-        return const Center(
-          child: CircularProgressIndicator(),
+        return PersonList(
+          personList: castList,
+          padding: 10,
         );
       },
+      error: (error, stackTrace) {
+        logError('Could not get cast.', error, stackTrace);
+
+        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              content: const ErrorSnackBarContent(
+                message: 'Could not get cast.',
+              ),
+            ),
+          );
+        });
+
+        return const Center(
+          child: ErrorText('Something went wrong.'),
+        );
+      },
+      loading: () => const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

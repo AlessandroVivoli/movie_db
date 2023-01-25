@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../../../../core/providers/service_providers.dart';
+import '../../../../../../../../../core/interfaces/i_movie_service.dart';
+import '../../../../../../../../../core/providers/movie_provider.dart';
 import '../../../../../../../../../core/providers/session_provider.dart';
-import '../../../../../../../../../core/services/movie_service.dart';
 import '../../../../../../../../shared/widgets/errors/error_snack_bar_content.dart';
 
 class DeleteButton extends HookConsumerWidget {
@@ -51,7 +51,7 @@ class DeleteButton extends HookConsumerWidget {
   void onDelete(
     ValueNotifier<bool> loading,
     BuildContext context,
-    MovieService movieService,
+    IMovieService movieService,
   ) async {
     loading.value = true;
 
