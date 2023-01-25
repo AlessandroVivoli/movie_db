@@ -1,28 +1,22 @@
 import 'package:dio/dio.dart';
 
+import '../interfaces/i_auth_service.dart';
 import '../models/auth/login_response.dart';
 import '../models/auth/request_token.dart';
 import '../models/auth/session_id.dart';
 import '../providers/dio_provider.dart';
 
-class AuthService {
-  /// Creates a temporary [RequestToken] that can then be validated \
-  /// using the [validateTokenWithLogin] method.
-  static Future<RequestToken> createRequestToken() {
+class AuthService implements IAuthService {
+  @override
+  Future<RequestToken> createRequestToken() {
     return DioProvider.dio
         .get('/authentication/token/new')
         .then((res) => Map<String, Object?>.from(res.data))
         .then(RequestToken.fromJson);
   }
 
-  /// Validates the [requestToken] and returns a new [RequestToken] \
-  /// containing the validated tmdb request token.
-  ///
-  /// The method takes in [username] and [password] of the user.
-  ///
-  /// The validated token can then be used to create a user session \
-  /// using the [createSessionId] method.
-  static Future<RequestToken> validateTokenWithLogin({
+  @override
+  Future<RequestToken> validateTokenWithLogin({
     required String requestToken,
     required String username,
     required String password,
@@ -40,10 +34,8 @@ class AuthService {
         .then(RequestToken.fromJson);
   }
 
-  /// Creates a tmdb session id.
-  ///
-  /// The [requestToken] must be a validated tmdb request token.
-  static Future<SessionId> createSessionId({
+  @override
+  Future<SessionId> createSessionId({
     required String requestToken,
   }) {
     return DioProvider.dio
@@ -57,17 +49,8 @@ class AuthService {
         .then(SessionId.fromJson);
   }
 
-  /// Used from logging in to the tmdb account
-  ///
-  /// Takes in a [username] and [password].
-  ///
-  /// Returns [LoginResponse] with `success = true` and `sessionId` if the login
-  /// is successful. \
-  /// Otherwise returns [LoginResponse] with `success = false` along with\
-  /// a `statusCode` and an error `message`.
-  ///
-  /// The `message` can then be displayed in a snack bar.
-  static Future<LoginResponse> login({
+  @override
+  Future<LoginResponse> login({
     required String username,
     required String password,
   }) async {
@@ -128,11 +111,8 @@ class AuthService {
     );
   }
 
-  /// Used to logout user from the tmdb account
-  ///
-  /// Returns `true` if logout was successful. \
-  /// Otherwise returns `false`.
-  static Future<bool> logout({required String sessionId}) {
+  @override
+  Future<bool> logout({required String sessionId}) {
     return DioProvider.dio.delete(
       '/authentication/session',
       data: {

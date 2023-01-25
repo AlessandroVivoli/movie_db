@@ -1,10 +1,10 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class AccountAvatarService {
-  /// Returns a gravatar url using the provided gravatar [hash]
-  ///
-  /// If [size] is provided it will scale image accordingly.\
-  static String getAccountAvatar({required String hash, int? size}) {
+import '../interfaces/i_account_avatar_service.dart';
+
+class AccountAvatarService implements IAccountAvatarService {
+  @override
+  String getAccountAvatar({required String hash, int? size}) {
     String sizeString = '';
 
     if (size != null) {

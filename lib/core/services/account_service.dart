@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 
+import '../interfaces/i_account_service.dart';
 import '../models/account/account_details.dart';
 import '../providers/dio_provider.dart';
 
-class AccountService {
-  /// Returns [AccountDetails] future using the valid session id.
-  static Future<AccountDetails> getAccountDetails({required String sessionId}) {
+class AccountService implements IAccountService {
+  @override
+  Future<AccountDetails> getAccountDetails({required String sessionId}) {
     return DioProvider.dio
         .get(
           '/account',
@@ -17,10 +18,8 @@ class AccountService {
         .then(AccountDetails.fromJson);
   }
 
-  /// Marks the movie favorite if the [favorite] is true.
-  ///
-  /// Returns the status code of the api response.
-  static Future<int> markMovieAsFavorite({
+  @override
+  Future<int> markMovieAsFavorite({
     required int accountId,
     required int movieId,
     required String sessionId,
@@ -42,10 +41,8 @@ class AccountService {
         .then((res) => res.data['status_code']);
   }
 
-  /// Adds movie to the watchlist if the [watchlist] is true.
-  ///
-  /// Returns the status code of the api response.
-  static Future<int> addMovieToWatchList({
+  @override
+  Future<int> addMovieToWatchList({
     required int accountId,
     required int movieId,
     required String sessionId,
