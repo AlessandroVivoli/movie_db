@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class PasswordTextField extends StatefulWidget {
+class PasswordTextField extends StatelessWidget {
   const PasswordTextField({
     super.key,
     required this.passwordController,
@@ -12,23 +12,11 @@ class PasswordTextField extends StatefulWidget {
   final FocusNode passwordNode;
 
   @override
-  State<PasswordTextField> createState() => _PasswordTextFieldState();
-}
-
-class _PasswordTextFieldState extends State<PasswordTextField> {
-  late final GlobalKey<FormFieldState> _formFieldKey;
-
-  @override
-  void initState() {
-    _formFieldKey = GlobalKey();
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormFieldState> formFieldKey = GlobalKey();
+
     return TextFormField(
-      key: _formFieldKey,
+      key: formFieldKey,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Password field is required!';
@@ -36,13 +24,13 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
 
         return null;
       },
-      focusNode: widget.passwordNode,
-      controller: widget.passwordController,
+      focusNode: passwordNode,
+      controller: passwordController,
       onFieldSubmitted: (value) {
-        _formFieldKey.currentState?.validate();
+        formFieldKey.currentState?.validate();
 
         if (value.isEmpty) {
-          widget.passwordNode.requestFocus();
+          passwordNode.requestFocus();
         }
       },
       obscureText: true,
