@@ -9,9 +9,12 @@ import '../models/movie/movie.dart';
 import '../models/movie/movie_arguments.dart';
 import '../models/movie/movie_list.dart';
 import '../services/movie_service.dart';
-import 'session_provider.dart';
+import 'dio_provider.dart';
+import 'local_storage_provider.dart';
 
-final movieServiceProvider = Provider<IMovieService>((ref) => MovieService());
+final movieServiceProvider = Provider<IMovieService>(
+  (ref) => MovieService(ref.read(dioProvider)),
+);
 
 final getTrendingMoviesProvider =
     FutureProvider.family<List<Movie>, TimeWindow>((ref, timeWindow) => ref
@@ -36,9 +39,8 @@ final getSimilarMoviesProvider = FutureProvider.family<List<Movie>, int>(
 
 final getMovieDetailsProvider = FutureProvider.family<MovieDetails, int>(
   (ref, movieId) async {
-    final movieService = ref.watch(movieServiceProvider);
-
-    final sessionId = SessionProvider.sessionId;
+    final movieService = ref.read(movieServiceProvider);
+    final sessionId = ref.watch(localStorageProvider)?.getSessionId();
 
     MovieAccountState? state;
 
@@ -49,11 +51,11 @@ final getMovieDetailsProvider = FutureProvider.family<MovieDetails, int>(
       );
     }
 
-    return movieService
-        .getMovieDetails(id: movieId)
-        .then((details) => details.copyWith(
-              state: state,
-            ));
+    return movieService.getMovieDetails(id: movieId).then(
+          (details) => details.copyWith(
+            state: state,
+          ),
+        );
   },
 );
 
