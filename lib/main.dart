@@ -4,15 +4,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
-import 'core/providers/session_provider.dart';
 import 'utils/router.dart';
 import 'utils/routes.dart';
 import 'utils/themes.dart';
 
 void main() async {
   await dotenv.load();
-
-  await SessionProvider.init();
 
   Loggy.initLoggy(
     logOptions: const LogOptions(
