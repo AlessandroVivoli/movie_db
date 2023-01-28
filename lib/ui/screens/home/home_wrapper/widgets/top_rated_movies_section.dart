@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../../../../core/providers/movie_provider.dart';
 import '../../../../../utils/extensions.dart';
@@ -69,8 +68,6 @@ class _TopRatedMoviesList extends ConsumerWidget {
           );
         },
         error: (error, stackTrace) {
-          logError('Could not get top rated movies.', error, stackTrace);
-
           context.showErrorSnackBar('Could not get top rated movies.');
 
           return const Center(

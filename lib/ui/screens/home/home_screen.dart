@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../../core/models/user/user.dart';
 import '../../../core/providers/account_service_provider.dart';
@@ -142,8 +141,6 @@ class _TrendingMoviesBuilder extends ConsumerWidget {
         return MovieCarousel(movies: movies.take(6).toList());
       },
       error: (error, stackTrace) {
-        logError('Could not get trending movies.', error, stackTrace);
-
         context.showErrorSnackBar('Could not get trending movies.');
 
         return const Center(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../../../core/error/invalid_user_error.dart';
 import '../../../../core/providers/auth_provider.dart';
@@ -50,8 +49,6 @@ class SubmitButton extends ConsumerWidget {
         if (error is InvalidUserError) {
           message = 'Wrong username and/or password';
         }
-
-        logError(message, error, stack);
 
         context.showErrorSnackBar(message);
 

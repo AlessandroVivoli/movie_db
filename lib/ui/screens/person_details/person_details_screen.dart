@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../../core/providers/person_provider.dart';
 import '../../../utils/extensions.dart';
@@ -37,8 +36,6 @@ class _PersonDetailsBodyBuilder extends ConsumerWidget {
     return personDetails.when(
       data: (details) => PersonDetailsBody(personDetails: details),
       error: (error, stackTrace) {
-        logError('Could not get person details', error, stackTrace);
-
         context.showErrorSnackBar('Could not get person details.');
 
         return Column(

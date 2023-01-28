@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../../../../core/models/movie/details/movie_details.dart';
 import '../../../../../core/providers/movie_provider.dart';
@@ -68,8 +67,6 @@ class _SimilarMoviesBuilder extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        logError('Could not get similar movies.', error, stackTrace);
-
         context.showErrorSnackBar('Could not get similar movies.');
 
         return const Center(

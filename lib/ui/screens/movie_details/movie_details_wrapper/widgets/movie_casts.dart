@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../../../../core/models/movie/details/movie_details.dart';
 import '../../../../../core/providers/person_provider.dart';
@@ -65,8 +64,6 @@ class _CastList extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        logError('Could not get cast.', error, stackTrace);
-
         context.showErrorSnackBar('Could not get cast.');
 
         return const Center(

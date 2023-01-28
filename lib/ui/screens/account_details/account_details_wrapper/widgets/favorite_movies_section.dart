@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../../../../core/models/account/account_details.dart';
 import '../../../../../core/models/movie/account_movie_arguments.dart';
@@ -93,8 +92,6 @@ class _FavoriteMoviesHookBuilder extends HookConsumerWidget {
             );
           },
           error: (error, stackTrace) {
-            logError('Could not get favorite movies.', error, stackTrace);
-
             context.showErrorSnackBar('Could not get favorite movies.');
 
             return const Center(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../../../../core/providers/person_provider.dart';
 import '../../../../../utils/constants.dart';
@@ -74,8 +73,6 @@ class _TrendingPersonsList extends ConsumerWidget {
             );
           },
           error: (error, stackTrace) {
-            logError('Could not get trending persons.', error, stackTrace);
-
             context.showErrorSnackBar('Could not get trending persons.');
 
             return const Center(

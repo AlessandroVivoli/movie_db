@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:loggy/loggy.dart';
 
 import '../error/invalid_user_error.dart';
 import '../models/user/user.dart';
@@ -67,7 +68,11 @@ class AuthNotifier extends Notifier<AuthState> {
   String? _handleLoginError(Object e) {
     final err = e as DioError;
 
+    var message = 'Could not login.';
+
     if (err.response!.data['status_code'] == 30) {
+      message = 'Wrong username and/or password';
+
       final invalidUserError = InvalidUserError(
         error: err.error,
         stackTrace: err.stackTrace!,
@@ -80,6 +85,8 @@ class AuthNotifier extends Notifier<AuthState> {
     } else {
       state = AuthState.error(err.error, err.stackTrace!);
     }
+
+    logError(message, e.error, e.stackTrace);
 
     return null;
   }

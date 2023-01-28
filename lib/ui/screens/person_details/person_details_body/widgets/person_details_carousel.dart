@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../../../../core/models/person/details/person_details.dart';
 import '../../../../../core/providers/image_provider.dart';
@@ -61,8 +60,6 @@ class _PersonCarouselBuilder extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        logError('Could not get person images.', error, stackTrace);
-
         context.showErrorSnackBar('Could not get person images.');
 
         return const Center(

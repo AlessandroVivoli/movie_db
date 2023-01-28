@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../../core/models/movie/details/movie_details.dart';
 import '../../../core/providers/movie_provider.dart';
@@ -47,8 +46,6 @@ class _MovieDetailsWrapper extends ConsumerWidget {
     return movieDetails.when(
       data: (details) => _MovieDetailsBody(details: details),
       error: (error, stackTrace) {
-        logError('Could not get movie details.', error, stackTrace);
-
         context.showErrorSnackBar('Could not get movie details.');
 
         return Column(
