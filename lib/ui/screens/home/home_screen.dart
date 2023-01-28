@@ -4,16 +4,18 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
-import '../../../core/providers/account_provider.dart';
-import '../../../core/providers/general_providers.dart';
+import '../../../core/models/user/user.dart';
+import '../../../core/providers/account_service_provider.dart';
+import '../../../core/providers/local_storage_provider.dart';
 import '../../../core/providers/movie_provider.dart';
-import '../../../core/providers/session_provider.dart';
+import '../../../core/providers/user_provider.dart';
 import '../../../utils/constants.dart';
+import '../../../utils/extensions.dart';
 import '../../shared/widgets/account_drawer/account_drawer.dart';
 import '../../shared/widgets/carousel/movie_carousel/movie_carousel.dart';
-import '../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../shared/widgets/errors/error_text.dart';
 import '../../shared/widgets/genre_tab/genre_tab.dart';
+import '../../shared/widgets/search_field/search_field.dart';
 import 'home_wrapper/home_wrapper.dart';
 
 class HomeScreen extends HookConsumerWidget {
@@ -23,24 +25,19 @@ class HomeScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final accountService = ref.watch(accountServiceProvider);
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
-    String? sessionId = SessionProvider.sessionId;
+    final localStorage = ref.watch(localStorageProvider);
+
+    final sessionId = localStorage?.getSessionId();
 
     useEffect(() {
       if (sessionId != null) {
-        accountService
-            .getAccountDetails(sessionId: sessionId)
-            .then((value) => ref
-                .read(
-                  accountDetailsStateProvider.notifier,
-                )
-                .state = value);
+        getUser(ref, sessionId);
       }
 
       return null;
-    }, []);
+    }, [localStorage]);
 
     return SafeArea(
       top: false,
@@ -56,25 +53,9 @@ class HomeScreen extends HookConsumerWidget {
           ),
         ),
         body: CustomScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           slivers: [
-            SliverAppBar(
-              systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarColor: Colors.transparent,
-              ),
-              title: Text(title),
-              centerTitle: true,
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.search),
-                ),
-              ],
-              expandedHeight: 200,
-              pinned: true,
-              flexibleSpace: const FlexibleSpaceBar(
-                background: _TrendingMoviesBuilder(),
-              ),
-            ),
+            _AppBar(title: title),
             const SliverToBoxAdapter(
               child: LimitedBox(
                 maxHeight: 300,
@@ -87,10 +68,60 @@ class HomeScreen extends HookConsumerWidget {
       ),
     );
   }
+
+  void getUser(WidgetRef ref, String sessionId) async {
+    final accountDetails = await ref
+        .read(accountServiceProvider)
+        .getAccountDetails(sessionId: sessionId);
+
+    ref.read(userProvider.notifier).state = User(
+      accountDetails: accountDetails,
+      sessionId: sessionId,
+    );
+  }
+}
+
+class _AppBar extends StatelessWidget {
+  const _AppBar({
+    required this.title,
+  });
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ),
+      title: Text(title),
+      centerTitle: true,
+      titleSpacing: 10,
+      actions: [
+        Consumer(
+          builder: (context, ref, child) {
+            return SearchField(
+              searchBuilder: (context, searchTerm) {
+                return List<Widget>.empty();
+              },
+              onSubmit: (searchTerm) {
+                // Add navigation to search results screen
+              },
+            );
+          },
+        ),
+      ],
+      expandedHeight: 200,
+      pinned: true,
+      flexibleSpace: const FlexibleSpaceBar(
+        background: _TrendingMoviesBuilder(),
+      ),
+    );
+  }
 }
 
 class _TrendingMoviesBuilder extends ConsumerWidget {
-  const _TrendingMoviesBuilder({Key? key}) : super(key: key);
+  const _TrendingMoviesBuilder();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -113,16 +144,7 @@ class _TrendingMoviesBuilder extends ConsumerWidget {
       error: (error, stackTrace) {
         logError('Could not get trending movies.', error, stackTrace);
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              content: const ErrorSnackBarContent(
-                message: 'Could not get trending movies.',
-              ),
-            ),
-          );
-        });
+        context.showErrorSnackBar('Could not get trending movies.');
 
         return const Center(
           child: ErrorText('Something went wrong.'),
