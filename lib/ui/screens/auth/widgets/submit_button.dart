@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:loggy/loggy.dart';
 
+import '../../../../core/error/invalid_user_error.dart';
 import '../../../../core/providers/auth_provider.dart';
-import '../../../../core/providers/session_provider.dart';
-import '../../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../../core/providers/user_provider.dart';
+import '../../../../utils/extensions.dart';
 
-class SubmitButton extends HookConsumerWidget {
+class SubmitButton extends ConsumerWidget {
   const SubmitButton({
     super.key,
     required this.formKey,
@@ -20,56 +21,80 @@ class SubmitButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authService = ref.watch(authServiceProvider);
+    final auth = ref.watch(authProvider);
 
-    final isLoggingIn = useState(false);
+    return auth.when(
+      loggedIn: (user) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          ref.read(userProvider.notifier).state = user;
 
-    if (isLoggingIn.value) {
-      return const Center(
+          Navigator.pop(context, false);
+        });
+
+        return _Button(
+          formKey: formKey,
+          usernameController: usernameController,
+          passwordController: passwordController,
+        );
+      },
+      loggedOut: () {
+        return _Button(
+          formKey: formKey,
+          usernameController: usernameController,
+          passwordController: passwordController,
+        );
+      },
+      error: (error, stack) {
+        var message = 'Could not login.';
+
+        if (error is InvalidUserError) {
+          message = 'Wrong username and/or password';
+        }
+
+        logError(message, error, stack);
+
+        context.showErrorSnackBar(message);
+
+        return _Button(
+          formKey: formKey,
+          usernameController: usernameController,
+          passwordController: passwordController,
+        );
+      },
+      loading: () => const Center(
         child: CircularProgressIndicator(),
-      );
-    }
+      ),
+    );
+  }
+}
 
+class _Button extends ConsumerWidget {
+  const _Button({
+    required this.formKey,
+    required this.usernameController,
+    required this.passwordController,
+  });
+
+  final GlobalKey<FormState> formKey;
+  final TextEditingController usernameController;
+  final TextEditingController passwordController;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     return TextButton(
       style: TextButton.styleFrom(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
       ),
-      onPressed: () async {
-        if (!(formKey.currentState?.validate() ?? false)) {
+      onPressed: () {
+        if (!formKey.currentState!.validate()) {
           return;
         }
 
-        isLoggingIn.value = true;
-
-        final response = await authService.login(
-          username: usernameController.text,
-          password: passwordController.text,
-        );
-
-        if (!response.success) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            ScaffoldMessenger.of(context)
-              ..removeCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content: ErrorSnackBarContent(
-                    message: response.message,
-                  ),
-                ),
-              );
-          });
-
-          isLoggingIn.value = false;
-
-          return;
-        }
-
-        SessionProvider.setSession(response.sessionId!);
-
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.pop(context, false);
-        });
+        ref.read(authProvider.notifier).login(
+              usernameController.text,
+              passwordController.text,
+            );
       },
       child: const Text('Submit'),
     );
