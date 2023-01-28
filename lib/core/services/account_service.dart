@@ -2,12 +2,15 @@ import 'package:dio/dio.dart';
 
 import '../interfaces/i_account_service.dart';
 import '../models/account/account_details.dart';
-import '../providers/dio_provider.dart';
 
 class AccountService implements IAccountService {
+  final Dio _dio;
+
+  const AccountService(Dio dio) : _dio = dio;
+
   @override
   Future<AccountDetails> getAccountDetails({required String sessionId}) {
-    return DioProvider.dio
+    return _dio
         .get(
           '/account',
           queryParameters: {
@@ -25,7 +28,7 @@ class AccountService implements IAccountService {
     required String sessionId,
     required bool favorite,
   }) {
-    return DioProvider.dio
+    return _dio
         .post(
           '/account/$accountId/favorite',
           data: {
@@ -48,7 +51,7 @@ class AccountService implements IAccountService {
     required String sessionId,
     required bool watchlist,
   }) {
-    return DioProvider.dio.post(
+    return _dio.post(
       '/account/$accountId/watchlist',
       queryParameters: {
         'session_id': sessionId,

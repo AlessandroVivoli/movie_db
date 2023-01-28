@@ -1,119 +1,53 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:loggy/loggy.dart';
 
 import '../interfaces/i_auth_service.dart';
-import '../models/auth/login_response.dart';
-import '../models/auth/request_token.dart';
-import '../models/auth/session_id.dart';
-import '../providers/dio_provider.dart';
 
 class AuthService implements IAuthService {
-  @override
-  Future<RequestToken> createRequestToken() {
-    return DioProvider.dio
-        .get('/authentication/token/new')
-        .then((res) => Map<String, Object?>.from(res.data))
-        .then(RequestToken.fromJson);
-  }
+  final Dio _dio;
+
+  const AuthService(Dio dio) : _dio = dio;
 
   @override
-  Future<RequestToken> validateTokenWithLogin({
-    required String requestToken,
-    required String username,
-    required String password,
-  }) {
-    return DioProvider.dio
-        .post(
-          '/authentication/token/validate_with_login',
-          data: {
-            'username': username,
-            'password': password,
-            'request_token': requestToken,
-          },
-        )
-        .then((res) => Map<String, Object?>.from(res.data))
-        .then(RequestToken.fromJson);
-  }
-
-  @override
-  Future<SessionId> createSessionId({
-    required String requestToken,
-  }) {
-    return DioProvider.dio
-        .post(
-          '/authentication/session/new',
-          data: {
-            'request_token': requestToken,
-          },
-        )
-        .then((res) => Map<String, Object?>.from(res.data))
-        .then(SessionId.fromJson);
-  }
-
-  @override
-  Future<LoginResponse> login({
+  Future<String?> login({
     required String username,
     required String password,
   }) async {
-    bool success = true;
-    int statusCode = 0;
-    String message = '';
-    String? sessionId;
+    try {
+      final requestToken = await _dio
+          .get('/authentication/token/new')
+          .then<String>((res) => res.data['request_token']);
 
-    final token = await createRequestToken().catchError((_) {
-      message = 'Could not get request token.';
+      final validatedToken = await _dio.post(
+        '/authentication/token/validate_with_login',
+        data: {
+          'username': username,
+          'password': password,
+          'request_token': requestToken,
+        },
+      ).then<String>((res) => res.data['request_token']);
 
-      return const RequestToken(
-        success: false,
-        expiresAt: '',
-        requestToken: '',
-      );
-    });
+      final sessionId = await _dio.post(
+        '/authentication/session/new',
+        data: {
+          'request_token': validatedToken,
+        },
+      ).then<String>((res) => res.data['session_id']);
 
-    if (token.success) {
-      final validatedToken = await validateTokenWithLogin(
-        requestToken: token.requestToken,
-        username: username,
-        password: password,
-      ).catchError((error) {
-        success = false;
-        statusCode = 2;
-        message = 'Could not get session id';
+      return sessionId;
+    } on DioError catch (e) {
+      logError(e.message, e.error, e.stackTrace);
 
-        if (error is DioError && error.response?.statusCode == 401) {
-          message = 'Wrong username and/or password';
-        }
+      debugPrint(e.response?.data['status_message']);
 
-        return const RequestToken(
-          success: false,
-          expiresAt: '',
-          requestToken: '',
-        );
-      });
-
-      if (validatedToken.success) {
-        final session = await createSessionId(
-          requestToken: validatedToken.requestToken,
-        ).catchError((_) {
-          return const SessionId(success: false, sessionId: '');
-        });
-
-        if (session.success) {
-          sessionId = session.sessionId;
-        }
-      }
+      return Future.error(e);
     }
-
-    return LoginResponse(
-      success: success,
-      statusCode: statusCode,
-      message: message,
-      sessionId: sessionId,
-    );
   }
 
   @override
   Future<bool> logout({required String sessionId}) {
-    return DioProvider.dio.delete(
+    return _dio.delete(
       '/authentication/session',
       data: {
         'session_id': sessionId,

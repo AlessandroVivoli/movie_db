@@ -7,14 +7,17 @@ import '../models/movie/details/movie_details.dart';
 import '../models/movie/movie.dart';
 import '../models/movie/movie_list.dart';
 import '../models/sort_by/sort_by.dart';
-import '../providers/dio_provider.dart';
 
 class MovieService implements IMovieService {
+  final Dio _dio;
+
+  const MovieService(Dio dio) : _dio = dio;
+
   @override
   Future<List<Movie>> getTrendingMovies({
     TimeWindow timeWindow = TimeWindow.week,
   }) {
-    return DioProvider.dio
+    return _dio
         .get('/trending/movie/$timeWindow')
         .then((res) => List<Map<String, Object?>>.from(res.data['results']))
         .then((rawList) => rawList.map(Movie.fromJson))
@@ -23,7 +26,7 @@ class MovieService implements IMovieService {
 
   @override
   Future<List<Movie>> getTopRatedMovies() {
-    return DioProvider.dio
+    return _dio
         .get('/movie/top_rated')
         .then((res) => List<Map<String, Object?>>.from(res.data['results']))
         .then((rawList) => rawList.map(Movie.fromJson))
@@ -36,7 +39,7 @@ class MovieService implements IMovieService {
     SortBy sortBy = Sorts.popularityDesc,
     bool? includeAdult,
   }) {
-    return DioProvider.dio
+    return _dio
         .get(
           '/discover/movie',
           queryParameters: {
@@ -52,7 +55,7 @@ class MovieService implements IMovieService {
 
   @override
   Future<MovieDetails> getMovieDetails({required int id}) {
-    return DioProvider.dio
+    return _dio
         .get('/movie/$id')
         .then((res) => Map<String, Object?>.from(res.data))
         .then(MovieDetails.fromJson);
@@ -60,7 +63,7 @@ class MovieService implements IMovieService {
 
   @override
   Future<List<Movie>> getSimilarMovies({required int id}) {
-    return DioProvider.dio
+    return _dio
         .get('/movie/$id/similar')
         .then((res) => List<Map<String, Object?>>.from(res.data['results']))
         .then((rawList) => rawList.map(Movie.fromJson))
@@ -69,7 +72,7 @@ class MovieService implements IMovieService {
 
   @override
   Future<List<Movie>> getPersonCredits({required int personId}) {
-    return DioProvider.dio
+    return _dio
         .get('/person/$personId/movie_credits')
         .then((res) => List<Map<String, Object?>>.from(res.data['cast']))
         .then((rawList) => rawList.map(Movie.fromJson))
@@ -81,7 +84,7 @@ class MovieService implements IMovieService {
     required int id,
     required String sessionId,
   }) {
-    return DioProvider.dio
+    return _dio
         .get(
           '/movie/$id/account_states',
           queryParameters: {
@@ -98,7 +101,7 @@ class MovieService implements IMovieService {
     required String sessionId,
     int page = 1,
   }) {
-    return DioProvider.dio
+    return _dio
         .get(
           '/account/$accountId/favorite/movies',
           queryParameters: {
@@ -117,7 +120,7 @@ class MovieService implements IMovieService {
     required String sessionId,
     int page = 1,
   }) {
-    return DioProvider.dio
+    return _dio
         .get(
           '/account/$accountId/watchlist/movies',
           queryParameters: {
@@ -136,7 +139,7 @@ class MovieService implements IMovieService {
     required String sessionId,
     int page = 1,
   }) {
-    return DioProvider.dio
+    return _dio
         .get(
           '/account/$accountId/rated/movies',
           queryParameters: {
@@ -155,7 +158,7 @@ class MovieService implements IMovieService {
     required String sessionId,
     required double rating,
   }) {
-    return DioProvider.dio
+    return _dio
         .post(
           '/movie/$id/rating',
           queryParameters: {
@@ -174,7 +177,7 @@ class MovieService implements IMovieService {
     required int id,
     required String sessionId,
   }) {
-    return DioProvider.dio
+    return _dio
         .delete(
           '/movie/$id/rating',
           queryParameters: {
