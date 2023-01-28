@@ -5,12 +5,12 @@ import '../../../../../../core/models/account/account_details.dart';
 class LoggedInDrawerView extends StatelessWidget {
   const LoggedInDrawerView({
     super.key,
-    this.onLogout,
+    this.onPressed,
     this.onProfilePressed,
     required this.accountDetails,
   });
 
-  final void Function()? onLogout;
+  final void Function()? onPressed;
   final void Function()? onProfilePressed;
   final AccountDetails accountDetails;
 
@@ -28,7 +28,7 @@ class LoggedInDrawerView extends StatelessWidget {
           label: const Text('Profile'),
         ),
         OutlinedButton.icon(
-          onPressed: onLogout,
+          onPressed: onPressed,
           icon: const Icon(Icons.logout),
           label: const Text('Logout'),
         ),

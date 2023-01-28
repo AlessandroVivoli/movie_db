@@ -31,7 +31,7 @@ class MovieCarouselItem extends ConsumerWidget {
           ),
           placeholderIcon: const Icon(Icons.movie),
         ),
-        _Title(title: title),
+        _TitleText(title: title),
         const _PlayIcon(),
         GestureDetector(
           onTap: () {
@@ -48,9 +48,7 @@ class MovieCarouselItem extends ConsumerWidget {
 }
 
 class _PlayIcon extends StatelessWidget {
-  const _PlayIcon({
-    Key? key,
-  }) : super(key: key);
+  const _PlayIcon();
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +72,8 @@ class _PlayIcon extends StatelessWidget {
   }
 }
 
-class _Title extends StatelessWidget {
-  const _Title({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
+class _TitleText extends StatelessWidget {
+  const _TitleText({required this.title});
 
   final String title;
 

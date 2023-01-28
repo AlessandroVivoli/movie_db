@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class BlankProfileImage extends StatelessWidget {
   const BlankProfileImage({
-    Key? key,
+    super.key,
     required this.imgRadius,
-  }) : super(key: key);
+  });
 
   final double imgRadius;
 

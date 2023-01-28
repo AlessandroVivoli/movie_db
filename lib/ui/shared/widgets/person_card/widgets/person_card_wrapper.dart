@@ -8,10 +8,10 @@ import '../../custom_image/custom_network_image.dart';
 
 class PersonCardWrapper extends ConsumerWidget {
   const PersonCardWrapper({
-    Key? key,
+    super.key,
     required this.imgRadius,
     required this.person,
-  }) : super(key: key);
+  });
 
   final double imgRadius;
   final Person person;

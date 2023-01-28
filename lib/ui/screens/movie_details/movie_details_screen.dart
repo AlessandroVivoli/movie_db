@@ -5,8 +5,8 @@ import 'package:loggy/loggy.dart';
 
 import '../../../core/models/movie/details/movie_details.dart';
 import '../../../core/providers/movie_provider.dart';
+import '../../../utils/extensions.dart';
 import '../../../utils/routes.dart';
-import '../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../shared/widgets/errors/error_text.dart';
 import 'backdrop/backdrop.dart';
 import 'movie_details_wrapper/movie_details_wrapper.dart';
@@ -25,7 +25,7 @@ class MovieDetailsScreen extends StatelessWidget {
     return SafeArea(
       top: false,
       child: Scaffold(
-        body: _MovieDetailsBuilder(
+        body: _MovieDetailsWrapper(
           movieId: movieId,
         ),
       ),
@@ -33,11 +33,10 @@ class MovieDetailsScreen extends StatelessWidget {
   }
 }
 
-class _MovieDetailsBuilder extends ConsumerWidget {
-  const _MovieDetailsBuilder({
-    Key? key,
+class _MovieDetailsWrapper extends ConsumerWidget {
+  const _MovieDetailsWrapper({
     required this.movieId,
-  }) : super(key: key);
+  });
 
   final int movieId;
 
@@ -46,20 +45,11 @@ class _MovieDetailsBuilder extends ConsumerWidget {
     final movieDetails = ref.watch(getMovieDetailsProvider(movieId));
 
     return movieDetails.when(
-      data: (details) => _MovieDetailsHookBuilder(details: details),
+      data: (details) => _MovieDetailsBody(details: details),
       error: (error, stackTrace) {
         logError('Could not get movie details.', error, stackTrace);
 
-        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              content: const ErrorSnackBarContent(
-                message: 'Could not get movie details.',
-              ),
-            ),
-          );
-        });
+        context.showErrorSnackBar('Could not get movie details.');
 
         return Column(
           children: [
@@ -79,11 +69,10 @@ class _MovieDetailsBuilder extends ConsumerWidget {
   }
 }
 
-class _MovieDetailsHookBuilder extends StatelessWidget {
-  const _MovieDetailsHookBuilder({
-    Key? key,
+class _MovieDetailsBody extends StatelessWidget {
+  const _MovieDetailsBody({
     required this.details,
-  }) : super(key: key);
+  });
 
   final MovieDetails details;
 

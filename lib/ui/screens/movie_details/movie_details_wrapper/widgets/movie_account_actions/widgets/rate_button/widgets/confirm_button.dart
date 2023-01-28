@@ -1,12 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:loggy/loggy.dart';
 
 import '../../../../../../../../../core/interfaces/i_movie_service.dart';
 import '../../../../../../../../../core/models/movie/account_state/rate/movie_rate.dart';
 import '../../../../../../../../../core/providers/movie_provider.dart';
-import '../../../../../../../../../core/providers/session_provider.dart';
-import '../../../../../../../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../../../../../../../core/providers/user_provider.dart';
+import '../../../../../../../../../utils/extensions.dart';
 
 class ConfirmButton extends HookConsumerWidget {
   final double rating;
@@ -29,7 +31,7 @@ class ConfirmButton extends HookConsumerWidget {
     if (!loading.value) {
       return OutlinedButton(
         onPressed: (rating > 0 && originalRating != rating)
-            ? () => onConfirm(loading, context, movieService)
+            ? () => onConfirm(loading, context, movieService, ref)
             : null,
         style: OutlinedButton.styleFrom(
           side: BorderSide(
@@ -52,26 +54,17 @@ class ConfirmButton extends HookConsumerWidget {
     ValueNotifier<bool> loading,
     BuildContext context,
     IMovieService movieService,
+    WidgetRef ref,
   ) async {
     loading.value = true;
 
     final code = await movieService
         .rateMovie(
-      id: movieId,
-      sessionId: SessionProvider.sessionId!,
-      rating: rating,
-    )
-        .catchError((_) {
-      ScaffoldMessenger.of(context)
-        ..removeCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            content: ErrorSnackBarContent(message: 'Could not submit rating.'),
-          ),
-        );
-
-      return -1;
-    });
+          id: movieId,
+          sessionId: ref.watch(userProvider)!.sessionId,
+          rating: rating,
+        )
+        .catchError((error) => showError(context, error));
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (code == -1) {
@@ -80,5 +73,13 @@ class ConfirmButton extends HookConsumerWidget {
 
       return Navigator.pop(context, MovieRate(value: rating));
     });
+  }
+
+  int showError(BuildContext context, DioError error) {
+    logError('Could not submit rating.', error.error, error.stackTrace);
+
+    context.showErrorSnackBar('Could not submit rating.');
+
+    return -1;
   }
 }

@@ -41,9 +41,8 @@ class LoginScreen extends StatelessWidget {
 
 class _FormWidgets extends HookWidget {
   const _FormWidgets({
-    Key? key,
     required this.formKey,
-  }) : super(key: key);
+  });
 
   final GlobalKey<FormState> formKey;
 

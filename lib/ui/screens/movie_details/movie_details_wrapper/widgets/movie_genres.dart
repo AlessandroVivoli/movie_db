@@ -5,9 +5,9 @@ import '../../../../shared/widgets/genre_list/genre_list.dart';
 
 class MovieGenres extends StatelessWidget {
   const MovieGenres({
-    Key? key,
+    super.key,
     required this.details,
-  }) : super(key: key);
+  });
 
   final MovieDetails details;
 

@@ -4,10 +4,10 @@ import '../../../../../core/models/person/details/person_details.dart';
 
 class PersonLifetime extends StatelessWidget {
   const PersonLifetime({
-    Key? key,
+    super.key,
     required this.personDetails,
     this.extendedDate = false,
-  }) : super(key: key);
+  });
 
   final PersonDetails personDetails;
 

@@ -5,16 +5,16 @@ import 'package:loggy/loggy.dart';
 import '../../../../../core/models/movie/movie_arguments.dart';
 import '../../../../../core/providers/movie_provider.dart';
 import '../../../../../utils/constants.dart';
-import '../../errors/error_snack_bar_content.dart';
+import '../../../../../utils/extensions.dart';
 import '../../errors/error_text.dart';
 import '../../movie_list/movie_list.dart';
 
-class GenreTabBuilder extends ConsumerWidget {
-  const GenreTabBuilder({
-    Key? key,
+class GenreTabMovies extends ConsumerWidget {
+  const GenreTabMovies({
+    super.key,
     required this.genreId,
     this.includeAdult,
-  }) : super(key: key);
+  });
 
   final bool? includeAdult;
   final int genreId;
@@ -47,16 +47,7 @@ class GenreTabBuilder extends ConsumerWidget {
       error: (error, stackTrace) {
         logError('Could not get movies.');
 
-        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              content: const ErrorSnackBarContent(
-                message: 'Could not get movies.',
-              ),
-            ),
-          );
-        });
+        context.showErrorSnackBar('Could not get movies.');
 
         return const Center(
           child: ErrorText('Something went wrong.'),

@@ -5,18 +5,18 @@ import 'package:loggy/loggy.dart';
 
 import '../../../../../core/models/account/account_details.dart';
 import '../../../../../core/models/movie/account_movie_arguments.dart';
+import '../../../../../core/providers/local_storage_provider.dart';
 import '../../../../../core/providers/movie_provider.dart';
-import '../../../../../core/providers/session_provider.dart';
-import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../../../utils/extensions.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/paged_movie_list/paged_movie_list.dart';
 
 class FavoriteMoviesSection extends StatelessWidget {
   const FavoriteMoviesSection({
-    Key? key,
+    super.key,
     required this.accountDetails,
     this.onReturn,
-  }) : super(key: key);
+  });
 
   final AccountDetails accountDetails;
   final void Function()? onReturn;
@@ -50,10 +50,9 @@ class FavoriteMoviesSection extends StatelessWidget {
 
 class _FavoriteMoviesHookBuilder extends HookConsumerWidget {
   const _FavoriteMoviesHookBuilder({
-    Key? key,
     required this.accountDetails,
     required this.onReturn,
-  }) : super(key: key);
+  });
 
   final AccountDetails accountDetails;
   final void Function()? onReturn;
@@ -64,11 +63,13 @@ class _FavoriteMoviesHookBuilder extends HookConsumerWidget {
 
     return Consumer(
       builder: (context, ref, child) {
+        final sessionId = ref.watch(localStorageProvider)?.getSessionId();
+
         final favoriteMovies = ref.watch(
           getFavoriteMoviesProvider(
             AccountMovieArguments(
               accountId: accountDetails.id,
-              sessionId: SessionProvider.sessionId!,
+              sessionId: sessionId!,
               page: page.value,
             ),
           ),
@@ -94,15 +95,7 @@ class _FavoriteMoviesHookBuilder extends HookConsumerWidget {
           error: (error, stackTrace) {
             logError('Could not get favorite movies.', error, stackTrace);
 
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: ErrorSnackBarContent(
-                    message: 'Could not get favorite movies.',
-                  ),
-                ),
-              );
-            });
+            context.showErrorSnackBar('Could not get favorite movies.');
 
             return const Center(
               child: ErrorText('Something went wrong.'),

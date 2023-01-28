@@ -1,11 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:loggy/loggy.dart';
 
 import '../../../../../../../../../core/interfaces/i_movie_service.dart';
 import '../../../../../../../../../core/providers/movie_provider.dart';
-import '../../../../../../../../../core/providers/session_provider.dart';
-import '../../../../../../../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../../../../../../../core/providers/user_provider.dart';
+import '../../../../../../../../../utils/extensions.dart';
 
 class DeleteButton extends HookConsumerWidget {
   const DeleteButton({
@@ -28,7 +30,7 @@ class DeleteButton extends HookConsumerWidget {
     if (!loading.value) {
       return OutlinedButton(
         onPressed: (originalRating > 0)
-            ? () => onDelete(loading, context, movieService)
+            ? () => onDelete(loading, context, movieService, ref)
             : null,
         style: OutlinedButton.styleFrom(
           foregroundColor: Colors.red,
@@ -52,24 +54,15 @@ class DeleteButton extends HookConsumerWidget {
     ValueNotifier<bool> loading,
     BuildContext context,
     IMovieService movieService,
+    WidgetRef ref,
   ) async {
     loading.value = true;
 
-    final code = await movieService
-        .deleteRating(id: movieId, sessionId: SessionProvider.sessionId!)
-        .catchError((_) {
-      ScaffoldMessenger.of(context)
-        ..removeCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            content: ErrorSnackBarContent(
-              message: 'Could not delete rating.',
-            ),
-          ),
-        );
+    final sessionId = ref.watch(userProvider)!.sessionId;
 
-      return -1;
-    });
+    final code = await movieService
+        .deleteRating(id: movieId, sessionId: sessionId)
+        .catchError((error) => showError(context, error));
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (code == -1) {
@@ -78,5 +71,13 @@ class DeleteButton extends HookConsumerWidget {
 
       return Navigator.pop(context, true);
     });
+  }
+
+  int showError(BuildContext context, DioError error) {
+    logError('Could not delete rating.', error.error, error.stackTrace);
+
+    context.showErrorSnackBar('Could not delete rating.');
+
+    return -1;
   }
 }

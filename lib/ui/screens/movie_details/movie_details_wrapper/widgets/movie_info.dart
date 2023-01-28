@@ -27,9 +27,8 @@ class MovieInfo extends StatelessWidget {
 
 class _BudgetText extends StatelessWidget {
   const _BudgetText({
-    Key? key,
     required this.budget,
-  }) : super(key: key);
+  });
 
   final int budget;
 
@@ -62,9 +61,8 @@ class _BudgetText extends StatelessWidget {
 
 class _DurationText extends StatelessWidget {
   const _DurationText({
-    Key? key,
     required this.runtime,
-  }) : super(key: key);
+  });
 
   final int runtime;
 
@@ -97,9 +95,8 @@ class _DurationText extends StatelessWidget {
 
 class _ReleaseDateText extends StatelessWidget {
   const _ReleaseDateText({
-    Key? key,
     required this.releaseDate,
-  }) : super(key: key);
+  });
 
   final String releaseDate;
 

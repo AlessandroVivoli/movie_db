@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class ErrorSnackBarContent extends StatelessWidget {
   const ErrorSnackBarContent({
-    Key? key,
+    super.key,
     required this.message,
-  }) : super(key: key);
+  });
 
   final String message;
 

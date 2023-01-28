@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
 import '../../../../core/providers/genre_provider.dart';
-import '../errors/error_snack_bar_content.dart';
+import '../../../../utils/extensions.dart';
 import '../errors/error_text.dart';
 import 'widgets/genre_tab_controller.dart';
 
@@ -29,16 +29,7 @@ class GenreTab extends ConsumerWidget {
       error: (error, stackTrace) {
         logError('Could not get genres.', error, stackTrace);
 
-        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              content: const ErrorSnackBarContent(
-                message: 'Could not get genres.',
-              ),
-            ),
-          );
-        });
+        context.showErrorSnackBar('Could not get genres.');
 
         return const Center(
           child: ErrorText('Something went wrong.'),

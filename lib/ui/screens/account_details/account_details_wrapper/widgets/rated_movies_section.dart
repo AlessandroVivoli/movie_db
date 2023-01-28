@@ -3,19 +3,17 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
-import '../../../../../core/models/account/account_details.dart';
 import '../../../../../core/models/movie/account_movie_arguments.dart';
+import '../../../../../core/models/user/user.dart';
 import '../../../../../core/providers/movie_provider.dart';
-import '../../../../../core/providers/session_provider.dart';
-import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../../../utils/extensions.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/paged_movie_list/paged_movie_list.dart';
 
 class RatedMoviesSection extends StatelessWidget {
-  const RatedMoviesSection(
-      {super.key, required this.accountDetails, this.onReturn});
+  const RatedMoviesSection({super.key, required this.user, this.onReturn});
 
-  final AccountDetails accountDetails;
+  final User user;
   final void Function()? onReturn;
 
   @override
@@ -37,7 +35,7 @@ class RatedMoviesSection extends StatelessWidget {
           SizedBox(
             height: 290,
             child: _RatedMoviesHookWidget(
-              accountDetails: accountDetails,
+              user: user,
               onReturn: onReturn,
             ),
           ),
@@ -49,12 +47,11 @@ class RatedMoviesSection extends StatelessWidget {
 
 class _RatedMoviesHookWidget extends HookConsumerWidget {
   const _RatedMoviesHookWidget({
-    Key? key,
-    required this.accountDetails,
+    required this.user,
     required this.onReturn,
-  }) : super(key: key);
+  });
 
-  final AccountDetails accountDetails;
+  final User user;
   final void Function()? onReturn;
 
   @override
@@ -64,8 +61,8 @@ class _RatedMoviesHookWidget extends HookConsumerWidget {
     final ratedMovies = ref.watch(
       getRatedMoviesProvider(
         AccountMovieArguments(
-          accountId: accountDetails.id,
-          sessionId: SessionProvider.sessionId!,
+          accountId: user.accountDetails.id,
+          sessionId: user.sessionId,
           page: page.value,
         ),
       ),
@@ -91,15 +88,7 @@ class _RatedMoviesHookWidget extends HookConsumerWidget {
       error: (error, stackTrace) {
         logError('Could not get rated movies.', error, stackTrace);
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: ErrorSnackBarContent(
-                message: 'Could not get rated movies.',
-              ),
-            ),
-          );
-        });
+        context.showErrorSnackBar('Could not get rated movies.');
 
         return const Center(
           child: ErrorText('Something went wrong.'),

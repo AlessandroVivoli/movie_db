@@ -4,14 +4,14 @@ import 'package:loggy/loggy.dart';
 
 import '../../../../../core/providers/person_provider.dart';
 import '../../../../../utils/constants.dart';
-import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../../../utils/extensions.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/person_list/person_list.dart';
 
 class TrendingPersonsSection extends StatelessWidget {
   const TrendingPersonsSection({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,7 @@ class TrendingPersonsSection extends StatelessWidget {
 }
 
 class _TrendingPersonsText extends StatelessWidget {
-  const _TrendingPersonsText({
-    Key? key,
-  }) : super(key: key);
+  const _TrendingPersonsText();
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +48,7 @@ class _TrendingPersonsText extends StatelessWidget {
 }
 
 class _TrendingPersonsList extends ConsumerWidget {
-  const _TrendingPersonsList({
-    Key? key,
-  }) : super(key: key);
+  const _TrendingPersonsList();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -80,16 +76,7 @@ class _TrendingPersonsList extends ConsumerWidget {
           error: (error, stackTrace) {
             logError('Could not get trending persons.', error, stackTrace);
 
-            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Theme.of(context).colorScheme.surface,
-                  content: const ErrorSnackBarContent(
-                    message: 'Could not get trending persons.',
-                  ),
-                ),
-              );
-            });
+            context.showErrorSnackBar('Could not get trending persons.');
 
             return const Center(
               child: ErrorText('Something went wrong.'),

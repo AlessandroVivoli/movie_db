@@ -4,15 +4,15 @@ import 'package:loggy/loggy.dart';
 
 import '../../../../../core/models/movie/details/movie_details.dart';
 import '../../../../../core/providers/person_provider.dart';
-import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../../../utils/extensions.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/person_list/person_list.dart';
 
 class MovieCasts extends StatelessWidget {
   const MovieCasts({
-    Key? key,
+    super.key,
     required this.details,
-  }) : super(key: key);
+  });
 
   final MovieDetails details;
 
@@ -33,18 +33,17 @@ class MovieCasts extends StatelessWidget {
         ),
         SizedBox(
           height: 150,
-          child: _CastBuilder(details: details),
+          child: _CastList(details: details),
         ),
       ],
     );
   }
 }
 
-class _CastBuilder extends ConsumerWidget {
-  const _CastBuilder({
-    Key? key,
+class _CastList extends ConsumerWidget {
+  const _CastList({
     required this.details,
-  }) : super(key: key);
+  });
 
   final MovieDetails details;
 
@@ -68,16 +67,7 @@ class _CastBuilder extends ConsumerWidget {
       error: (error, stackTrace) {
         logError('Could not get cast.', error, stackTrace);
 
-        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              content: const ErrorSnackBarContent(
-                message: 'Could not get cast.',
-              ),
-            ),
-          );
-        });
+        context.showErrorSnackBar('Could not get cast.');
 
         return const Center(
           child: ErrorText('Something went wrong.'),

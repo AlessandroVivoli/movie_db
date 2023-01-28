@@ -9,9 +9,9 @@ import 'widgets/person_lifetime.dart';
 
 class PersonDetailsWrapper extends StatelessWidget {
   const PersonDetailsWrapper({
-    Key? key,
+    super.key,
     required this.personDetails,
-  }) : super(key: key);
+  });
 
   final PersonDetails personDetails;
 

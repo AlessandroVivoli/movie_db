@@ -3,15 +3,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
 import '../../../../../core/providers/movie_provider.dart';
-import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../../../utils/extensions.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/movie_list/movie_list.dart';
 
 class PersonCredits extends StatelessWidget {
   const PersonCredits({
-    Key? key,
+    super.key,
     required this.id,
-  }) : super(key: key);
+  });
 
   final int id;
 
@@ -35,10 +35,7 @@ class PersonCredits extends StatelessWidget {
 }
 
 class _CreditsList extends ConsumerWidget {
-  const _CreditsList({
-    Key? key,
-    required this.personId,
-  }) : super(key: key);
+  const _CreditsList({required this.personId});
 
   final int personId;
 
@@ -60,16 +57,8 @@ class _CreditsList extends ConsumerWidget {
         },
         error: (error, stackTrace) {
           logError('Could not get movie credits.', error, stackTrace);
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                backgroundColor: Theme.of(context).colorScheme.surface,
-                content: const ErrorSnackBarContent(
-                  message: 'Could not get movie credits.',
-                ),
-              ),
-            );
-          });
+
+          context.showErrorSnackBar('Could not get movie credits.');
 
           return const Center(
             child: ErrorText('Something went wrong.'),

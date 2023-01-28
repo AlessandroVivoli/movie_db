@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/models/genre/genre.dart';
-import 'genre_tab_builder.dart';
+import 'genre_tab_movies.dart';
 
 class GenreTabController extends StatelessWidget {
   const GenreTabController({
-    Key? key,
+    super.key,
     required this.data,
     this.includeAdult,
-  }) : super(key: key);
+  });
 
   final List<Genre> data;
   final bool? includeAdult;
@@ -37,7 +37,7 @@ class GenreTabController extends StatelessWidget {
                 data.length,
                 (index) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: GenreTabBuilder(
+                  child: GenreTabMovies(
                     genreId: data[index].id,
                     includeAdult: includeAdult,
                   ),

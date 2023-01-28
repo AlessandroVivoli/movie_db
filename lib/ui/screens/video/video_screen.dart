@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
 import '../../../core/providers/video_provider.dart';
-import '../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../utils/extensions.dart';
 import '../../shared/widgets/errors/error_text.dart';
 import 'player/player.dart';
 
@@ -49,16 +49,7 @@ class VideoScreen extends ConsumerWidget {
         error: (error, stackTrace) {
           logError('Cannot play movie trailer.', error, stackTrace);
 
-          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                backgroundColor: Theme.of(context).colorScheme.surface,
-                content: const ErrorSnackBarContent(
-                  message: 'Cannot play movie trailer.',
-                ),
-              ),
-            );
-          });
+          context.showErrorSnackBar('Cannot play movie trailer.');
 
           return const Center(
             child: ErrorText('Something went wrong.'),

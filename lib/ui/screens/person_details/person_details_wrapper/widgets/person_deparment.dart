@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class PersonDepartment extends StatelessWidget {
   const PersonDepartment({
-    Key? key,
+    super.key,
     required this.department,
-  }) : super(key: key);
+  });
 
   final String department;
 

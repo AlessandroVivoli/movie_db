@@ -3,22 +3,21 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
-import '../../../../../core/models/account/account_details.dart';
 import '../../../../../core/models/movie/account_movie_arguments.dart';
+import '../../../../../core/models/user/user.dart';
 import '../../../../../core/providers/movie_provider.dart';
-import '../../../../../core/providers/session_provider.dart';
-import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../../../utils/extensions.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/paged_movie_list/paged_movie_list.dart';
 
 class WatchlistSection extends StatelessWidget {
   const WatchlistSection({
     super.key,
-    required this.accountDetails,
+    required this.user,
     this.onReturn,
   });
 
-  final AccountDetails accountDetails;
+  final User user;
   final void Function()? onReturn;
 
   @override
@@ -40,7 +39,7 @@ class WatchlistSection extends StatelessWidget {
           SizedBox(
             height: 290,
             child: _WatchlistHookWidget(
-              accountDetails: accountDetails,
+              user: user,
               onReturn: onReturn,
             ),
           ),
@@ -52,12 +51,11 @@ class WatchlistSection extends StatelessWidget {
 
 class _WatchlistHookWidget extends HookConsumerWidget {
   const _WatchlistHookWidget({
-    Key? key,
-    required this.accountDetails,
+    required this.user,
     required this.onReturn,
-  }) : super(key: key);
+  });
 
-  final AccountDetails accountDetails;
+  final User user;
   final void Function()? onReturn;
 
   @override
@@ -67,8 +65,8 @@ class _WatchlistHookWidget extends HookConsumerWidget {
     final movieWatchlist = ref.watch(
       getMovieWatchlistProvider(
         AccountMovieArguments(
-          accountId: accountDetails.id,
-          sessionId: SessionProvider.sessionId!,
+          accountId: user.accountDetails.id,
+          sessionId: user.sessionId,
           page: page.value,
         ),
       ),
@@ -94,15 +92,7 @@ class _WatchlistHookWidget extends HookConsumerWidget {
       error: (error, stackTrace) {
         logError('Could not get movie watchlist.', error, stackTrace);
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: ErrorSnackBarContent(
-                message: 'Could not get movie watchlist.',
-              ),
-            ),
-          );
-        });
+        context.showErrorSnackBar('Could not get movie watchlist.');
 
         return const Center(
           child: ErrorText('Something went wrong'),

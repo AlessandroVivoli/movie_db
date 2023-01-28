@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
 import '../../../core/providers/person_provider.dart';
-import '../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../utils/extensions.dart';
 import '../../shared/widgets/errors/error_text.dart';
 import 'person_details_body/person_details_body.dart';
 
@@ -25,9 +25,8 @@ class PersonDetailsScreen extends StatelessWidget {
 
 class _PersonDetailsBodyBuilder extends ConsumerWidget {
   const _PersonDetailsBodyBuilder({
-    Key? key,
     required this.personId,
-  }) : super(key: key);
+  });
 
   final int personId;
 
@@ -40,16 +39,7 @@ class _PersonDetailsBodyBuilder extends ConsumerWidget {
       error: (error, stackTrace) {
         logError('Could not get person details', error, stackTrace);
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              content: const ErrorSnackBarContent(
-                message: 'Could not get person details.',
-              ),
-            ),
-          );
-        });
+        context.showErrorSnackBar('Could not get person details.');
 
         return Column(
           children: [

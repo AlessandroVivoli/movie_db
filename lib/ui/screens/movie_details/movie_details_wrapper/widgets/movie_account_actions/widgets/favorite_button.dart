@@ -1,12 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:loggy/loggy.dart';
 
-import '../../../../../../../core/providers/account_provider.dart';
-import '../../../../../../../core/providers/general_providers.dart';
-import '../../../../../../../core/providers/session_provider.dart';
-import '../../../../../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../../../../../core/providers/account_service_provider.dart';
+import '../../../../../../../core/providers/user_provider.dart';
+import '../../../../../../../utils/extensions.dart';
 
 class FavoriteButton extends HookConsumerWidget {
   const FavoriteButton({
@@ -20,7 +21,7 @@ class FavoriteButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final accountId = ref.watch(accountDetailsStateProvider)!.id;
+    final user = ref.watch(userProvider)!;
     final accountService = ref.watch(accountServiceProvider);
 
     final favorited = useState(favorite);
@@ -45,26 +46,12 @@ class FavoriteButton extends HookConsumerWidget {
       onPressed: () async {
         final code = await accountService
             .markMovieAsFavorite(
-          accountId: accountId,
-          favorite: !favorited.value,
-          movieId: movieId,
-          sessionId: SessionProvider.sessionId!,
-        )
-            .catchError((_) {
-          ScaffoldMessenger.of(context)
-            ..removeCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: ErrorSnackBarContent(
-                  message: (favorite)
-                      ? 'Could not remove movie from favorites.'
-                      : 'Could not add movie to favorites.',
-                ),
-              ),
-            );
-
-          return -1;
-        });
+              accountId: user.accountDetails.id,
+              favorite: !favorited.value,
+              movieId: movieId,
+              sessionId: user.sessionId,
+            )
+            .catchError((error) => showError(context, error));
 
         if (code != -1) {
           favorited.value = !favorited.value;
@@ -78,6 +65,18 @@ class FavoriteButton extends HookConsumerWidget {
         ),
       ),
     );
+  }
+
+  int showError(BuildContext context, DioError error) {
+    final message = (favorite)
+        ? 'Could not remove movie from favorites.'
+        : 'Could not add movie to favorites.';
+
+    logError(message, error.error, error.stackTrace);
+
+    context.showErrorSnackBar(message);
+
+    return -1;
   }
 
   IconData? buildIcon(bool favorite) {

@@ -5,15 +5,15 @@ import 'package:loggy/loggy.dart';
 
 import '../../../../../core/models/person/details/person_details.dart';
 import '../../../../../core/providers/image_provider.dart';
+import '../../../../../utils/extensions.dart';
 import '../../../../shared/widgets/carousel/image_carousel/image_carousel.dart';
-import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 
 class PersonDetailsCarousel extends StatelessWidget {
   const PersonDetailsCarousel({
-    Key? key,
+    super.key,
     required this.personDetails,
-  }) : super(key: key);
+  });
 
   final PersonDetails personDetails;
 
@@ -36,9 +36,8 @@ class PersonDetailsCarousel extends StatelessWidget {
 
 class _PersonCarouselBuilder extends ConsumerWidget {
   const _PersonCarouselBuilder({
-    Key? key,
     required this.personDetails,
-  }) : super(key: key);
+  });
 
   final PersonDetails personDetails;
 
@@ -64,16 +63,7 @@ class _PersonCarouselBuilder extends ConsumerWidget {
       error: (error, stackTrace) {
         logError('Could not get person images.', error, stackTrace);
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              content: const ErrorSnackBarContent(
-                message: 'Could not get person images.',
-              ),
-            ),
-          );
-        });
+        context.showErrorSnackBar('Could not get person images.');
 
         return const Center(
           child: ErrorText('Something went wrong.'),

@@ -10,9 +10,9 @@ import '../../stroke_text/stroke_text.dart';
 
 class MovieCardWrapper extends ConsumerWidget {
   const MovieCardWrapper({
-    Key? key,
+    super.key,
     required this.movie,
-  }) : super(key: key);
+  });
 
   final Movie movie;
 

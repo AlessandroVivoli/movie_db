@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class PersonBiography extends StatelessWidget {
   const PersonBiography({
-    Key? key,
+    super.key,
     required this.biography,
-  }) : super(key: key);
+  });
 
   final String biography;
 

@@ -5,8 +5,8 @@ import 'widgets/trending_persons_section.dart';
 
 class HomeWrapper extends StatelessWidget {
   const HomeWrapper({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -4,9 +4,9 @@ import '../../../../../core/models/person/details/person_details.dart';
 
 class PersonAge extends StatelessWidget {
   const PersonAge({
-    Key? key,
+    super.key,
     required this.personDetails,
-  }) : super(key: key);
+  });
 
   final PersonDetails personDetails;
 

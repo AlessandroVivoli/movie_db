@@ -3,14 +3,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
 import '../../../../../core/providers/movie_provider.dart';
-import '../../../../shared/widgets/errors/error_snack_bar_content.dart';
+import '../../../../../utils/extensions.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/movie_list/movie_list.dart';
 
 class TopRatedMoviesSection extends StatelessWidget {
   const TopRatedMoviesSection({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,7 @@ class TopRatedMoviesSection extends StatelessWidget {
 }
 
 class _TopRatedMoviesText extends StatelessWidget {
-  const _TopRatedMoviesText({
-    Key? key,
-  }) : super(key: key);
+  const _TopRatedMoviesText();
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +47,7 @@ class _TopRatedMoviesText extends StatelessWidget {
 }
 
 class _TopRatedMoviesList extends ConsumerWidget {
-  const _TopRatedMoviesList({
-    Key? key,
-  }) : super(key: key);
+  const _TopRatedMoviesList();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -75,16 +71,7 @@ class _TopRatedMoviesList extends ConsumerWidget {
         error: (error, stackTrace) {
           logError('Could not get top rated movies.', error, stackTrace);
 
-          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                backgroundColor: Theme.of(context).colorScheme.surface,
-                content: const ErrorSnackBarContent(
-                  message: 'Could not get top rated movies.',
-                ),
-              ),
-            );
-          });
+          context.showErrorSnackBar('Could not get top rated movies.');
 
           return const Center(
             child: ErrorText('Something went wrong.'),
