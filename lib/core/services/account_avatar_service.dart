@@ -5,7 +5,7 @@ import '../interfaces/i_account_avatar_service.dart';
 class AccountAvatarService implements IAccountAvatarService {
   @override
   String getAccountAvatar({required String hash, int? size}) {
-    String sizeString = '';
+    var sizeString = '';
 
     if (size != null) {
       sizeString = '?s=$size';
