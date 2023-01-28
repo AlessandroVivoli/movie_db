@@ -22,7 +22,7 @@ class FavoriteButton extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
-    final accountService = ref.watch(accountServiceProvider);
+    final accountService = ref.read(accountServiceProvider);
 
     final favorited = useState(favorite);
 

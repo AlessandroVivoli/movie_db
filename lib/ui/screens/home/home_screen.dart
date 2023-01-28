@@ -27,7 +27,7 @@ class HomeScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
-    final localStorage = ref.watch(localStorageProvider);
+    final localStorage = ref.read(localStorageProvider);
 
     final sessionId = localStorage?.getSessionId();
 

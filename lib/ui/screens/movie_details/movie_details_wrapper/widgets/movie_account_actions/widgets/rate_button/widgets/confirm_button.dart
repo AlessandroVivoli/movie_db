@@ -24,7 +24,7 @@ class ConfirmButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final movieService = ref.watch(movieServiceProvider);
+    final movieService = ref.read(movieServiceProvider);
 
     final loading = useState(false);
 

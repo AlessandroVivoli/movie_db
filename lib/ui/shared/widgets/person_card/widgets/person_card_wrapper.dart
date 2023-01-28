@@ -18,7 +18,7 @@ class PersonCardWrapper extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imageService = ref.watch(imageServiceProvider);
+    final imageService = ref.read(imageServiceProvider);
 
     return Column(
       children: [
