@@ -5,21 +5,31 @@ import '../interfaces/i_person_service.dart';
 import '../models/person/details/person_details.dart';
 import '../models/person/person.dart';
 import '../services/person_service.dart';
+import 'dio_provider.dart';
 
-final personServiceProvider = Provider<IPersonService>(
-  (ref) => PersonService(),
-);
+final personServiceProvider = Provider<IPersonService>((ref) {
+  return PersonService(ref.read(dioProvider));
+});
 
-final getTrendingPersonsProvider =
-    FutureProvider.family<List<Person>, TimeWindow>((ref, timeWindow) => ref
+typedef GetTrendingPersonsProvider
+    = FutureProviderFamily<List<Person>, TimeWindow>;
+
+final getTrendingPersonsProvider = GetTrendingPersonsProvider(
+  (ref, timeWindow) {
+    return ref
         .watch(personServiceProvider)
-        .getTrendingPersons(timeWindow: timeWindow));
-
-final getCastProvider = FutureProvider.family<List<Person>, int>(
-    (ref, movieId) =>
-        ref.watch(personServiceProvider).getCast(movieId: movieId));
-
-final getPersonDetailsProvider = FutureProvider.family<PersonDetails, int>(
-  (ref, personId) =>
-      ref.watch(personServiceProvider).getPersonDetails(id: personId),
+        .getTrendingPersons(timeWindow: timeWindow);
+  },
 );
+
+typedef GetCastProvider = FutureProviderFamily<List<Person>, int>;
+
+final getCastProvider = GetCastProvider((ref, movieId) {
+  return ref.watch(personServiceProvider).getCast(movieId: movieId);
+});
+
+typedef GetPersonDetailsProvider = FutureProviderFamily<PersonDetails, int>;
+
+final getPersonDetailsProvider = GetPersonDetailsProvider((ref, personId) {
+  return ref.watch(personServiceProvider).getPersonDetails(id: personId);
+});
