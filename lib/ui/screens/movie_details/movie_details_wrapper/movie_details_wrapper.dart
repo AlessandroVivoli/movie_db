@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/models/movie/details/movie_details.dart';
+import '../../../../core/providers/user_provider.dart';
 import 'widgets/movie_account_actions/movie_account_actions.dart';
 import 'widgets/movie_casts.dart';
 import 'widgets/movie_description.dart';
@@ -10,13 +11,15 @@ import 'widgets/movie_info.dart';
 import 'widgets/movie_rating.dart';
 import 'widgets/similar_movie_list.dart';
 
-class MovieDetailsWrapper extends StatelessWidget {
+class MovieDetailsWrapper extends ConsumerWidget {
   final MovieDetails details;
 
   const MovieDetailsWrapper({super.key, required this.details});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProvider);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,13 +31,7 @@ class MovieDetailsWrapper extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MovieRating(details.voteAverage),
-              Consumer(
-                builder: (context, ref, child) {
-                  return MovieAccountActions(
-                    movieDetails: details,
-                  );
-                },
-              ),
+              if (user != null) MovieAccountActions(movieDetails: details),
               MovieDescription(details.overview!),
               MovieInfo(
                 budget: details.budget,
