@@ -11,7 +11,7 @@ final genreServiceProvider = Provider<IGenreService>(
 
 final getGenresProvider =
     FutureProvider((ref) => ref.watch(genreServiceProvider).getGenres().then(
-          (value) => null,
+          (value) => value,
           onError: (err) => logError(
             'Could not get genres.',
             err.error,
