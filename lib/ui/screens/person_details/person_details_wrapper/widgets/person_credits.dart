@@ -56,7 +56,7 @@ class _CreditsList extends ConsumerWidget {
           return MovieList(movieList: movies);
         },
         error: (error, stackTrace) {
-          logError('Could not get movie credits.', error, stackTrace);
+          
 
           context.showErrorSnackBar('Could not get movie credits.');
 

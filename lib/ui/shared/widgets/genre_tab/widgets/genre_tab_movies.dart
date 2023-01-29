@@ -45,7 +45,7 @@ class GenreTabMovies extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        logError('Could not get movies.');
+        
 
         context.showErrorSnackBar('Could not get movies.');
 

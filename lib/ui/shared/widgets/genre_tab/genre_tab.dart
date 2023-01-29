@@ -27,7 +27,7 @@ class GenreTab extends ConsumerWidget {
         return GenreTabController(data: genreList);
       },
       error: (error, stackTrace) {
-        logError('Could not get genres.', error, stackTrace);
+        
 
         context.showErrorSnackBar('Could not get genres.');
 

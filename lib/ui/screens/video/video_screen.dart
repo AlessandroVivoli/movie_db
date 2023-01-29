@@ -47,7 +47,7 @@ class VideoScreen extends ConsumerWidget {
           return Player(video: videos.first);
         },
         error: (error, stackTrace) {
-          logError('Cannot play movie trailer.', error, stackTrace);
+          
 
           context.showErrorSnackBar('Cannot play movie trailer.');
 
