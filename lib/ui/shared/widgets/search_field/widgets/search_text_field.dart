@@ -24,15 +24,15 @@ class SearchTextField extends HookWidget {
     final controller = useTextEditingController();
 
     useEffect(() {
-      inputFocusNode.addListener(() {
-        if (!inputFocusNode.hasFocus && controller.text.isEmpty) {
-          isTextField.value = false;
-        }
+      inputFocusNode.addListener(
+        () => focusNodeListener(inputFocusNode, controller, isTextField),
+      );
 
-        isTextField.value = inputFocusNode.hasFocus;
-      });
-
-      return null;
+      return () {
+        inputFocusNode.removeListener(
+          () => focusNodeListener(inputFocusNode, controller, isTextField),
+        );
+      };
     }, []);
 
     return HookBuilder(
@@ -97,5 +97,14 @@ class SearchTextField extends HookWidget {
         );
       },
     );
+  }
+
+  void focusNodeListener(FocusNode inputFocusNode,
+      TextEditingController controller, ValueNotifier<bool> isTextField) {
+    if (!inputFocusNode.hasFocus && controller.text.isEmpty) {
+      isTextField.value = false;
+    }
+
+    isTextField.value = inputFocusNode.hasFocus;
   }
 }

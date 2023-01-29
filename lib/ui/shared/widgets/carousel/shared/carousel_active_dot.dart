@@ -31,11 +31,11 @@ class CarouselActiveDot extends HookWidget {
     );
 
     useEffect(() {
-      controller.addListener(() {
-        activePage.value = controller.page ?? 0;
-      });
+      controller.addListener(() => controllerListener(activePage));
 
-      return null;
+      return () {
+        controller.removeListener(() => controllerListener(activePage));
+      };
     }, []);
 
     return Positioned(
@@ -47,5 +47,9 @@ class CarouselActiveDot extends HookWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
     );
+  }
+
+  void controllerListener(ValueNotifier<double> activePage) {
+    activePage.value = controller.page ?? 0;
   }
 }

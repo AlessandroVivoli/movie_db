@@ -38,6 +38,16 @@ class HomeScreen extends HookConsumerWidget {
       return null;
     }, [localStorage]);
 
+    useEffect(() {
+      final focusScope = FocusScope.of(context);
+
+      focusScope.addListener(() => focusListener(focusScope));
+
+      return () {
+        focusScope.removeListener(() => focusListener(focusScope));
+      };
+    }, []);
+
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -77,6 +87,12 @@ class HomeScreen extends HookConsumerWidget {
       accountDetails: accountDetails,
       sessionId: sessionId,
     );
+  }
+
+  void focusListener(FocusScopeNode focusScope) {
+    if (!focusScope.hasPrimaryFocus) {
+      focusScope.unfocus();
+    }
   }
 }
 

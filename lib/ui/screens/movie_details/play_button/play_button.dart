@@ -16,10 +16,10 @@ class PlayButton extends HookWidget {
     final playButtonScale = usePlayButtonScale(controller, offset.value).value;
 
     useEffect(() {
-      controller.addListener(() {
-        offset.value = controller.offset;
-      });
-      return null;
+      controller.addListener(() => controllerListener(offset));
+      return () {
+        controller.removeListener(() => controllerListener(offset));
+      };
     }, []);
 
     return Positioned(
@@ -36,5 +36,9 @@ class PlayButton extends HookWidget {
         ),
       ),
     );
+  }
+
+  void controllerListener(ValueNotifier<double> offset) {
+    offset.value = controller.offset;
   }
 }
