@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
+import 'utils/loggers/provider_logger.dart';
 import 'utils/router.dart';
 import 'utils/routes.dart';
 import 'utils/themes.dart';
@@ -31,7 +32,12 @@ void main() async {
     return true;
   };
 
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(ProviderScope(
+    observers: [
+      ProviderLogger(),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
