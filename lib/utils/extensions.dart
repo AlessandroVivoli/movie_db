@@ -80,11 +80,13 @@ extension ShowSnackBar on BuildContext {
 
   void showErrorSnackBar(String error) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(this).showSnackBar(
-        SnackBar(
-          content: ErrorSnackBarContent(message: error),
-        ),
-      );
+      ScaffoldMessenger.of(this)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: ErrorSnackBarContent(message: error),
+          ),
+        );
     });
   }
 }
