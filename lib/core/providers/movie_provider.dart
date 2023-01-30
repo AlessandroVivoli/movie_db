@@ -1,5 +1,4 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../utils/constants.dart';
 import '../interfaces/i_movie_service.dart';
@@ -17,150 +16,92 @@ final movieServiceProvider = Provider<IMovieService>(
   (ref) => MovieService(ref.watch(dioProvider)),
 );
 
-final getTrendingMoviesProvider =
-    FutureProvider.family<List<Movie>, TimeWindow>((ref, timeWindow) => ref
-        .watch(movieServiceProvider)
-        .getTrendingMovies(timeWindow: timeWindow)
-        .then(
-          (value) => value,
-          onError: (err) => logError(
-            'Could not get trending movies.',
-            err.error,
-            err.stackTrace,
-          ),
-        ));
+typedef GetTrendingMoviesProvider
+    = FutureProviderFamily<List<Movie>, TimeWindow>;
+
+final getTrendingMoviesProvider = GetTrendingMoviesProvider((ref, timeWindow) {
+  return ref
+      .watch(movieServiceProvider)
+      .getTrendingMovies(timeWindow: timeWindow);
+});
 
 final getTopRatedMoviesProvider = FutureProvider(
-  (ref) => ref.watch(movieServiceProvider).getTopRatedMovies().then(
-        (value) => value,
-        onError: (err) => logError(
-          'Could not get top rated movies.',
-          err.error,
-          err.stackTrace,
-        ),
-      ),
+  (ref) => ref.watch(movieServiceProvider).getTopRatedMovies(),
 );
 
-final getMoviesProvider =
-    FutureProvider.family<List<Movie>, MovieArguments>((ref, arguments) => ref
-        .watch(movieServiceProvider)
-        .getMovies(
+typedef GetMoviesProvider = FutureProviderFamily<List<Movie>, MovieArguments>;
+
+final getMoviesProvider = GetMoviesProvider(
+    (ref, arguments) => ref.watch(movieServiceProvider).getMovies(
           withGenres: arguments.withGenres,
           sortBy: arguments.sortBy,
           includeAdult: arguments.includeAdult,
-        )
-        .then(
-          (value) => value,
-          onError: (err) => logError(
-            'Could not get movies.',
-            err.error,
-            err.stackTrace,
-          ),
         ));
 
-final getSimilarMoviesProvider = FutureProvider.family<List<Movie>, int>(
-  (ref, movieId) =>
-      ref.watch(movieServiceProvider).getSimilarMovies(id: movieId).then(
-            (value) => value,
-            onError: (err) => logError(
-              'Could not get similar movies.',
-              err.error,
-              err.stackTrace,
-            ),
-          ),
-);
+typedef GetSimilarMoviesProvider = FutureProviderFamily<List<Movie>, int>;
 
-final getMovieDetailsProvider = FutureProvider.family<MovieDetails, int>(
-  (ref, movieId) async {
-    final movieService = ref.watch(movieServiceProvider);
-    final sessionId = ref.watch(localStorageProvider).getSessionId();
+final getSimilarMoviesProvider = GetSimilarMoviesProvider((ref, movieId) {
+  return ref.watch(movieServiceProvider).getSimilarMovies(id: movieId);
+});
 
-    MovieAccountState? state;
+typedef GetMovieDetailsProvider = FutureProviderFamily<MovieDetails, int>;
 
-    if (sessionId != null) {
-      state = await movieService.getAccountMovieState(
-        id: movieId,
-        sessionId: sessionId,
-      );
-    }
+final getMovieDetailsProvider = GetMovieDetailsProvider((ref, movieId) async {
+  final movieService = ref.watch(movieServiceProvider);
 
-    return movieService.getMovieDetails(id: movieId).then(
-          (details) => details.copyWith(
-            state: state,
-          ),
-          onError: (err) => logError(
-            'Could not get movie details.',
-            err.error,
-            err.stackTrace,
-          ),
-        );
-  },
-);
+  return _getMovieState(ref, movieService, movieId).then((movieState) {
+    return movieService
+        .getMovieDetails(id: movieId)
+        .then((movieDetails) => movieDetails.copyWith(state: movieState));
+  });
+});
 
-final getPersonCreditsProvider = FutureProvider.family<List<Movie>, int>((ref,
-        personId) =>
-    ref.watch(movieServiceProvider).getPersonCredits(personId: personId).then(
-          (value) => value,
-          onError: (err) => logError(
-            'Could not get movie credits.',
-            err.error,
-            err.stackTrace,
-          ),
+Future<MovieAccountState?> _getMovieState(
+  FutureProviderRef<MovieDetails> ref,
+  IMovieService movieService,
+  int movieId,
+) async {
+  final sessionId = ref.watch(localStorageProvider).getSessionId();
+
+  if (sessionId != null) {
+    return movieService.getAccountMovieState(id: movieId, sessionId: sessionId);
+  }
+
+  return null;
+}
+
+typedef GetPersonCreditsProvider = FutureProviderFamily<List<Movie>, int>;
+
+final getPersonCreditsProvider = GetPersonCreditsProvider((ref, personId) {
+  return ref.watch(movieServiceProvider).getPersonCredits(personId: personId);
+});
+
+typedef GetFavoriteMoviesProvider
+    = FutureProviderFamily<MovieListModel, AccountMovieArguments>;
+
+final getFavoriteMoviesProvider = GetFavoriteMoviesProvider(
+    (ref, args) => ref.watch(movieServiceProvider).getFavoriteMovies(
+          accountId: args.accountId,
+          sessionId: args.sessionId,
+          page: args.page,
         ));
 
-final getFavoriteMoviesProvider =
-    FutureProvider.family<MovieListModel, AccountMovieArguments>(
-  (ref, args) => ref
-      .watch(movieServiceProvider)
-      .getFavoriteMovies(
-        accountId: args.accountId,
-        sessionId: args.sessionId,
-        page: args.page,
-      )
-      .then(
-        (value) => value,
-        onError: (err) => logError(
-          'Could not get favorite movies.',
-          err.error,
-          err.stackTrace,
-        ),
-      ),
-);
+typedef GetRatedMoviesProvider
+    = FutureProviderFamily<MovieListModel, AccountMovieArguments>;
 
-final getRatedMoviesProvider =
-    FutureProvider.family<MovieListModel, AccountMovieArguments>(
-  (ref, args) => ref
-      .watch(movieServiceProvider)
-      .getRatedMovies(
-        accountId: args.accountId,
-        sessionId: args.sessionId,
-        page: args.page,
-      )
-      .then(
-        (value) => value,
-        onError: (err) => logError(
-          'Could not get rated movies.',
-          err.error,
-          err.stackTrace,
-        ),
-      ),
-);
+final getRatedMoviesProvider = GetRatedMoviesProvider(
+    (ref, args) => ref.watch(movieServiceProvider).getRatedMovies(
+          accountId: args.accountId,
+          sessionId: args.sessionId,
+          page: args.page,
+        ));
 
-final getMovieWatchlistProvider =
-    FutureProvider.family<MovieListModel, AccountMovieArguments>(
-  (ref, args) => ref
-      .watch(movieServiceProvider)
-      .getMovieWatchlist(
-        accountId: args.accountId,
-        sessionId: args.sessionId,
-        page: args.page,
-      )
-      .then(
-        (value) => value,
-        onError: (err) => logError(
-          'Could not get movie watchlist.',
-          err.error,
-          err.stackTrace,
-        ),
-      ),
-);
+typedef GetMovieWatchlistProvider
+    = FutureProviderFamily<MovieListModel, AccountMovieArguments>;
+
+final getMovieWatchlistProvider = GetMovieWatchlistProvider(
+    (ref, args) => ref.watch(movieServiceProvider).getMovieWatchlist(
+          accountId: args.accountId,
+          sessionId: args.sessionId,
+          page: args.page,
+        ));

@@ -1,5 +1,4 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../utils/constants.dart';
 import '../interfaces/i_person_service.dart';
@@ -16,43 +15,19 @@ typedef GetTrendingPersonsProvider
     = FutureProviderFamily<List<Person>, TimeWindow>;
 
 final getTrendingPersonsProvider = GetTrendingPersonsProvider(
-  (ref, timeWindow) {
-    return ref
-        .watch(personServiceProvider)
-        .getTrendingPersons(timeWindow: timeWindow)
-        .then(
-          (value) => value,
-          onError: (err) => logError(
-            'Could not get trending persons.',
-            err.error,
-            err.stackTrace,
-          ),
-        );
-  },
+  (ref, timeWindow) => ref
+      .watch(personServiceProvider)
+      .getTrendingPersons(timeWindow: timeWindow),
 );
 
 typedef GetCastProvider = FutureProviderFamily<List<Person>, int>;
 
 final getCastProvider = GetCastProvider((ref, movieId) {
-  return ref.watch(personServiceProvider).getCast(movieId: movieId).then(
-        (value) => value,
-        onError: (err) => logError(
-          'Could not get cast.',
-          err.error,
-          err.stackTrace,
-        ),
-      );
+  return ref.watch(personServiceProvider).getCast(movieId: movieId);
 });
 
 typedef GetPersonDetailsProvider = FutureProviderFamily<PersonDetails, int>;
 
 final getPersonDetailsProvider = GetPersonDetailsProvider((ref, personId) {
-  return ref.watch(personServiceProvider).getPersonDetails(id: personId).then(
-        (value) => value,
-        onError: (err) => logError(
-          'Could not get person details',
-          err.error,
-          err.stackTrace,
-        ),
-      );
+  return ref.watch(personServiceProvider).getPersonDetails(id: personId);
 });

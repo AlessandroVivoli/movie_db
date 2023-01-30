@@ -6,13 +6,13 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../utils/interceptors/query_interceptor.dart';
 
-final dioProvider = Provider(
-  (ref) => Dio(
+final dioProvider = Provider((ref) {
+  return Dio(
     BaseOptions(baseUrl: dotenv.get('BASE_URL')),
   )..interceptors.addAll(
       [
         QueryInterceptor(),
         if (!kDebugMode) PrettyDioLogger(),
       ],
-    ),
-);
+    );
+});
