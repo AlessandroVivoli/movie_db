@@ -8,7 +8,7 @@ abstract class IAuthService {
   /// Otherwise throws error.
   ///
   /// The `message` can then be displayed in a snack bar.
-  Future<String?> login({
+  Future<String> login({
     required String username,
     required String password,
   });
