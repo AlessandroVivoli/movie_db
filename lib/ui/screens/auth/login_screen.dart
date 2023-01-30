@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'widgets/password_text_field.dart';
 import 'widgets/submit_button.dart';
@@ -76,6 +78,36 @@ class _FormWidgets extends HookWidget {
         PasswordTextField(
           passwordController: passwordController,
           passwordNode: passwordNode,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 10,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              const Text(
+                'Powered by ',
+                style: TextStyle(
+                  fontSize: 12,
+                ),
+              ),
+              InkWell(
+                onTap: () async {
+                  if (await canLaunchUrl(Uri.https('www.themoviedb.org'))) {
+                    launchUrl(Uri.https('www.themoviedb.org'),
+                        mode: LaunchMode.externalApplication);
+                  }
+                },
+                child: SvgPicture.asset(
+                  'assets/tmdb-logo.svg',
+                  height: 16,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 10),
         SizedBox(
