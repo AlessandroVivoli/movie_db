@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/models/movie/details/movie_details.dart';
-import '../../../../core/providers/user_provider.dart';
+import '../../../../core/providers/auth_provider.dart';
 import 'widgets/movie_account_actions/movie_account_actions.dart';
 import 'widgets/movie_casts.dart';
 import 'widgets/movie_description.dart';
@@ -18,7 +18,7 @@ class MovieDetailsWrapper extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider);
+    final user = ref.watch(authProvider);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -31,7 +31,10 @@ class MovieDetailsWrapper extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MovieRating(details.voteAverage),
-              if (user != null) MovieAccountActions(movieDetails: details),
+              user.maybeWhen(
+                loggedIn: (user) => MovieAccountActions(movieDetails: details),
+                orElse: () => const SizedBox(height: 0),
+              ),
               MovieDescription(details.overview!),
               MovieInfo(
                 budget: details.budget,

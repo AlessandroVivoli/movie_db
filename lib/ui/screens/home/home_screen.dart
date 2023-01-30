@@ -5,9 +5,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/models/user/user.dart';
 import '../../../core/providers/account_service_provider.dart';
+import '../../../core/providers/auth_provider.dart';
 import '../../../core/providers/local_storage_provider.dart';
 import '../../../core/providers/movie_provider.dart';
-import '../../../core/providers/user_provider.dart';
+import '../../../core/unions/auth_state.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/extensions.dart';
 import '../../shared/widgets/account_drawer/account_drawer.dart';
@@ -26,17 +27,15 @@ class HomeScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
-    final localStorage = ref.read(localStorageProvider);
-
-    final sessionId = localStorage?.getSessionId();
-
     useEffect(() {
+      final sessionId = ref.read(localStorageProvider).getSessionId();
+
       if (sessionId != null) {
         getUser(ref, sessionId);
       }
 
       return null;
-    }, [localStorage]);
+    }, []);
 
     return SafeArea(
       top: false,
@@ -73,9 +72,11 @@ class HomeScreen extends HookConsumerWidget {
         .read(accountServiceProvider)
         .getAccountDetails(sessionId: sessionId);
 
-    ref.read(userProvider.notifier).state = User(
-      accountDetails: accountDetails,
-      sessionId: sessionId,
+    ref.read(authProvider.notifier).state = AuthState.loggedIn(
+      User(
+        accountDetails: accountDetails,
+        sessionId: sessionId,
+      ),
     );
   }
 }

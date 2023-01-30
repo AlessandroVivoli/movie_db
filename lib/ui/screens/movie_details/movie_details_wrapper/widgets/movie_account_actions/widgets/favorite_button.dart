@@ -6,8 +6,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
 import '../../../../../../../core/providers/account_service_provider.dart';
-import '../../../../../../../core/providers/user_provider.dart';
+import '../../../../../../../core/providers/auth_provider.dart';
 import '../../../../../../../utils/extensions.dart';
+import '../../../../../../shared/widgets/errors/error_text.dart';
 
 class FavoriteButton extends HookConsumerWidget {
   const FavoriteButton({
@@ -21,8 +22,8 @@ class FavoriteButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider)!;
-    final accountService = ref.read(accountServiceProvider);
+    final user = ref.watch(authProvider);
+    final accountService = ref.watch(accountServiceProvider);
 
     final favorited = useState(favorite);
 
@@ -42,28 +43,31 @@ class FavoriteButton extends HookConsumerWidget {
       ),
     );
 
-    return IconButton(
-      onPressed: () async {
-        final code = await accountService
-            .markMovieAsFavorite(
-              accountId: user.accountDetails.id,
-              favorite: !favorited.value,
-              movieId: movieId,
-              sessionId: user.sessionId,
-            )
-            .catchError((error) => showError(context, error));
+    return user.maybeWhen(
+      loggedIn: (user) => IconButton(
+        onPressed: () async {
+          final code = await accountService
+              .markMovieAsFavorite(
+                accountId: user.accountDetails.id,
+                favorite: !favorited.value,
+                movieId: movieId,
+                sessionId: user.sessionId,
+              )
+              .catchError((error) => showError(context, error));
 
-        if (code != -1) {
-          favorited.value = !favorited.value;
-        }
-      },
-      icon: ScaleTransition(
-        scale: animation,
-        child: FaIcon(
-          buildIcon(favorited.value),
-          color: buildColor(favorited.value, context),
+          if (code != -1) {
+            favorited.value = !favorited.value;
+          }
+        },
+        icon: ScaleTransition(
+          scale: animation,
+          child: FaIcon(
+            buildIcon(favorited.value),
+            color: buildColor(favorited.value, context),
+          ),
         ),
       ),
+      orElse: () => const ErrorText('You\'re not logged in.'),
     );
   }
 

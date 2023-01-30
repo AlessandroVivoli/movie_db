@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/error/invalid_user_error.dart';
 import '../../../../core/providers/auth_provider.dart';
-import '../../../../core/providers/user_provider.dart';
 import '../../../../utils/extensions.dart';
 
 class SubmitButton extends ConsumerWidget {
@@ -25,8 +24,6 @@ class SubmitButton extends ConsumerWidget {
     return auth.when(
       loggedIn: (user) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          ref.read(userProvider.notifier).state = user;
-
           Navigator.pop(context, false);
         });
 

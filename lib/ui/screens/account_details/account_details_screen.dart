@@ -3,10 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/providers/account_service_provider.dart';
+import '../../../core/providers/auth_provider.dart';
 import '../../../core/providers/image_provider.dart';
-import '../../../core/providers/user_provider.dart';
 import '../../../utils/enums.dart';
 import '../../shared/widgets/backdrop_image/backdrop_image.dart';
+import '../../shared/widgets/errors/error_text.dart';
 import 'account_details_wrapper/account_details_wrapper.dart';
 
 class AccountDetailsScreen extends StatelessWidget {
@@ -46,11 +47,15 @@ class _UsernameText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider);
+    final user = ref.watch(authProvider);
 
-    return Text(
-      user!.accountDetails.username,
-      overflow: TextOverflow.ellipsis,
+    return user.maybeWhen(
+      loggedIn: (user) => Text(
+        user.accountDetails.username,
+        overflow: TextOverflow.ellipsis,
+      ),
+      loading: () => const CircularProgressIndicator(),
+      orElse: () => const ErrorText('Not logged in.'),
     );
   }
 }
@@ -60,24 +65,27 @@ class _AccountDetailsImage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider);
-    final accountAvatarService = ref.read(accountAvatarServiceProvider);
-    final imageService = ref.read(imageServiceProvider);
+    final user = ref.watch(authProvider);
+    final accountAvatarService = ref.watch(accountAvatarServiceProvider);
+    final imageService = ref.watch(imageServiceProvider);
 
-    return BackdropImage(
-      imgUrl: (user!.accountDetails.avatar.tmdb.avatarPath != null)
-          ? imageService.getImageUrl(
-              size: ProfileSizes.original.name,
-              path: user.accountDetails.profilePath,
-            )
-          : accountAvatarService.getAccountAvatar(
-              hash: user.accountDetails.profilePath,
-              size: 2000,
-            ),
-      placeholderIcon: const Icon(
-        Icons.person,
-        size: 100,
+    return user.maybeWhen(
+      loggedIn: (user) => BackdropImage(
+        imgUrl: (user.accountDetails.avatar.tmdb.avatarPath != null)
+            ? imageService.getImageUrl(
+                size: ProfileSizes.original.name,
+                path: user.accountDetails.profilePath,
+              )
+            : accountAvatarService.getAccountAvatar(
+                hash: user.accountDetails.profilePath,
+                size: 2000,
+              ),
+        placeholderIcon: const Icon(
+          Icons.person,
+          size: 100,
+        ),
       ),
+      orElse: () => const Center(child: ErrorText('You\'re not logged in!')),
     );
   }
 }

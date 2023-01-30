@@ -7,24 +7,25 @@ import 'package:loggy/loggy.dart';
 import '../../../../../../../../../core/interfaces/i_movie_service.dart';
 import '../../../../../../../../../core/models/movie/account_state/rate/movie_rate.dart';
 import '../../../../../../../../../core/providers/movie_provider.dart';
-import '../../../../../../../../../core/providers/user_provider.dart';
 import '../../../../../../../../../utils/extensions.dart';
 
 class ConfirmButton extends HookConsumerWidget {
   final double rating;
   final double originalRating;
   final int movieId;
+  final String sessionId;
 
   const ConfirmButton({
     super.key,
     required this.rating,
     required this.movieId,
     required this.originalRating,
+    required this.sessionId,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final movieService = ref.read(movieServiceProvider);
+    final movieService = ref.watch(movieServiceProvider);
 
     final loading = useState(false);
 
@@ -61,7 +62,7 @@ class ConfirmButton extends HookConsumerWidget {
     final code = await movieService
         .rateMovie(
           id: movieId,
-          sessionId: ref.watch(userProvider)!.sessionId,
+          sessionId: sessionId,
           rating: rating,
         )
         .catchError((error) => showError(context, error));
