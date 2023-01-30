@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/providers/local_storage_provider.dart';
+import 'core/services/local_storage_repository.dart';
 import 'utils/loggers/provider_logger.dart';
 import 'utils/router.dart';
 import 'utils/routes.dart';
@@ -11,6 +14,8 @@ import 'utils/themes.dart';
 
 void main() async {
   await dotenv.load();
+
+  final prefs = await SharedPreferences.getInstance();
 
   Loggy.initLoggy(
     logOptions: const LogOptions(
@@ -35,6 +40,11 @@ void main() async {
   runApp(ProviderScope(
     observers: [
       ProviderLogger(),
+    ],
+    overrides: [
+      localStorageProvider.overrideWithValue(
+        LocalStorageRepository(prefs),
+      )
     ],
     child: const MyApp(),
   ));
