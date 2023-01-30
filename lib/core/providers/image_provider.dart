@@ -7,7 +7,7 @@ import '../services/image_service.dart';
 import 'dio_provider.dart';
 
 final imageServiceProvider = Provider<IImageService>(
-  (ref) => ImageService(ref.read(dioProvider)),
+  (ref) => ImageService(ref.watch(dioProvider)),
 );
 
 final getPersonImagesProvider = FutureProvider.family<List<ImageModel>, int>(

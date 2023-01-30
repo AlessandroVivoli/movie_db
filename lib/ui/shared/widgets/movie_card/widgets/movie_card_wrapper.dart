@@ -18,7 +18,7 @@ class MovieCardWrapper extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imageService = ref.read(imageServiceProvider);
+    final imageService = ref.watch(imageServiceProvider);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

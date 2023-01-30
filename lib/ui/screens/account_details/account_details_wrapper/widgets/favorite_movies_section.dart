@@ -62,7 +62,7 @@ class _FavoriteMoviesHookBuilder extends HookConsumerWidget {
 
     return Consumer(
       builder: (context, ref, child) {
-        final sessionId = ref.read(localStorageProvider)?.getSessionId();
+        final sessionId = ref.watch(localStorageProvider).getSessionId();
 
         final favoriteMovies = ref.watch(
           getFavoriteMoviesProvider(

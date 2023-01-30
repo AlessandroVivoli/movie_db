@@ -6,7 +6,7 @@ import '../services/genre_service.dart';
 import 'dio_provider.dart';
 
 final genreServiceProvider = Provider<IGenreService>(
-  (ref) => GenreService(ref.read(dioProvider)),
+  (ref) => GenreService(ref.watch(dioProvider)),
 );
 
 final getGenresProvider =

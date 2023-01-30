@@ -14,7 +14,7 @@ import 'dio_provider.dart';
 import 'local_storage_provider.dart';
 
 final movieServiceProvider = Provider<IMovieService>(
-  (ref) => MovieService(ref.read(dioProvider)),
+  (ref) => MovieService(ref.watch(dioProvider)),
 );
 
 final getTrendingMoviesProvider =
@@ -72,8 +72,8 @@ final getSimilarMoviesProvider = FutureProvider.family<List<Movie>, int>(
 
 final getMovieDetailsProvider = FutureProvider.family<MovieDetails, int>(
   (ref, movieId) async {
-    final movieService = ref.read(movieServiceProvider);
-    final sessionId = ref.watch(localStorageProvider)?.getSessionId();
+    final movieService = ref.watch(movieServiceProvider);
+    final sessionId = ref.watch(localStorageProvider).getSessionId();
 
     MovieAccountState? state;
 

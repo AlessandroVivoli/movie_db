@@ -7,7 +7,7 @@ import '../services/video_service.dart';
 import 'dio_provider.dart';
 
 final videoServiceProvider = Provider<IVideoService>((ref) {
-  return VideoService(ref.read(dioProvider));
+  return VideoService(ref.watch(dioProvider));
 });
 
 typedef GetVideosProvider = FutureProviderFamily<List<Video>, int>;

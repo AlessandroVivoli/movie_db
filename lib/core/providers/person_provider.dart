@@ -9,7 +9,7 @@ import '../services/person_service.dart';
 import 'dio_provider.dart';
 
 final personServiceProvider = Provider<IPersonService>((ref) {
-  return PersonService(ref.read(dioProvider));
+  return PersonService(ref.watch(dioProvider));
 });
 
 typedef GetTrendingPersonsProvider
