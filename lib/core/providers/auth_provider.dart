@@ -30,9 +30,10 @@ class AuthNotifier extends Notifier<AuthState> {
 
     bool success = false;
     if (sessionId != null) {
-      success = await ref.read(authServiceProvider).logout(
-            sessionId: sessionId,
-          );
+      success = await ref
+          .read(authServiceProvider)
+          .logout(sessionId: sessionId)
+          .catchError((e) => false);
     }
 
     if (!success) {
