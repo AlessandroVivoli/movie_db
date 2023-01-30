@@ -53,19 +53,21 @@ class AuthNotifier extends Notifier<AuthState> {
     return ref
         .read(authServiceProvider)
         .login(username: username, password: password)
-        .then(
-      (sessionId) async {
-        ref.read(localStorageProvider).setSessionId(sessionId);
+        .then(_getUser);
+  }
 
-        return ref
-            .read(accountServiceProvider)
-            .getAccountDetails(sessionId: sessionId)
-            .then((accountDetails) => User(
-                  accountDetails: accountDetails,
-                  sessionId: sessionId,
-                ));
-      },
-    );
+  Future<User> _getUser(String sessionId) {
+    ref.read(localStorageProvider).setSessionId(sessionId);
+
+    return ref
+        .read(accountServiceProvider)
+        .getAccountDetails(sessionId: sessionId)
+        .then(
+          (accountDetails) => User(
+            accountDetails: accountDetails,
+            sessionId: sessionId,
+          ),
+        );
   }
 
   User? _handleLoginError(DioError err) {
