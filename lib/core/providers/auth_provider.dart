@@ -57,11 +57,13 @@ class AuthNotifier extends Notifier<AuthState> {
       (sessionId) async {
         ref.read(localStorageProvider).setSessionId(sessionId);
 
-        final accountDetails = await ref
+        return ref
             .read(accountServiceProvider)
-            .getAccountDetails(sessionId: sessionId);
-
-        return User(accountDetails: accountDetails, sessionId: sessionId);
+            .getAccountDetails(sessionId: sessionId)
+            .then((accountDetails) => User(
+                  accountDetails: accountDetails,
+                  sessionId: sessionId,
+                ));
       },
     );
   }
