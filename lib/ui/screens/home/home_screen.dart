@@ -13,6 +13,7 @@ import '../../../utils/constants.dart';
 import '../../../utils/extensions.dart';
 import '../../shared/widgets/account_drawer/account_drawer.dart';
 import '../../shared/widgets/carousel/movie_carousel/movie_carousel.dart';
+import '../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../shared/widgets/errors/error_text.dart';
 import '../../shared/widgets/genre_tab/genre_tab.dart';
 import '../../shared/widgets/search_field/search_field.dart';
@@ -31,7 +32,7 @@ class HomeScreen extends HookConsumerWidget {
       final sessionId = ref.read(localStorageProvider).getSessionId();
 
       if (sessionId != null) {
-        getUser(ref, sessionId);
+        getUser(ref, sessionId, context);
       }
 
       return null;
@@ -67,16 +68,27 @@ class HomeScreen extends HookConsumerWidget {
     );
   }
 
-  void getUser(WidgetRef ref, String sessionId) async {
-    final accountDetails = await ref
+  void getUser(WidgetRef ref, String sessionId, BuildContext context) async {
+    ref
         .read(accountServiceProvider)
-        .getAccountDetails(sessionId: sessionId);
-
-    ref.read(authProvider.notifier).state = AuthState.loggedIn(
-      User(
-        accountDetails: accountDetails,
-        sessionId: sessionId,
+        .getAccountDetails(sessionId: sessionId)
+        .then(
+      (accountDetails) =>
+          ref.read(authProvider.notifier).state = AuthState.loggedIn(
+        User(
+          accountDetails: accountDetails,
+          sessionId: sessionId,
+        ),
       ),
+      onError: (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: ErrorSnackBarContent(
+              message: 'Could not get user.',
+            ),
+          ),
+        );
+      },
     );
   }
 }
