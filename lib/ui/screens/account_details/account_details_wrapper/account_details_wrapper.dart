@@ -26,7 +26,7 @@ class AccountDetailsWrapper extends HookConsumerWidget {
             if (user.accountDetails.name != null)
               AccountDetailsNameText(name: user.accountDetails.name!),
             FavoriteMoviesSection(
-              accountDetails: user.accountDetails,
+              user: user,
               onReturn: () => (reloadKey.value = UniqueKey()),
             ),
             WatchlistSection(
