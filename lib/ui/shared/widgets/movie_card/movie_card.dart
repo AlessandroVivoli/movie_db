@@ -7,14 +7,9 @@ import 'widgets/movie_card_wrapper.dart';
 class MovieCard extends StatelessWidget {
   final Movie movie;
 
-  final void Function()? onReturn;
-  final bool refreshOnReturn;
-
   const MovieCard({
     super.key,
     required this.movie,
-    this.onReturn,
-    this.refreshOnReturn = false,
   });
 
   @override
@@ -28,10 +23,6 @@ class MovieCard extends StatelessWidget {
             AppRoute.movie,
             arguments: movie.id,
           );
-
-          if (onReturn != null) {
-            onReturn!();
-          }
         },
         child: MovieCardWrapper(movie: movie),
       ),

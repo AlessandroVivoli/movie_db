@@ -13,11 +13,9 @@ class FavoriteMoviesSection extends StatelessWidget {
   const FavoriteMoviesSection({
     super.key,
     required this.user,
-    this.onReturn,
   });
 
   final User user;
-  final void Function()? onReturn;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +37,6 @@ class FavoriteMoviesSection extends StatelessWidget {
             height: 290,
             child: _FavoriteMoviesHookBuilder(
               user: user,
-              onReturn: onReturn,
             ),
           ),
         ],
@@ -51,11 +48,9 @@ class FavoriteMoviesSection extends StatelessWidget {
 class _FavoriteMoviesHookBuilder extends HookConsumerWidget {
   const _FavoriteMoviesHookBuilder({
     required this.user,
-    required this.onReturn,
   });
 
   final User user;
-  final void Function()? onReturn;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -85,8 +80,6 @@ class _FavoriteMoviesHookBuilder extends HookConsumerWidget {
               onPageChanged: (index) {
                 page.value = index;
               },
-              refreshOnReturn: true,
-              onReturn: onReturn,
             );
           },
           error: (error, stackTrace) {

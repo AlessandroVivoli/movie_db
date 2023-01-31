@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/providers/auth_provider.dart';
@@ -15,7 +14,6 @@ class AccountDetailsWrapper extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authProvider);
-    final reloadKey = useState(UniqueKey());
 
     return user.maybeWhen(
       loggedIn: (user) => Padding(
@@ -27,15 +25,12 @@ class AccountDetailsWrapper extends HookConsumerWidget {
               AccountDetailsNameText(name: user.accountDetails.name!),
             FavoriteMoviesSection(
               user: user,
-              onReturn: () => (reloadKey.value = UniqueKey()),
             ),
             WatchlistSection(
               user: user,
-              onReturn: () => (reloadKey.value = UniqueKey()),
             ),
             RatedMoviesSection(
               user: user,
-              onReturn: () => (reloadKey.value = UniqueKey()),
             ),
           ],
         ),

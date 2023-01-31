@@ -10,10 +10,9 @@ import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/paged_movie_list/paged_movie_list.dart';
 
 class RatedMoviesSection extends StatelessWidget {
-  const RatedMoviesSection({super.key, required this.user, this.onReturn});
+  const RatedMoviesSection({super.key, required this.user});
 
   final User user;
-  final void Function()? onReturn;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,6 @@ class RatedMoviesSection extends StatelessWidget {
             height: 290,
             child: _RatedMoviesHookWidget(
               user: user,
-              onReturn: onReturn,
             ),
           ),
         ],
@@ -47,11 +45,9 @@ class RatedMoviesSection extends StatelessWidget {
 class _RatedMoviesHookWidget extends HookConsumerWidget {
   const _RatedMoviesHookWidget({
     required this.user,
-    required this.onReturn,
   });
 
   final User user;
-  final void Function()? onReturn;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -79,8 +75,6 @@ class _RatedMoviesHookWidget extends HookConsumerWidget {
           onPageChanged: (index) {
             page.value = index;
           },
-          refreshOnReturn: true,
-          onReturn: onReturn,
         );
       },
       error: (error, stackTrace) {

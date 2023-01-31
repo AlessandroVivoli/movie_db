@@ -8,16 +8,11 @@ class MovieList extends StatelessWidget {
   final double padding;
   final ScrollController? controller;
 
-  final bool? refreshOnReturn;
-  final void Function()? onReturn;
-
   const MovieList({
     super.key,
     required this.movieList,
     this.padding = 0,
     this.controller,
-    this.refreshOnReturn,
-    this.onReturn,
   });
 
   @override
@@ -35,8 +30,6 @@ class MovieList extends StatelessWidget {
       itemBuilder: (context, index) {
         return MovieCard(
           movie: movieList[index],
-          refreshOnReturn: refreshOnReturn ?? false,
-          onReturn: onReturn,
         );
       },
     );

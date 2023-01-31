@@ -9,14 +9,10 @@ class PagedMovieList extends HookWidget {
     super.key,
     required this.movieList,
     this.onPageChanged,
-    this.onReturn,
-    this.refreshOnReturn,
   });
 
   final MovieListModel movieList;
   final void Function(int page)? onPageChanged;
-  final void Function()? onReturn;
-  final bool? refreshOnReturn;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +24,6 @@ class PagedMovieList extends HookWidget {
           child: MovieList(
             movieList: movieList.results,
             controller: scrollController,
-            onReturn: onReturn,
-            refreshOnReturn: refreshOnReturn,
           ),
         ),
         SizedBox(

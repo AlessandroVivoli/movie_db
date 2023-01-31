@@ -13,11 +13,9 @@ class WatchlistSection extends StatelessWidget {
   const WatchlistSection({
     super.key,
     required this.user,
-    this.onReturn,
   });
 
   final User user;
-  final void Function()? onReturn;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +37,6 @@ class WatchlistSection extends StatelessWidget {
             height: 290,
             child: _WatchlistHookWidget(
               user: user,
-              onReturn: onReturn,
             ),
           ),
         ],
@@ -51,11 +48,9 @@ class WatchlistSection extends StatelessWidget {
 class _WatchlistHookWidget extends HookConsumerWidget {
   const _WatchlistHookWidget({
     required this.user,
-    required this.onReturn,
   });
 
   final User user;
-  final void Function()? onReturn;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -83,8 +78,6 @@ class _WatchlistHookWidget extends HookConsumerWidget {
           onPageChanged: (index) {
             page.value = index;
           },
-          refreshOnReturn: true,
-          onReturn: onReturn,
         );
       },
       error: (error, stackTrace) {
