@@ -6,8 +6,10 @@ import '../services/account_avatar_service.dart';
 import '../services/account_service.dart';
 import 'dio_provider.dart';
 
-final accountServiceProvider =
-    Provider<IAccountService>((ref) => AccountService(ref.watch(dioProvider)));
+final accountServiceProvider = Provider<IAccountService>(
+  (ref) => AccountService(ref.watch(dioProvider)),
+);
 
-final accountAvatarServiceProvider =
-    Provider<IAccountAvatarService>((ref) => AccountAvatarService());
+final accountAvatarServiceProvider = Provider<IAccountAvatarService>(
+  (ref) => AccountAvatarService(),
+);
