@@ -153,7 +153,7 @@ class MovieService implements IMovieService {
   }
 
   @override
-  Future<int> rateMovie({
+  Future<void> rateMovie({
     required int id,
     required String sessionId,
     required double rating,
@@ -173,7 +173,7 @@ class MovieService implements IMovieService {
   }
 
   @override
-  Future<int> deleteRating({
+  Future<void> deleteRating({
     required int id,
     required String sessionId,
   }) {

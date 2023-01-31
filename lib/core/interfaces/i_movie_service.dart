@@ -71,17 +71,17 @@ abstract class IMovieService {
   });
 
   /// Sets the movie [rating] using the movie [id] and [sessionId]
-  Future<int> rateMovie({
+  Future<void> rateMovie({
     required int id,
     required String sessionId,
     required double rating,
   });
 
-  /// Deletes the movie [rating] set by user
+  /// Deletes the movie rating set by user
   ///
   /// [id] is the movie id\
   /// [sessionId] is the user session id
-  Future<int> deleteRating({
+  Future<void> deleteRating({
     required int id,
     required String sessionId,
   });
