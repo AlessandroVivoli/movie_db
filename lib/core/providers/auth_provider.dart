@@ -26,28 +26,11 @@ class AuthNotifier extends Notifier<AuthState> {
   Future<void> logout() async {
     state = const AuthState.loading();
 
-    final sessionId = ref.read(localStorageProvider).getSessionId();
-
-    bool success = false;
-    if (sessionId != null) {
-      success = await ref
-          .read(authServiceProvider)
-          .logout(sessionId: sessionId)
-          .catchError((e) => false);
-    }
-
-    if (!success) {
-      state = AuthState.error(
-        Exception('Could not logout'),
-        StackTrace.current,
-      );
-
-      return;
-    }
-
-    ref.read(localStorageProvider).setSessionId(null);
-
-    state = const AuthState.loggedOut();
+    await _logout().then((success) {
+      if (success) {
+        state = const AuthState.loggedOut();
+      }
+    });
   }
 
   Future<User> _login(String username, String password) async {
@@ -93,6 +76,30 @@ class AuthNotifier extends Notifier<AuthState> {
     logError(message, err, err.stackTrace);
 
     return null;
+  }
+
+  Future<bool> _logout() async {
+    final sessionId = ref.read(localStorageProvider).getSessionId();
+
+    bool success = false;
+
+    if (sessionId != null) {
+      success = await ref
+          .read(authServiceProvider)
+          .logout(sessionId: sessionId)
+          .catchError(
+        (e) {
+          state = AuthState.error(e, e.stackTrace);
+          return false;
+        },
+      );
+    }
+
+    if (success) {
+      ref.read(localStorageProvider).setSessionId(null);
+    }
+
+    return success;
   }
 
   @override
