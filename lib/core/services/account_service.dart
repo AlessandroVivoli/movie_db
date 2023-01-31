@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../interfaces/i_account_service.dart';
 import '../models/account/account_details.dart';
+import '../models/user/user.dart';
 
 class AccountService implements IAccountService {
   final Dio _dio;
@@ -23,21 +24,20 @@ class AccountService implements IAccountService {
 
   @override
   Future<int> markMovieAsFavorite({
-    required int accountId,
+    required User user,
     required int movieId,
-    required String sessionId,
     required bool favorite,
   }) {
     return _dio
         .post(
-          '/account/$accountId/favorite',
+          '/account/${user.accountDetails.id}/favorite',
           data: {
             'media_type': 'movie',
             'media_id': movieId,
             'favorite': favorite,
           },
           queryParameters: {
-            'session_id': sessionId,
+            'session_id': user.sessionId,
           },
           options: Options(contentType: 'application/json;charset=utf-8'),
         )
@@ -46,15 +46,14 @@ class AccountService implements IAccountService {
 
   @override
   Future<int> addMovieToWatchList({
-    required int accountId,
+    required User user,
     required int movieId,
-    required String sessionId,
     required bool watchlist,
   }) {
     return _dio.post(
-      '/account/$accountId/watchlist',
+      '/account/${user.accountDetails.id}/watchlist',
       queryParameters: {
-        'session_id': sessionId,
+        'session_id': user.sessionId,
       },
       data: {
         'media_type': 'movie',

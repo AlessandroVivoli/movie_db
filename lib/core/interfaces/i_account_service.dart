@@ -1,4 +1,5 @@
 import '../models/account/account_details.dart';
+import '../models/user/user.dart';
 
 abstract class IAccountService {
   /// Returns [AccountDetails] future using the valid session id.
@@ -8,9 +9,8 @@ abstract class IAccountService {
   ///
   /// Returns the status code of the api response.
   Future<int> markMovieAsFavorite({
-    required int accountId,
+    required User user,
     required int movieId,
-    required String sessionId,
     required bool favorite,
   });
 
@@ -18,9 +18,8 @@ abstract class IAccountService {
   ///
   /// Returns the status code of the api response.
   Future<int> addMovieToWatchList({
-    required int accountId,
+    required User user,
     required int movieId,
-    required String sessionId,
     required bool watchlist,
   });
 }
