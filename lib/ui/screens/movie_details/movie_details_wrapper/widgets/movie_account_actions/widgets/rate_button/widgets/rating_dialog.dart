@@ -46,10 +46,9 @@ class RatingDialog extends HookConsumerWidget {
                       width: 80,
                       height: 36,
                       child: DeleteButton(
-                        rating: rating.value,
                         movieId: movieId,
                         originalRating: this.rating,
-                        sessionId: user.sessionId,
+                        user: user,
                       ),
                     ),
                     SizedBox(
@@ -59,7 +58,7 @@ class RatingDialog extends HookConsumerWidget {
                         rating: rating.value,
                         movieId: movieId,
                         originalRating: this.rating,
-                        sessionId: user.sessionId,
+                        user: user,
                       ),
                     ),
                   ],

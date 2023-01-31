@@ -1,82 +1,92 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
-import '../../../../../../../../../core/interfaces/i_movie_service.dart';
+import '../../../../../../../../../core/models/user/user.dart';
 import '../../../../../../../../../core/providers/movie_provider.dart';
 import '../../../../../../../../../utils/extensions.dart';
 
-class DeleteButton extends HookConsumerWidget {
+class DeleteButton extends ConsumerWidget {
   const DeleteButton({
     super.key,
-    required this.rating,
     required this.movieId,
     required this.originalRating,
-    required this.sessionId,
+    required this.user,
   });
 
-  final double rating;
   final double originalRating;
   final int movieId;
-  final String sessionId;
+  final User user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final movieService = ref.watch(movieServiceProvider);
+    final deleteRating = ref.watch(deleteRatingProvider);
 
-    final loading = useState(false);
-
-    if (!loading.value) {
-      return OutlinedButton(
-        onPressed: (originalRating > 0)
-            ? () => onDelete(loading, context, movieService, ref)
-            : null,
-        style: OutlinedButton.styleFrom(
-          foregroundColor: Colors.red,
-          side: BorderSide(
-            color: (originalRating > 0) ? Colors.red : Colors.grey,
-            width: 2,
-          ),
-        ),
-        child: const Text('Delete'),
-      );
-    }
-
-    return const Center(
-      child: CircularProgressIndicator(
-        color: Colors.red,
+    return deleteRating.when(
+      init: () => _DeleteButton(
+        movieId: movieId,
+        originalRating: originalRating,
+        user: user,
       ),
+      completed: () {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.pop(context);
+        });
+
+        return _DeleteButton(
+          movieId: movieId,
+          user: user,
+          originalRating: originalRating,
+        );
+      },
+      loading: () => const Center(
+        child: CircularProgressIndicator(
+          color: Colors.red,
+        ),
+      ),
+      error: (error, stackTrace) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.pop(context);
+        });
+
+        context.showErrorSnackBar('Could not delete rating');
+
+        return _DeleteButton(
+          originalRating: originalRating,
+          user: user,
+          movieId: movieId,
+        );
+      },
     );
   }
+}
 
-  void onDelete(
-    ValueNotifier<bool> loading,
-    BuildContext context,
-    IMovieService movieService,
-    WidgetRef ref,
-  ) async {
-    loading.value = true;
+class _DeleteButton extends ConsumerWidget {
+  const _DeleteButton({
+    required this.originalRating,
+    required this.user,
+    required this.movieId,
+  });
 
-    final code = await movieService
-        .deleteRating(id: movieId, sessionId: sessionId)
-        .catchError((error) => showError(context, error));
+  final double originalRating;
+  final User user;
+  final int movieId;
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (code == -1) {
-        return Navigator.pop(context, false);
-      }
-
-      return Navigator.pop(context, true);
-    });
-  }
-
-  int showError(BuildContext context, DioError error) {
-    logError('Could not delete rating.', error.error, error.stackTrace);
-
-    context.showErrorSnackBar('Could not delete rating.');
-
-    return -1;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return OutlinedButton(
+      onPressed: (originalRating > 0)
+          ? () => ref
+              .read(deleteRatingProvider.notifier)
+              .deleteRating(movieId, user.sessionId)
+          : null,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.red,
+        side: BorderSide(
+          color: (originalRating > 0) ? Colors.red : Colors.grey,
+          width: 2,
+        ),
+      ),
+      child: const Text('Delete'),
+    );
   }
 }
