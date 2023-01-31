@@ -187,4 +187,20 @@ class MovieService implements IMovieService {
         )
         .then((res) => res.data['status_code']);
   }
+
+  @override
+  Future<MovieListModel> searchMovies({
+    required String query,
+    bool includeAdult = false,
+    int page = 1,
+  }) {
+    return _dio.get(
+      '/search/movie',
+      queryParameters: {
+        'query': query,
+        'include_adult': includeAdult,
+        'page': page,
+      },
+    ).then((res) => MovieListModel.fromJson(res.data));
+  }
 }

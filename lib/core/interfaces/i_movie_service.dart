@@ -85,4 +85,10 @@ abstract class IMovieService {
     required int id,
     required String sessionId,
   });
+
+  Future<MovieListModel> searchMovies({
+    required String query,
+    bool includeAdult = false,
+    int page = 1,
+  });
 }
