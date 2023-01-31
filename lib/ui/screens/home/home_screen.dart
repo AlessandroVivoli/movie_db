@@ -11,12 +11,13 @@ import '../../../core/providers/movie_provider.dart';
 import '../../../core/unions/auth_state.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/extensions.dart';
+import '../../../utils/routes.dart';
 import '../../shared/widgets/account_drawer/account_drawer.dart';
 import '../../shared/widgets/carousel/movie_carousel/movie_carousel.dart';
 import '../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../shared/widgets/errors/error_text.dart';
 import '../../shared/widgets/genre_tab/genre_tab.dart';
-import '../../shared/widgets/search_field/search_field.dart';
+import '../../shared/widgets/search/custom_search_delegate.dart';
 import 'home_wrapper/home_wrapper.dart';
 
 class HomeScreen extends HookConsumerWidget {
@@ -110,17 +111,22 @@ class _AppBar extends StatelessWidget {
       centerTitle: true,
       titleSpacing: 10,
       actions: [
-        Consumer(
-          builder: (context, ref, child) {
-            return SearchField(
-              searchBuilder: (context, searchTerm) {
-                return List<Widget>.empty();
-              },
-              onSubmit: (searchTerm) {
-                // Add navigation to search results screen
-              },
+        IconButton(
+          onPressed: () {
+            showSearch(
+              context: context,
+              delegate: CustomSearchDelegate(),
+            ).then(
+              (movieId) => (movieId != null)
+                  ? Navigator.pushNamed(
+                      context,
+                      AppRoute.movie,
+                      arguments: movieId,
+                    )
+                  : null,
             );
           },
+          icon: const Icon(Icons.search),
         ),
       ],
       expandedHeight: 200,
