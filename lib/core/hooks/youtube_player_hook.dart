@@ -14,20 +14,23 @@ YoutubePlayerController useYoutubePlayerController({
   );
 }
 
+typedef __YoutubePlayerState
+    = HookState<YoutubePlayerController, _YoutubePlayerControllerHook>;
+
 class _YoutubePlayerControllerHook extends Hook<YoutubePlayerController> {
-  const _YoutubePlayerControllerHook(
-      {required this.initialVideoId, required this.flags});
+  const _YoutubePlayerControllerHook({
+    required this.initialVideoId,
+    required this.flags,
+  });
 
   final String initialVideoId;
   final YoutubePlayerFlags flags;
 
   @override
-  HookState<YoutubePlayerController, Hook<YoutubePlayerController>>
-      createState() => __YoutubePlayerControllerHookState();
+  __YoutubePlayerState createState() => __YoutubePlayerControllerHookState();
 }
 
-class __YoutubePlayerControllerHookState
-    extends HookState<YoutubePlayerController, _YoutubePlayerControllerHook> {
+class __YoutubePlayerControllerHookState extends __YoutubePlayerState {
   late final controller = YoutubePlayerController(
     initialVideoId: hook.initialVideoId,
     flags: hook.flags,
