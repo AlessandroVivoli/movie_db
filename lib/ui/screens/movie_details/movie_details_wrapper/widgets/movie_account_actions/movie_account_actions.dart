@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../core/models/movie/account_state/rate/movie_rate.dart';
 import '../../../../../../core/models/movie/details/movie_details.dart';
 import 'widgets/favorite_button.dart';
 import 'widgets/rate_button/rate_button.dart';
@@ -17,6 +18,8 @@ class MovieAccountActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final rated = movieDetails.state!.rated;
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 10, top: 10),
       child: Row(
@@ -24,7 +27,9 @@ class MovieAccountActions extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           RateButton(
-            rated: movieDetails.state!.rated,
+            rate: (movieDetails.state!.rated is bool)
+                ? const MovieRate(value: 0)
+                : MovieRate.fromJson(rated),
             movieId: movieDetails.id,
           ),
           Row(
