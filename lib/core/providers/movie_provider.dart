@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../utils/constants.dart';
 import '../../utils/enums.dart';
@@ -15,6 +16,8 @@ import '../unions/rate_state.dart';
 import 'account_service_provider.dart';
 import 'dio_provider.dart';
 import 'local_storage_provider.dart';
+
+part 'movie_provider.g.dart';
 
 final movieServiceProvider = Provider<IMovieService>(
   name: 'MovieServiceProvider',
@@ -239,4 +242,16 @@ dynamic _refreshMovies(Ref ref, int movieId, RefreshType type) {
   }
 
   ref.invalidate(getMovieDetailsProvider(movieId));
+}
+
+@riverpod
+Future<MovieListModel> searchMovies(
+  SearchMoviesRef ref, {
+  required String query,
+  bool includeAdult = false,
+  int page = 1,
+}) async {
+  return ref
+      .watch(movieServiceProvider)
+      .searchMovies(query: query, includeAdult: includeAdult, page: page);
 }
