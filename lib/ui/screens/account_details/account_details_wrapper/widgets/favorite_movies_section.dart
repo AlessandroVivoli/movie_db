@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/models/account/account_details.dart';
-import '../../../../../core/models/movie/account_movie_arguments.dart';
-import '../../../../../core/providers/local_storage_provider.dart';
+import '../../../../../core/models/movie/user_movie_arguments.dart';
+import '../../../../../core/models/user/user.dart';
 import '../../../../../core/providers/movie_provider.dart';
 import '../../../../../utils/extensions.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
@@ -13,11 +12,11 @@ import '../../../../shared/widgets/paged_movie_list/paged_movie_list.dart';
 class FavoriteMoviesSection extends StatelessWidget {
   const FavoriteMoviesSection({
     super.key,
-    required this.accountDetails,
+    required this.user,
     this.onReturn,
   });
 
-  final AccountDetails accountDetails;
+  final User user;
   final void Function()? onReturn;
 
   @override
@@ -39,7 +38,9 @@ class FavoriteMoviesSection extends StatelessWidget {
           SizedBox(
             height: 290,
             child: _FavoriteMoviesHookBuilder(
-                accountDetails: accountDetails, onReturn: onReturn),
+              user: user,
+              onReturn: onReturn,
+            ),
           ),
         ],
       ),
@@ -49,11 +50,11 @@ class FavoriteMoviesSection extends StatelessWidget {
 
 class _FavoriteMoviesHookBuilder extends HookConsumerWidget {
   const _FavoriteMoviesHookBuilder({
-    required this.accountDetails,
+    required this.user,
     required this.onReturn,
   });
 
-  final AccountDetails accountDetails;
+  final User user;
   final void Function()? onReturn;
 
   @override
@@ -62,13 +63,10 @@ class _FavoriteMoviesHookBuilder extends HookConsumerWidget {
 
     return Consumer(
       builder: (context, ref, child) {
-        final sessionId = ref.watch(localStorageProvider).getSessionId();
-
         final favoriteMovies = ref.watch(
           getFavoriteMoviesProvider(
-            AccountMovieArguments(
-              accountId: accountDetails.id,
-              sessionId: sessionId!,
+            UserMovieArguments(
+              user: user,
               page: page.value,
             ),
           ),
