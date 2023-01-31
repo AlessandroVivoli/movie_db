@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/models/movie/account_movie_arguments.dart';
+import '../../../../../core/models/movie/user_movie_arguments.dart';
 import '../../../../../core/models/user/user.dart';
 import '../../../../../core/providers/movie_provider.dart';
 import '../../../../../utils/extensions.dart';
@@ -63,9 +63,8 @@ class _WatchlistHookWidget extends HookConsumerWidget {
 
     final movieWatchlist = ref.watch(
       getMovieWatchlistProvider(
-        AccountMovieArguments(
-          accountId: user.accountDetails.id,
-          sessionId: user.sessionId,
+        UserMovieArguments(
+          user: user,
           page: page.value,
         ),
       ),
