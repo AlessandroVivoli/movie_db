@@ -67,8 +67,10 @@ class AuthNotifier extends Notifier<AuthState> {
       return ref
           .read(authServiceProvider)
           .logout(sessionId: sessionId)
-          .then((success) => const AuthState.loggedOut())
-          .catchError(AuthState.error);
+          .then((success) {
+        ref.read(localStorageProvider).setSessionId(null);
+        return const AuthState.loggedOut();
+      }).catchError(AuthState.error);
     }
 
     return Future(
