@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/providers/auth/auth_provider.dart';
@@ -6,7 +7,7 @@ import '../../../../utils/routes.dart';
 import 'widgets/logged_in_drawer_view/logged_in_drawer_view.dart';
 import 'widgets/logged_out_drawer_view/logged_out_drawer_view.dart';
 
-class AccountDrawer extends ConsumerWidget {
+class AccountDrawer extends HookConsumerWidget {
   const AccountDrawer({
     super.key,
     this.onLogin,
@@ -17,9 +18,11 @@ class AccountDrawer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authProvider);
 
-    return SafeArea(
-      child: user.maybeWhen(
-        loggedIn: (user) => LoggedInDrawerView(
+    final widget = useState<Widget>(const LoggedOutDrawerView());
+
+    user.whenOrNull<void>(
+      loggedIn: (user) {
+        widget.value = LoggedInDrawerView(
           accountDetails: user.accountDetails,
           onPressed: () {
             ref.read(authProvider.notifier).logout();
@@ -32,15 +35,13 @@ class AccountDrawer extends ConsumerWidget {
               arguments: user.accountDetails,
             );
           },
-        ),
-        orElse: () => LoggedOutDrawerView(
-          onLogin: () {
-            if (onLogin != null) {
-              onLogin!();
-            }
-          },
-        ),
-      ),
+        );
+      },
+      loggedOut: () {
+        widget.value = const LoggedOutDrawerView();
+      },
     );
+
+    return SafeArea(child: widget.value);
   }
 }
