@@ -21,9 +21,7 @@ class RateMovieNotifier extends AutoDisposeNotifier<RateState> {
   }
 
   @override
-  RateState build() {
-    return const RateState.init();
-  }
+  RateState build() => const RateState.init();
 
   void _refreshRatings(Ref ref, int movieId) {
     ref.invalidate(getMovieDetailsProvider(movieId));
