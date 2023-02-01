@@ -75,8 +75,6 @@ class AuthNotifier extends Notifier<AuthState> {
   Future<void> init() async {
     final sessionId = ref.read(localStorageProvider).getSessionId();
 
-    state = AuthState.error('Something went wrong', StackTrace.current);
-
     if (sessionId == null) {
       state = const AuthState.loggedOut();
       return;
