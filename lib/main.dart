@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/providers/auth/auth_provider.dart';
 import 'core/providers/local_storage/local_storage_provider.dart';
 import 'core/services/local_storage_repository.dart';
 import 'utils/loggers/provider_logger.dart';
@@ -37,24 +38,32 @@ void main() async {
     return true;
   };
 
-  runApp(ProviderScope(
-    observers: [
-      ProviderLogger(),
-    ],
+  final container = ProviderContainer(
     overrides: [
       localStorageProvider.overrideWithValue(
         LocalStorageRepository(prefs),
       )
     ],
-    child: const MyApp(),
-  ));
+  );
+
+  await container.read(authProvider.notifier).init();
+
+  runApp(
+    ProviderScope(
+      observers: [
+        ProviderLogger(),
+      ],
+      parent: container,
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       color: const Color.fromARGB(255, 17, 25, 37),
