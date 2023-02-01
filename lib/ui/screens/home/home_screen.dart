@@ -14,7 +14,6 @@ import '../../../utils/extensions.dart';
 import '../../../utils/routes.dart';
 import '../../shared/widgets/account_drawer/account_drawer.dart';
 import '../../shared/widgets/carousel/movie_carousel/movie_carousel.dart';
-import '../../shared/widgets/errors/error_snack_bar_content.dart';
 import '../../shared/widgets/errors/error_text.dart';
 import '../../shared/widgets/genre_tab/genre_tab.dart';
 import '../../shared/widgets/search/custom_search_delegate.dart';
@@ -74,23 +73,17 @@ class HomeScreen extends HookConsumerWidget {
         .read(accountServiceProvider)
         .getAccountDetails(sessionId: sessionId)
         .then(
-      (accountDetails) =>
-          ref.read(authProvider.notifier).state = AuthState.loggedIn(
-        User(
-          accountDetails: accountDetails,
-          sessionId: sessionId,
-        ),
-      ),
-      onError: (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: ErrorSnackBarContent(
-              message: 'Could not get user.',
-            ),
+      (accountDetails) {
+        ref.read(authProvider.notifier).state = AuthState.loggedIn(
+          User(
+            accountDetails: accountDetails,
+            sessionId: sessionId,
           ),
         );
       },
-    );
+    ).catchError((_) {
+      context.showErrorSnackBar('Could not get user.');
+    });
   }
 }
 
