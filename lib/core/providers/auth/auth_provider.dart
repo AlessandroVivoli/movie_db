@@ -66,8 +66,10 @@ class AuthNotifier extends Notifier<AuthState> {
     final sessionId = ref.read(localStorageProvider).getSessionId();
 
     if (sessionId == null) {
-      return Future.error('Not logged in.');
+      return Future.error(Exception('Not logged in.'));
     }
+
+    ref.read(localStorageProvider).setSessionId(null);
 
     return ref.read(authServiceProvider).logout(sessionId: sessionId);
   }
