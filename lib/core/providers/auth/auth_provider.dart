@@ -58,15 +58,15 @@ class AuthNotifier extends Notifier<AuthState> {
     state = const AuthState.loading();
 
     state = await _logout()
-        .then((success) => const AuthState.loggedOut())
+        .then((_) => const AuthState.loggedOut())
         .catchError(AuthState.error);
   }
 
-  Future<bool> _logout() async {
+  Future<void> _logout() {
     final sessionId = ref.read(localStorageProvider).getSessionId();
 
     if (sessionId == null) {
-      throw Exception('Not logged in.');
+      return Future.error('Not logged in.');
     }
 
     return ref.read(authServiceProvider).logout(sessionId: sessionId);
@@ -75,7 +75,12 @@ class AuthNotifier extends Notifier<AuthState> {
   Future<void> init() async {
     final sessionId = ref.read(localStorageProvider).getSessionId();
 
-    if (sessionId == null) return;
+    if (sessionId == null) {
+      state = const AuthState.loggedOut();
+      return;
+    }
+
+    state = const AuthState.loading();
 
     state = await ref
         .read(accountServiceProvider)
@@ -88,7 +93,7 @@ class AuthNotifier extends Notifier<AuthState> {
             ),
           ),
         )
-        .catchError((error) => const AuthState.loggedOut());
+        .catchError(AuthState.error);
   }
 
   @override
