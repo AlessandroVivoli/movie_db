@@ -2,14 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
-import '../error/invalid_user_error.dart';
-import '../interfaces/i_auth_service.dart';
-import '../models/user/user.dart';
-import '../services/auth_service.dart';
-import '../unions/auth_state.dart';
-import 'account_service_provider.dart';
-import 'dio_provider.dart';
-import 'local_storage_provider.dart';
+import '../../error/invalid_user_error.dart';
+import '../../models/user/user.dart';
+import '../../unions/auth_state.dart';
+import '../account/account_service_provider.dart';
+import '../local_storage/local_storage_provider.dart';
+import 'auth_service_provider.dart';
 
 class AuthNotifier extends Notifier<AuthState> {
   Future<void> login(String username, String password) async {
@@ -107,10 +105,6 @@ class AuthNotifier extends Notifier<AuthState> {
     return const AuthState.loggedOut();
   }
 }
-
-final authServiceProvider = Provider<IAuthService>(
-  (ref) => AuthService(ref.watch(dioProvider)),
-);
 
 final authProvider = NotifierProvider<AuthNotifier, AuthState>(() {
   return AuthNotifier();

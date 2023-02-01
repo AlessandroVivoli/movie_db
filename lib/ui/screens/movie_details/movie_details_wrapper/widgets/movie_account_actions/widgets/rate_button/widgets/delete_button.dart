@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../../core/models/user/user.dart';
-import '../../../../../../../../../core/providers/movie_provider.dart';
+import '../../../../../../../../../core/providers/movie/rated_movies/delete_rating_provider.dart';
 import '../../../../../../../../../utils/extensions.dart';
 
 class DeleteButton extends ConsumerWidget {

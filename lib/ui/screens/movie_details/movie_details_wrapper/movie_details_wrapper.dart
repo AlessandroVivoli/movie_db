@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/models/movie/details/movie_details.dart';
-import '../../../../core/providers/auth_provider.dart';
+import '../../../../core/providers/auth/auth_provider.dart';
 import 'widgets/movie_account_actions/movie_account_actions.dart';
 import 'widgets/movie_casts.dart';
 import 'widgets/movie_description.dart';

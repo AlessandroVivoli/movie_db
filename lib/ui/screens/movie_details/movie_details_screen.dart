@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/models/movie/details/movie_details.dart';
-import '../../../core/providers/movie_provider.dart';
+import '../../../core/providers/movie/get_movie_details_provider.dart';
 import '../../../utils/extensions.dart';
 import '../../../utils/routes.dart';
 import '../../shared/widgets/errors/error_text.dart';

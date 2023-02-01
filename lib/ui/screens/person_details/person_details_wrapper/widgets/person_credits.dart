@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
-import '../../../../../core/providers/movie_provider.dart';
+import '../../../../../core/providers/movie/get_person_credits_provider.dart';
 import '../../../../../utils/extensions.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/movie_list/movie_list.dart';
@@ -56,8 +55,6 @@ class _CreditsList extends ConsumerWidget {
           return MovieList(movieList: movies);
         },
         error: (error, stackTrace) {
-          
-
           context.showErrorSnackBar('Could not get movie credits.');
 
           return const Center(

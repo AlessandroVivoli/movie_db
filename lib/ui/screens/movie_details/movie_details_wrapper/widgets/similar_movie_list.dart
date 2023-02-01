@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/models/movie/details/movie_details.dart';
-import '../../../../../core/providers/movie_provider.dart';
+import '../../../../../core/providers/movie/get_similar_movies_provider.dart';
 import '../../../../../utils/extensions.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/movie_list/movie_list.dart';

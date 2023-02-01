@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/providers/account_service_provider.dart';
-import '../../../core/providers/auth_provider.dart';
-import '../../../core/providers/image_provider.dart';
+import '../../../core/providers/account/account_avatar_service_provider.dart';
+import '../../../core/providers/auth/auth_provider.dart';
+import '../../../core/providers/image/image_service_provider.dart';
 import '../../../utils/enums.dart';
 import '../../shared/widgets/backdrop_image/backdrop_image.dart';
 import '../../shared/widgets/errors/error_text.dart';

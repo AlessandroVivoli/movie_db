@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../core/providers/auth_provider.dart';
+import '../../../../../../core/providers/auth/auth_provider.dart';
 import '../../../../../../utils/routes.dart';
 
 class LoggedOutDrawerView extends ConsumerWidget {

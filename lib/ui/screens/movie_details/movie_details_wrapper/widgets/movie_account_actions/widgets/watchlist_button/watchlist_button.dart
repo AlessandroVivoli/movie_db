@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../core/models/movie/movie_user_action_arguments.dart';
-import '../../../../../../../../core/providers/auth_provider.dart';
-import '../../../../../../../../core/providers/movie_provider.dart';
+import '../../../../../../../../core/providers/auth/auth_provider.dart';
+import '../../../../../../../../core/providers/movie/movie_watchlist/add_movie_to_watchlist_provider.dart';
 import '../../../../../../../../utils/extensions.dart';
 import '../../../../../../../shared/widgets/errors/error_text.dart';
 

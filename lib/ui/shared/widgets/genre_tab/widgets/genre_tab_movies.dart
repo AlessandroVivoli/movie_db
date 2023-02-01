@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../../../../core/models/movie/movie_arguments.dart';
-import '../../../../../core/providers/movie_provider.dart';
+import '../../../../../core/providers/movie/get_movies_provider.dart';
 import '../../../../../utils/constants.dart';
 import '../../../../../utils/extensions.dart';
 import '../../errors/error_text.dart';
@@ -45,8 +44,6 @@ class GenreTabMovies extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        
-
         context.showErrorSnackBar('Could not get movies.');
 
         return const Center(

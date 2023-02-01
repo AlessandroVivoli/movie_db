@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/models/movie/user_movie_arguments.dart';
 import '../../../../../core/models/user/user.dart';
-import '../../../../../core/providers/movie_provider.dart';
+import '../../../../../core/providers/movie/rated_movies/get_rated_movies_provider.dart';
 import '../../../../../utils/extensions.dart';
 import '../../../../shared/widgets/errors/error_text.dart';
 import '../../../../shared/widgets/paged_movie_list/paged_movie_list.dart';

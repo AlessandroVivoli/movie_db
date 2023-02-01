@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/providers/auth_provider.dart';
+import '../../../../core/providers/auth/auth_provider.dart';
 import '../../../../utils/routes.dart';
 import 'widgets/logged_in_drawer_view/logged_in_drawer_view.dart';
 import 'widgets/logged_out_drawer_view/logged_out_drawer_view.dart';

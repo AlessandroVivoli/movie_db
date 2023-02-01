@@ -3,8 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../core/models/movie/movie_list.dart';
-import '../../../../../../core/providers/auth_provider.dart';
-import '../../../../../../core/providers/movie_provider.dart';
+import '../../../../../../core/providers/auth/auth_provider.dart';
+import '../../../../../../core/providers/movie/search_movies_provider.dart';
 import '../../../errors/error_text.dart';
 import '../../../movie_card/movie_card.dart';
 

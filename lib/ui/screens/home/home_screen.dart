@@ -4,10 +4,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/models/user/user.dart';
-import '../../../core/providers/account_service_provider.dart';
-import '../../../core/providers/auth_provider.dart';
-import '../../../core/providers/local_storage_provider.dart';
-import '../../../core/providers/movie_provider.dart';
+import '../../../core/providers/account/account_service_provider.dart';
+import '../../../core/providers/auth/auth_provider.dart';
+import '../../../core/providers/local_storage/local_storage_provider.dart';
+import '../../../core/providers/movie/get_trending_movies_provider.dart';
 import '../../../core/unions/auth_state.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/extensions.dart';

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/models/person/details/person_details.dart';
-import '../../../../../core/providers/image_provider.dart';
+import '../../../../../core/providers/image/get_person_images_provider.dart';
 import '../../../../../utils/extensions.dart';
 import '../../../../shared/widgets/carousel/image_carousel/image_carousel.dart';
 import '../../../../shared/widgets/errors/error_text.dart';

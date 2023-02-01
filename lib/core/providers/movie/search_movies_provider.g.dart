@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'movie_provider.dart';
+part of 'search_movies_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$searchMoviesHash() => r'ad69f429711b6253aa65f7be4cd3372a7a288f44';
+String _$searchMoviesHash() => r'bba1ec0b796cc33f0bf3dacf122e99fa6b01957e';
 
 /// See also [searchMovies].
 class SearchMoviesProvider extends AutoDisposeFutureProvider<MovieListModel> {

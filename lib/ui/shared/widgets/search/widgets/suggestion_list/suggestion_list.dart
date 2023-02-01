@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../core/providers/auth_provider.dart';
-import '../../../../../../core/providers/image_provider.dart';
-import '../../../../../../core/providers/movie_provider.dart';
+import '../../../../../../core/providers/auth/auth_provider.dart';
+import '../../../../../../core/providers/image/image_service_provider.dart';
+import '../../../../../../core/providers/movie/search_movies_provider.dart';
 import '../../../../../../utils/enums.dart';
 import '../../../../../../utils/extensions.dart';
 import '../../../../../../utils/routes.dart';

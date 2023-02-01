@@ -5,7 +5,7 @@ import '../interfaces/i_person_service.dart';
 import '../models/person/details/person_details.dart';
 import '../models/person/person.dart';
 import '../services/person_service.dart';
-import 'dio_provider.dart';
+import 'dio/dio_provider.dart';
 
 final personServiceProvider = Provider<IPersonService>((ref) {
   return PersonService(ref.watch(dioProvider));

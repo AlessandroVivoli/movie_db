@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
-import '../../../../core/providers/genre_provider.dart';
+import '../../../../core/providers/genre/get_genres_provider.dart';
 import '../../../../utils/extensions.dart';
 import '../errors/error_text.dart';
 import 'widgets/genre_tab_controller.dart';
@@ -27,8 +26,6 @@ class GenreTab extends ConsumerWidget {
         return GenreTabController(data: genreList);
       },
       error: (error, stackTrace) {
-        
-
         context.showErrorSnackBar('Could not get genres.');
 
         return const Center(

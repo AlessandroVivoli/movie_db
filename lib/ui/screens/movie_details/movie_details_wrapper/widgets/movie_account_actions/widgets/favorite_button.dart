@@ -4,8 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../core/models/movie/movie_user_action_arguments.dart';
-import '../../../../../../../core/providers/auth_provider.dart';
-import '../../../../../../../core/providers/movie_provider.dart';
+import '../../../../../../../core/providers/auth/auth_provider.dart';
+import '../../../../../../../core/providers/movie/favorite_movies/add_movie_to_favorites_provider.dart';
 import '../../../../../../../utils/extensions.dart';
 import '../../../../../../shared/widgets/errors/error_text.dart';
 

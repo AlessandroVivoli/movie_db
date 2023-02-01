@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'core/providers/local_storage_provider.dart';
+import 'core/providers/local_storage/local_storage_provider.dart';
 import 'core/services/local_storage_repository.dart';
 import 'utils/loggers/provider_logger.dart';
 import 'utils/router.dart';
