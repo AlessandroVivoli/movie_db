@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../error/invalid_user_error.dart';
 import '../../models/user/user.dart';
@@ -13,22 +12,25 @@ class AuthNotifier extends Notifier<AuthState> {
   Future<void> login(String username, String password) async {
     state = const AuthState.loading();
 
-    await _login(username, password).then(
-      (user) {
-        state = AuthState.loggedIn(user);
-      },
-      onError: (e) => _handleLoginError(e),
-    );
+    state = await _login(username, password)
+        .then(AuthState.loggedIn)
+        .catchError(_handleLoginError);
   }
 
-  Future<void> logout() async {
-    state = const AuthState.loading();
+  AuthState _handleLoginError(Object error, StackTrace stackTrace) {
+    if (error is DioError && error.response?.data['status_code'] == 30) {
+      final invalidUserError = InvalidUserError(
+        error: error,
+        stackTrace: error.stackTrace!,
+      );
 
-    await _logout().then((success) {
-      if (success) {
-        state = const AuthState.loggedOut();
-      }
-    });
+      return AuthState.error(
+        invalidUserError,
+        invalidUserError.stackTrace,
+      );
+    }
+
+    return AuthState.error(error, stackTrace);
   }
 
   Future<User> _login(String username, String password) async {
@@ -52,52 +54,29 @@ class AuthNotifier extends Notifier<AuthState> {
         );
   }
 
-  User? _handleLoginError(DioError err) {
-    var message = 'Could not login.';
+  Future<void> logout() async {
+    state = const AuthState.loading();
 
-    if (err.response?.data['status_code'] == 30) {
-      message = 'Invalid username and/or password';
-
-      final invalidUserError = InvalidUserError(
-        error: err,
-        stackTrace: err.stackTrace!,
-      );
-
-      state = AuthState.error(
-        invalidUserError,
-        invalidUserError.stackTrace,
-      );
-    } else {
-      state = AuthState.error(err, err.stackTrace!);
-    }
-
-    logError(message, err, err.stackTrace);
-
-    return null;
+    state = await _logout();
   }
 
-  Future<bool> _logout() async {
+  Future<AuthState> _logout() {
     final sessionId = ref.read(localStorageProvider).getSessionId();
 
-    bool success = false;
-
     if (sessionId != null) {
-      success = await ref
+      return ref
           .read(authServiceProvider)
           .logout(sessionId: sessionId)
-          .catchError(
-        (e) {
-          state = AuthState.error(e, e.stackTrace);
-          return false;
-        },
-      );
+          .then((success) => const AuthState.loggedOut())
+          .catchError(AuthState.error);
     }
 
-    if (success) {
-      ref.read(localStorageProvider).setSessionId(null);
-    }
-
-    return success;
+    return Future(
+      () => AuthState.error(
+        Exception('Not logged in'),
+        StackTrace.current,
+      ),
+    );
   }
 
   @override
