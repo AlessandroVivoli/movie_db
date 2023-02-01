@@ -36,12 +36,12 @@ class AuthService implements IAuthService {
   }
 
   @override
-  Future<bool> logout({required String sessionId}) {
+  Future<void> logout({required String sessionId}) {
     return _dio.delete(
       '/authentication/session',
       data: {
         'session_id': sessionId,
       },
-    ).then((res) => res.data['success']);
+    );
   }
 }

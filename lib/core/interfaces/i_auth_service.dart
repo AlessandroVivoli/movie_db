@@ -14,8 +14,5 @@ abstract class IAuthService {
   });
 
   /// Used to logout user from the tmdb account
-  ///
-  /// Returns `true` if logout was successful. \
-  /// Otherwise returns `false`.
-  Future<bool> logout({required String sessionId});
+  Future<void> logout({required String sessionId});
 }
