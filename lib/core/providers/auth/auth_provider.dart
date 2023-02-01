@@ -57,44 +57,38 @@ class AuthNotifier extends Notifier<AuthState> {
   Future<void> logout() async {
     state = const AuthState.loading();
 
-    state = await _logout();
+    state = await _logout()
+        .then((success) => const AuthState.loggedOut())
+        .catchError(AuthState.error);
   }
 
-  Future<AuthState> _logout() {
+  Future<bool> _logout() async {
     final sessionId = ref.read(localStorageProvider).getSessionId();
 
     if (sessionId == null) {
-      return Future(
-        () => AuthState.error(
-          Exception('Not logged in'),
-          StackTrace.current,
-        ),
-      );
+      throw Exception('Not logged in.');
     }
 
-    return ref
-        .read(authServiceProvider)
-        .logout(sessionId: sessionId)
-        .then((success) {
-      ref.read(localStorageProvider).setSessionId(null);
-      return const AuthState.loggedOut();
-    }).catchError(AuthState.error);
+    return ref.read(authServiceProvider).logout(sessionId: sessionId);
   }
 
   Future<void> init() async {
     final sessionId = ref.read(localStorageProvider).getSessionId();
 
-    if (sessionId != null) {
-      ref
-          .read(accountServiceProvider)
-          .getAccountDetails(sessionId: sessionId)
-          .then(
-            (details) => state = AuthState.loggedIn(
-              User(accountDetails: details, sessionId: sessionId),
+    if (sessionId == null) return;
+
+    state = await ref
+        .read(accountServiceProvider)
+        .getAccountDetails(sessionId: sessionId)
+        .then(
+          (details) => AuthState.loggedIn(
+            User(
+              accountDetails: details,
+              sessionId: sessionId,
             ),
-          )
-          .catchError((error) => state = const AuthState.loggedOut());
-    }
+          ),
+        )
+        .catchError((error) => const AuthState.loggedOut());
   }
 
   @override
