@@ -1,7 +1,10 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../data/local_storage_repository.dart';
 
-final localStorageProvider = Provider<LocalStorageRepository>((ref) {
+part 'local_storage_provider.g.dart';
+
+@riverpod
+LocalStorageRepository localStorage(LocalStorageRef ref) {
   throw UnimplementedError();
-});
+}

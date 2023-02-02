@@ -1,10 +1,11 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/image_model.dart';
 import 'image_service_provider.dart';
 
-typedef GetPersonImagesProvider = FutureProviderFamily<List<ImageModel>, int>;
+part 'get_person_images_provider.g.dart';
 
-final getPersonImagesProvider = GetPersonImagesProvider((ref, personId) {
+@riverpod
+Future<List<ImageModel>> getPersonImages(GetPersonImagesRef ref, int personId) {
   return ref.watch(imageServiceProvider).getPersonImages(id: personId);
-});
+}

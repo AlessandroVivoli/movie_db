@@ -1,28 +1,31 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../features/account/provider/account_service_provider.dart';
-import '../../domain/movie_user_action_arguments.dart';
+import '../../../account/provider/account_service_provider.dart';
+import '../../../auth/domain/user.dart';
 import '../get_movie_details_provider.dart';
 import 'get_favorite_movies_provider.dart';
 
-typedef AddMovieToFavoritesProvider
-    = FutureProviderFamily<void, MovieUserActionArguments>;
+part 'add_movie_to_favorites_provider.g.dart';
 
-final addMovieToFavoritesProvider = AddMovieToFavoritesProvider(
-  name: 'AddMovieToFavoritesProvider',
-  (ref, args) => ref
+@riverpod
+Future<void> addMovieToFavorites(
+  AddMovieToFavoritesRef ref, {
+  required User user,
+  required int movieId,
+  required bool favorite,
+}) {
+  return ref
       .watch(accountServiceProvider)
       .markMovieAsFavorite(
-        user: args.user,
-        movieId: args.movieId,
-        favorite: args.action,
+        user: user,
+        movieId: movieId,
+        favorite: favorite,
       )
-      .then(
-        (_) => _refreshFavorites(ref, args.movieId),
-      ),
-);
+      .then((_) => _refreshFavorites(ref, movieId));
+}
 
-_refreshFavorites(FutureProviderRef<void> ref, int movieId) {
+_refreshFavorites(Ref ref, int movieId) {
   ref.invalidate(addMovieToFavoritesProvider);
   ref.invalidate(getMovieDetailsProvider(movieId));
   ref.invalidate(getFavoriteMoviesProvider);

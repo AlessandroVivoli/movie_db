@@ -1,3 +1,4 @@
+import '../../auth/domain/user.dart';
 import '../../time_window/domain/time_window.dart';
 import 'account_state/movie_account_state.dart';
 import 'movie.dart';
@@ -31,7 +32,7 @@ abstract class IMovieService {
   Future<List<Movie>> getMovies({
     List<int>? withGenres,
     SortBy sortBy = SortBy.popularityDesc,
-    bool? includeAdult,
+    bool includeAdult = false,
   });
 
   /// Returns [MovieDetails] future using the provided movie [id]
@@ -51,22 +52,19 @@ abstract class IMovieService {
 
   /// Returns the user favorite movie list.
   Future<MovieListModel> getFavoriteMovies({
-    required int accountId,
-    required String sessionId,
+    required User user,
     int page = 1,
   });
 
   /// Returns the user movie watchlist.
   Future<MovieListModel> getMovieWatchlist({
-    required int accountId,
-    required String sessionId,
+    required User user,
     int page = 1,
   });
 
   /// Returns the user rated movie list.
   Future<MovieListModel> getRatedMovies({
-    required int accountId,
-    required String sessionId,
+    required User user,
     int page = 1,
   });
 

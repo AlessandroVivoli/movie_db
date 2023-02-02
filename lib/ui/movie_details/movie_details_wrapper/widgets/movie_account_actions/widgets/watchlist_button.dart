@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../core/extensions.dart';
 import '../../../../../../../features/auth/provider/auth_provider.dart';
+import '../../../../../../core/extensions.dart';
 import '../../../../../../core/widgets/errors/error_text.dart';
-import '../../../../../../features/movies/domain/movie_user_action_arguments.dart';
 import '../../../../../../features/movies/provider/movie_watchlist/add_movie_to_watchlist_provider.dart';
 
 class WatchlistButton extends ConsumerWidget {
@@ -34,11 +33,9 @@ class WatchlistButton extends ConsumerWidget {
           ref
               .read(
                 addMovieToWatchlistProvider(
-                  MovieUserActionArguments(
-                    user: user,
-                    movieId: movieId,
-                    action: !watchlist,
-                  ),
+                  user: user,
+                  movieId: movieId,
+                  watchlist: !watchlist,
                 ),
               )
               .whenOrNull(

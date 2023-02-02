@@ -1,11 +1,15 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/rate_state.dart';
 import '../get_movie_details_provider.dart';
 import '../movie_service_provider.dart';
 import 'get_rated_movies_provider.dart';
 
-class RateMovieNotifier extends AutoDisposeNotifier<RateState> {
+part 'rate_movies_provider.g.dart';
+
+@riverpod
+class RateMovies extends _$RateMovies {
   void rateMovie(int movieId, String sessionId, double rating) {
     state = const RateState.loading();
 
@@ -30,11 +34,3 @@ class RateMovieNotifier extends AutoDisposeNotifier<RateState> {
     state = const RateState.completed();
   }
 }
-
-typedef RateMovieProvider
-    = AutoDisposeNotifierProvider<RateMovieNotifier, RateState>;
-
-final rateMovieProvider = RateMovieProvider(
-  name: 'RateMoviesProvider',
-  () => RateMovieNotifier(),
-);

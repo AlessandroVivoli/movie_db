@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../features/person/provider/person_provider.dart';
 import '../../../../core/extensions.dart';
 import '../../../../core/widgets/errors/error_text.dart';
 import '../../../../core/widgets/person_list/person_list.dart';
+import '../../../../features/person/provider/get_trending_persons_provider.dart';
 import '../../../../features/time_window/domain/time_window.dart';
 
 class TrendingPersonsSection extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/errors/invalid_user_error.dart';
 import '../../account/provider/account_service_provider.dart';
@@ -8,7 +8,10 @@ import '../domain/auth_state.dart';
 import '../domain/user.dart';
 import 'auth_service_provider.dart';
 
-class AuthNotifier extends Notifier<AuthState> {
+part 'auth_provider.g.dart';
+
+@riverpod
+class Auth extends _$Auth {
   Future<void> login(String username, String password) async {
     state = const AuthState.loading();
 
@@ -103,7 +106,3 @@ class AuthNotifier extends Notifier<AuthState> {
     return const AuthState.loggedOut();
   }
 }
-
-final authProvider = NotifierProvider<AuthNotifier, AuthState>(() {
-  return AuthNotifier();
-});

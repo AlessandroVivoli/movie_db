@@ -1,17 +1,17 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../time_window/domain/time_window.dart';
 import '../domain/movie.dart';
 import 'movie_service_provider.dart';
 
-typedef GetTrendingMoviesProvider
-    = FutureProviderFamily<List<Movie>, TimeWindow>;
+part 'get_trending_movies_provider.g.dart';
 
-final getTrendingMoviesProvider = GetTrendingMoviesProvider(
-  name: 'GetTrendingMoviesProvider',
-  (ref, timeWindow) {
-    return ref
-        .watch(movieServiceProvider)
-        .getTrendingMovies(timeWindow: timeWindow);
-  },
-);
+@riverpod
+Future<List<Movie>> getTrendingMovies(
+  GetTrendingMoviesRef ref,
+  TimeWindow timeWindow,
+) {
+  return ref
+      .watch(movieServiceProvider)
+      .getTrendingMovies(timeWindow: timeWindow);
+}

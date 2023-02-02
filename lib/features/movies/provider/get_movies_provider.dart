@@ -1,16 +1,21 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/movie.dart';
-import '../domain/movie_arguments.dart';
+import '../domain/sort_by.dart';
 import 'movie_service_provider.dart';
 
-typedef GetMoviesProvider = FutureProviderFamily<List<Movie>, MovieArguments>;
+part 'get_movies_provider.g.dart';
 
-final getMoviesProvider = GetMoviesProvider(
-  name: 'GetMoviesProvider',
-  (ref, arguments) => ref.watch(movieServiceProvider).getMovies(
-        withGenres: arguments.withGenres,
-        sortBy: arguments.sortBy,
-        includeAdult: arguments.includeAdult,
-      ),
-);
+@riverpod
+Future<List<Movie>> getMovies(
+  GetMoviesRef ref, {
+  List<int>? withGenres,
+  SortBy sortBy = SortBy.popularityDesc,
+  bool includeAdult = false,
+}) {
+  return ref.watch(movieServiceProvider).getMovies(
+        withGenres: withGenres,
+        sortBy: sortBy,
+        includeAdult: includeAdult,
+      );
+}

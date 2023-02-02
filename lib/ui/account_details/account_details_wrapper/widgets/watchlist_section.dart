@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/extensions.dart';
 import '../../../../../features/auth/domain/user.dart';
+import '../../../../core/extensions.dart';
 import '../../../../core/widgets/errors/error_text.dart';
 import '../../../../core/widgets/paged_movie_list/paged_movie_list.dart';
-import '../../../../features/movies/domain/user_movie_arguments.dart';
 import '../../../../features/movies/provider/movie_watchlist/get_movie_watchlist_provider.dart';
 
 class WatchlistSection extends StatelessWidget {
@@ -57,12 +56,7 @@ class _WatchlistHookWidget extends HookConsumerWidget {
     final page = useState(1);
 
     final movieWatchlist = ref.watch(
-      getMovieWatchlistProvider(
-        UserMovieArguments(
-          user: user,
-          page: page.value,
-        ),
-      ),
+      getMovieWatchlistProvider(user: user, page: page.value),
     );
 
     return movieWatchlist.when(

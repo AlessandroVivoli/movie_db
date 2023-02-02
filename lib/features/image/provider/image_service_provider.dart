@@ -1,9 +1,12 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../dio/provider/dio_provider.dart';
 import '../../../features/image/data/image_service.dart';
+import '../../dio/provider/dio_provider.dart';
 import '../domain/i_image_service.dart';
 
-final imageServiceProvider = Provider<IImageService>(
-  (ref) => ImageService(ref.watch(dioProvider)),
-);
+part 'image_service_provider.g.dart';
+
+@riverpod
+IImageService imageService(ImageServiceRef ref) {
+  return ImageService(ref.watch(dioProvider));
+}

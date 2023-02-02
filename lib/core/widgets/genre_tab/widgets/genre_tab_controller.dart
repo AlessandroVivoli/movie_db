@@ -7,11 +7,11 @@ class GenreTabController extends StatelessWidget {
   const GenreTabController({
     super.key,
     required this.data,
-    this.includeAdult,
+    this.includeAdult = false,
   });
 
   final List<Genre> data;
-  final bool? includeAdult;
+  final bool includeAdult;
 
   @override
   Widget build(BuildContext context) {

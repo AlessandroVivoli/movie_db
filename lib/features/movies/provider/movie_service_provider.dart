@@ -1,10 +1,12 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../dio/provider/dio_provider.dart';
 import '../data/movie_service.dart';
 import '../domain/i_movie_service.dart';
 
-final movieServiceProvider = Provider<IMovieService>(
-  name: 'MovieServiceProvider',
-  (ref) => MovieService(ref.watch(dioProvider)),
-);
+part 'movie_service_provider.g.dart';
+
+@riverpod
+IMovieService movieService(MovieServiceRef ref) {
+  return MovieService(ref.watch(dioProvider));
+}

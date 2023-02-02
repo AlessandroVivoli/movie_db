@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../../auth/domain/user.dart';
 import '../../time_window/domain/time_window.dart';
 import '../domain/account_state/movie_account_state.dart';
 import '../domain/i_movie_service.dart';
@@ -37,7 +38,7 @@ class MovieService implements IMovieService {
   Future<List<Movie>> getMovies({
     List<int>? withGenres,
     SortBy sortBy = SortBy.popularityDesc,
-    bool? includeAdult,
+    bool includeAdult = false,
   }) {
     return _dio
         .get(
@@ -45,7 +46,7 @@ class MovieService implements IMovieService {
           queryParameters: {
             'sort_by': '$sortBy',
             'with_genres': withGenres?.join(','),
-            'include_adult': includeAdult ?? false,
+            'include_adult': includeAdult,
           },
         )
         .then((res) => List<Map<String, Object?>>.from(res.data['results']))
@@ -97,15 +98,14 @@ class MovieService implements IMovieService {
 
   @override
   Future<MovieListModel> getFavoriteMovies({
-    required int accountId,
-    required String sessionId,
+    required User user,
     int page = 1,
   }) {
     return _dio
         .get(
-          '/account/$accountId/favorite/movies',
+          '/account/${user.accountDetails.id}/favorite/movies',
           queryParameters: {
-            'session_id': sessionId,
+            'session_id': user.sessionId,
             'sort_by': 'created_at.desc',
             'page': '$page',
           },
@@ -116,15 +116,14 @@ class MovieService implements IMovieService {
 
   @override
   Future<MovieListModel> getMovieWatchlist({
-    required int accountId,
-    required String sessionId,
+    required User user,
     int page = 1,
   }) {
     return _dio
         .get(
-          '/account/$accountId/watchlist/movies',
+          '/account/${user.accountDetails.id}/watchlist/movies',
           queryParameters: {
-            'session_id': sessionId,
+            'session_id': user.sessionId,
             'sort_by': 'created_at.desc',
             'page': '$page',
           },
@@ -135,15 +134,14 @@ class MovieService implements IMovieService {
 
   @override
   Future<MovieListModel> getRatedMovies({
-    required int accountId,
-    required String sessionId,
+    required User user,
     int page = 1,
   }) {
     return _dio
         .get(
-          '/account/$accountId/rated/movies',
+          '/account/${user.accountDetails.id}/rated/movies',
           queryParameters: {
-            'session_id': sessionId,
+            'session_id': user.sessionId,
             'sort_by': 'created_at.desc',
             'page': '$page',
           },

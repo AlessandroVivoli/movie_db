@@ -1,8 +1,11 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../data/account_avatar_service.dart';
 import '../domain/i_account_avatar_service.dart';
 
-final accountAvatarServiceProvider = Provider<IAccountAvatarService>(
-  (ref) => AccountAvatarService(),
-);
+part 'account_avatar_service_provider.g.dart';
+
+@riverpod
+IAccountAvatarService accountAvatarService(AccountAvatarServiceRef ref) {
+  return AccountAvatarService();
+}

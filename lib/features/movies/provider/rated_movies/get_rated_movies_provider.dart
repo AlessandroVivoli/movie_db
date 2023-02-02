@@ -1,17 +1,19 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../auth/domain/user.dart';
 import '../../domain/movie_list.dart';
-import '../../domain/user_movie_arguments.dart';
 import '../movie_service_provider.dart';
 
-typedef GetRatedMoviesProvider
-    = FutureProviderFamily<MovieListModel, UserMovieArguments>;
+part 'get_rated_movies_provider.g.dart';
 
-final getRatedMoviesProvider = GetRatedMoviesProvider(
-  name: 'GetRatedMoviesProvider',
-  (ref, args) => ref.watch(movieServiceProvider).getRatedMovies(
-        accountId: args.user.accountDetails.id,
-        sessionId: args.user.sessionId,
-        page: args.page,
-      ),
-);
+@riverpod
+Future<MovieListModel> getRatedMovies(
+  GetRatedMoviesRef ref, {
+  required User user,
+  int page = 1,
+}) {
+  return ref.watch(movieServiceProvider).getRatedMovies(
+        user: user,
+        page: page,
+      );
+}

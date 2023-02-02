@@ -1,13 +1,11 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/movie.dart';
 import 'movie_service_provider.dart';
 
-typedef GetSimilarMoviesProvider = FutureProviderFamily<List<Movie>, int>;
+part 'get_similar_movies_provider.g.dart';
 
-final getSimilarMoviesProvider = GetSimilarMoviesProvider(
-  name: 'GetSimilarMoviesProvider',
-  (ref, movieId) {
-    return ref.watch(movieServiceProvider).getSimilarMovies(id: movieId);
-  },
-);
+@riverpod
+Future<List<Movie>> getSimilarMovies(GetSimilarMoviesRef ref, int movieId) {
+  return ref.watch(movieServiceProvider).getSimilarMovies(id: movieId);
+}

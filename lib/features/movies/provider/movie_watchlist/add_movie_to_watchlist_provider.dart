@@ -1,24 +1,28 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../features/account/provider/account_service_provider.dart';
-import '../../domain/movie_user_action_arguments.dart';
+import '../../../auth/domain/user.dart';
 import '../get_movie_details_provider.dart';
 import 'get_movie_watchlist_provider.dart';
 
-typedef AddMovieToWatchlistProvider
-    = FutureProviderFamily<void, MovieUserActionArguments>;
+part 'add_movie_to_watchlist_provider.g.dart';
 
-final addMovieToWatchlistProvider = AddMovieToWatchlistProvider(
-  name: 'AddMovieToWatchlistProvider',
-  (ref, args) => ref
+@riverpod
+Future<void> addMovieToWatchlist(
+  AddMovieToWatchlistRef ref, {
+  required User user,
+  required int movieId,
+  required bool watchlist,
+}) {
+  return ref
       .watch(accountServiceProvider)
       .addMovieToWatchList(
-        user: args.user,
-        movieId: args.movieId,
-        watchlist: args.action,
+        user: user,
+        movieId: movieId,
+        watchlist: watchlist,
       )
-      .then((_) => _refreshWatchlist(ref, args.movieId)),
-);
+      .then((_) => _refreshWatchlist(ref, movieId));
+}
 
 _refreshWatchlist(FutureProviderRef<void> ref, int movieId) {
   ref.invalidate(addMovieToWatchlistProvider);

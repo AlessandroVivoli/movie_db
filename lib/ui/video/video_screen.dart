@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/extensions.dart';
-import '../../../features/video/provider/video_provider.dart';
 import '../../core/widgets/errors/error_text.dart';
+import '../../features/video/provider/get_videos_provider.dart';
 import 'player/player.dart';
 
 class VideoScreen extends ConsumerWidget {

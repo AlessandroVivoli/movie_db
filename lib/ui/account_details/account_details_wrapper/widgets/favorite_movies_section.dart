@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/extensions.dart';
 import '../../../../../features/auth/domain/user.dart';
+import '../../../../core/extensions.dart';
 import '../../../../core/widgets/errors/error_text.dart';
 import '../../../../core/widgets/paged_movie_list/paged_movie_list.dart';
-import '../../../../features/movies/domain/user_movie_arguments.dart';
 import '../../../../features/movies/provider/favorite_movies/get_favorite_movies_provider.dart';
 
 class FavoriteMoviesSection extends StatelessWidget {
@@ -59,12 +58,7 @@ class _FavoriteMoviesHookBuilder extends HookConsumerWidget {
     return Consumer(
       builder: (context, ref, child) {
         final favoriteMovies = ref.watch(
-          getFavoriteMoviesProvider(
-            UserMovieArguments(
-              user: user,
-              page: page.value,
-            ),
-          ),
+          getFavoriteMoviesProvider(user: user, page: page.value),
         );
 
         return favoriteMovies.when(

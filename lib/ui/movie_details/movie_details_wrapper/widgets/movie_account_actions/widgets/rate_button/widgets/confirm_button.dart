@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../../../core/extensions.dart';
 import '../../../../../../../../../features/auth/domain/user.dart';
+import '../../../../../../../../core/extensions.dart';
 import '../../../../../../../../features/movies/provider/rated_movies/rate_movies_provider.dart';
 
 class ConfirmButton extends ConsumerWidget {
@@ -21,7 +21,7 @@ class ConfirmButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final rateProvider = ref.watch(rateMovieProvider);
+    final rateProvider = ref.watch(rateMoviesProvider);
 
     return rateProvider.when(
       init: () => _ConfirmButton(
@@ -79,7 +79,7 @@ class _ConfirmButton extends ConsumerWidget {
     return OutlinedButton(
       onPressed: (rating > 0 && originalRating != rating)
           ? () {
-              ref.read(rateMovieProvider.notifier).rateMovie(
+              ref.read(rateMoviesProvider.notifier).rateMovie(
                     movieId,
                     user.sessionId,
                     rating,

@@ -1,13 +1,11 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/movie.dart';
 import 'movie_service_provider.dart';
 
-typedef GetPersonCreditsProvider = FutureProviderFamily<List<Movie>, int>;
+part 'get_person_credits_provider.g.dart';
 
-final getPersonCreditsProvider = GetPersonCreditsProvider(
-  name: 'GetPersonCreditsProvider',
-  (ref, personId) {
-    return ref.watch(movieServiceProvider).getPersonCredits(personId: personId);
-  },
-);
+@riverpod
+Future<List<Movie>> getPersonCredits(GetPersonCreditsRef ref, int personId) {
+  return ref.watch(movieServiceProvider).getPersonCredits(personId: personId);
+}
