@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/shared/widgets/errors/error_text.dart';
-import '../../../core/utils/extensions.dart';
+import '../../core/extensions.dart';
 import '../../../routing/routes.dart';
+import '../../core/widgets/errors/error_text.dart';
 import '../../features/movies/domain/movie_details.dart';
 import '../../features/movies/provider/get_movie_details_provider.dart';
 import 'backdrop/backdrop.dart';

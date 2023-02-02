@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/shared/widgets/backdrop_image/backdrop_image.dart';
-import '../../../../core/utils/enums.dart';
+import '../../../core/widgets/backdrop_image/backdrop_image.dart';
+import '../../../features/image/domain/sizes.dart';
 import '../../../features/image/provider/image_service_provider.dart';
 import '../../../features/movies/domain/movie_details.dart';
 

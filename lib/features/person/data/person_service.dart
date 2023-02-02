@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../../core/utils/constants.dart';
+import '../../time_window/domain/time_window.dart';
 import '../domain/i_person_service.dart';
 import '../domain/person.dart';
 import '../domain/person_details.dart';

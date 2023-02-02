@@ -12,7 +12,7 @@ _$_MovieArguments _$$_MovieArgumentsFromJson(Map<String, dynamic> json) =>
           ?.map((e) => e as int)
           .toList(),
       sortBy: json['sort_by'] == null
-          ? Sorts.popularityDesc
+          ? SortBy.popularityDesc
           : SortBy.fromJson(json['sort_by'] as Map<String, dynamic>),
       includeAdult: json['include_adult'] as bool?,
     );

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/shared/widgets/errors/error_text.dart';
-import '../../../../../core/shared/widgets/paged_movie_list/paged_movie_list.dart';
-import '../../../../../core/utils/extensions.dart';
+import '../../../../core/extensions.dart';
 import '../../../../../features/auth/domain/user.dart';
+import '../../../../core/widgets/errors/error_text.dart';
+import '../../../../core/widgets/paged_movie_list/paged_movie_list.dart';
 import '../../../../features/movies/domain/user_movie_arguments.dart';
 import '../../../../features/movies/provider/favorite_movies/get_favorite_movies_provider.dart';
 

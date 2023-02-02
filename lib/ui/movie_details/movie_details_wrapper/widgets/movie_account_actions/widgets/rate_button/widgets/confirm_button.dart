@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../../../../core/utils/extensions.dart';
+import '../../../../../../../../core/extensions.dart';
 import '../../../../../../../../../features/auth/domain/user.dart';
 import '../../../../../../../../features/movies/provider/rated_movies/rate_movies_provider.dart';
 

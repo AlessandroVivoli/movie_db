@@ -3,8 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../../features/auth/provider/auth_provider.dart';
-import '../../../../../../../../../core/shared/widgets/errors/error_text.dart';
-import '../../../../../../../../../core/shared/widgets/rating/rating.dart';
+import '../../../../../../../../core/widgets/errors/error_text.dart';
+import '../../../../../../../../core/widgets/rating/rating.dart';
 import 'confirm_button.dart';
 import 'delete_button.dart';
 

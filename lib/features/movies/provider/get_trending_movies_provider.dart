@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/utils/constants.dart';
+import '../../time_window/domain/time_window.dart';
 import '../domain/movie.dart';
 import 'movie_service_provider.dart';
 

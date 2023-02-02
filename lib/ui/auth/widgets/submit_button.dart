@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/utils/errors/invalid_user_error.dart';
-import '../../../../core/utils/extensions.dart';
 import '../../../../features/auth/provider/auth_provider.dart';
+import '../../../core/errors/invalid_user_error.dart';
+import '../../../core/extensions.dart';
 
 class SubmitButton extends ConsumerWidget {
   const SubmitButton({

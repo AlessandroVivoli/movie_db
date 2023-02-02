@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/shared/widgets/carousel/image_carousel/image_carousel.dart';
-import '../../../../../core/shared/widgets/errors/error_text.dart';
-import '../../../../../core/utils/extensions.dart';
+import '../../../../core/widgets/carousel/image_carousel/image_carousel.dart';
+import '../../../../core/widgets/errors/error_text.dart';
+import '../../../../core/extensions.dart';
 import '../../../../../features/person/domain/person_details.dart';
 import '../../../../features/image/provider/get_person_images_provider.dart';
 

@@ -1,4 +1,4 @@
-import '../../../core/utils/constants.dart';
+import '../../time_window/domain/time_window.dart';
 import 'account_state/movie_account_state.dart';
 import 'movie.dart';
 import 'movie_details.dart';
@@ -30,7 +30,7 @@ abstract class IMovieService {
   /// it is `true`. Defaults to `false`.
   Future<List<Movie>> getMovies({
     List<int>? withGenres,
-    SortBy sortBy = Sorts.popularityDesc,
+    SortBy sortBy = SortBy.popularityDesc,
     bool? includeAdult,
   });
 

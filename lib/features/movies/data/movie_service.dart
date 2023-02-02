@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../../core/utils/constants.dart';
+import '../../time_window/domain/time_window.dart';
 import '../domain/account_state/movie_account_state.dart';
 import '../domain/i_movie_service.dart';
 import '../domain/movie.dart';
@@ -36,7 +36,7 @@ class MovieService implements IMovieService {
   @override
   Future<List<Movie>> getMovies({
     List<int>? withGenres,
-    SortBy sortBy = Sorts.popularityDesc,
+    SortBy sortBy = SortBy.popularityDesc,
     bool? includeAdult,
   }) {
     return _dio

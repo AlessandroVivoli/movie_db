@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/shared/widgets/account_drawer/account_drawer.dart';
-import '../../../core/shared/widgets/carousel/movie_carousel/movie_carousel.dart';
-import '../../../core/shared/widgets/errors/error_text.dart';
-import '../../../core/shared/widgets/genre_tab/genre_tab.dart';
-import '../../../core/shared/widgets/search/custom_search_delegate.dart';
-import '../../../core/utils/constants.dart';
-import '../../../core/utils/extensions.dart';
 import '../../../routing/routes.dart';
+import '../../core/extensions.dart';
+import '../../core/widgets/account_drawer/account_drawer.dart';
+import '../../core/widgets/carousel/movie_carousel/movie_carousel.dart';
+import '../../core/widgets/errors/error_text.dart';
+import '../../core/widgets/genre_tab/genre_tab.dart';
+import '../../core/widgets/search/custom_search_delegate.dart';
 import '../../features/movies/provider/get_trending_movies_provider.dart';
+import '../../features/time_window/domain/time_window.dart';
 import 'home_wrapper/home_wrapper.dart';
 
 class HomeScreen extends StatelessWidget {

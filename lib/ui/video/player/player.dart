@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../../../core/utils/hooks/youtube_player_hook.dart';
+import '../../../core/hooks/youtube_player_hook.dart';
 import '../../../features/video/domain/video.dart';
 
 class Player extends HookWidget {

@@ -11,7 +11,7 @@ import 'features/local_storage/provider/local_storage_provider.dart';
 import 'routing/router.dart';
 import 'routing/routes.dart';
 import 'themes/main_theme.dart';
-import 'core/utils/loggers/provider_logger.dart';
+import 'core/loggers/provider_logger.dart';
 
 void main() async {
   await dotenv.load();

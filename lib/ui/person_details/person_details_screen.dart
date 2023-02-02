@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../core/extensions.dart';
 import '../../../features/person/provider/person_provider.dart';
-import '../../../core/utils/extensions.dart';
-import '../../../core/shared/widgets/errors/error_text.dart';
+import '../../core/widgets/errors/error_text.dart';
 import 'person_details_body/person_details_body.dart';
 
 class PersonDetailsScreen extends StatelessWidget {

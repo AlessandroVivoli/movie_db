@@ -134,7 +134,7 @@ class __$$_MovieArgumentsCopyWithImpl<$Res>
 class _$_MovieArguments implements _MovieArguments {
   const _$_MovieArguments(
       {required final List<int>? withGenres,
-      this.sortBy = Sorts.popularityDesc,
+      this.sortBy = SortBy.popularityDesc,
       required this.includeAdult})
       : _withGenres = withGenres;
 

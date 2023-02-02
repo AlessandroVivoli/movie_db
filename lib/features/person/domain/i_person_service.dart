@@ -1,4 +1,4 @@
-import '../../../core/utils/constants.dart';
+import '../../time_window/domain/time_window.dart';
 import 'person.dart';
 import 'person_details.dart';
 

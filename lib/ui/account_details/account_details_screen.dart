@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/shared/widgets/backdrop_image/backdrop_image.dart';
-import '../../../core/shared/widgets/errors/error_text.dart';
-import '../../../core/utils/enums.dart';
 import '../../../features/account/provider/account_avatar_service_provider.dart';
 import '../../../features/auth/provider/auth_provider.dart';
+import '../../core/widgets/backdrop_image/backdrop_image.dart';
+import '../../core/widgets/errors/error_text.dart';
+import '../../features/image/domain/sizes.dart';
 import '../../features/image/provider/image_service_provider.dart';
 import 'account_details_wrapper/account_details_wrapper.dart';
 

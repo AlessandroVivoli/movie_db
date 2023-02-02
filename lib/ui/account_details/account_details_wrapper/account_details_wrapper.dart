@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/auth/provider/auth_provider.dart';
-import '../../../../core/shared/widgets/errors/error_text.dart';
+import '../../../core/widgets/errors/error_text.dart';
 import 'widgets/account_details_name_text.dart';
 import 'widgets/favorite_movies_section.dart';
 import 'widgets/rated_movies_section.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/shared/widgets/errors/error_text.dart';
-import '../../../../../core/shared/widgets/movie_list/movie_list.dart';
-import '../../../../../core/utils/extensions.dart';
+import '../../../../core/widgets/errors/error_text.dart';
+import '../../../../core/widgets/movie_list/movie_list.dart';
+import '../../../../core/extensions.dart';
 import '../../../../features/movies/domain/movie_details.dart';
 import '../../../../features/movies/provider/get_similar_movies_provider.dart';
 

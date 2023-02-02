@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/utils/errors/invalid_user_error.dart';
+import '../../../core/errors/invalid_user_error.dart';
 import '../../account/provider/account_service_provider.dart';
 import '../../local_storage/provider/local_storage_provider.dart';
 import '../domain/auth_state.dart';

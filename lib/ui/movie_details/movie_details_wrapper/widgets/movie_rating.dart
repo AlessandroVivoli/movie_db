@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../../core/shared/widgets/rating/rating.dart';
+import '../../../../core/widgets/rating/rating.dart';
 
 class MovieRating extends StatelessWidget {
   final double rating;

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../../core/shared/widgets/errors/error_text.dart';
-import '../../../../../../../core/utils/extensions.dart';
+import '../../../../../../core/extensions.dart';
 import '../../../../../../../features/auth/provider/auth_provider.dart';
+import '../../../../../../core/widgets/errors/error_text.dart';
 import '../../../../../../features/movies/domain/movie_user_action_arguments.dart';
 import '../../../../../../features/movies/provider/favorite_movies/add_movie_to_favorites_provider.dart';
 
