@@ -29,13 +29,13 @@ class _SystemHash {
   }
 }
 
-String _$localStorageHash() => r'30e04a90f8415fa9a8e3e954f6bc5059234e1827';
+String _$localStorageHash() => r'11560d1d8069f7d229fa29da5ceb52da9a28ccf8';
 
 /// See also [localStorage].
-final localStorageProvider = AutoDisposeProvider<LocalStorageRepository>(
+final localStorageProvider = Provider<LocalStorageRepository>(
   localStorage,
   name: r'localStorageProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$localStorageHash,
 );
-typedef LocalStorageRef = AutoDisposeProviderRef<LocalStorageRepository>;
+typedef LocalStorageRef = ProviderRef<LocalStorageRepository>;

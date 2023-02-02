@@ -6,7 +6,7 @@ import '../domain/i_person_service.dart';
 
 part 'person_service_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 IPersonService personService(PersonServiceRef ref) {
   return PersonService(ref.watch(dioProvider));
 }

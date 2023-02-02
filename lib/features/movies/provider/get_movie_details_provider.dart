@@ -8,9 +8,9 @@ import 'movie_service_provider.dart';
 
 part 'get_movie_details_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<MovieDetails> getMovieDetails(GetMovieDetailsRef ref, int movieId) {
-  final movieService = ref.watch(movieServiceProvider);
+  final movieService = ref.read(movieServiceProvider);
 
   return _getMovieState(ref, movieService, movieId).then(
     (movieState) => movieService
@@ -20,7 +20,7 @@ Future<MovieDetails> getMovieDetails(GetMovieDetailsRef ref, int movieId) {
 }
 
 Future<MovieAccountState?> _getMovieState(
-  AutoDisposeFutureProviderRef ref,
+  FutureProviderRef ref,
   IMovieService movieService,
   int movieId,
 ) async {

@@ -6,13 +6,13 @@ import '../movie_service_provider.dart';
 
 part 'get_movie_watchlist_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<MovieListModel> getMovieWatchlist(
   GetMovieWatchlistRef ref, {
   required User user,
   int page = 1,
 }) {
-  return ref.watch(movieServiceProvider).getMovieWatchlist(
+  return ref.read(movieServiceProvider).getMovieWatchlist(
         user: user,
         page: page,
       );

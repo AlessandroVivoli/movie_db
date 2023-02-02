@@ -29,10 +29,10 @@ class _SystemHash {
   }
 }
 
-String _$getTrendingMoviesHash() => r'efe0ca08fb6f9150279ecb1571dbfcdd5bbc5cc5';
+String _$getTrendingMoviesHash() => r'14c2f652ab4d975801289620b04d575a72e5591c';
 
 /// See also [getTrendingMovies].
-class GetTrendingMoviesProvider extends AutoDisposeFutureProvider<List<Movie>> {
+class GetTrendingMoviesProvider extends FutureProvider<List<Movie>> {
   GetTrendingMoviesProvider(
     this.timeWindow,
   ) : super(
@@ -64,7 +64,7 @@ class GetTrendingMoviesProvider extends AutoDisposeFutureProvider<List<Movie>> {
   }
 }
 
-typedef GetTrendingMoviesRef = AutoDisposeFutureProviderRef<List<Movie>>;
+typedef GetTrendingMoviesRef = FutureProviderRef<List<Movie>>;
 
 /// See also [getTrendingMovies].
 final getTrendingMoviesProvider = GetTrendingMoviesFamily();
@@ -81,7 +81,7 @@ class GetTrendingMoviesFamily extends Family<AsyncValue<List<Movie>>> {
   }
 
   @override
-  AutoDisposeFutureProvider<List<Movie>> getProviderOverride(
+  FutureProvider<List<Movie>> getProviderOverride(
     covariant GetTrendingMoviesProvider provider,
   ) {
     return call(

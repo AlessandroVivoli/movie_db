@@ -5,7 +5,7 @@ import 'genre_service_provider.dart';
 
 part 'get_genres_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<Genre>> getGenres(GetGenresRef ref) {
-  return ref.watch(genreServiceProvider).getGenres();
+  return ref.read(genreServiceProvider).getGenres();
 }

@@ -29,14 +29,14 @@ class _SystemHash {
   }
 }
 
-String _$getTopRatedMoviesHash() => r'8556181ca5a00d18d796d4d02b51ee56d415448a';
+String _$getTopRatedMoviesHash() => r'e53df3fee153a15da3a1936c80dcb74f9014fa93';
 
 /// See also [getTopRatedMovies].
-final getTopRatedMoviesProvider = AutoDisposeFutureProvider<List<Movie>>(
+final getTopRatedMoviesProvider = FutureProvider<List<Movie>>(
   getTopRatedMovies,
   name: r'getTopRatedMoviesProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$getTopRatedMoviesHash,
 );
-typedef GetTopRatedMoviesRef = AutoDisposeFutureProviderRef<List<Movie>>;
+typedef GetTopRatedMoviesRef = FutureProviderRef<List<Movie>>;

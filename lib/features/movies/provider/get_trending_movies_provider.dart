@@ -6,12 +6,12 @@ import 'movie_service_provider.dart';
 
 part 'get_trending_movies_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<Movie>> getTrendingMovies(
   GetTrendingMoviesRef ref,
   TimeWindow timeWindow,
 ) {
   return ref
-      .watch(movieServiceProvider)
+      .read(movieServiceProvider)
       .getTrendingMovies(timeWindow: timeWindow);
 }

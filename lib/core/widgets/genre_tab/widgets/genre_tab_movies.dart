@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../features/movies/domain/movie_arguments.dart';
 import '../../../../features/movies/domain/sort_by.dart';
 import '../../../../features/movies/provider/get_movies_provider.dart';
 import '../../../extensions.dart';
@@ -21,9 +22,11 @@ class GenreTabMovies extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final movieList = ref.watch(
       getMoviesProvider(
-        withGenres: [genreId],
-        includeAdult: includeAdult,
-        sortBy: SortBy.popularityDesc,
+        MovieArguments(
+          withGenres: [genreId],
+          includeAdult: includeAdult,
+          sortBy: SortBy.popularityDesc,
+        ),
       ),
     );
 

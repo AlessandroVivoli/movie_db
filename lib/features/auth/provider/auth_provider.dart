@@ -10,7 +10,7 @@ import 'auth_service_provider.dart';
 
 part 'auth_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class Auth extends _$Auth {
   Future<void> login(String username, String password) async {
     state = const AuthState.loading();

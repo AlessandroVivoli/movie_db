@@ -6,7 +6,7 @@ import '../domain/i_movie_service.dart';
 
 part 'movie_service_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 IMovieService movieService(MovieServiceRef ref) {
   return MovieService(ref.watch(dioProvider));
 }

@@ -29,11 +29,10 @@ class _SystemHash {
   }
 }
 
-String _$getMovieWatchlistHash() => r'fc82e059973e1d1de9c43f7ed820e5ecd0545296';
+String _$getMovieWatchlistHash() => r'973238b055160832f7f794942705364ff8345af7';
 
 /// See also [getMovieWatchlist].
-class GetMovieWatchlistProvider
-    extends AutoDisposeFutureProvider<MovieListModel> {
+class GetMovieWatchlistProvider extends FutureProvider<MovieListModel> {
   GetMovieWatchlistProvider({
     required this.user,
     this.page = 1,
@@ -71,7 +70,7 @@ class GetMovieWatchlistProvider
   }
 }
 
-typedef GetMovieWatchlistRef = AutoDisposeFutureProviderRef<MovieListModel>;
+typedef GetMovieWatchlistRef = FutureProviderRef<MovieListModel>;
 
 /// See also [getMovieWatchlist].
 final getMovieWatchlistProvider = GetMovieWatchlistFamily();
@@ -90,7 +89,7 @@ class GetMovieWatchlistFamily extends Family<AsyncValue<MovieListModel>> {
   }
 
   @override
-  AutoDisposeFutureProvider<MovieListModel> getProviderOverride(
+  FutureProvider<MovieListModel> getProviderOverride(
     covariant GetMovieWatchlistProvider provider,
   ) {
     return call(

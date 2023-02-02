@@ -29,11 +29,10 @@ class _SystemHash {
   }
 }
 
-String _$getPersonDetailsHash() => r'4bbbc57f8d5d98158aabc1757d0ee055a1bc8741';
+String _$getPersonDetailsHash() => r'abc6c5250be9baefc3142f7eb1da0aaf99469768';
 
 /// See also [getPersonDetails].
-class GetPersonDetailsProvider
-    extends AutoDisposeFutureProvider<PersonDetails> {
+class GetPersonDetailsProvider extends FutureProvider<PersonDetails> {
   GetPersonDetailsProvider(
     this.personId,
   ) : super(
@@ -65,7 +64,7 @@ class GetPersonDetailsProvider
   }
 }
 
-typedef GetPersonDetailsRef = AutoDisposeFutureProviderRef<PersonDetails>;
+typedef GetPersonDetailsRef = FutureProviderRef<PersonDetails>;
 
 /// See also [getPersonDetails].
 final getPersonDetailsProvider = GetPersonDetailsFamily();
@@ -82,7 +81,7 @@ class GetPersonDetailsFamily extends Family<AsyncValue<PersonDetails>> {
   }
 
   @override
-  AutoDisposeFutureProvider<PersonDetails> getProviderOverride(
+  FutureProvider<PersonDetails> getProviderOverride(
     covariant GetPersonDetailsProvider provider,
   ) {
     return call(

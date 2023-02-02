@@ -5,7 +5,7 @@ import 'movie_service_provider.dart';
 
 part 'get_person_credits_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<Movie>> getPersonCredits(GetPersonCreditsRef ref, int personId) {
-  return ref.watch(movieServiceProvider).getPersonCredits(personId: personId);
+  return ref.read(movieServiceProvider).getPersonCredits(personId: personId);
 }

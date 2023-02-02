@@ -5,7 +5,7 @@ import 'video_service_provider.dart';
 
 part 'get_videos_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<Video>> getVideos(GetVideosRef ref, int movieId) {
-  return ref.watch(videoServiceProvider).getVideos(movieId: movieId);
+  return ref.read(videoServiceProvider).getVideos(movieId: movieId);
 }

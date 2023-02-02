@@ -5,7 +5,7 @@ import 'movie_service_provider.dart';
 
 part 'get_similar_movies_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<Movie>> getSimilarMovies(GetSimilarMoviesRef ref, int movieId) {
-  return ref.watch(movieServiceProvider).getSimilarMovies(id: movieId);
+  return ref.read(movieServiceProvider).getSimilarMovies(id: movieId);
 }

@@ -30,11 +30,10 @@ class _SystemHash {
 }
 
 String _$getTrendingPersonsHash() =>
-    r'1a70d60b2542b5d4e8d2869bc9c90d979b5f4687';
+    r'671317f8ecf50945c99c61b373565dbf8f50051f';
 
 /// See also [getTrendingPersons].
-class GetTrendingPersonsProvider
-    extends AutoDisposeFutureProvider<List<Person>> {
+class GetTrendingPersonsProvider extends FutureProvider<List<Person>> {
   GetTrendingPersonsProvider(
     this.timeWindow,
   ) : super(
@@ -67,7 +66,7 @@ class GetTrendingPersonsProvider
   }
 }
 
-typedef GetTrendingPersonsRef = AutoDisposeFutureProviderRef<List<Person>>;
+typedef GetTrendingPersonsRef = FutureProviderRef<List<Person>>;
 
 /// See also [getTrendingPersons].
 final getTrendingPersonsProvider = GetTrendingPersonsFamily();
@@ -84,7 +83,7 @@ class GetTrendingPersonsFamily extends Family<AsyncValue<List<Person>>> {
   }
 
   @override
-  AutoDisposeFutureProvider<List<Person>> getProviderOverride(
+  FutureProvider<List<Person>> getProviderOverride(
     covariant GetTrendingPersonsProvider provider,
   ) {
     return call(

@@ -29,13 +29,13 @@ class _SystemHash {
   }
 }
 
-String _$movieServiceHash() => r'769747b6f55fb7358a2017b639c8568930b21d73';
+String _$movieServiceHash() => r'5dce5893ccecf2b7fb40ea49ba53b4ce1027fc77';
 
 /// See also [movieService].
-final movieServiceProvider = AutoDisposeProvider<IMovieService>(
+final movieServiceProvider = Provider<IMovieService>(
   movieService,
   name: r'movieServiceProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$movieServiceHash,
 );
-typedef MovieServiceRef = AutoDisposeProviderRef<IMovieService>;
+typedef MovieServiceRef = ProviderRef<IMovieService>;

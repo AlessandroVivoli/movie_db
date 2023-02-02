@@ -29,10 +29,10 @@ class _SystemHash {
   }
 }
 
-String _$getPersonCreditsHash() => r'0b8be552decad8f339d407ab3cb6b38b3f6c86a4';
+String _$getPersonCreditsHash() => r'868c7a6312f8ddc8e9898c6bdd1ca77ab0b8bbb0';
 
 /// See also [getPersonCredits].
-class GetPersonCreditsProvider extends AutoDisposeFutureProvider<List<Movie>> {
+class GetPersonCreditsProvider extends FutureProvider<List<Movie>> {
   GetPersonCreditsProvider(
     this.personId,
   ) : super(
@@ -64,7 +64,7 @@ class GetPersonCreditsProvider extends AutoDisposeFutureProvider<List<Movie>> {
   }
 }
 
-typedef GetPersonCreditsRef = AutoDisposeFutureProviderRef<List<Movie>>;
+typedef GetPersonCreditsRef = FutureProviderRef<List<Movie>>;
 
 /// See also [getPersonCredits].
 final getPersonCreditsProvider = GetPersonCreditsFamily();
@@ -81,7 +81,7 @@ class GetPersonCreditsFamily extends Family<AsyncValue<List<Movie>>> {
   }
 
   @override
-  AutoDisposeFutureProvider<List<Movie>> getProviderOverride(
+  FutureProvider<List<Movie>> getProviderOverride(
     covariant GetPersonCreditsProvider provider,
   ) {
     return call(

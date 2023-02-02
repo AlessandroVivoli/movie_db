@@ -5,7 +5,7 @@ import 'movie_service_provider.dart';
 
 part 'get_top_rated_movies_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<Movie>> getTopRatedMovies(GetTopRatedMoviesRef ref) {
-  return ref.watch(movieServiceProvider).getTopRatedMovies();
+  return ref.read(movieServiceProvider).getTopRatedMovies();
 }

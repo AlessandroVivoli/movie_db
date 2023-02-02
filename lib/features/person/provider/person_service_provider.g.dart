@@ -29,14 +29,14 @@ class _SystemHash {
   }
 }
 
-String _$personServiceHash() => r'bdfd788627767a615cf3d12bb962c7f00d940256';
+String _$personServiceHash() => r'253f39492947e15ebcfc9c641f5b810978f974e7';
 
 /// See also [personService].
-final personServiceProvider = AutoDisposeProvider<IPersonService>(
+final personServiceProvider = Provider<IPersonService>(
   personService,
   name: r'personServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$personServiceHash,
 );
-typedef PersonServiceRef = AutoDisposeProviderRef<IPersonService>;
+typedef PersonServiceRef = ProviderRef<IPersonService>;

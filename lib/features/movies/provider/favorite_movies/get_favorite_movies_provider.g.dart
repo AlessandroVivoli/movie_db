@@ -29,11 +29,10 @@ class _SystemHash {
   }
 }
 
-String _$getFavoriteMoviesHash() => r'efb88e4d699e95548496c78595701d6929a009f0';
+String _$getFavoriteMoviesHash() => r'36943ba7c9912f5c235a1b0a680df6382397cdae';
 
 /// See also [getFavoriteMovies].
-class GetFavoriteMoviesProvider
-    extends AutoDisposeFutureProvider<MovieListModel> {
+class GetFavoriteMoviesProvider extends FutureProvider<MovieListModel> {
   GetFavoriteMoviesProvider({
     required this.user,
     this.page = 1,
@@ -71,7 +70,7 @@ class GetFavoriteMoviesProvider
   }
 }
 
-typedef GetFavoriteMoviesRef = AutoDisposeFutureProviderRef<MovieListModel>;
+typedef GetFavoriteMoviesRef = FutureProviderRef<MovieListModel>;
 
 /// See also [getFavoriteMovies].
 final getFavoriteMoviesProvider = GetFavoriteMoviesFamily();
@@ -90,7 +89,7 @@ class GetFavoriteMoviesFamily extends Family<AsyncValue<MovieListModel>> {
   }
 
   @override
-  AutoDisposeFutureProvider<MovieListModel> getProviderOverride(
+  FutureProvider<MovieListModel> getProviderOverride(
     covariant GetFavoriteMoviesProvider provider,
   ) {
     return call(

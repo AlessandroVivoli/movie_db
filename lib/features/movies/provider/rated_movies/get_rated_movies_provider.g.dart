@@ -29,10 +29,10 @@ class _SystemHash {
   }
 }
 
-String _$getRatedMoviesHash() => r'6e586374edc2cec8262da920d1c4fbc4bc1773a7';
+String _$getRatedMoviesHash() => r'df7eccf0a180f64286d984abf94b176d4db11eee';
 
 /// See also [getRatedMovies].
-class GetRatedMoviesProvider extends AutoDisposeFutureProvider<MovieListModel> {
+class GetRatedMoviesProvider extends FutureProvider<MovieListModel> {
   GetRatedMoviesProvider({
     required this.user,
     this.page = 1,
@@ -70,7 +70,7 @@ class GetRatedMoviesProvider extends AutoDisposeFutureProvider<MovieListModel> {
   }
 }
 
-typedef GetRatedMoviesRef = AutoDisposeFutureProviderRef<MovieListModel>;
+typedef GetRatedMoviesRef = FutureProviderRef<MovieListModel>;
 
 /// See also [getRatedMovies].
 final getRatedMoviesProvider = GetRatedMoviesFamily();
@@ -89,7 +89,7 @@ class GetRatedMoviesFamily extends Family<AsyncValue<MovieListModel>> {
   }
 
   @override
-  AutoDisposeFutureProvider<MovieListModel> getProviderOverride(
+  FutureProvider<MovieListModel> getProviderOverride(
     covariant GetRatedMoviesProvider provider,
   ) {
     return call(

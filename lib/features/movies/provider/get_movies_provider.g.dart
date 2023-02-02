@@ -29,20 +29,16 @@ class _SystemHash {
   }
 }
 
-String _$getMoviesHash() => r'ffcbd0a76ce14875de852392fcc684672b30d38f';
+String _$getMoviesHash() => r'27eefdabdffb7dd8f564551724765225e1e36fd2';
 
 /// See also [getMovies].
-class GetMoviesProvider extends AutoDisposeFutureProvider<List<Movie>> {
-  GetMoviesProvider({
-    this.withGenres,
-    this.sortBy = SortBy.popularityDesc,
-    this.includeAdult = false,
-  }) : super(
+class GetMoviesProvider extends FutureProvider<List<Movie>> {
+  GetMoviesProvider(
+    this.args,
+  ) : super(
           (ref) => getMovies(
             ref,
-            withGenres: withGenres,
-            sortBy: sortBy,
-            includeAdult: includeAdult,
+            args,
           ),
           from: getMoviesProvider,
           name: r'getMoviesProvider',
@@ -52,30 +48,23 @@ class GetMoviesProvider extends AutoDisposeFutureProvider<List<Movie>> {
                   : _$getMoviesHash,
         );
 
-  final List<int>? withGenres;
-  final SortBy sortBy;
-  final bool includeAdult;
+  final MovieArguments args;
 
   @override
   bool operator ==(Object other) {
-    return other is GetMoviesProvider &&
-        other.withGenres == withGenres &&
-        other.sortBy == sortBy &&
-        other.includeAdult == includeAdult;
+    return other is GetMoviesProvider && other.args == args;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, withGenres.hashCode);
-    hash = _SystemHash.combine(hash, sortBy.hashCode);
-    hash = _SystemHash.combine(hash, includeAdult.hashCode);
+    hash = _SystemHash.combine(hash, args.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-typedef GetMoviesRef = AutoDisposeFutureProviderRef<List<Movie>>;
+typedef GetMoviesRef = FutureProviderRef<List<Movie>>;
 
 /// See also [getMovies].
 final getMoviesProvider = GetMoviesFamily();
@@ -83,26 +72,20 @@ final getMoviesProvider = GetMoviesFamily();
 class GetMoviesFamily extends Family<AsyncValue<List<Movie>>> {
   GetMoviesFamily();
 
-  GetMoviesProvider call({
-    List<int>? withGenres,
-    SortBy sortBy = SortBy.popularityDesc,
-    bool includeAdult = false,
-  }) {
+  GetMoviesProvider call(
+    MovieArguments args,
+  ) {
     return GetMoviesProvider(
-      withGenres: withGenres,
-      sortBy: sortBy,
-      includeAdult: includeAdult,
+      args,
     );
   }
 
   @override
-  AutoDisposeFutureProvider<List<Movie>> getProviderOverride(
+  FutureProvider<List<Movie>> getProviderOverride(
     covariant GetMoviesProvider provider,
   ) {
     return call(
-      withGenres: provider.withGenres,
-      sortBy: provider.sortBy,
-      includeAdult: provider.includeAdult,
+      provider.args,
     );
   }
 

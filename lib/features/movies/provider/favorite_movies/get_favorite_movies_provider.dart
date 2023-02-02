@@ -6,13 +6,13 @@ import '../movie_service_provider.dart';
 
 part 'get_favorite_movies_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<MovieListModel> getFavoriteMovies(
   GetFavoriteMoviesRef ref, {
   required User user,
   int page = 1,
 }) {
-  return ref.watch(movieServiceProvider).getFavoriteMovies(
+  return ref.read(movieServiceProvider).getFavoriteMovies(
         user: user,
         page: page,
       );

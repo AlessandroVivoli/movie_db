@@ -8,7 +8,7 @@ import '../domain/query_interceptor.dart';
 
 part 'dio_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Dio dio(DioRef ref) {
   return Dio(
     BaseOptions(baseUrl: dotenv.get('BASE_URL')),

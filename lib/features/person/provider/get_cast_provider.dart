@@ -5,7 +5,7 @@ import 'person_service_provider.dart';
 
 part 'get_cast_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<Person>> getCast(GetCastRef ref, int movieId) {
   return ref.watch(personServiceProvider).getCast(movieId: movieId);
 }

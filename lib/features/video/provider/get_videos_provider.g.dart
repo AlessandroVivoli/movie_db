@@ -29,10 +29,10 @@ class _SystemHash {
   }
 }
 
-String _$getVideosHash() => r'b5563be986567ee824700f5a8c79e7017007e726';
+String _$getVideosHash() => r'd437bf37ab8c92537de736bddc18560f2546705b';
 
 /// See also [getVideos].
-class GetVideosProvider extends AutoDisposeFutureProvider<List<Video>> {
+class GetVideosProvider extends FutureProvider<List<Video>> {
   GetVideosProvider(
     this.movieId,
   ) : super(
@@ -64,7 +64,7 @@ class GetVideosProvider extends AutoDisposeFutureProvider<List<Video>> {
   }
 }
 
-typedef GetVideosRef = AutoDisposeFutureProviderRef<List<Video>>;
+typedef GetVideosRef = FutureProviderRef<List<Video>>;
 
 /// See also [getVideos].
 final getVideosProvider = GetVideosFamily();
@@ -81,7 +81,7 @@ class GetVideosFamily extends Family<AsyncValue<List<Video>>> {
   }
 
   @override
-  AutoDisposeFutureProvider<List<Video>> getProviderOverride(
+  FutureProvider<List<Video>> getProviderOverride(
     covariant GetVideosProvider provider,
   ) {
     return call(

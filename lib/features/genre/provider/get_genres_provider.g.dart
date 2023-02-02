@@ -29,13 +29,13 @@ class _SystemHash {
   }
 }
 
-String _$getGenresHash() => r'e958f95f1d51d45eb7f298444b585c042a18fec5';
+String _$getGenresHash() => r'00ffaac08006d46a809ae7ec726e5313eb8207e2';
 
 /// See also [getGenres].
-final getGenresProvider = AutoDisposeFutureProvider<List<Genre>>(
+final getGenresProvider = FutureProvider<List<Genre>>(
   getGenres,
   name: r'getGenresProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$getGenresHash,
 );
-typedef GetGenresRef = AutoDisposeFutureProviderRef<List<Genre>>;
+typedef GetGenresRef = FutureProviderRef<List<Genre>>;

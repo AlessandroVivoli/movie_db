@@ -29,10 +29,10 @@ class _SystemHash {
   }
 }
 
-String _$getCastHash() => r'8e0fd12bf43f4166e66902e291cd3e9b94437d22';
+String _$getCastHash() => r'27898cf791be548931688cfba18aa307e5c76b9b';
 
 /// See also [getCast].
-class GetCastProvider extends AutoDisposeFutureProvider<List<Person>> {
+class GetCastProvider extends FutureProvider<List<Person>> {
   GetCastProvider(
     this.movieId,
   ) : super(
@@ -64,7 +64,7 @@ class GetCastProvider extends AutoDisposeFutureProvider<List<Person>> {
   }
 }
 
-typedef GetCastRef = AutoDisposeFutureProviderRef<List<Person>>;
+typedef GetCastRef = FutureProviderRef<List<Person>>;
 
 /// See also [getCast].
 final getCastProvider = GetCastFamily();
@@ -81,7 +81,7 @@ class GetCastFamily extends Family<AsyncValue<List<Person>>> {
   }
 
   @override
-  AutoDisposeFutureProvider<List<Person>> getProviderOverride(
+  FutureProvider<List<Person>> getProviderOverride(
     covariant GetCastProvider provider,
   ) {
     return call(

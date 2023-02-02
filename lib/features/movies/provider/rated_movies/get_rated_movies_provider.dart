@@ -6,13 +6,13 @@ import '../movie_service_provider.dart';
 
 part 'get_rated_movies_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<MovieListModel> getRatedMovies(
   GetRatedMoviesRef ref, {
   required User user,
   int page = 1,
 }) {
-  return ref.watch(movieServiceProvider).getRatedMovies(
+  return ref.read(movieServiceProvider).getRatedMovies(
         user: user,
         page: page,
       );
