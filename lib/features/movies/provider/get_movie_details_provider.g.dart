@@ -29,10 +29,10 @@ class _SystemHash {
   }
 }
 
-String _$getMovieDetailsHash() => r'3642c97205d812e3b5166104bfa8e61198d66110';
+String _$getMovieDetailsHash() => r'31149d2c5992002a395723d2f70c828de3f9488c';
 
 /// See also [getMovieDetails].
-class GetMovieDetailsProvider extends FutureProvider<MovieDetails> {
+class GetMovieDetailsProvider extends AutoDisposeFutureProvider<MovieDetails> {
   GetMovieDetailsProvider(
     this.movieId,
   ) : super(
@@ -64,7 +64,7 @@ class GetMovieDetailsProvider extends FutureProvider<MovieDetails> {
   }
 }
 
-typedef GetMovieDetailsRef = FutureProviderRef<MovieDetails>;
+typedef GetMovieDetailsRef = AutoDisposeFutureProviderRef<MovieDetails>;
 
 /// See also [getMovieDetails].
 final getMovieDetailsProvider = GetMovieDetailsFamily();
@@ -81,7 +81,7 @@ class GetMovieDetailsFamily extends Family<AsyncValue<MovieDetails>> {
   }
 
   @override
-  FutureProvider<MovieDetails> getProviderOverride(
+  AutoDisposeFutureProvider<MovieDetails> getProviderOverride(
     covariant GetMovieDetailsProvider provider,
   ) {
     return call(

@@ -8,9 +8,9 @@ import 'movie_service_provider.dart';
 
 part 'get_movie_details_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 Future<MovieDetails> getMovieDetails(GetMovieDetailsRef ref, int movieId) {
-  final movieService = ref.read(movieServiceProvider);
+  final movieService = ref.watch(movieServiceProvider);
 
   return _getMovieState(ref, movieService, movieId).then(
     (movieState) => movieService
