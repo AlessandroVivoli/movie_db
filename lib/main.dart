@@ -5,13 +5,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'core/providers/auth/auth_provider.dart';
-import 'core/providers/local_storage/local_storage_provider.dart';
-import 'core/services/local_storage_repository.dart';
-import 'utils/loggers/provider_logger.dart';
-import 'utils/router.dart';
-import 'utils/routes.dart';
-import 'utils/themes.dart';
+import 'features/auth/provider/auth_provider.dart';
+import 'features/local_storage/data/local_storage_repository.dart';
+import 'features/local_storage/provider/local_storage_provider.dart';
+import 'routing/router.dart';
+import 'routing/routes.dart';
+import 'themes/main_theme.dart';
+import 'core/utils/loggers/provider_logger.dart';
 
 void main() async {
   await dotenv.load();
