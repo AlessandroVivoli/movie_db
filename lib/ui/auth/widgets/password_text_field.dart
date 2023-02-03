@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PasswordTextField extends StatelessWidget {
@@ -13,13 +14,14 @@ class PasswordTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     final GlobalKey<FormFieldState> formFieldKey = GlobalKey();
 
     return TextFormField(
       key: formFieldKey,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Password field is required!';
+          return '${localization.fieldRequired} ${localization.passwordTextFieldLabel.toLowerCase()}';
         }
 
         return null;
@@ -34,14 +36,14 @@ class PasswordTextField extends StatelessWidget {
         }
       },
       obscureText: true,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
         label: Text.rich(
           TextSpan(
             children: [
-              WidgetSpan(child: FaIcon(FontAwesomeIcons.lock)),
-              WidgetSpan(child: SizedBox(width: 5)),
-              TextSpan(text: 'Password'),
+              const WidgetSpan(child: FaIcon(FontAwesomeIcons.lock)),
+              const WidgetSpan(child: SizedBox(width: 5)),
+              TextSpan(text: localization.passwordTextFieldLabel),
             ],
           ),
         ),

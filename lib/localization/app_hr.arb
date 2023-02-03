@@ -1,0 +1,17 @@
+{
+    "trendingPersons": "Osobe u Trendu ovog tjedna",
+    "localizationLabel": "Lokalizacija",
+    "profileButtonLabel": "Profil",
+    "logoutButtonLabel": "Odjava",
+    "loginButtonLabel": "Prijava",
+    "helloLabel": "Bok",
+    "loginScreenTitle": "Prijava",
+    "usernameTextFieldLabel": "Korisničko ime",
+    "passwordTextFieldLabel": "Lozinka",
+    "poweredByLabel": "Pokreće",
+    "loginSubmitButtonLabel": "Prijavi se",
+    "fieldRequired": "Obavezno",
+    "wrongCredentialsErrorMessage": "Pogresno korisničko ime i/ili lozinka",
+    "generalLoginErrorMessage": "Prijava nije moguća",
+    "errorTextMessage": "Nešto je pošlo po krivu"
+}

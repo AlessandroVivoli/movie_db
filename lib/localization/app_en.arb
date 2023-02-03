@@ -1,0 +1,32 @@
+{
+    "trendingPersons": "Trending Persons this Week",
+    "@trendingPersons": {
+        "description": "Title of the trending persons section"
+    },
+    "localizationLabel": "Localization",
+    "@localizationLabel": {
+        "description": "Text for localization inside the drawer"
+    },
+    "profileButtonLabel": "Profile",
+    "logoutButtonLabel": "Logout",
+    "loginButtonLabel": "Login",
+    "helloLabel": "Hello",
+    "@helloLabel": {
+        "description": "Hello text in the drawer to greet the user"
+    },
+    "loginScreenTitle": "Login",
+    "usernameTextFieldLabel": "Username",
+    "passwordTextFieldLabel": "Password",
+    "poweredByLabel": "Powered by",
+    "@poweredByLabel": {
+        "description": "Powered by text shown in the login screen"
+    },
+    "loginSubmitButtonLabel": "Submit",
+    "fieldRequired": "Required",
+    "@fieldRequired": {
+        "description": "Error text for all required form fields"
+    },
+    "wrongCredentialsErrorMessage": "Wrong username and/or password",
+    "generalLoginErrorMessage": "Could not login",
+    "errorTextMessage": "Something went wrong"
+}

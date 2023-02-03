@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -54,14 +55,16 @@ class _FormWidgets extends HookWidget {
     final passwordController = useTextEditingController(text: null);
     final passwordNode = useFocusNode();
 
+    final localization = AppLocalizations.of(context)!;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Center(
+        Center(
           child: Text(
-            'Login',
-            style: TextStyle(
+            localization.loginScreenTitle,
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,
             ),
@@ -87,9 +90,9 @@ class _FormWidgets extends HookWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const Text(
-                'Powered by ',
-                style: TextStyle(
+              Text(
+                '${localization.poweredByLabel} ',
+                style: const TextStyle(
                   fontSize: 12,
                 ),
               ),

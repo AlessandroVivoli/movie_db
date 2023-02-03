@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
@@ -10,6 +11,7 @@ import 'core/loggers/provider_logger.dart';
 import 'features/auth/provider/auth_provider.dart';
 import 'features/local_storage/data/local_storage_repository.dart';
 import 'features/local_storage/provider/local_storage_provider.dart';
+import 'features/localization/provider/locale_state_provider.dart';
 import 'routing/router.dart';
 import 'routing/routes.dart';
 import 'themes/main_theme.dart';
@@ -54,6 +56,9 @@ void main() async {
 
   await container.read(authProvider.notifier).init();
 
+  final locale = container.read(localStorageProvider).getLocale();
+  container.read(localeStateProvider.notifier).state = locale;
+
   runApp(
     UncontrolledProviderScope(
       container: container,
@@ -62,12 +67,14 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     FlutterNativeSplash.remove();
+
+    final locale = ref.watch(localeStateProvider);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -76,6 +83,9 @@ class MyApp extends StatelessWidget {
       theme: mainTheme,
       initialRoute: AppRoute.home,
       onGenerateRoute: generateRoute,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: locale,
     );
   }
 }

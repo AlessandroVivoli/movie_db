@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/auth/provider/auth_provider.dart';
@@ -21,6 +22,8 @@ class SubmitButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authProvider);
 
+    final localization = AppLocalizations.of(context)!;
+
     return auth.when(
       loggedIn: (user) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -41,10 +44,10 @@ class SubmitButton extends ConsumerWidget {
         );
       },
       error: (error, stack) {
-        var message = 'Could not login.';
+        var message = localization.generalLoginErrorMessage;
 
         if (error is InvalidUserError) {
-          message = 'Wrong username and/or password';
+          message = localization.wrongCredentialsErrorMessage;
         }
 
         context.showErrorSnackBar(message);
@@ -75,6 +78,8 @@ class _Button extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final localization = AppLocalizations.of(context)!;
+
     return TextButton(
       style: TextButton.styleFrom(
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -90,7 +95,7 @@ class _Button extends ConsumerWidget {
               passwordController.text,
             );
       },
-      child: const Text('Submit'),
+      child: Text(localization.loginSubmitButtonLabel),
     );
   }
 }
