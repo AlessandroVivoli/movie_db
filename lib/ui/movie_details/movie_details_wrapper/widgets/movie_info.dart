@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MovieInfo extends StatelessWidget {
   final int budget;
-  final int runtime;
+  final int? runtime;
   final String releaseDate;
 
   const MovieInfo({
@@ -14,13 +15,15 @@ class MovieInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        _BudgetText(budget: budget),
-        _DurationText(runtime: runtime),
-        _ReleaseDateText(releaseDate: releaseDate),
-      ],
+    return SingleChildScrollView(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _BudgetText(budget: budget),
+          _DurationText(runtime: runtime),
+          _ReleaseDateText(releaseDate: releaseDate),
+        ],
+      ),
     );
   }
 }
@@ -34,11 +37,13 @@ class _BudgetText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Budget'.toUpperCase(),
+          localization.movieBudgetLabel.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w600,
@@ -48,7 +53,7 @@ class _BudgetText extends StatelessWidget {
           height: 10,
         ),
         Text(
-          '$budget \$',
+          '\$$budget ',
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontWeight: FontWeight.w600,
@@ -64,15 +69,17 @@ class _DurationText extends StatelessWidget {
     required this.runtime,
   });
 
-  final int runtime;
+  final int? runtime;
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Duration'.toUpperCase(),
+          localization.movieDurationLabel.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w600,
@@ -82,7 +89,7 @@ class _DurationText extends StatelessWidget {
           height: 10,
         ),
         Text(
-          '$runtime min',
+          (runtime != null) ? '$runtime min' : '?',
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontWeight: FontWeight.w600,
@@ -102,11 +109,13 @@ class _ReleaseDateText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Release date'.toUpperCase(),
+          localization.releaseDateLabel.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w600,

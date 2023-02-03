@@ -1,4 +1,5 @@
 {
+    "@@countryCode": "US",
     "trendingPersons": "Trending Persons this Week",
     "@trendingPersons": {
         "description": "Title of the trending persons section"
@@ -10,9 +11,15 @@
     "profileButtonLabel": "Profile",
     "logoutButtonLabel": "Logout",
     "loginButtonLabel": "Login",
-    "helloLabel": "Hello",
+    "helloLabel": "Hello, {userName}",
     "@helloLabel": {
-        "description": "Hello text in the drawer to greet the user"
+        "description": "Hello text in the drawer to greet the user",
+        "placeholders": {
+            "userName": {
+                "type": "String",
+                "example": "Steve"
+            }
+        }
     },
     "loginScreenTitle": "Login",
     "usernameTextFieldLabel": "Username",
@@ -28,5 +35,125 @@
     },
     "wrongCredentialsErrorMessage": "Wrong username and/or password",
     "generalLoginErrorMessage": "Could not login",
-    "errorTextMessage": "Something went wrong"
+    "unexpectedErrorMessage": "Something went wrong",
+    "notLoggedInErrorMessage": "You're not logged in!",
+    "noFavorites": "No favorite movie found.",
+    "@noFavorites": {
+        "description": "Indicating that no user favorite movies were found when fetching favorite movies"
+    },
+    "getFavoritesError": "Could not get favorite movies",
+    "@getFavoritesError": {
+        "description": "Indicating an error that was thrown while fetching favorite movies"
+    },
+    "noRated": "No rated movie found.",
+    "@noRated": {
+        "description": "Indicating that no user rated movies were found when fetching rated movies"
+    },
+    "getRatedError": "Could not get rated movies",
+    "@getRatedError": {
+        "description": "Indicating an error that was thrown while fetching rated movies"
+    },
+    "noWatchlist": "No watchlist found.",
+    "@noWatchlist": {
+        "description": "Indicating that no user watchlist was found when fetching watchlist"
+    },
+    "getWatchlistError": "Could not get movie watchlist",
+    "@getWatchlistError": {
+        "description": "Indicating an error that was thrown while fetching watchlist"
+    },
+    "noTrendingMovies": "No trending movie found.",
+    "@noTrendingMovies": {
+        "description": "Indicating that no trending movies were found when fetching trending movies"
+    },
+    "getTrendingMoviesError": "Could not get trending movies",
+    "@getTrendingMoviesError": {
+        "description": "Indicating an error that was thrown while fetching trending movies"
+    },
+    "noTopRatedMovies": "No top rated movie found.",
+    "@noTopRatedMovies": {
+        "description": "Indicating that no top rated movies were found when fetching top rated movies"
+    },
+    "getTopRatedMoviesError": "Could not get top rated movies",
+    "@getTopRatedMoviesError": {
+        "description": "Indicating an error that was thrown while fetching top rated movies"
+    },
+    "noTrendingPersons": "No trending person found.",
+    "@noTrendingPersons": {
+        "description": "Indicating that no trending persons were found when fetching trending persons"
+    },
+    "getTrendingPersonsError": "Could not get trending persons",
+    "@getTrendingPersonsError": {
+        "description": "Indicating an error that was thrown while fetching trending persons"
+    },
+    "getMovieDetailsError": "Could not get movie details",
+    "@getMovieDetailsError": {
+        "description": "Indicating an error that was thrown while fetching movie details"
+    },
+    "noCast": "No movie cast found.",
+    "@noCast": {
+        "description": "Indicating that no movie casts were found when fetching movie casts"
+    },
+    "getCastError": "Could not get movie cast",
+    "@getCastError": {
+        "description": "Indicating an error that was thrown while fetching movie casts"
+    },
+    "noSimilarMovies": "No similar movies found.",
+    "@noSimilarMovies": {
+        "description": "Indicating that no similar movies were found when fetching similar movies"
+    },
+    "getSimilarMoviesError": "Could not get similar movies",
+    "@getSimilarMoviesError": {
+        "description": "Indicating an error that was thrown while fetching similar movies"
+    },
+    "removeFavoriteError": "Could not remove movie from favorites",
+    "addFavoriteError": "Could not add movie to favorites",
+    "removeWatchlistError": "Could not remove movie from watchlist",
+    "addWatchlistError": "Could not add movie to watchlist",
+    "rateButtonLabel": "Rate",
+    "rateConfirmButtonLabel": "Confirm",
+    "rateError": "Could not rate movie",
+    "rateDeleteButtonLabel": "Delete",
+    "deleteRatingError": "Could not delete movie rating",
+    "getPersonDetailsError": "Could not get person details",
+    "@getPersonDetailsError": {
+        "description": "Indicating an error that was thrown while fetching person details"
+    },
+    "getPersonImagesError": "Could not get person images",
+    "@getPersonImagesError": {
+        "description": "Indicating an error that was thrown while fetching person images"
+    },
+    "noMovieCredits": "No movie credits found.",
+    "@noMovieCredits": {
+        "description": "Indicating that no movie credits were found when fetching movie credits"
+    },
+    "getMovieCreditsError": "Could not get movie credits",
+    "@getMovieCreditsError": {
+        "description": "Indicating an error that was thrown while fetching movie credits"
+    },
+    "noTrailer": "No trailer found.",
+    "@noTrailer": {
+        "description": "Indicating that no trailer was found when fetching movie videos"
+    },
+    "trailerError": "Cannot play movie trailer",
+    "@trailerError": {
+        "description": "Indicating an error that was thrown while trying to play a movie trailer"
+    },
+    "accountRealName": "Name",
+    "favoriteMoviesSectionTitle": "Favorite Movies",
+    "ratedMoviesSectionTitle": "Rated Movies",
+    "watchlistSectionTitle": "Watchlist",
+    "topRatedMoviesSectionTitle": "Top rated movies",
+    "trendingPersonsSectionTitle": "Trending persons this week",
+    "movieCastsLabel": "Casts",
+    "movieDescriptionLabel": "Overview",
+    "genresSectionTitle": "Genres",
+    "movieBudgetLabel": "Budget",
+    "movieDurationLabel": "Duration",
+    "releaseDateLabel": "Release date",
+    "similarMoviesSectionTitle": "Similar movies",
+    "personAgeLabel": "Age",
+    "personBiographyLabel": "Biography",
+    "personCreditsLabel": "Credits",
+    "personDepartmentLabel": "Known for",
+    "personLifetimeLabel": "Lifetime"
 }

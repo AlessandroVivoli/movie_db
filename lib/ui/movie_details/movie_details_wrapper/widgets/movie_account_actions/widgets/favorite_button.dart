@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -21,6 +22,8 @@ class FavoriteButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authProvider);
 
+    final localization = AppLocalizations.of(context)!;
+
     return user.maybeWhen(
       loggedIn: (user) => IconButton(
         onPressed: () async {
@@ -35,8 +38,8 @@ class FavoriteButton extends ConsumerWidget {
               .whenOrNull(
                 error: (_, __) => context.showErrorSnackBar(
                   (favorite)
-                      ? 'Could not remove movie from favorites.'
-                      : 'Could not add movie to favorites.',
+                      ? localization.removeFavoriteError
+                      : localization.addFavoriteError,
                 ),
               );
         },
@@ -46,7 +49,7 @@ class FavoriteButton extends ConsumerWidget {
               (favorite) ? Colors.pink : Theme.of(context).colorScheme.primary,
         ),
       ),
-      orElse: () => const ErrorText('You\'re not logged in.'),
+      orElse: () => ErrorText(localization.notLoggedInErrorMessage),
     );
   }
 }

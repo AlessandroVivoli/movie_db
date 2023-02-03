@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../features/auth/provider/auth_provider.dart';
@@ -20,34 +21,37 @@ class WatchlistButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authProvider);
 
+    final localization = AppLocalizations.of(context)!;
+
     return user.maybeWhen(
-      loggedIn: (user) => IconButton(
-        icon: Icon(
-          (watchlist) ? Icons.bookmark_added : Icons.bookmark_add_outlined,
-          size: 30,
-          color: (watchlist)
-              ? Theme.of(context).colorScheme.primary
-              : Colors.white,
-        ),
-        onPressed: () {
-          ref
-              .read(
-                addMovieToWatchlistProvider(
-                  user: user,
-                  movieId: movieId,
-                  watchlist: !watchlist,
-                ),
-              )
-              .whenOrNull(
-                error: (error, stackTrace) => context.showErrorSnackBar(
-                  (watchlist)
-                      ? 'Could not remove movie from watchlist.'
-                      : 'Could not add movie to watchlist',
-                ),
-              );
-        },
-      ),
-      orElse: () => const ErrorText('You\'re not logged in.'),
-    );
+        loggedIn: (user) => IconButton(
+              icon: Icon(
+                (watchlist)
+                    ? Icons.bookmark_added
+                    : Icons.bookmark_add_outlined,
+                size: 30,
+                color: (watchlist)
+                    ? Theme.of(context).colorScheme.primary
+                    : Colors.white,
+              ),
+              onPressed: () {
+                ref
+                    .read(
+                      addMovieToWatchlistProvider(
+                        user: user,
+                        movieId: movieId,
+                        watchlist: !watchlist,
+                      ),
+                    )
+                    .whenOrNull(
+                      error: (error, stackTrace) => context.showErrorSnackBar(
+                        (watchlist)
+                            ? localization.removeWatchlistError
+                            : localization.addWatchlistError,
+                      ),
+                    );
+              },
+            ),
+        orElse: () => ErrorText(localization.notLoggedInErrorMessage));
   }
 }

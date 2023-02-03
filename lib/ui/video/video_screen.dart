@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/extensions.dart';
@@ -15,6 +16,8 @@ class VideoScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final videos = ref.watch(getVideosProvider(movieId));
+
+    final localization = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -38,18 +41,18 @@ class VideoScreen extends ConsumerWidget {
           );
 
           if (videos.isEmpty) {
-            return const Center(
-              child: Text('No video found.'),
+            return Center(
+              child: Text(localization.noTrailer),
             );
           }
 
           return Player(video: videos.first);
         },
         error: (error, stackTrace) {
-          context.showErrorSnackBar('Cannot play movie trailer.');
+          context.showErrorSnackBar(localization.trailerError);
 
-          return const Center(
-            child: ErrorText('Something went wrong.'),
+          return Center(
+            child: ErrorText(localization.unexpectedErrorMessage),
           );
         },
         loading: () => const Center(

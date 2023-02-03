@@ -30,7 +30,7 @@ class MovieDetailsBackdrop extends ConsumerWidget {
           width: (orientation == Orientation.portrait) ? 200 : 400,
           child: Center(
             child: Text(
-              details.originalTitle ?? '',
+              details.title,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontSize: 16,

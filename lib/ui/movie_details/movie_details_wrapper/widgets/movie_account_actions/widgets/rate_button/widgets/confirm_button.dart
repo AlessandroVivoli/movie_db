@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../../features/auth/domain/user.dart';
@@ -23,6 +24,8 @@ class ConfirmButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final rateProvider = ref.watch(rateMoviesProvider);
 
+    final localization = AppLocalizations.of(context)!;
+
     return rateProvider.when(
       init: () => _ConfirmButton(
         rating: rating,
@@ -44,7 +47,7 @@ class ConfirmButton extends ConsumerWidget {
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stackTrace) {
-        context.showErrorSnackBar('Could not rate movie.');
+        context.showErrorSnackBar(localization.rateError);
 
         WidgetsBinding.instance.addPostFrameCallback((_) {
           Navigator.pop(context, false);
@@ -76,6 +79,8 @@ class _ConfirmButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final localization = AppLocalizations.of(context)!;
+
     return OutlinedButton(
       onPressed: (rating > 0 && originalRating != rating)
           ? () {
@@ -94,7 +99,7 @@ class _ConfirmButton extends ConsumerWidget {
           width: 2,
         ),
       ),
-      child: const Text('Confirm'),
+      child: Text(localization.rateConfirmButtonLabel),
     );
   }
 }

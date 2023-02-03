@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../features/genre/provider/get_genres_provider.dart';
@@ -8,12 +9,13 @@ import 'widgets/genre_tab_controller.dart';
 
 class GenreTab extends ConsumerWidget {
   const GenreTab({super.key, this.includeAdult});
-
   final bool? includeAdult;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final genres = ref.watch(getGenresProvider);
+
+    final localization = AppLocalizations.of(context)!;
 
     return genres.when(
       data: (genreList) {
@@ -28,8 +30,8 @@ class GenreTab extends ConsumerWidget {
       error: (error, stackTrace) {
         context.showErrorSnackBar('Could not get genres.');
 
-        return const Center(
-          child: ErrorText('Something went wrong.'),
+        return Center(
+          child: ErrorText(localization.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

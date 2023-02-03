@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/auth/provider/auth_provider.dart';
@@ -14,6 +15,8 @@ class AccountDetailsWrapper extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authProvider);
+
+    final localization = AppLocalizations.of(context)!;
 
     return user.maybeWhen(
       loggedIn: (user) => Padding(
@@ -35,8 +38,8 @@ class AccountDetailsWrapper extends HookConsumerWidget {
           ],
         ),
       ),
-      orElse: () => const Center(
-        child: ErrorText('You\'re not logged in.'),
+      orElse: () => Center(
+        child: ErrorText(localization.notLoggedInErrorMessage),
       ),
     );
   }

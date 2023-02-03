@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PersonDepartment extends StatelessWidget {
   const PersonDepartment({
@@ -10,11 +11,13 @@ class PersonDepartment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Known for'.toUpperCase(),
+          localization.personDepartmentLabel.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w600,

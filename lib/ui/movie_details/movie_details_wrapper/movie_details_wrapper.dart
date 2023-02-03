@@ -39,7 +39,7 @@ class MovieDetailsWrapper extends ConsumerWidget {
               MovieInfo(
                 budget: details.budget,
                 runtime: details.runtime,
-                releaseDate: details.releaseDate!,
+                releaseDate: details.releaseDate,
               ),
               MovieGenres(details: details),
             ],

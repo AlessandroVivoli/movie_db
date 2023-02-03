@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -15,13 +16,15 @@ class RatedMoviesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Rated Movies',
+            localization.ratedMoviesSectionTitle,
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
               fontSize: 18,
@@ -56,11 +59,13 @@ class _RatedMoviesHookWidget extends HookConsumerWidget {
       getRatedMoviesProvider(user: user, page: page.value),
     );
 
+    final localization = AppLocalizations.of(context)!;
+
     return ratedMovies.when(
       data: (movies) {
         if (movies.totalResults == 0) {
-          return const Center(
-            child: Text('Nothing found.'),
+          return Center(
+            child: Text(localization.noRated),
           );
         }
 
@@ -72,10 +77,10 @@ class _RatedMoviesHookWidget extends HookConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar('Could not get rated movies.');
+        context.showErrorSnackBar(localization.getRatedError);
 
-        return const Center(
-          child: ErrorText('Something went wrong.'),
+        return Center(
+          child: ErrorText(localization.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

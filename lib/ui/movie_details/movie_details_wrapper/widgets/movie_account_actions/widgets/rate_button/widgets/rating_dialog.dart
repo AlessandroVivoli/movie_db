@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -18,6 +19,8 @@ class RatingDialog extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final rating = useState(this.rating);
     final user = ref.watch(authProvider);
+
+    final localization = AppLocalizations.of(context)!;
 
     return user.maybeWhen(
       loggedIn: (user) => Center(
@@ -68,8 +71,8 @@ class RatingDialog extends HookConsumerWidget {
           ),
         ),
       ),
-      orElse: () => const Center(
-        child: ErrorText('You\'re not logged in.'),
+      orElse: () => Center(
+        child: ErrorText(localization.notLoggedInErrorMessage),
       ),
     );
   }

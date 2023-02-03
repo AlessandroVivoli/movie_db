@@ -101,8 +101,8 @@ class __$$_GenreCopyWithImpl<$Res> extends _$GenreCopyWithImpl<$Res, _$_Genre>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Genre implements _Genre {
-  const _$_Genre({required this.id, required this.name});
+class _$_Genre extends _Genre {
+  const _$_Genre({required this.id, required this.name}) : super._();
 
   factory _$_Genre.fromJson(Map<String, dynamic> json) =>
       _$$_GenreFromJson(json);
@@ -144,9 +144,10 @@ class _$_Genre implements _Genre {
   }
 }
 
-abstract class _Genre implements Genre {
+abstract class _Genre extends Genre {
   const factory _Genre({required final int id, required final String name}) =
       _$_Genre;
+  const _Genre._() : super._();
 
   factory _Genre.fromJson(Map<String, dynamic> json) = _$_Genre.fromJson;
 

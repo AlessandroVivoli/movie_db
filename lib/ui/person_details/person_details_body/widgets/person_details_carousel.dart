@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../features/person/domain/person_details.dart';
+import '../../../../core/extensions.dart';
 import '../../../../core/widgets/carousel/image_carousel/image_carousel.dart';
 import '../../../../core/widgets/errors/error_text.dart';
-import '../../../../core/extensions.dart';
-import '../../../../../features/person/domain/person_details.dart';
 import '../../../../features/image/provider/get_person_images_provider.dart';
 
 class PersonDetailsCarousel extends StatelessWidget {
@@ -44,6 +45,8 @@ class _PersonCarouselBuilder extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final personImages = ref.watch(getPersonImagesProvider(personDetails.id));
 
+    final localization = AppLocalizations.of(context)!;
+
     return personImages.when(
       data: (images) {
         if (images.isEmpty) {
@@ -60,10 +63,10 @@ class _PersonCarouselBuilder extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar('Could not get person images.');
+        context.showErrorSnackBar(localization.getPersonImagesError);
 
-        return const Center(
-          child: ErrorText('Something went wrong.'),
+        return Center(
+          child: ErrorText(localization.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../features/genre/domain/genre.dart';
 import '../../extensions.dart';
@@ -10,6 +11,8 @@ class GenreList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(

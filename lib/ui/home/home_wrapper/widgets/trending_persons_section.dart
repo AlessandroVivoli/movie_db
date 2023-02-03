@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/extensions.dart';
@@ -29,12 +30,14 @@ class _TrendingPersonsText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
           Text(
-            'Trending persons on this week'.toUpperCase(),
+            localization.trendingPersonsSectionTitle.toUpperCase(),
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.w600,
@@ -55,6 +58,8 @@ class _TrendingPersonsList extends ConsumerWidget {
       getTrendingPersonsProvider(TimeWindow.week),
     );
 
+    final localization = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: SizedBox(
@@ -62,8 +67,8 @@ class _TrendingPersonsList extends ConsumerWidget {
         child: trendingPresons.when(
           data: (persons) {
             if (persons.isEmpty) {
-              return const Center(
-                child: Text('Nothing found.'),
+              return Center(
+                child: Text(localization.noTrendingPersons),
               );
             }
 
@@ -73,10 +78,10 @@ class _TrendingPersonsList extends ConsumerWidget {
             );
           },
           error: (error, stackTrace) {
-            context.showErrorSnackBar('Could not get trending persons.');
+            context.showErrorSnackBar(localization.getTrendingPersonsError);
 
-            return const Center(
-              child: ErrorText('Something went wrong.'),
+            return Center(
+              child: ErrorText(localization.unexpectedErrorMessage),
             );
           },
           loading: () => const Center(

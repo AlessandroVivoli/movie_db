@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/extensions.dart';
@@ -17,13 +18,15 @@ class MovieCasts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 20, left: 10),
           child: Text(
-            'Casts'.toUpperCase(),
+            localization.movieCastsLabel.toUpperCase(),
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.w600,
@@ -50,11 +53,13 @@ class _CastList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final cast = ref.watch(getCastProvider(details.id));
 
+    final localization = AppLocalizations.of(context)!;
+
     return cast.when(
       data: (castList) {
         if (castList.isEmpty) {
-          return const Center(
-            child: Text('Nothing found.'),
+          return Center(
+            child: Text(localization.noCast),
           );
         }
 
@@ -64,10 +69,10 @@ class _CastList extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar('Could not get cast.');
+        context.showErrorSnackBar(localization.getCastError);
 
-        return const Center(
-          child: ErrorText('Something went wrong.'),
+        return Center(
+          child: ErrorText(localization.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

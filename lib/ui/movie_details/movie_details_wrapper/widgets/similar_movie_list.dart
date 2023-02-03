@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../core/extensions.dart';
 import '../../../../core/widgets/errors/error_text.dart';
 import '../../../../core/widgets/movie_list/movie_list.dart';
-import '../../../../core/extensions.dart';
 import '../../../../features/movies/domain/movie_details.dart';
 import '../../../../features/movies/provider/get_similar_movies_provider.dart';
 
@@ -17,13 +18,15 @@ class SimilarMovieList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(
-            'Similar movies'.toUpperCase(),
+            localization.similarMoviesSectionTitle.toUpperCase(),
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.w600,
@@ -53,11 +56,13 @@ class _SimilarMoviesBuilder extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final similarMovieList = ref.watch(getSimilarMoviesProvider(details.id));
 
+    final localization = AppLocalizations.of(context)!;
+
     return similarMovieList.when(
       data: (similarMovies) {
         if (similarMovies.isEmpty) {
-          return const Center(
-            child: Text('Nothing found'),
+          return Center(
+            child: Text(localization.noSimilarMovies),
           );
         }
 
@@ -67,10 +72,10 @@ class _SimilarMoviesBuilder extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar('Could not get similar movies.');
+        context.showErrorSnackBar(localization.getSimilarMoviesError);
 
-        return const Center(
-          child: ErrorText('Something went wrong.'),
+        return Center(
+          child: ErrorText(localization.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

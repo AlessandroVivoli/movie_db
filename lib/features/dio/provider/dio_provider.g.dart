@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$dioHash() => r'380bf03afdea69637ddf084e564f049c006b3812';
+String _$dioHash() => r'6f8f5094cd407102ef5f9ca5bff21701e3aeb551';
 
 /// See also [dio].
 final dioProvider = Provider<Dio>(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../features/account/provider/account_avatar_service_provider.dart';
@@ -49,13 +50,15 @@ class _UsernameText extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authProvider);
 
+    final localization = AppLocalizations.of(context)!;
+
     return user.maybeWhen(
       loggedIn: (user) => Text(
         user.accountDetails.username,
         overflow: TextOverflow.ellipsis,
       ),
       loading: () => const CircularProgressIndicator(),
-      orElse: () => const ErrorText('Not logged in.'),
+      orElse: () => ErrorText(localization.notLoggedInErrorMessage),
     );
   }
 }
@@ -68,6 +71,8 @@ class _AccountDetailsImage extends ConsumerWidget {
     final user = ref.watch(authProvider);
     final accountAvatarService = ref.watch(accountAvatarServiceProvider);
     final imageService = ref.watch(imageServiceProvider);
+
+    final localization = AppLocalizations.of(context)!;
 
     return user.maybeWhen(
       loggedIn: (user) => BackdropImage(
@@ -85,7 +90,9 @@ class _AccountDetailsImage extends ConsumerWidget {
           size: 100,
         ),
       ),
-      orElse: () => const Center(child: ErrorText('You\'re not logged in!')),
+      orElse: () => Center(
+        child: ErrorText(localization.notLoggedInErrorMessage),
+      ),
     );
   }
 }

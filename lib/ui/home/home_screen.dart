@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../routing/routes.dart';
@@ -106,23 +107,25 @@ class _TrendingMoviesBuilder extends ConsumerWidget {
       getTrendingMoviesProvider(TimeWindow.week),
     );
 
+    final localization = AppLocalizations.of(context)!;
+
     return trendingMovies.when(
       data: (movies) {
         final movieList = movies.take(6).toList();
 
         if (movieList.isEmpty) {
-          return const Center(
-            child: Text('Nothing found.'),
+          return Center(
+            child: Text(localization.noTrendingMovies),
           );
         }
 
         return MovieCarousel(movies: movies.take(6).toList());
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar('Could not get trending movies.');
+        context.showErrorSnackBar(localization.getTrendingMoviesError);
 
-        return const Center(
-          child: ErrorText('Something went wrong.'),
+        return Center(
+          child: ErrorText(localization.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

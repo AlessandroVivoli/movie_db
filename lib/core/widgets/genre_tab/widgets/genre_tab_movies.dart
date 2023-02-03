@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/movies/domain/movie_arguments.dart';
@@ -30,6 +31,8 @@ class GenreTabMovies extends ConsumerWidget {
       ),
     );
 
+    final localization = AppLocalizations.of(context)!;
+
     return movieList.when(
       data: (movies) {
         if (movies.isEmpty) {
@@ -46,8 +49,8 @@ class GenreTabMovies extends ConsumerWidget {
       error: (error, stackTrace) {
         context.showErrorSnackBar('Could not get movies.');
 
-        return const Center(
-          child: ErrorText('Something went wrong.'),
+        return Center(
+          child: ErrorText(localization.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

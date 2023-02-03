@@ -24,7 +24,7 @@ class LoggedInDrawerView extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            '${localization.helloLabel}, ${accountDetails.username}',
+            localization.helloLabel(accountDetails.username),
           ),
         ),
         OutlinedButton.icon(

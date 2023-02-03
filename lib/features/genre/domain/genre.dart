@@ -5,10 +5,18 @@ part 'genre.g.dart';
 
 @freezed
 class Genre with _$Genre {
+  const Genre._();
+
   const factory Genre({
     required int id,
     required String name,
   }) = _Genre;
 
   factory Genre.fromJson(Map<String, Object?> json) => _$GenreFromJson(json);
+
+  // TODO add genre localization
+  /* @override
+  String get name {
+    
+  } */
 }

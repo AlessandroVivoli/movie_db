@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/extensions.dart';
@@ -33,16 +34,18 @@ class _PersonDetailsBodyBuilder extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final personDetails = ref.watch(getPersonDetailsProvider(personId));
 
+    final localization = AppLocalizations.of(context)!;
+
     return personDetails.when(
       data: (details) => PersonDetailsBody(personDetails: details),
       error: (error, stackTrace) {
-        context.showErrorSnackBar('Could not get person details.');
+        context.showErrorSnackBar(localization.getPersonDetailsError);
 
         return Column(
           children: [
             AppBar(),
-            const Center(
-              child: ErrorText('Something went wrong.'),
+            Center(
+              child: ErrorText(localization.unexpectedErrorMessage),
             ),
           ],
         );

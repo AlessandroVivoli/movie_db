@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../features/auth/provider/auth_provider.dart';
@@ -28,6 +29,8 @@ class SuggestionList extends ConsumerWidget {
         includeAdult: user?.accountDetails.includeAdult ?? false,
       ),
     );
+
+    final localization = AppLocalizations.of(context)!;
 
     return search.when(
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -101,8 +104,8 @@ class SuggestionList extends ConsumerWidget {
       error: (error, stackTrace) {
         context.showErrorSnackBar('Could not search for movies.');
 
-        return const Center(
-          child: ErrorText('Something went wrong.'),
+        return Center(
+          child: ErrorText(localization.unexpectedErrorMessage),
         );
       },
     );

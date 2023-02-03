@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AccountDetailsNameText extends StatelessWidget {
   const AccountDetailsNameText({
@@ -10,13 +11,15 @@ class AccountDetailsNameText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Name',
+            localization.accountRealName,
             style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
                 fontSize: 18,

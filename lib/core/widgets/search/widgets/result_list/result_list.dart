@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -28,6 +29,8 @@ class ResultList extends HookConsumerWidget {
         page: page.value,
       ),
     );
+
+    final localization = AppLocalizations.of(context)!;
 
     return search.when(
       data: (data) {
@@ -68,7 +71,9 @@ class ResultList extends HookConsumerWidget {
           ],
         );
       },
-      error: (_, __) => const Center(child: ErrorText('Something went wrong')),
+      error: (_, __) => Center(
+        child: ErrorText(localization.unexpectedErrorMessage),
+      ),
       loading: () {
         return Column(
           children: [

@@ -17,10 +17,10 @@ _$_MovieDetails _$$_MovieDetailsFromJson(Map<String, dynamic> json) =>
       homepage: json['homepage'] as String?,
       id: json['id'] as int,
       imdbId: json['imdb_id'] as String?,
-      originalLanguage: json['original_language'] as String?,
-      originalTitle: json['original_title'] as String?,
+      originalLanguage: json['original_language'] as String,
+      originalTitle: json['original_title'] as String,
       overview: json['overview'] as String?,
-      popularity: (json['popularity'] as num?)?.toDouble(),
+      popularity: (json['popularity'] as num).toDouble(),
       posterPath: json['poster_path'] as String?,
       productionCompanies: (json['production_companies'] as List<dynamic>?)
           ?.map((e) => ProductionCompany.fromJson(e as Map<String, dynamic>))
@@ -28,14 +28,15 @@ _$_MovieDetails _$$_MovieDetailsFromJson(Map<String, dynamic> json) =>
       productionCountries: (json['production_countries'] as List<dynamic>?)
           ?.map((e) => ProductionCountry.fromJson(e as Map<String, dynamic>))
           .toList(),
-      releaseDate: json['release_date'] as String?,
+      releaseDate: json['release_date'] as String,
       revenue: json['revenue'] as int,
-      runtime: json['runtime'] as int,
+      runtime: json['runtime'] as int?,
       spokenLanguages: (json['spoken_languages'] as List<dynamic>)
           .map((e) => SpokenLanguage.fromJson(e as Map<String, dynamic>))
           .toList(),
-      status: json['status'] as String?,
+      status: json['status'] as String,
       tagline: json['tagline'] as String?,
+      title: json['title'] as String,
       video: json['video'] as bool,
       voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int,
@@ -69,6 +70,7 @@ Map<String, dynamic> _$$_MovieDetailsToJson(_$_MovieDetails instance) =>
           instance.spokenLanguages.map((e) => e.toJson()).toList(),
       'status': instance.status,
       'tagline': instance.tagline,
+      'title': instance.title,
       'video': instance.video,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,

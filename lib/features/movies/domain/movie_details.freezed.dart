@@ -27,22 +27,23 @@ mixin _$MovieDetails {
   String? get homepage => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   String? get imdbId => throw _privateConstructorUsedError;
-  String? get originalLanguage => throw _privateConstructorUsedError;
-  String? get originalTitle => throw _privateConstructorUsedError;
+  String get originalLanguage => throw _privateConstructorUsedError;
+  String get originalTitle => throw _privateConstructorUsedError;
   String? get overview => throw _privateConstructorUsedError;
-  double? get popularity => throw _privateConstructorUsedError;
+  double get popularity => throw _privateConstructorUsedError;
   String? get posterPath => throw _privateConstructorUsedError;
   List<ProductionCompany>? get productionCompanies =>
       throw _privateConstructorUsedError;
   List<ProductionCountry>? get productionCountries =>
       throw _privateConstructorUsedError;
-  String? get releaseDate => throw _privateConstructorUsedError;
+  String get releaseDate => throw _privateConstructorUsedError;
   int get revenue => throw _privateConstructorUsedError;
-  int get runtime => throw _privateConstructorUsedError;
+  int? get runtime => throw _privateConstructorUsedError;
   List<SpokenLanguage> get spokenLanguages =>
       throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
   String? get tagline => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
   bool get video => throw _privateConstructorUsedError;
   double get voteAverage => throw _privateConstructorUsedError;
   int get voteCount => throw _privateConstructorUsedError;
@@ -68,19 +69,20 @@ abstract class $MovieDetailsCopyWith<$Res> {
       String? homepage,
       int id,
       String? imdbId,
-      String? originalLanguage,
-      String? originalTitle,
+      String originalLanguage,
+      String originalTitle,
       String? overview,
-      double? popularity,
+      double popularity,
       String? posterPath,
       List<ProductionCompany>? productionCompanies,
       List<ProductionCountry>? productionCountries,
-      String? releaseDate,
+      String releaseDate,
       int revenue,
-      int runtime,
+      int? runtime,
       List<SpokenLanguage> spokenLanguages,
-      String? status,
+      String status,
       String? tagline,
+      String title,
       bool video,
       double voteAverage,
       int voteCount,
@@ -109,19 +111,20 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
     Object? homepage = freezed,
     Object? id = null,
     Object? imdbId = freezed,
-    Object? originalLanguage = freezed,
-    Object? originalTitle = freezed,
+    Object? originalLanguage = null,
+    Object? originalTitle = null,
     Object? overview = freezed,
-    Object? popularity = freezed,
+    Object? popularity = null,
     Object? posterPath = freezed,
     Object? productionCompanies = freezed,
     Object? productionCountries = freezed,
-    Object? releaseDate = freezed,
+    Object? releaseDate = null,
     Object? revenue = null,
-    Object? runtime = null,
+    Object? runtime = freezed,
     Object? spokenLanguages = null,
-    Object? status = freezed,
+    Object? status = null,
     Object? tagline = freezed,
+    Object? title = null,
     Object? video = null,
     Object? voteAverage = null,
     Object? voteCount = null,
@@ -156,22 +159,22 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
           ? _value.imdbId
           : imdbId // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalLanguage: freezed == originalLanguage
+      originalLanguage: null == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      originalTitle: freezed == originalTitle
+              as String,
+      originalTitle: null == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String?,
-      popularity: freezed == popularity
+      popularity: null == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
@@ -184,30 +187,34 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
           ? _value.productionCountries
           : productionCountries // ignore: cast_nullable_to_non_nullable
               as List<ProductionCountry>?,
-      releaseDate: freezed == releaseDate
+      releaseDate: null == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       revenue: null == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
               as int,
-      runtime: null == runtime
+      runtime: freezed == runtime
           ? _value.runtime
           : runtime // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       spokenLanguages: null == spokenLanguages
           ? _value.spokenLanguages
           : spokenLanguages // ignore: cast_nullable_to_non_nullable
               as List<SpokenLanguage>,
-      status: freezed == status
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       tagline: freezed == tagline
           ? _value.tagline
           : tagline // ignore: cast_nullable_to_non_nullable
               as String?,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
       video: null == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
@@ -256,19 +263,20 @@ abstract class _$$_MovieDetailsCopyWith<$Res>
       String? homepage,
       int id,
       String? imdbId,
-      String? originalLanguage,
-      String? originalTitle,
+      String originalLanguage,
+      String originalTitle,
       String? overview,
-      double? popularity,
+      double popularity,
       String? posterPath,
       List<ProductionCompany>? productionCompanies,
       List<ProductionCountry>? productionCountries,
-      String? releaseDate,
+      String releaseDate,
       int revenue,
-      int runtime,
+      int? runtime,
       List<SpokenLanguage> spokenLanguages,
-      String? status,
+      String status,
       String? tagline,
+      String title,
       bool video,
       double voteAverage,
       int voteCount,
@@ -296,19 +304,20 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
     Object? homepage = freezed,
     Object? id = null,
     Object? imdbId = freezed,
-    Object? originalLanguage = freezed,
-    Object? originalTitle = freezed,
+    Object? originalLanguage = null,
+    Object? originalTitle = null,
     Object? overview = freezed,
-    Object? popularity = freezed,
+    Object? popularity = null,
     Object? posterPath = freezed,
     Object? productionCompanies = freezed,
     Object? productionCountries = freezed,
-    Object? releaseDate = freezed,
+    Object? releaseDate = null,
     Object? revenue = null,
-    Object? runtime = null,
+    Object? runtime = freezed,
     Object? spokenLanguages = null,
-    Object? status = freezed,
+    Object? status = null,
     Object? tagline = freezed,
+    Object? title = null,
     Object? video = null,
     Object? voteAverage = null,
     Object? voteCount = null,
@@ -343,22 +352,22 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
           ? _value.imdbId
           : imdbId // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalLanguage: freezed == originalLanguage
+      originalLanguage: null == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      originalTitle: freezed == originalTitle
+              as String,
+      originalTitle: null == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String?,
-      popularity: freezed == popularity
+      popularity: null == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
@@ -371,30 +380,34 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
           ? _value._productionCountries
           : productionCountries // ignore: cast_nullable_to_non_nullable
               as List<ProductionCountry>?,
-      releaseDate: freezed == releaseDate
+      releaseDate: null == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       revenue: null == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
               as int,
-      runtime: null == runtime
+      runtime: freezed == runtime
           ? _value.runtime
           : runtime // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       spokenLanguages: null == spokenLanguages
           ? _value._spokenLanguages
           : spokenLanguages // ignore: cast_nullable_to_non_nullable
               as List<SpokenLanguage>,
-      status: freezed == status
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       tagline: freezed == tagline
           ? _value.tagline
           : tagline // ignore: cast_nullable_to_non_nullable
               as String?,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
       video: null == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
@@ -439,6 +452,7 @@ class _$_MovieDetails implements _MovieDetails {
       required final List<SpokenLanguage> spokenLanguages,
       required this.status,
       required this.tagline,
+      required this.title,
       required this.video,
       required this.voteAverage,
       required this.voteCount,
@@ -472,13 +486,13 @@ class _$_MovieDetails implements _MovieDetails {
   @override
   final String? imdbId;
   @override
-  final String? originalLanguage;
+  final String originalLanguage;
   @override
-  final String? originalTitle;
+  final String originalTitle;
   @override
   final String? overview;
   @override
-  final double? popularity;
+  final double popularity;
   @override
   final String? posterPath;
   final List<ProductionCompany>? _productionCompanies;
@@ -504,11 +518,11 @@ class _$_MovieDetails implements _MovieDetails {
   }
 
   @override
-  final String? releaseDate;
+  final String releaseDate;
   @override
   final int revenue;
   @override
-  final int runtime;
+  final int? runtime;
   final List<SpokenLanguage> _spokenLanguages;
   @override
   List<SpokenLanguage> get spokenLanguages {
@@ -518,9 +532,11 @@ class _$_MovieDetails implements _MovieDetails {
   }
 
   @override
-  final String? status;
+  final String status;
   @override
   final String? tagline;
+  @override
+  final String title;
   @override
   final bool video;
   @override
@@ -532,7 +548,7 @@ class _$_MovieDetails implements _MovieDetails {
 
   @override
   String toString() {
-    return 'MovieDetails(adult: $adult, backdropPath: $backdropPath, budget: $budget, genres: $genres, homepage: $homepage, id: $id, imdbId: $imdbId, originalLanguage: $originalLanguage, originalTitle: $originalTitle, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, productionCountries: $productionCountries, releaseDate: $releaseDate, revenue: $revenue, runtime: $runtime, spokenLanguages: $spokenLanguages, status: $status, tagline: $tagline, video: $video, voteAverage: $voteAverage, voteCount: $voteCount, state: $state)';
+    return 'MovieDetails(adult: $adult, backdropPath: $backdropPath, budget: $budget, genres: $genres, homepage: $homepage, id: $id, imdbId: $imdbId, originalLanguage: $originalLanguage, originalTitle: $originalTitle, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, productionCountries: $productionCountries, releaseDate: $releaseDate, revenue: $revenue, runtime: $runtime, spokenLanguages: $spokenLanguages, status: $status, tagline: $tagline, title: $title, video: $video, voteAverage: $voteAverage, voteCount: $voteCount, state: $state)';
   }
 
   @override
@@ -571,6 +587,7 @@ class _$_MovieDetails implements _MovieDetails {
                 .equals(other._spokenLanguages, _spokenLanguages) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.tagline, tagline) || other.tagline == tagline) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.video, video) || other.video == video) &&
             (identical(other.voteAverage, voteAverage) ||
                 other.voteAverage == voteAverage) &&
@@ -603,6 +620,7 @@ class _$_MovieDetails implements _MovieDetails {
         const DeepCollectionEquality().hash(_spokenLanguages),
         status,
         tagline,
+        title,
         video,
         voteAverage,
         voteCount,
@@ -632,19 +650,20 @@ abstract class _MovieDetails implements MovieDetails {
       required final String? homepage,
       required final int id,
       required final String? imdbId,
-      required final String? originalLanguage,
-      required final String? originalTitle,
+      required final String originalLanguage,
+      required final String originalTitle,
       required final String? overview,
-      required final double? popularity,
+      required final double popularity,
       required final String? posterPath,
       required final List<ProductionCompany>? productionCompanies,
       required final List<ProductionCountry>? productionCountries,
-      required final String? releaseDate,
+      required final String releaseDate,
       required final int revenue,
-      required final int runtime,
+      required final int? runtime,
       required final List<SpokenLanguage> spokenLanguages,
-      required final String? status,
+      required final String status,
       required final String? tagline,
+      required final String title,
       required final bool video,
       required final double voteAverage,
       required final int voteCount,
@@ -668,13 +687,13 @@ abstract class _MovieDetails implements MovieDetails {
   @override
   String? get imdbId;
   @override
-  String? get originalLanguage;
+  String get originalLanguage;
   @override
-  String? get originalTitle;
+  String get originalTitle;
   @override
   String? get overview;
   @override
-  double? get popularity;
+  double get popularity;
   @override
   String? get posterPath;
   @override
@@ -682,17 +701,19 @@ abstract class _MovieDetails implements MovieDetails {
   @override
   List<ProductionCountry>? get productionCountries;
   @override
-  String? get releaseDate;
+  String get releaseDate;
   @override
   int get revenue;
   @override
-  int get runtime;
+  int? get runtime;
   @override
   List<SpokenLanguage> get spokenLanguages;
   @override
-  String? get status;
+  String get status;
   @override
   String? get tagline;
+  @override
+  String get title;
   @override
   bool get video;
   @override

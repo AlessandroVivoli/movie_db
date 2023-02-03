@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../core/extensions.dart';
 import '../../../routing/routes.dart';
+import '../../core/extensions.dart';
 import '../../core/widgets/errors/error_text.dart';
 import '../../features/movies/domain/movie_details.dart';
 import '../../features/movies/provider/get_movie_details_provider.dart';
@@ -43,17 +44,19 @@ class _MovieDetailsWrapper extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final movieDetails = ref.watch(getMovieDetailsProvider(movieId));
 
+    final localization = AppLocalizations.of(context)!;
+
     return movieDetails.when(
       data: (details) => _MovieDetailsBody(details: details),
       error: (error, stackTrace) {
-        context.showErrorSnackBar('Could not get movie details.');
+        context.showErrorSnackBar(localization.getMovieDetailsError);
 
         return Column(
           children: [
             AppBar(),
-            const Expanded(
+            Expanded(
               child: Center(
-                child: ErrorText('Something went wrong.'),
+                child: ErrorText(localization.unexpectedErrorMessage),
               ),
             ),
           ],
