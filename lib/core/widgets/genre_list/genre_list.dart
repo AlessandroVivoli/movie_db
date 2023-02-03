@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../features/genre/domain/genre.dart';
+import '../../../features/localization/provider/locale_state_provider.dart';
 import '../../extensions.dart';
 
-class GenreList extends StatelessWidget {
+class GenreList extends ConsumerWidget {
   final List<Genre> genres;
 
   const GenreList({super.key, required this.genres});
 
   @override
-  Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localeStateProvider);
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -30,7 +31,7 @@ class GenreList extends StatelessWidget {
               ),
             ),
             child: Text(
-              genres[index].name,
+              genres[index].getName(locale),
               style: TextStyle(color: Theme.of(context).colorScheme.secondary),
             ),
           ),

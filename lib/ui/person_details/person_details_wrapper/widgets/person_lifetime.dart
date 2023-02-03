@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../features/person/domain/person_details.dart';
+import '../../../../features/localization/provider/locale_state_provider.dart';
 
-class PersonLifetime extends StatelessWidget {
+class PersonLifetime extends ConsumerWidget {
   const PersonLifetime({
     super.key,
     required this.personDetails,
@@ -15,7 +17,9 @@ class PersonLifetime extends StatelessWidget {
   final bool extendedDate;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localeStateProvider);
+
     final localization = AppLocalizations.of(context)!;
 
     return Column(
@@ -30,7 +34,7 @@ class PersonLifetime extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          personDetails.getLifetime(extendedDate),
+          personDetails.getLifetime(extendedDate, locale),
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontWeight: FontWeight.w600,

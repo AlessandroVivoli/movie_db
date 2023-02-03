@@ -6,6 +6,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../features/auth/provider/auth_provider.dart';
 import '../../../features/local_storage/provider/local_storage_provider.dart';
 import '../../../features/localization/provider/locale_state_provider.dart';
+import '../../../features/movies/provider/favorite_movies/get_favorite_movies_provider.dart';
+import '../../../features/movies/provider/movie_watchlist/get_movie_watchlist_provider.dart';
+import '../../../features/movies/provider/rated_movies/get_rated_movies_provider.dart';
 import '../../../routing/routes.dart';
 import 'widgets/logged_in_drawer_view/logged_in_drawer_view.dart';
 import 'widgets/logged_out_drawer_view/logged_out_drawer_view.dart';
@@ -64,35 +67,45 @@ class _LocaleColumn extends HookConsumerWidget {
     final widget = useValueListenable(notifierWidget);
 
     final locale = ref.watch(localeStateProvider);
-
     const supportedLocales = AppLocalizations.supportedLocales;
+    final localization = AppLocalizations.of(context)!;
 
     return Column(
       children: [
         Expanded(child: widget),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text('${AppLocalizations.of(context)!.localizationLabel}:'),
-            DropdownButton(
-              value: locale,
-              items: List.generate(
-                supportedLocales.length,
-                (index) => DropdownMenuItem(
-                  value: supportedLocales[index],
-                  child: Text(supportedLocales[index].languageCode),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text('${AppLocalizations.of(context)!.localizationLabel}:'),
+              DropdownButton(
+                value: locale,
+                items: List.generate(
+                  supportedLocales.length,
+                  (index) => DropdownMenuItem(
+                    value: supportedLocales[index],
+                    child: Text(
+                      localization.languageSelection(
+                        supportedLocales[index].languageCode,
+                      ),
+                    ),
+                  ),
                 ),
+                onChanged: (Locale? value) {
+                  if (value == null) return;
+
+                  ref.read(localeStateProvider.notifier).state = value;
+
+                  ref.read(localStorageProvider).setLocale(value);
+                  ref.invalidate(getFavoriteMoviesProvider);
+                  ref.invalidate(getMovieWatchlistProvider);
+                  ref.invalidate(getRatedMoviesProvider);
+                },
               ),
-              onChanged: (Locale? value) {
-                if (value == null) return;
-
-                ref.read(localeStateProvider.notifier).state = value;
-
-                ref.read(localStorageProvider).setLocale(value);
-              },
-            ),
-          ],
+            ],
+          ),
         )
       ],
     );

@@ -111,6 +111,8 @@ class _ReleaseDateText extends StatelessWidget {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
 
+    final dateTime = DateTime.tryParse(releaseDate);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -125,7 +127,7 @@ class _ReleaseDateText extends StatelessWidget {
           height: 10,
         ),
         Text(
-          releaseDate,
+          (dateTime != null) ? localization.releaseDateValue(dateTime) : '?',
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontWeight: FontWeight.w600,

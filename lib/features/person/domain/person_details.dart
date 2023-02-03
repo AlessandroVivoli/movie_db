@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
@@ -37,16 +38,20 @@ class PersonDetails with _$PersonDetails {
     return '${(age.inDays / 365).floor()}';
   }
 
-  String getLifetime(bool extendedDate) {
+  String getLifetime(bool extendedDate, Locale locale) {
     final birthdayDate = DateTime.tryParse(birthday ?? '');
     final deathdayDate = DateTime.tryParse(deathday ?? '');
 
-    final String pattern = (extendedDate) ? 'yMMMMd' : 'yMMMd';
+    final String pattern = (extendedDate)
+        ? _localePattern[locale.languageCode]![1]
+        : _localePattern[locale.languageCode]![0];
 
-    final birthdayFormat =
-        (birthdayDate == null) ? '?' : DateFormat(pattern).format(birthdayDate);
-    final deathdayFormat =
-        (deathdayDate == null) ? '?' : DateFormat(pattern).format(deathdayDate);
+    final birthdayFormat = (birthdayDate == null)
+        ? '?'
+        : DateFormat(pattern, locale.languageCode).format(birthdayDate);
+    final deathdayFormat = (deathdayDate == null)
+        ? '?'
+        : DateFormat(pattern, locale.languageCode).format(deathdayDate);
 
     final lifetimeFormat = (birthdayDate == null && deathdayDate == null)
         ? '?'
@@ -55,3 +60,8 @@ class PersonDetails with _$PersonDetails {
     return lifetimeFormat;
   }
 }
+
+Map<String, List<String>> _localePattern = {
+  'hr': ['d. MMM y.', 'd. MMMMM y.'],
+  'en': ['yMMMd', 'yMMMMd'],
+};

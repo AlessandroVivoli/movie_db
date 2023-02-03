@@ -20,7 +20,7 @@ class MovieGenres extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.only(top: 20),
           child: Text(
             localization.genresSectionTitle.toUpperCase(),
             style: TextStyle(
@@ -30,7 +30,7 @@ class MovieGenres extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
+          padding: const EdgeInsets.only(top: 10, bottom: 20),
           child: GenreList(genres: details.genres),
         ),
       ],
