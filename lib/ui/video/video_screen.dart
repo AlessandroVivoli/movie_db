@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../core/extensions.dart';
+import '../../core/extensions/build_context_extensions.dart';
 import '../../core/widgets/errors/error_text.dart';
 import '../../features/video/provider/get_videos_provider.dart';
 import 'player/player.dart';

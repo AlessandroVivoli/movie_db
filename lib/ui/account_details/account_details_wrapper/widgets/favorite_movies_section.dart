@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../features/auth/domain/user.dart';
-import '../../../../core/extensions.dart';
+import '../../../../core/extensions/build_context_extensions.dart';
 import '../../../../core/widgets/errors/error_text.dart';
 import '../../../../core/widgets/paged_movie_list/paged_movie_list.dart';
 import '../../../../features/movies/provider/favorite_movies/get_favorite_movies_provider.dart';

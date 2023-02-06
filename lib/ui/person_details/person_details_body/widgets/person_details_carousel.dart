@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../features/person/domain/person_details.dart';
-import '../../../../core/extensions.dart';
+import '../../../../core/extensions/build_context_extensions.dart';
 import '../../../../core/widgets/carousel/image_carousel/image_carousel.dart';
 import '../../../../core/widgets/errors/error_text.dart';
 import '../../../../features/image/provider/get_person_images_provider.dart';

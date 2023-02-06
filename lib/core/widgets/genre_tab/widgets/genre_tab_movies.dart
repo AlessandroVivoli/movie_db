@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../features/movies/domain/movie_arguments.dart';
 import '../../../../features/movies/domain/sort_by.dart';
 import '../../../../features/movies/provider/get_movies_provider.dart';
-import '../../../extensions.dart';
+import '../../../extensions/build_context_extensions.dart';
 import '../../errors/error_text.dart';
 import '../../movie_list/movie_list.dart';
 

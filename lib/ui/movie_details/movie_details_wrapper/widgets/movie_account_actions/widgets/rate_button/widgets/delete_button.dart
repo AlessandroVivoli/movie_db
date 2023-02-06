@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../../features/auth/domain/user.dart';
-import '../../../../../../../../core/extensions.dart';
+import '../../../../../../../../core/extensions/build_context_extensions.dart';
 import '../../../../../../../../features/movies/provider/rated_movies/delete_rating_provider.dart';
 
 class DeleteButton extends ConsumerWidget {

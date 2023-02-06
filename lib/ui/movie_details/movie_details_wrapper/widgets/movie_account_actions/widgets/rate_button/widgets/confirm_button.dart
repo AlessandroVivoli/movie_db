@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../../features/auth/domain/user.dart';
-import '../../../../../../../../core/extensions.dart';
+import '../../../../../../../../core/extensions/build_context_extensions.dart';
 import '../../../../../../../../features/movies/provider/rated_movies/rate_movies_provider.dart';
 
 class ConfirmButton extends ConsumerWidget {

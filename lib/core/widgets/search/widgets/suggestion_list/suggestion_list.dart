@@ -7,7 +7,7 @@ import '../../../../../features/image/domain/sizes.dart';
 import '../../../../../features/image/provider/image_service_provider.dart';
 import '../../../../../features/movies/provider/search_movies_provider.dart';
 import '../../../../../routing/routes.dart';
-import '../../../../extensions.dart';
+import '../../../../extensions/build_context_extensions.dart';
 import '../../../custom_image/custom_network_image.dart';
 import '../../../errors/error_text.dart';
 

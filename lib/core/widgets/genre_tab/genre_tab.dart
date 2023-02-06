@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../features/genre/provider/get_genres_provider.dart';
-import '../../extensions.dart';
+import '../../extensions/build_context_extensions.dart';
 import '../errors/error_text.dart';
 import 'widgets/genre_tab_controller.dart';
 
