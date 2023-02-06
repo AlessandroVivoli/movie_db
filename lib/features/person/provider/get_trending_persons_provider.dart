@@ -6,7 +6,7 @@ import 'person_service_provider.dart';
 
 part 'get_trending_persons_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 Future<List<Person>> getTrendingPersons(
   GetTrendingPersonsRef ref,
   TimeWindow timeWindow,

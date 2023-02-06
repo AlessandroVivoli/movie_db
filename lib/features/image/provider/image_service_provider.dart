@@ -6,7 +6,7 @@ import '../domain/i_image_service.dart';
 
 part 'image_service_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 IImageService imageService(ImageServiceRef ref) {
   return ImageService(ref.watch(dioProvider));
 }

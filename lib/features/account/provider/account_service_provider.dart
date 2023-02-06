@@ -6,7 +6,7 @@ import '../domain/i_account_service.dart';
 
 part 'account_service_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 IAccountService accountService(AccountServiceRef ref) {
   return AccountService(ref.watch(dioProvider));
 }

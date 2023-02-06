@@ -6,7 +6,7 @@ import '../domain/i_genre_service.dart';
 
 part 'genre_service_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 IGenreService genreService(GenreServiceRef ref) {
   return GenreService(ref.watch(dioProvider));
 }

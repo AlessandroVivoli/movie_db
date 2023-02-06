@@ -5,7 +5,7 @@ import '../domain/i_account_avatar_service.dart';
 
 part 'account_avatar_service_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 IAccountAvatarService accountAvatarService(AccountAvatarServiceRef ref) {
   return AccountAvatarService();
 }

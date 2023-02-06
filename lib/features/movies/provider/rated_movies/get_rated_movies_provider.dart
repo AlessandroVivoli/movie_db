@@ -6,7 +6,7 @@ import '../movie_service_provider.dart';
 
 part 'get_rated_movies_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 Future<MovieListModel> getRatedMovies(
   GetRatedMoviesRef ref, {
   required User user,

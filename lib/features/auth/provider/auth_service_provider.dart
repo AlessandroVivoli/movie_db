@@ -6,7 +6,7 @@ import '../domain/i_auth_service.dart';
 
 part 'auth_service_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 IAuthService authService(AuthServiceRef ref) {
   return AuthService(ref.watch(dioProvider));
 }
