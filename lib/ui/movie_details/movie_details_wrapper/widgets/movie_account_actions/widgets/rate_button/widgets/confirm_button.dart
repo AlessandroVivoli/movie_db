@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../../features/auth/domain/user.dart';
 import '../../../../../../../../core/extensions/build_context_extensions.dart';
-import '../../../../../../../../features/movies/provider/rated_movies/rate_movies_provider.dart';
+import '../../../../../../../../features/movies/provider/rating/rate_movies_provider.dart';
 
 class ConfirmButton extends ConsumerWidget {
   final double rating;
@@ -22,44 +22,36 @@ class ConfirmButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final rateProvider = ref.watch(rateMoviesProvider);
+    final isLoading = ref.watch(rateMoviesProvider).maybeWhen(
+          loading: () => true,
+          orElse: () => false,
+        );
 
     final localization = AppLocalizations.of(context)!;
 
-    return rateProvider.when(
-      init: () => _ConfirmButton(
-        rating: rating,
-        originalRating: originalRating,
-        movieId: movieId,
-        user: user,
-      ),
-      completed: () {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.pop(context, true);
-        });
+    ref.listen(rateMoviesProvider, (previous, next) {
+      next.whenOrNull(
+        error: (error, stackTrace) {
+          context.showErrorSnackBar(localization.rateError);
 
-        return _ConfirmButton(
-          rating: rating,
-          originalRating: originalRating,
-          movieId: movieId,
-          user: user,
-        );
-      },
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stackTrace) {
-        context.showErrorSnackBar(localization.rateError);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.pop(context, false);
+          });
+        },
+        success: () {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.pop(context, true);
+          });
+        },
+      );
+    });
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.pop(context, false);
-        });
-
-        return _ConfirmButton(
-          rating: rating,
-          originalRating: originalRating,
-          movieId: movieId,
-          user: user,
-        );
-      },
+    return _ConfirmButton(
+      rating: rating,
+      originalRating: originalRating,
+      movieId: movieId,
+      user: user,
+      isLoading: isLoading,
     );
   }
 }
@@ -70,19 +62,27 @@ class _ConfirmButton extends ConsumerWidget {
     required this.originalRating,
     required this.movieId,
     required this.user,
+    required this.isLoading,
   });
 
   final double rating;
   final double originalRating;
   final int movieId;
   final User user;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localization = AppLocalizations.of(context)!;
 
+    if (isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
     return OutlinedButton(
-      onPressed: (rating > 0 && originalRating != rating)
+      onPressed: (rating > 0 && originalRating != rating && !isLoading)
           ? () {
               ref.read(rateMoviesProvider.notifier).rateMovie(
                     movieId,

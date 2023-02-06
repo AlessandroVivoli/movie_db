@@ -3,9 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../features/auth/provider/auth_provider.dart';
-import '../../../../../../core/extensions/build_context_extensions.dart';
 import '../../../../../../core/widgets/errors/error_text.dart';
-import '../../../../../../features/movies/provider/movie_watchlist/add_movie_to_watchlist_provider.dart';
+import '../../../../../../features/account/provider/watchlist/add_movie_to_watchlist_provider.dart';
 
 class WatchlistButton extends ConsumerWidget {
   const WatchlistButton({
@@ -35,20 +34,9 @@ class WatchlistButton extends ConsumerWidget {
                     : Colors.white,
               ),
               onPressed: () {
-                ref
-                    .read(
-                      addMovieToWatchlistProvider(
-                        user: user,
-                        movieId: movieId,
-                        watchlist: !watchlist,
-                      ),
-                    )
-                    .whenOrNull(
-                      error: (error, stackTrace) => context.showErrorSnackBar(
-                        (watchlist)
-                            ? localization.removeWatchlistError
-                            : localization.addWatchlistError,
-                      ),
+                ref.read(watchlistProvider.notifier).addMovieToWatchlist(
+                      movieId: movieId,
+                      watchlist: watchlist,
                     );
               },
             ),

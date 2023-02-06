@@ -45,7 +45,7 @@ class AccountService implements IAccountService {
   }
 
   @override
-  Future<int> addMovieToWatchList({
+  Future<void> addMovieToWatchList({
     required User user,
     required int movieId,
     required bool watchlist,

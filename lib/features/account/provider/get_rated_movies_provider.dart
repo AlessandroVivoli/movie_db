@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../auth/domain/user.dart';
-import '../../domain/movie_list.dart';
-import '../movie_service_provider.dart';
+import '../../auth/domain/user.dart';
+import '../../movies/domain/movie_list.dart';
+import '../../movies/provider/movie_service_provider.dart';
 
 part 'get_rated_movies_provider.g.dart';
 

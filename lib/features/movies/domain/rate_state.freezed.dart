@@ -18,24 +18,24 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$RateState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function() completed,
+    required TResult Function() idle,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(Object? error, StackTrace stackTrace) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? completed,
+    TResult? Function()? idle,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function()? completed,
+    TResult Function()? idle,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(Object? error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -43,24 +43,24 @@ mixin _$RateState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RateInit value) init,
-    required TResult Function(RateCompleted value) completed,
+    required TResult Function(RateIdle value) idle,
+    required TResult Function(RateSuccess value) success,
     required TResult Function(RateLoading value) loading,
     required TResult Function(RateError value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RateInit value)? init,
-    TResult? Function(RateCompleted value)? completed,
+    TResult? Function(RateIdle value)? idle,
+    TResult? Function(RateSuccess value)? success,
     TResult? Function(RateLoading value)? loading,
     TResult? Function(RateError value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RateInit value)? init,
-    TResult Function(RateCompleted value)? completed,
+    TResult Function(RateIdle value)? idle,
+    TResult Function(RateSuccess value)? success,
     TResult Function(RateLoading value)? loading,
     TResult Function(RateError value)? error,
     required TResult orElse(),
@@ -86,34 +86,34 @@ class _$RateStateCopyWithImpl<$Res, $Val extends RateState>
 }
 
 /// @nodoc
-abstract class _$$RateInitCopyWith<$Res> {
-  factory _$$RateInitCopyWith(
-          _$RateInit value, $Res Function(_$RateInit) then) =
-      __$$RateInitCopyWithImpl<$Res>;
+abstract class _$$RateIdleCopyWith<$Res> {
+  factory _$$RateIdleCopyWith(
+          _$RateIdle value, $Res Function(_$RateIdle) then) =
+      __$$RateIdleCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RateInitCopyWithImpl<$Res>
-    extends _$RateStateCopyWithImpl<$Res, _$RateInit>
-    implements _$$RateInitCopyWith<$Res> {
-  __$$RateInitCopyWithImpl(_$RateInit _value, $Res Function(_$RateInit) _then)
+class __$$RateIdleCopyWithImpl<$Res>
+    extends _$RateStateCopyWithImpl<$Res, _$RateIdle>
+    implements _$$RateIdleCopyWith<$Res> {
+  __$$RateIdleCopyWithImpl(_$RateIdle _value, $Res Function(_$RateIdle) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RateInit implements RateInit {
-  const _$RateInit();
+class _$RateIdle implements RateIdle {
+  const _$RateIdle();
 
   @override
   String toString() {
-    return 'RateState.init()';
+    return 'RateState.idle()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RateInit);
+        (other.runtimeType == runtimeType && other is _$RateIdle);
   }
 
   @override
@@ -122,36 +122,36 @@ class _$RateInit implements RateInit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function() completed,
+    required TResult Function() idle,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(Object? error, StackTrace stackTrace) error,
   }) {
-    return init();
+    return idle();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? completed,
+    TResult? Function()? idle,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
   }) {
-    return init?.call();
+    return idle?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function()? completed,
+    TResult Function()? idle,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(Object? error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
-    if (init != null) {
-      return init();
+    if (idle != null) {
+      return idle();
     }
     return orElse();
   }
@@ -159,75 +159,75 @@ class _$RateInit implements RateInit {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RateInit value) init,
-    required TResult Function(RateCompleted value) completed,
+    required TResult Function(RateIdle value) idle,
+    required TResult Function(RateSuccess value) success,
     required TResult Function(RateLoading value) loading,
     required TResult Function(RateError value) error,
   }) {
-    return init(this);
+    return idle(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RateInit value)? init,
-    TResult? Function(RateCompleted value)? completed,
+    TResult? Function(RateIdle value)? idle,
+    TResult? Function(RateSuccess value)? success,
     TResult? Function(RateLoading value)? loading,
     TResult? Function(RateError value)? error,
   }) {
-    return init?.call(this);
+    return idle?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RateInit value)? init,
-    TResult Function(RateCompleted value)? completed,
+    TResult Function(RateIdle value)? idle,
+    TResult Function(RateSuccess value)? success,
     TResult Function(RateLoading value)? loading,
     TResult Function(RateError value)? error,
     required TResult orElse(),
   }) {
-    if (init != null) {
-      return init(this);
+    if (idle != null) {
+      return idle(this);
     }
     return orElse();
   }
 }
 
-abstract class RateInit implements RateState {
-  const factory RateInit() = _$RateInit;
+abstract class RateIdle implements RateState {
+  const factory RateIdle() = _$RateIdle;
 }
 
 /// @nodoc
-abstract class _$$RateCompletedCopyWith<$Res> {
-  factory _$$RateCompletedCopyWith(
-          _$RateCompleted value, $Res Function(_$RateCompleted) then) =
-      __$$RateCompletedCopyWithImpl<$Res>;
+abstract class _$$RateSuccessCopyWith<$Res> {
+  factory _$$RateSuccessCopyWith(
+          _$RateSuccess value, $Res Function(_$RateSuccess) then) =
+      __$$RateSuccessCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RateCompletedCopyWithImpl<$Res>
-    extends _$RateStateCopyWithImpl<$Res, _$RateCompleted>
-    implements _$$RateCompletedCopyWith<$Res> {
-  __$$RateCompletedCopyWithImpl(
-      _$RateCompleted _value, $Res Function(_$RateCompleted) _then)
+class __$$RateSuccessCopyWithImpl<$Res>
+    extends _$RateStateCopyWithImpl<$Res, _$RateSuccess>
+    implements _$$RateSuccessCopyWith<$Res> {
+  __$$RateSuccessCopyWithImpl(
+      _$RateSuccess _value, $Res Function(_$RateSuccess) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RateCompleted implements RateCompleted {
-  const _$RateCompleted();
+class _$RateSuccess implements RateSuccess {
+  const _$RateSuccess();
 
   @override
   String toString() {
-    return 'RateState.completed()';
+    return 'RateState.success()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RateCompleted);
+        (other.runtimeType == runtimeType && other is _$RateSuccess);
   }
 
   @override
@@ -236,36 +236,36 @@ class _$RateCompleted implements RateCompleted {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function() completed,
+    required TResult Function() idle,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(Object? error, StackTrace stackTrace) error,
   }) {
-    return completed();
+    return success();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? completed,
+    TResult? Function()? idle,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
   }) {
-    return completed?.call();
+    return success?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function()? completed,
+    TResult Function()? idle,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(Object? error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
-    if (completed != null) {
-      return completed();
+    if (success != null) {
+      return success();
     }
     return orElse();
   }
@@ -273,43 +273,43 @@ class _$RateCompleted implements RateCompleted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RateInit value) init,
-    required TResult Function(RateCompleted value) completed,
+    required TResult Function(RateIdle value) idle,
+    required TResult Function(RateSuccess value) success,
     required TResult Function(RateLoading value) loading,
     required TResult Function(RateError value) error,
   }) {
-    return completed(this);
+    return success(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RateInit value)? init,
-    TResult? Function(RateCompleted value)? completed,
+    TResult? Function(RateIdle value)? idle,
+    TResult? Function(RateSuccess value)? success,
     TResult? Function(RateLoading value)? loading,
     TResult? Function(RateError value)? error,
   }) {
-    return completed?.call(this);
+    return success?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RateInit value)? init,
-    TResult Function(RateCompleted value)? completed,
+    TResult Function(RateIdle value)? idle,
+    TResult Function(RateSuccess value)? success,
     TResult Function(RateLoading value)? loading,
     TResult Function(RateError value)? error,
     required TResult orElse(),
   }) {
-    if (completed != null) {
-      return completed(this);
+    if (success != null) {
+      return success(this);
     }
     return orElse();
   }
 }
 
-abstract class RateCompleted implements RateState {
-  const factory RateCompleted() = _$RateCompleted;
+abstract class RateSuccess implements RateState {
+  const factory RateSuccess() = _$RateSuccess;
 }
 
 /// @nodoc
@@ -350,8 +350,8 @@ class _$RateLoading implements RateLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function() completed,
+    required TResult Function() idle,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(Object? error, StackTrace stackTrace) error,
   }) {
@@ -361,8 +361,8 @@ class _$RateLoading implements RateLoading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? completed,
+    TResult? Function()? idle,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
   }) {
@@ -372,8 +372,8 @@ class _$RateLoading implements RateLoading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function()? completed,
+    TResult Function()? idle,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(Object? error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -387,8 +387,8 @@ class _$RateLoading implements RateLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RateInit value) init,
-    required TResult Function(RateCompleted value) completed,
+    required TResult Function(RateIdle value) idle,
+    required TResult Function(RateSuccess value) success,
     required TResult Function(RateLoading value) loading,
     required TResult Function(RateError value) error,
   }) {
@@ -398,8 +398,8 @@ class _$RateLoading implements RateLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RateInit value)? init,
-    TResult? Function(RateCompleted value)? completed,
+    TResult? Function(RateIdle value)? idle,
+    TResult? Function(RateSuccess value)? success,
     TResult? Function(RateLoading value)? loading,
     TResult? Function(RateError value)? error,
   }) {
@@ -409,8 +409,8 @@ class _$RateLoading implements RateLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RateInit value)? init,
-    TResult Function(RateCompleted value)? completed,
+    TResult Function(RateIdle value)? idle,
+    TResult Function(RateSuccess value)? success,
     TResult Function(RateLoading value)? loading,
     TResult Function(RateError value)? error,
     required TResult orElse(),
@@ -497,8 +497,8 @@ class _$RateError implements RateError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function() completed,
+    required TResult Function() idle,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(Object? error, StackTrace stackTrace) error,
   }) {
@@ -508,8 +508,8 @@ class _$RateError implements RateError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function()? completed,
+    TResult? Function()? idle,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(Object? error, StackTrace stackTrace)? error,
   }) {
@@ -519,8 +519,8 @@ class _$RateError implements RateError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function()? completed,
+    TResult Function()? idle,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(Object? error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -534,8 +534,8 @@ class _$RateError implements RateError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RateInit value) init,
-    required TResult Function(RateCompleted value) completed,
+    required TResult Function(RateIdle value) idle,
+    required TResult Function(RateSuccess value) success,
     required TResult Function(RateLoading value) loading,
     required TResult Function(RateError value) error,
   }) {
@@ -545,8 +545,8 @@ class _$RateError implements RateError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RateInit value)? init,
-    TResult? Function(RateCompleted value)? completed,
+    TResult? Function(RateIdle value)? idle,
+    TResult? Function(RateSuccess value)? success,
     TResult? Function(RateLoading value)? loading,
     TResult? Function(RateError value)? error,
   }) {
@@ -556,8 +556,8 @@ class _$RateError implements RateError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RateInit value)? init,
-    TResult Function(RateCompleted value)? completed,
+    TResult Function(RateIdle value)? idle,
+    TResult Function(RateSuccess value)? success,
     TResult Function(RateLoading value)? loading,
     TResult Function(RateError value)? error,
     required TResult orElse(),

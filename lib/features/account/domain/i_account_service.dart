@@ -17,7 +17,7 @@ abstract class IAccountService {
   /// Adds movie to the watchlist if the [watchlist] is true.
   ///
   /// Returns the status code of the api response.
-  Future<int> addMovieToWatchList({
+  Future<void> addMovieToWatchList({
     required User user,
     required int movieId,
     required bool watchlist,

@@ -3,12 +3,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../features/account/provider/get_rated_movies_provider.dart';
+import '../../../features/account/provider/watchlist/get_movie_watchlist_provider.dart';
 import '../../../features/auth/provider/auth_provider.dart';
 import '../../../features/local_storage/provider/local_storage_provider.dart';
 import '../../../features/localization/provider/locale_state_provider.dart';
 import '../../../features/movies/provider/favorite_movies/get_favorite_movies_provider.dart';
-import '../../../features/movies/provider/movie_watchlist/get_movie_watchlist_provider.dart';
-import '../../../features/movies/provider/rated_movies/get_rated_movies_provider.dart';
 import '../../../routing/routes.dart';
 import 'widgets/logged_in_drawer_view/logged_in_drawer_view.dart';
 import 'widgets/logged_out_drawer_view/logged_out_drawer_view.dart';

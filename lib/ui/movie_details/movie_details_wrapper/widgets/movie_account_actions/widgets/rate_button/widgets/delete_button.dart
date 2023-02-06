@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../../features/auth/domain/user.dart';
 import '../../../../../../../../core/extensions/build_context_extensions.dart';
-import '../../../../../../../../features/movies/provider/rated_movies/delete_rating_provider.dart';
+import '../../../../../../../../features/movies/provider/rating/delete_rating_provider.dart';
 
 class DeleteButton extends ConsumerWidget {
   const DeleteButton({
@@ -20,45 +20,35 @@ class DeleteButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final deleteRating = ref.watch(deleteRatingProvider);
+    final isLoading = ref.watch(deleteRatingProvider).maybeWhen(
+          loading: () => true,
+          orElse: () => false,
+        );
 
     final localization = AppLocalizations.of(context)!;
 
-    return deleteRating.when(
-      init: () => _DeleteButton(
-        movieId: movieId,
-        originalRating: originalRating,
-        user: user,
-      ),
-      completed: () {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.pop(context);
-        });
+    ref.listen(deleteRatingProvider, (previous, next) {
+      next.whenOrNull(
+        success: () {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.pop(context);
+          });
+        },
+        error: (error, stackTrace) {
+          context.showErrorSnackBar(localization.deleteRatingError);
 
-        return _DeleteButton(
-          movieId: movieId,
-          user: user,
-          originalRating: originalRating,
-        );
-      },
-      loading: () => const Center(
-        child: CircularProgressIndicator(
-          color: Colors.red,
-        ),
-      ),
-      error: (error, stackTrace) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.pop(context);
-        });
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.pop(context);
+          });
+        },
+      );
+    });
 
-        context.showErrorSnackBar(localization.deleteRatingError);
-
-        return _DeleteButton(
-          originalRating: originalRating,
-          user: user,
-          movieId: movieId,
-        );
-      },
+    return _DeleteButton(
+      movieId: movieId,
+      originalRating: originalRating,
+      user: user,
+      isLoading: isLoading,
     );
   }
 }
@@ -68,15 +58,23 @@ class _DeleteButton extends ConsumerWidget {
     required this.originalRating,
     required this.user,
     required this.movieId,
+    required this.isLoading,
   });
 
   final double originalRating;
   final User user;
   final int movieId;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localization = AppLocalizations.of(context)!;
+
+    if (isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(color: Colors.red),
+      );
+    }
 
     return OutlinedButton(
       onPressed: (originalRating > 0)

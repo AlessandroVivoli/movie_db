@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'rate_movies_provider.dart';
+part of 'add_movie_to_watchlist_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,18 +29,19 @@ class _SystemHash {
   }
 }
 
-String _$RateMoviesHash() => r'81ad9f4e431091700fd7d4b82e99000cd255ac21';
+String _$WatchlistHash() => r'ec4fa79b3c159b518d069b4a02ccde66bfe013ba';
 
-/// See also [RateMovies].
-final rateMoviesProvider = AutoDisposeNotifierProvider<RateMovies, RateState>(
-  RateMovies.new,
-  name: r'rateMoviesProvider',
+/// See also [Watchlist].
+final watchlistProvider =
+    AutoDisposeNotifierProvider<Watchlist, WatchlistState>(
+  Watchlist.new,
+  name: r'watchlistProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$RateMoviesHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$WatchlistHash,
 );
-typedef RateMoviesRef = AutoDisposeNotifierProviderRef<RateState>;
+typedef WatchlistRef = AutoDisposeNotifierProviderRef<WatchlistState>;
 
-abstract class _$RateMovies extends AutoDisposeNotifier<RateState> {
+abstract class _$Watchlist extends AutoDisposeNotifier<WatchlistState> {
   @override
-  RateState build();
+  WatchlistState build();
 }
