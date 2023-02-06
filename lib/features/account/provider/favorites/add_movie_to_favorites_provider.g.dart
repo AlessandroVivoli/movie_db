@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'add_movie_to_watchlist_provider.dart';
+part of 'add_movie_to_favorites_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,19 +29,19 @@ class _SystemHash {
   }
 }
 
-String _$WatchlistHash() => r'4964b45825ef215002497eea071e82af9058dc2d';
+String _$FavoritesHash() => r'4f222ab8bc695212d8c7daf11fe7979f08bb8cc5';
 
-/// See also [Watchlist].
-final watchlistProvider =
-    AutoDisposeNotifierProvider<Watchlist, AccountMoviesState>(
-  Watchlist.new,
-  name: r'watchlistProvider',
+/// See also [Favorites].
+final favoritesProvider =
+    AutoDisposeNotifierProvider<Favorites, AccountMoviesState>(
+  Favorites.new,
+  name: r'favoritesProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$WatchlistHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$FavoritesHash,
 );
-typedef WatchlistRef = AutoDisposeNotifierProviderRef<AccountMoviesState>;
+typedef FavoritesRef = AutoDisposeNotifierProviderRef<AccountMoviesState>;
 
-abstract class _$Watchlist extends AutoDisposeNotifier<AccountMoviesState> {
+abstract class _$Favorites extends AutoDisposeNotifier<AccountMoviesState> {
   @override
   AccountMoviesState build();
 }

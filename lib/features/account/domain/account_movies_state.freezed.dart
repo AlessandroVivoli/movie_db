@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'watchlist_state.dart';
+part of 'account_movies_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,24 +15,24 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$WatchlistState {
+mixin _$AccountMoviesState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool watchlist) success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool watchlist)? success,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(Object error, StackTrace stackTrace)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool watchlist)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -40,39 +40,39 @@ mixin _$WatchlistState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(WatchlistSuccess value) success,
-    required TResult Function(WatchlistLoading value) loading,
-    required TResult Function(WatchlistError value) error,
+    required TResult Function(AccountMoviesSuccess value) success,
+    required TResult Function(AccountMoviesLoading value) loading,
+    required TResult Function(AccountMoviesError value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WatchlistSuccess value)? success,
-    TResult? Function(WatchlistLoading value)? loading,
-    TResult? Function(WatchlistError value)? error,
+    TResult? Function(AccountMoviesSuccess value)? success,
+    TResult? Function(AccountMoviesLoading value)? loading,
+    TResult? Function(AccountMoviesError value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(WatchlistSuccess value)? success,
-    TResult Function(WatchlistLoading value)? loading,
-    TResult Function(WatchlistError value)? error,
+    TResult Function(AccountMoviesSuccess value)? success,
+    TResult Function(AccountMoviesLoading value)? loading,
+    TResult Function(AccountMoviesError value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $WatchlistStateCopyWith<$Res> {
-  factory $WatchlistStateCopyWith(
-          WatchlistState value, $Res Function(WatchlistState) then) =
-      _$WatchlistStateCopyWithImpl<$Res, WatchlistState>;
+abstract class $AccountMoviesStateCopyWith<$Res> {
+  factory $AccountMoviesStateCopyWith(
+          AccountMoviesState value, $Res Function(AccountMoviesState) then) =
+      _$AccountMoviesStateCopyWithImpl<$Res, AccountMoviesState>;
 }
 
 /// @nodoc
-class _$WatchlistStateCopyWithImpl<$Res, $Val extends WatchlistState>
-    implements $WatchlistStateCopyWith<$Res> {
-  _$WatchlistStateCopyWithImpl(this._value, this._then);
+class _$AccountMoviesStateCopyWithImpl<$Res, $Val extends AccountMoviesState>
+    implements $AccountMoviesStateCopyWith<$Res> {
+  _$AccountMoviesStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -81,97 +81,70 @@ class _$WatchlistStateCopyWithImpl<$Res, $Val extends WatchlistState>
 }
 
 /// @nodoc
-abstract class _$$WatchlistSuccessCopyWith<$Res> {
-  factory _$$WatchlistSuccessCopyWith(
-          _$WatchlistSuccess value, $Res Function(_$WatchlistSuccess) then) =
-      __$$WatchlistSuccessCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool watchlist});
+abstract class _$$AccountMoviesSuccessCopyWith<$Res> {
+  factory _$$AccountMoviesSuccessCopyWith(_$AccountMoviesSuccess value,
+          $Res Function(_$AccountMoviesSuccess) then) =
+      __$$AccountMoviesSuccessCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$WatchlistSuccessCopyWithImpl<$Res>
-    extends _$WatchlistStateCopyWithImpl<$Res, _$WatchlistSuccess>
-    implements _$$WatchlistSuccessCopyWith<$Res> {
-  __$$WatchlistSuccessCopyWithImpl(
-      _$WatchlistSuccess _value, $Res Function(_$WatchlistSuccess) _then)
+class __$$AccountMoviesSuccessCopyWithImpl<$Res>
+    extends _$AccountMoviesStateCopyWithImpl<$Res, _$AccountMoviesSuccess>
+    implements _$$AccountMoviesSuccessCopyWith<$Res> {
+  __$$AccountMoviesSuccessCopyWithImpl(_$AccountMoviesSuccess _value,
+      $Res Function(_$AccountMoviesSuccess) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? watchlist = null,
-  }) {
-    return _then(_$WatchlistSuccess(
-      null == watchlist
-          ? _value.watchlist
-          : watchlist // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$WatchlistSuccess implements WatchlistSuccess {
-  const _$WatchlistSuccess(this.watchlist);
-
-  @override
-  final bool watchlist;
+class _$AccountMoviesSuccess implements AccountMoviesSuccess {
+  const _$AccountMoviesSuccess();
 
   @override
   String toString() {
-    return 'WatchlistState.success(watchlist: $watchlist)';
+    return 'AccountMoviesState.success()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$WatchlistSuccess &&
-            (identical(other.watchlist, watchlist) ||
-                other.watchlist == watchlist));
+        (other.runtimeType == runtimeType && other is _$AccountMoviesSuccess);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, watchlist);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$WatchlistSuccessCopyWith<_$WatchlistSuccess> get copyWith =>
-      __$$WatchlistSuccessCopyWithImpl<_$WatchlistSuccess>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool watchlist) success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
-    return success(watchlist);
+    return success();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool watchlist)? success,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(Object error, StackTrace stackTrace)? error,
   }) {
-    return success?.call(watchlist);
+    return success?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool watchlist)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(watchlist);
+      return success();
     }
     return orElse();
   }
@@ -179,9 +152,9 @@ class _$WatchlistSuccess implements WatchlistSuccess {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(WatchlistSuccess value) success,
-    required TResult Function(WatchlistLoading value) loading,
-    required TResult Function(WatchlistError value) error,
+    required TResult Function(AccountMoviesSuccess value) success,
+    required TResult Function(AccountMoviesLoading value) loading,
+    required TResult Function(AccountMoviesError value) error,
   }) {
     return success(this);
   }
@@ -189,9 +162,9 @@ class _$WatchlistSuccess implements WatchlistSuccess {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WatchlistSuccess value)? success,
-    TResult? Function(WatchlistLoading value)? loading,
-    TResult? Function(WatchlistError value)? error,
+    TResult? Function(AccountMoviesSuccess value)? success,
+    TResult? Function(AccountMoviesLoading value)? loading,
+    TResult? Function(AccountMoviesError value)? error,
   }) {
     return success?.call(this);
   }
@@ -199,9 +172,9 @@ class _$WatchlistSuccess implements WatchlistSuccess {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(WatchlistSuccess value)? success,
-    TResult Function(WatchlistLoading value)? loading,
-    TResult Function(WatchlistError value)? error,
+    TResult Function(AccountMoviesSuccess value)? success,
+    TResult Function(AccountMoviesLoading value)? loading,
+    TResult Function(AccountMoviesError value)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -211,45 +184,40 @@ class _$WatchlistSuccess implements WatchlistSuccess {
   }
 }
 
-abstract class WatchlistSuccess implements WatchlistState {
-  const factory WatchlistSuccess(final bool watchlist) = _$WatchlistSuccess;
-
-  bool get watchlist;
-  @JsonKey(ignore: true)
-  _$$WatchlistSuccessCopyWith<_$WatchlistSuccess> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class AccountMoviesSuccess implements AccountMoviesState {
+  const factory AccountMoviesSuccess() = _$AccountMoviesSuccess;
 }
 
 /// @nodoc
-abstract class _$$WatchlistLoadingCopyWith<$Res> {
-  factory _$$WatchlistLoadingCopyWith(
-          _$WatchlistLoading value, $Res Function(_$WatchlistLoading) then) =
-      __$$WatchlistLoadingCopyWithImpl<$Res>;
+abstract class _$$AccountMoviesLoadingCopyWith<$Res> {
+  factory _$$AccountMoviesLoadingCopyWith(_$AccountMoviesLoading value,
+          $Res Function(_$AccountMoviesLoading) then) =
+      __$$AccountMoviesLoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$WatchlistLoadingCopyWithImpl<$Res>
-    extends _$WatchlistStateCopyWithImpl<$Res, _$WatchlistLoading>
-    implements _$$WatchlistLoadingCopyWith<$Res> {
-  __$$WatchlistLoadingCopyWithImpl(
-      _$WatchlistLoading _value, $Res Function(_$WatchlistLoading) _then)
+class __$$AccountMoviesLoadingCopyWithImpl<$Res>
+    extends _$AccountMoviesStateCopyWithImpl<$Res, _$AccountMoviesLoading>
+    implements _$$AccountMoviesLoadingCopyWith<$Res> {
+  __$$AccountMoviesLoadingCopyWithImpl(_$AccountMoviesLoading _value,
+      $Res Function(_$AccountMoviesLoading) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$WatchlistLoading implements WatchlistLoading {
-  const _$WatchlistLoading();
+class _$AccountMoviesLoading implements AccountMoviesLoading {
+  const _$AccountMoviesLoading();
 
   @override
   String toString() {
-    return 'WatchlistState.loading()';
+    return 'AccountMoviesState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$WatchlistLoading);
+        (other.runtimeType == runtimeType && other is _$AccountMoviesLoading);
   }
 
   @override
@@ -258,7 +226,7 @@ class _$WatchlistLoading implements WatchlistLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool watchlist) success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
@@ -268,7 +236,7 @@ class _$WatchlistLoading implements WatchlistLoading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool watchlist)? success,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(Object error, StackTrace stackTrace)? error,
   }) {
@@ -278,7 +246,7 @@ class _$WatchlistLoading implements WatchlistLoading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool watchlist)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -292,9 +260,9 @@ class _$WatchlistLoading implements WatchlistLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(WatchlistSuccess value) success,
-    required TResult Function(WatchlistLoading value) loading,
-    required TResult Function(WatchlistError value) error,
+    required TResult Function(AccountMoviesSuccess value) success,
+    required TResult Function(AccountMoviesLoading value) loading,
+    required TResult Function(AccountMoviesError value) error,
   }) {
     return loading(this);
   }
@@ -302,9 +270,9 @@ class _$WatchlistLoading implements WatchlistLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WatchlistSuccess value)? success,
-    TResult? Function(WatchlistLoading value)? loading,
-    TResult? Function(WatchlistError value)? error,
+    TResult? Function(AccountMoviesSuccess value)? success,
+    TResult? Function(AccountMoviesLoading value)? loading,
+    TResult? Function(AccountMoviesError value)? error,
   }) {
     return loading?.call(this);
   }
@@ -312,9 +280,9 @@ class _$WatchlistLoading implements WatchlistLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(WatchlistSuccess value)? success,
-    TResult Function(WatchlistLoading value)? loading,
-    TResult Function(WatchlistError value)? error,
+    TResult Function(AccountMoviesSuccess value)? success,
+    TResult Function(AccountMoviesLoading value)? loading,
+    TResult Function(AccountMoviesError value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -324,25 +292,25 @@ class _$WatchlistLoading implements WatchlistLoading {
   }
 }
 
-abstract class WatchlistLoading implements WatchlistState {
-  const factory WatchlistLoading() = _$WatchlistLoading;
+abstract class AccountMoviesLoading implements AccountMoviesState {
+  const factory AccountMoviesLoading() = _$AccountMoviesLoading;
 }
 
 /// @nodoc
-abstract class _$$WatchlistErrorCopyWith<$Res> {
-  factory _$$WatchlistErrorCopyWith(
-          _$WatchlistError value, $Res Function(_$WatchlistError) then) =
-      __$$WatchlistErrorCopyWithImpl<$Res>;
+abstract class _$$AccountMoviesErrorCopyWith<$Res> {
+  factory _$$AccountMoviesErrorCopyWith(_$AccountMoviesError value,
+          $Res Function(_$AccountMoviesError) then) =
+      __$$AccountMoviesErrorCopyWithImpl<$Res>;
   @useResult
   $Res call({Object error, StackTrace stackTrace});
 }
 
 /// @nodoc
-class __$$WatchlistErrorCopyWithImpl<$Res>
-    extends _$WatchlistStateCopyWithImpl<$Res, _$WatchlistError>
-    implements _$$WatchlistErrorCopyWith<$Res> {
-  __$$WatchlistErrorCopyWithImpl(
-      _$WatchlistError _value, $Res Function(_$WatchlistError) _then)
+class __$$AccountMoviesErrorCopyWithImpl<$Res>
+    extends _$AccountMoviesStateCopyWithImpl<$Res, _$AccountMoviesError>
+    implements _$$AccountMoviesErrorCopyWith<$Res> {
+  __$$AccountMoviesErrorCopyWithImpl(
+      _$AccountMoviesError _value, $Res Function(_$AccountMoviesError) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -351,7 +319,7 @@ class __$$WatchlistErrorCopyWithImpl<$Res>
     Object? error = null,
     Object? stackTrace = null,
   }) {
-    return _then(_$WatchlistError(
+    return _then(_$AccountMoviesError(
       null == error ? _value.error : error,
       null == stackTrace
           ? _value.stackTrace
@@ -363,8 +331,8 @@ class __$$WatchlistErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$WatchlistError implements WatchlistError {
-  const _$WatchlistError(this.error, this.stackTrace);
+class _$AccountMoviesError implements AccountMoviesError {
+  const _$AccountMoviesError(this.error, this.stackTrace);
 
   @override
   final Object error;
@@ -373,14 +341,14 @@ class _$WatchlistError implements WatchlistError {
 
   @override
   String toString() {
-    return 'WatchlistState.error(error: $error, stackTrace: $stackTrace)';
+    return 'AccountMoviesState.error(error: $error, stackTrace: $stackTrace)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WatchlistError &&
+            other is _$AccountMoviesError &&
             const DeepCollectionEquality().equals(other.error, error) &&
             (identical(other.stackTrace, stackTrace) ||
                 other.stackTrace == stackTrace));
@@ -393,13 +361,14 @@ class _$WatchlistError implements WatchlistError {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$WatchlistErrorCopyWith<_$WatchlistError> get copyWith =>
-      __$$WatchlistErrorCopyWithImpl<_$WatchlistError>(this, _$identity);
+  _$$AccountMoviesErrorCopyWith<_$AccountMoviesError> get copyWith =>
+      __$$AccountMoviesErrorCopyWithImpl<_$AccountMoviesError>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool watchlist) success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
@@ -409,7 +378,7 @@ class _$WatchlistError implements WatchlistError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool watchlist)? success,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(Object error, StackTrace stackTrace)? error,
   }) {
@@ -419,7 +388,7 @@ class _$WatchlistError implements WatchlistError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool watchlist)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -433,9 +402,9 @@ class _$WatchlistError implements WatchlistError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(WatchlistSuccess value) success,
-    required TResult Function(WatchlistLoading value) loading,
-    required TResult Function(WatchlistError value) error,
+    required TResult Function(AccountMoviesSuccess value) success,
+    required TResult Function(AccountMoviesLoading value) loading,
+    required TResult Function(AccountMoviesError value) error,
   }) {
     return error(this);
   }
@@ -443,9 +412,9 @@ class _$WatchlistError implements WatchlistError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WatchlistSuccess value)? success,
-    TResult? Function(WatchlistLoading value)? loading,
-    TResult? Function(WatchlistError value)? error,
+    TResult? Function(AccountMoviesSuccess value)? success,
+    TResult? Function(AccountMoviesLoading value)? loading,
+    TResult? Function(AccountMoviesError value)? error,
   }) {
     return error?.call(this);
   }
@@ -453,9 +422,9 @@ class _$WatchlistError implements WatchlistError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(WatchlistSuccess value)? success,
-    TResult Function(WatchlistLoading value)? loading,
-    TResult Function(WatchlistError value)? error,
+    TResult Function(AccountMoviesSuccess value)? success,
+    TResult Function(AccountMoviesLoading value)? loading,
+    TResult Function(AccountMoviesError value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -465,13 +434,13 @@ class _$WatchlistError implements WatchlistError {
   }
 }
 
-abstract class WatchlistError implements WatchlistState {
-  const factory WatchlistError(
-      final Object error, final StackTrace stackTrace) = _$WatchlistError;
+abstract class AccountMoviesError implements AccountMoviesState {
+  const factory AccountMoviesError(
+      final Object error, final StackTrace stackTrace) = _$AccountMoviesError;
 
   Object get error;
   StackTrace get stackTrace;
   @JsonKey(ignore: true)
-  _$$WatchlistErrorCopyWith<_$WatchlistError> get copyWith =>
+  _$$AccountMoviesErrorCopyWith<_$AccountMoviesError> get copyWith =>
       throw _privateConstructorUsedError;
 }

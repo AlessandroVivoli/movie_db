@@ -5,46 +5,46 @@ import '../../../auth/provider/auth_provider.dart';
 import '../../../movies/provider/get_movie_details_provider.dart';
 import '../../domain/account_movies_state.dart';
 import '../account_service_provider.dart';
-import 'get_movie_watchlist_provider.dart';
+import '../favorite_movies/get_favorite_movies_provider.dart';
 
-part 'add_movie_to_watchlist_provider.g.dart';
+part 'add_movie_to_favorites_provider.g.dart';
 
 @riverpod
-class Watchlist extends _$Watchlist {
+class Favorites extends _$Favorites {
   @override
   AccountMoviesState build() => const AccountMoviesState.success();
 
-  void addMovieToWatchlist({
+  void addMovieToFavorites({
     required int movieId,
-    required bool watchlist,
+    required bool favorite,
   }) async {
     state = const AccountMoviesState.loading();
 
-    state = await _addMovieToWatchlist(movieId: movieId, watchlist: watchlist)
-        .then((_) => _onSuccess(movieId, watchlist))
+    state = await _addMovieToFavorites(movieId: movieId, favorite: favorite)
+        .then((_) => _onSuccess(movieId, favorite))
         .catchError(AccountMoviesState.error);
   }
 
-  void _refreshWatchlist(Ref ref, int movieId) {
+  void _refreshFavorites(Ref ref, int movieId) {
     ref.invalidate(getMovieDetailsProvider(movieId));
-    ref.invalidate(getMovieWatchlistProvider);
+    ref.invalidate(getFavoriteMoviesProvider);
   }
 
-  AccountMoviesState _onSuccess(int movieId, bool watchlist) {
-    _refreshWatchlist(ref, movieId);
+  AccountMoviesState _onSuccess(int movieId, bool favorite) {
+    _refreshFavorites(ref, movieId);
     return const AccountMoviesState.success();
   }
 
-  Future<void> _addMovieToWatchlist({
+  Future<void> _addMovieToFavorites({
     required int movieId,
-    required bool watchlist,
+    required bool favorite,
   }) {
     final user = ref.read(authProvider).whenOrNull(loggedIn: (user) => user)!;
 
-    return ref.read(accountServiceProvider).addMovieToWatchList(
+    return ref.watch(accountServiceProvider).markMovieAsFavorite(
           user: user,
           movieId: movieId,
-          watchlist: watchlist,
+          favorite: favorite,
         );
   }
 }

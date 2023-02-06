@@ -7,7 +7,7 @@ import '../../../../../features/auth/domain/user.dart';
 import '../../../../core/extensions/build_context_extensions.dart';
 import '../../../../core/widgets/errors/error_text.dart';
 import '../../../../core/widgets/paged_movie_list/paged_movie_list.dart';
-import '../../../../features/movies/provider/favorite_movies/get_favorite_movies_provider.dart';
+import '../../../../features/account/provider/favorite_movies/get_favorite_movies_provider.dart';
 
 class FavoriteMoviesSection extends StatelessWidget {
   const FavoriteMoviesSection({

@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../../features/auth/provider/auth_provider.dart';
 import '../../../../../../core/extensions/build_context_extensions.dart';
 import '../../../../../../core/widgets/errors/error_text.dart';
-import '../../../../../../features/movies/provider/favorite_movies/add_movie_to_favorites_provider.dart';
+import '../../../../../../features/account/provider/favorite_movies/add_movie_to_favorites_provider.dart';
 
 class FavoriteButton extends ConsumerWidget {
   const FavoriteButton({
@@ -22,27 +22,36 @@ class FavoriteButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authProvider);
 
+    final loading = ref
+        .watch(favoritesProvider)
+        .maybeWhen(loading: () => true, orElse: () => false);
+
     final localization = AppLocalizations.of(context)!;
+
+    ref.listen(
+      favoritesProvider,
+      (previous, next) {
+        next.whenOrNull(
+          error: (error, stackTrace) {
+            context.showErrorSnackBar(
+              !favorite
+                  ? localization.addFavoriteError
+                  : localization.removeFavoriteError,
+            );
+          },
+        );
+      },
+    );
 
     return user.maybeWhen(
       loggedIn: (user) => IconButton(
-        onPressed: () async {
-          ref
-              .read(
-                addMovieToFavoritesProvider(
-                  user: user,
-                  movieId: movieId,
-                  favorite: !favorite,
-                ),
-              )
-              .whenOrNull(
-                error: (_, __) => context.showErrorSnackBar(
-                  (favorite)
-                      ? localization.removeFavoriteError
-                      : localization.addFavoriteError,
-                ),
-              );
-        },
+        onPressed: loading
+            ? null
+            : () async {
+                ref
+                    .read(favoritesProvider.notifier)
+                    .addMovieToFavorites(movieId: movieId, favorite: !favorite);
+              },
         icon: FaIcon(
           (favorite) ? FontAwesomeIcons.solidHeart : FontAwesomeIcons.heart,
           color:
