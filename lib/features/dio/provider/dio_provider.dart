@@ -5,7 +5,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../localization/provider/locale_state_provider.dart';
-import '../domain/query_interceptor.dart';
+import '../data/query_interceptor.dart';
 
 part 'dio_provider.g.dart';
 

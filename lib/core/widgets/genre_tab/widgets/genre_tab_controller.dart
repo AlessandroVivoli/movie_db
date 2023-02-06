@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/genre/domain/genre.dart';
-import '../../../../features/localization/provider/locale_state_provider.dart';
 import 'genre_tab_movies.dart';
 
 class GenreTabController extends ConsumerWidget {
@@ -17,7 +17,7 @@ class GenreTabController extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final locale = ref.read(localeStateProvider);
+    final localization = AppLocalizations.of(context)!;
 
     return DefaultTabController(
       length: data.length,
@@ -29,7 +29,11 @@ class GenreTabController extends ConsumerWidget {
               data.length,
               (index) {
                 return Tab(
-                  child: Text(data[index].getName(locale)),
+                  child: Text(
+                    localization.translateGenres(
+                      data[index].name.replaceAll(' ', ''),
+                    ),
+                  ),
                 );
               },
             ),

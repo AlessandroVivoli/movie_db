@@ -166,6 +166,16 @@
   "personDepartmentLabel": "Known for",
   "personLifetimeLabel": "Lifetime",
   "noBiography": "No biography",
+  "translateGenres": "{value, select, ScienceFiction{Science Fiction} TVMovie{TV Movie} other{{value}}}",
+  "@translateGenres": {
+    "description": "Genres based on locale",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "Action"
+      }
+    }
+  },
   "languageSelection": "{locale, select, hr{Croatian} en{English} other{{locale}}}",
   "@languageSelection": {
     "description": "Languages based on locale",

@@ -74,6 +74,14 @@
   "personCreditsLabel": "Zasluge",
   "personDepartmentLabel": "Poznat po",
   "personLifetimeLabel": "Godište",
+  "translateGenres": "{value, select, Action{Akcija} Adventure{Avantura} Animation{Animirani} Comedy{Komedija} Crime{Kriminalni} Documentary{Documentarac} Family{Obiteljski} Fantasy{Fantazija} History{Povijesni} Horror{Horor} Music{Glazbeni} Mistery{Misterij} Romance{Romantički} ScienceFiction{Znanstvena Fantastika} TVMovie{TV Film} Thriller{Triler} War{Ratni} other{{value}}}",
+  "@translateGenres": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "languageSelection": "{locale, select, hr{Hrvatski} en{Engleski} other{{locale}}}",
   "@languageSelection": {
     "placeholders": {
