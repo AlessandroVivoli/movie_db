@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$imageServiceHash() => r'1c5275fb222719424259a184565d83ec9da207c6';
+String _$imageServiceHash() => r'1c8c1aa8647133b8bc2ad2c1cc5a8f6b413274f9';
 
 /// See also [imageService].
 final imageServiceProvider = AutoDisposeProvider<IImageService>(

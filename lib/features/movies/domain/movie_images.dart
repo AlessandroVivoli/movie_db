@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'image_model.dart';
+import '../../image/domain/image_model.dart';
 
 part 'movie_images.freezed.dart';
 part 'movie_images.g.dart';
@@ -8,6 +8,7 @@ part 'movie_images.g.dart';
 @freezed
 class MovieImages with _$MovieImages {
   const factory MovieImages({
+    required int id,
     required List<ImageModel> backdrops,
     required List<ImageModel> posters,
   }) = _MovieImages;

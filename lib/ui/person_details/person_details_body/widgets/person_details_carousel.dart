@@ -7,7 +7,7 @@ import '../../../../../features/person/domain/person_details.dart';
 import '../../../../core/extensions/build_context_extensions.dart';
 import '../../../../core/widgets/carousel/image_carousel/image_carousel.dart';
 import '../../../../core/widgets/errors/error_text.dart';
-import '../../../../features/image/provider/get_person_images_provider.dart';
+import '../../../../features/person/provider/image/get_person_images_provider.dart';
 
 class PersonDetailsCarousel extends StatelessWidget {
   const PersonDetailsCarousel({

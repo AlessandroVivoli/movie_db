@@ -29,14 +29,14 @@ class _SystemHash {
   }
 }
 
-String _$accountServiceHash() => r'c859ec6e7bbd3a351aaf1453d9edcf004564bcdd';
+String _$accountServiceHash() => r'499b254b4d53707404767e92ab1adc466547ac04';
 
 /// See also [accountService].
-final accountServiceProvider = AutoDisposeProvider<IAccountService>(
+final accountServiceProvider = Provider<IAccountService>(
   accountService,
   name: r'accountServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$accountServiceHash,
 );
-typedef AccountServiceRef = AutoDisposeProviderRef<IAccountService>;
+typedef AccountServiceRef = ProviderRef<IAccountService>;

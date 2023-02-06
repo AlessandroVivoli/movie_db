@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'get_favorite_movies_provider.dart';
+part of 'get_person_images_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,73 +29,64 @@ class _SystemHash {
   }
 }
 
-String _$getFavoriteMoviesHash() => r'5a7a8d91d365436e3e99ab018d53ed72e2433b92';
+String _$getPersonImagesHash() => r'5599e23cec16f5e4982e31479bd8d061ca6ab9f0';
 
-/// See also [getFavoriteMovies].
-class GetFavoriteMoviesProvider
-    extends AutoDisposeFutureProvider<MovieListModel> {
-  GetFavoriteMoviesProvider({
-    required this.user,
-    this.page = 1,
-  }) : super(
-          (ref) => getFavoriteMovies(
+/// See also [getPersonImages].
+class GetPersonImagesProvider
+    extends AutoDisposeFutureProvider<List<ImageModel>> {
+  GetPersonImagesProvider(
+    this.id,
+  ) : super(
+          (ref) => getPersonImages(
             ref,
-            user: user,
-            page: page,
+            id,
           ),
-          from: getFavoriteMoviesProvider,
-          name: r'getFavoriteMoviesProvider',
+          from: getPersonImagesProvider,
+          name: r'getPersonImagesProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$getFavoriteMoviesHash,
+                  : _$getPersonImagesHash,
         );
 
-  final User user;
-  final int page;
+  final int id;
 
   @override
   bool operator ==(Object other) {
-    return other is GetFavoriteMoviesProvider &&
-        other.user == user &&
-        other.page == page;
+    return other is GetPersonImagesProvider && other.id == id;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, user.hashCode);
-    hash = _SystemHash.combine(hash, page.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-typedef GetFavoriteMoviesRef = AutoDisposeFutureProviderRef<MovieListModel>;
+typedef GetPersonImagesRef = AutoDisposeFutureProviderRef<List<ImageModel>>;
 
-/// See also [getFavoriteMovies].
-final getFavoriteMoviesProvider = GetFavoriteMoviesFamily();
+/// See also [getPersonImages].
+final getPersonImagesProvider = GetPersonImagesFamily();
 
-class GetFavoriteMoviesFamily extends Family<AsyncValue<MovieListModel>> {
-  GetFavoriteMoviesFamily();
+class GetPersonImagesFamily extends Family<AsyncValue<List<ImageModel>>> {
+  GetPersonImagesFamily();
 
-  GetFavoriteMoviesProvider call({
-    required User user,
-    int page = 1,
-  }) {
-    return GetFavoriteMoviesProvider(
-      user: user,
-      page: page,
+  GetPersonImagesProvider call(
+    int id,
+  ) {
+    return GetPersonImagesProvider(
+      id,
     );
   }
 
   @override
-  AutoDisposeFutureProvider<MovieListModel> getProviderOverride(
-    covariant GetFavoriteMoviesProvider provider,
+  AutoDisposeFutureProvider<List<ImageModel>> getProviderOverride(
+    covariant GetPersonImagesProvider provider,
   ) {
     return call(
-      user: provider.user,
-      page: provider.page,
+      provider.id,
     );
   }
 
@@ -106,5 +97,5 @@ class GetFavoriteMoviesFamily extends Family<AsyncValue<MovieListModel>> {
   List<ProviderOrFamily>? get dependencies => null;
 
   @override
-  String? get name => r'getFavoriteMoviesProvider';
+  String? get name => r'getPersonImagesProvider';
 }

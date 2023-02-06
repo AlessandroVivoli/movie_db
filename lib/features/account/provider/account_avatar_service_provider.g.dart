@@ -30,14 +30,14 @@ class _SystemHash {
 }
 
 String _$accountAvatarServiceHash() =>
-    r'73c2d32ad3cb08a828aed2e57e2304dbd965055c';
+    r'31c781a295dd384da002311188958340c9a65291';
 
 /// See also [accountAvatarService].
-final accountAvatarServiceProvider = AutoDisposeProvider<IAccountAvatarService>(
+final accountAvatarServiceProvider = Provider<IAccountAvatarService>(
   accountAvatarService,
   name: r'accountAvatarServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$accountAvatarServiceHash,
 );
-typedef AccountAvatarServiceRef = AutoDisposeProviderRef<IAccountAvatarService>;
+typedef AccountAvatarServiceRef = ProviderRef<IAccountAvatarService>;

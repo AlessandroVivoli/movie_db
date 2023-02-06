@@ -3,8 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../features/auth/provider/auth_provider.dart';
-import '../../../../../features/image/domain/sizes.dart';
-import '../../../../../features/image/provider/image_service_provider.dart';
+import '../../../../../features/movies/domain/backdrop_sizes_enum.dart';
+import '../../../../../features/movies/provider/images/movie_image_service_provider.dart';
 import '../../../../../features/movies/provider/search_movies_provider.dart';
 import '../../../../../routing/routes.dart';
 import '../../../../extensions/build_context_extensions.dart';
@@ -90,10 +90,11 @@ class SuggestionList extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(5),
                   child: CustomNetworkImage(
                     placeholderIcon: const Icon(Icons.movie),
-                    url: ref.read(imageServiceProvider).getImageUrl(
-                          size: BackdropSizes.original.name,
-                          path: list[index].backdropPath,
-                        ),
+                    url:
+                        ref.read(movieImageServiceProvider).getMovieBackdropUrl(
+                              size: BackdropSizes.w300,
+                              path: list[index].backdropPath,
+                            ),
                   ),
                 ),
               ),

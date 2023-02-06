@@ -29,13 +29,13 @@ class _SystemHash {
   }
 }
 
-String _$authServiceHash() => r'c49f42c467d9bfc3e9bf07d633c97ff681a7fa3e';
+String _$authServiceHash() => r'55e8e5aa2ab62d8f319662fb2f89be5f4211073f';
 
 /// See also [authService].
-final authServiceProvider = AutoDisposeProvider<IAuthService>(
+final authServiceProvider = Provider<IAuthService>(
   authService,
   name: r'authServiceProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$authServiceHash,
 );
-typedef AuthServiceRef = AutoDisposeProviderRef<IAuthService>;
+typedef AuthServiceRef = ProviderRef<IAuthService>;

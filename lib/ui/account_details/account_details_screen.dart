@@ -7,8 +7,8 @@ import '../../../features/account/provider/account_avatar_service_provider.dart'
 import '../../../features/auth/provider/auth_provider.dart';
 import '../../core/widgets/backdrop_image/backdrop_image.dart';
 import '../../core/widgets/errors/error_text.dart';
-import '../../features/image/domain/sizes.dart';
-import '../../features/image/provider/image_service_provider.dart';
+import '../../features/person/domain/profile_sizes_enum.dart';
+import '../../features/person/provider/image/person_image_service_provider.dart';
 import 'account_details_wrapper/account_details_wrapper.dart';
 
 class AccountDetailsScreen extends StatelessWidget {
@@ -70,15 +70,15 @@ class _AccountDetailsImage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authProvider);
     final accountAvatarService = ref.watch(accountAvatarServiceProvider);
-    final imageService = ref.watch(imageServiceProvider);
+    final imageService = ref.watch(personImageServiceProvider);
 
     final localization = AppLocalizations.of(context)!;
 
     return user.maybeWhen(
       loggedIn: (user) => BackdropImage(
         imgUrl: (user.accountDetails.avatar.tmdb.avatarPath != null)
-            ? imageService.getImageUrl(
-                size: ProfileSizes.original.name,
+            ? imageService.getPersonProfileUrl(
+                size: ProfileSizes.original,
                 path: user.accountDetails.profilePath,
               )
             : accountAvatarService.getAccountAvatar(

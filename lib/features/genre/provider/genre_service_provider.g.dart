@@ -29,13 +29,13 @@ class _SystemHash {
   }
 }
 
-String _$genreServiceHash() => r'2ba2bb8c523ea07f0292636aa07328eb5aa4dc23';
+String _$genreServiceHash() => r'09f486c0a76110dc9c38113a816d8a50c8dcaf46';
 
 /// See also [genreService].
-final genreServiceProvider = AutoDisposeProvider<IGenreService>(
+final genreServiceProvider = Provider<IGenreService>(
   genreService,
   name: r'genreServiceProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$genreServiceHash,
 );
-typedef GenreServiceRef = AutoDisposeProviderRef<IGenreService>;
+typedef GenreServiceRef = ProviderRef<IGenreService>;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../features/image/domain/sizes.dart';
-import '../../../../features/image/provider/image_service_provider.dart';
 import '../../../../features/person/domain/person.dart';
+import '../../../../features/person/domain/profile_sizes_enum.dart';
+import '../../../../features/person/provider/image/person_image_service_provider.dart';
 import '../../custom_image/custom_network_image.dart';
 
 class PersonCardWrapper extends ConsumerWidget {
@@ -18,7 +18,7 @@ class PersonCardWrapper extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imageService = ref.watch(imageServiceProvider);
+    final imageService = ref.watch(personImageServiceProvider);
 
     return Column(
       children: [
@@ -30,8 +30,8 @@ class PersonCardWrapper extends ConsumerWidget {
             child: CustomNetworkImage(
               width: imgRadius * 2,
               height: imgRadius * 2,
-              url: imageService.getImageUrl(
-                size: ProfileSizes.w185.name,
+              url: imageService.getPersonProfileUrl(
+                size: ProfileSizes.w185,
                 path: person.profilePath,
               ),
               placeholderIcon: const Icon(

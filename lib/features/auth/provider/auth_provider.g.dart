@@ -29,18 +29,18 @@ class _SystemHash {
   }
 }
 
-String _$AuthHash() => r'8a7208cd763717f209fae8e2676fa44d1daf6c63';
+String _$AuthHash() => r'85b85ccf4b0324817f60988272a4fbdda5df54fd';
 
 /// See also [Auth].
-final authProvider = NotifierProvider<Auth, AuthState>(
+final authProvider = AutoDisposeNotifierProvider<Auth, AuthState>(
   Auth.new,
   name: r'authProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$AuthHash,
 );
-typedef AuthRef = NotifierProviderRef<AuthState>;
+typedef AuthRef = AutoDisposeNotifierProviderRef<AuthState>;
 
-abstract class _$Auth extends Notifier<AuthState> {
+abstract class _$Auth extends AutoDisposeNotifier<AuthState> {
   @override
   AuthState build();
 }

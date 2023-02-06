@@ -20,6 +20,7 @@ MovieImages _$MovieImagesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MovieImages {
+  int get id => throw _privateConstructorUsedError;
   List<ImageModel> get backdrops => throw _privateConstructorUsedError;
   List<ImageModel> get posters => throw _privateConstructorUsedError;
 
@@ -35,7 +36,7 @@ abstract class $MovieImagesCopyWith<$Res> {
           MovieImages value, $Res Function(MovieImages) then) =
       _$MovieImagesCopyWithImpl<$Res, MovieImages>;
   @useResult
-  $Res call({List<ImageModel> backdrops, List<ImageModel> posters});
+  $Res call({int id, List<ImageModel> backdrops, List<ImageModel> posters});
 }
 
 /// @nodoc
@@ -51,10 +52,15 @@ class _$MovieImagesCopyWithImpl<$Res, $Val extends MovieImages>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? backdrops = null,
     Object? posters = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       backdrops: null == backdrops
           ? _value.backdrops
           : backdrops // ignore: cast_nullable_to_non_nullable
@@ -75,7 +81,7 @@ abstract class _$$_MovieImagesCopyWith<$Res>
       __$$_MovieImagesCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<ImageModel> backdrops, List<ImageModel> posters});
+  $Res call({int id, List<ImageModel> backdrops, List<ImageModel> posters});
 }
 
 /// @nodoc
@@ -89,10 +95,15 @@ class __$$_MovieImagesCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? backdrops = null,
     Object? posters = null,
   }) {
     return _then(_$_MovieImages(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       backdrops: null == backdrops
           ? _value._backdrops
           : backdrops // ignore: cast_nullable_to_non_nullable
@@ -109,7 +120,8 @@ class __$$_MovieImagesCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MovieImages implements _MovieImages {
   const _$_MovieImages(
-      {required final List<ImageModel> backdrops,
+      {required this.id,
+      required final List<ImageModel> backdrops,
       required final List<ImageModel> posters})
       : _backdrops = backdrops,
         _posters = posters;
@@ -117,6 +129,8 @@ class _$_MovieImages implements _MovieImages {
   factory _$_MovieImages.fromJson(Map<String, dynamic> json) =>
       _$$_MovieImagesFromJson(json);
 
+  @override
+  final int id;
   final List<ImageModel> _backdrops;
   @override
   List<ImageModel> get backdrops {
@@ -135,7 +149,7 @@ class _$_MovieImages implements _MovieImages {
 
   @override
   String toString() {
-    return 'MovieImages(backdrops: $backdrops, posters: $posters)';
+    return 'MovieImages(id: $id, backdrops: $backdrops, posters: $posters)';
   }
 
   @override
@@ -143,6 +157,7 @@ class _$_MovieImages implements _MovieImages {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MovieImages &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other._backdrops, _backdrops) &&
             const DeepCollectionEquality().equals(other._posters, _posters));
@@ -152,6 +167,7 @@ class _$_MovieImages implements _MovieImages {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       const DeepCollectionEquality().hash(_backdrops),
       const DeepCollectionEquality().hash(_posters));
 
@@ -171,12 +187,15 @@ class _$_MovieImages implements _MovieImages {
 
 abstract class _MovieImages implements MovieImages {
   const factory _MovieImages(
-      {required final List<ImageModel> backdrops,
+      {required final int id,
+      required final List<ImageModel> backdrops,
       required final List<ImageModel> posters}) = _$_MovieImages;
 
   factory _MovieImages.fromJson(Map<String, dynamic> json) =
       _$_MovieImages.fromJson;
 
+  @override
+  int get id;
   @override
   List<ImageModel> get backdrops;
   @override

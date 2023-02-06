@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../features/image/domain/sizes.dart';
-import '../../../../features/image/provider/image_service_provider.dart';
+import '../../../../features/movies/domain/backdrop_sizes_enum.dart';
+import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
 import '../../../../routing/routes.dart';
 import '../../backdrop_image/backdrop_image.dart';
 
@@ -20,13 +20,13 @@ class MovieCarouselItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imageService = ref.watch(imageServiceProvider);
+    final imageService = ref.watch(movieImageServiceProvider);
 
     return Stack(
       children: [
         BackdropImage(
-          imgUrl: imageService.getImageUrl(
-            size: BackdropSizes.original.name,
+          imgUrl: imageService.getMovieBackdropUrl(
+            size: BackdropSizes.original,
             path: image,
           ),
           placeholderIcon: const Icon(Icons.movie),

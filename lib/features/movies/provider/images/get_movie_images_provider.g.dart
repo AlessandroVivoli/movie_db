@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'get_person_images_provider.dart';
+part of 'get_movie_images_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,64 +29,63 @@ class _SystemHash {
   }
 }
 
-String _$getPersonImagesHash() => r'05103188d171a1fb8ba5cd66d820478f861da378';
+String _$movieImagesHash() => r'34abea24d204a20be07a5651533b3a3db0bca2a1';
 
-/// See also [getPersonImages].
-class GetPersonImagesProvider
-    extends AutoDisposeFutureProvider<List<ImageModel>> {
-  GetPersonImagesProvider(
-    this.personId,
+/// See also [movieImages].
+class MovieImagesProvider extends AutoDisposeFutureProvider<MovieImages> {
+  MovieImagesProvider(
+    this.movieId,
   ) : super(
-          (ref) => getPersonImages(
+          (ref) => movieImages(
             ref,
-            personId,
+            movieId,
           ),
-          from: getPersonImagesProvider,
-          name: r'getPersonImagesProvider',
+          from: movieImagesProvider,
+          name: r'movieImagesProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$getPersonImagesHash,
+                  : _$movieImagesHash,
         );
 
-  final int personId;
+  final int movieId;
 
   @override
   bool operator ==(Object other) {
-    return other is GetPersonImagesProvider && other.personId == personId;
+    return other is MovieImagesProvider && other.movieId == movieId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, personId.hashCode);
+    hash = _SystemHash.combine(hash, movieId.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-typedef GetPersonImagesRef = AutoDisposeFutureProviderRef<List<ImageModel>>;
+typedef MovieImagesRef = AutoDisposeFutureProviderRef<MovieImages>;
 
-/// See also [getPersonImages].
-final getPersonImagesProvider = GetPersonImagesFamily();
+/// See also [movieImages].
+final movieImagesProvider = MovieImagesFamily();
 
-class GetPersonImagesFamily extends Family<AsyncValue<List<ImageModel>>> {
-  GetPersonImagesFamily();
+class MovieImagesFamily extends Family<AsyncValue<MovieImages>> {
+  MovieImagesFamily();
 
-  GetPersonImagesProvider call(
-    int personId,
+  MovieImagesProvider call(
+    int movieId,
   ) {
-    return GetPersonImagesProvider(
-      personId,
+    return MovieImagesProvider(
+      movieId,
     );
   }
 
   @override
-  AutoDisposeFutureProvider<List<ImageModel>> getProviderOverride(
-    covariant GetPersonImagesProvider provider,
+  AutoDisposeFutureProvider<MovieImages> getProviderOverride(
+    covariant MovieImagesProvider provider,
   ) {
     return call(
-      provider.personId,
+      provider.movieId,
     );
   }
 
@@ -97,5 +96,5 @@ class GetPersonImagesFamily extends Family<AsyncValue<List<ImageModel>>> {
   List<ProviderOrFamily>? get dependencies => null;
 
   @override
-  String? get name => r'getPersonImagesProvider';
+  String? get name => r'movieImagesProvider';
 }

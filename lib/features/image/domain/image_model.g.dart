@@ -12,7 +12,7 @@ _$_ImageModel _$$_ImageModelFromJson(Map<String, dynamic> json) =>
       filePath: json['file_path'] as String,
       height: json['height'] as int,
       iso_639_1: json['iso_639_1'] as String?,
-      voteAverage: (json['vote_average'] as num).toDouble(),
+      voteAverage: json['vote_average'] as int,
       voteCount: json['vote_count'] as int,
       width: json['width'] as int,
     );

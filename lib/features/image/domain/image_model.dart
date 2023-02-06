@@ -10,7 +10,7 @@ class ImageModel with _$ImageModel {
     required String filePath,
     required int height,
     required String? iso_639_1,
-    required double voteAverage,
+    required int voteAverage,
     required int voteCount,
     required int width,
   }) = _ImageModel;

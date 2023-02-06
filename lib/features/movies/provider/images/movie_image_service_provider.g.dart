@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'video_service_provider.dart';
+part of 'movie_image_service_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,13 +29,14 @@ class _SystemHash {
   }
 }
 
-String _$videoServiceHash() => r'03eeb1cc9596c1aadfcfe1ee5c31b73b11f11d39';
+String _$movieImageServiceHash() => r'5a43087f5f2968622c6fdbbc8a83e8064417c9f7';
 
-/// See also [videoService].
-final videoServiceProvider = Provider<IVideoService>(
-  videoService,
-  name: r'videoServiceProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$videoServiceHash,
+/// See also [movieImageService].
+final movieImageServiceProvider = AutoDisposeProvider<IMovieImageService>(
+  movieImageService,
+  name: r'movieImageServiceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$movieImageServiceHash,
 );
-typedef VideoServiceRef = ProviderRef<IVideoService>;
+typedef MovieImageServiceRef = AutoDisposeProviderRef<IMovieImageService>;
