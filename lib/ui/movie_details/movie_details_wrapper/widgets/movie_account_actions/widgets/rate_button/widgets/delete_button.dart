@@ -78,9 +78,7 @@ class _DeleteButton extends ConsumerWidget {
 
     return OutlinedButton(
       onPressed: (originalRating > 0)
-          ? () => ref
-              .read(deleteRatingProvider.notifier)
-              .deleteRating(movieId, user.sessionId)
+          ? () => ref.read(deleteRatingProvider.notifier).deleteRating(movieId)
           : null,
       style: OutlinedButton.styleFrom(
         foregroundColor: Colors.red,

@@ -84,11 +84,7 @@ class _ConfirmButton extends ConsumerWidget {
     return OutlinedButton(
       onPressed: (rating > 0 && originalRating != rating && !isLoading)
           ? () {
-              ref.read(rateMoviesProvider.notifier).rateMovie(
-                    movieId,
-                    user.sessionId,
-                    rating,
-                  );
+              ref.read(rateMoviesProvider.notifier).rateMovie(movieId, rating);
             }
           : null,
       style: OutlinedButton.styleFrom(

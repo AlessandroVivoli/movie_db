@@ -56,7 +56,7 @@ class _RatedMoviesHookWidget extends HookConsumerWidget {
     final page = useState(1);
 
     final ratedMovies = ref.watch(
-      getRatedMoviesProvider(user: user, page: page.value),
+      getRatedMoviesProvider(page: page.value),
     );
 
     final localization = AppLocalizations.of(context)!;

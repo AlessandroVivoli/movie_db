@@ -59,7 +59,7 @@ class _WatchlistHookWidget extends HookConsumerWidget {
     final page = useState(1);
 
     final movieWatchlist = ref.watch(
-      getMovieWatchlistProvider(user: user, page: page.value),
+      getMovieWatchlistProvider(page: page.value),
     );
 
     final localization = AppLocalizations.of(context)!;
