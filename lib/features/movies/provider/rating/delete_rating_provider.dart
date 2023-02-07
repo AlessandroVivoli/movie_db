@@ -11,6 +11,9 @@ part 'delete_rating_provider.g.dart';
 
 @riverpod
 class DeleteRating extends _$DeleteRating {
+  @override
+  RateState build() => const RateState.idle();
+
   void deleteRating(int movieId) {
     state = const RateState.loading();
 
@@ -22,9 +25,6 @@ class DeleteRating extends _$DeleteRating {
         .catchError((err) => state = RateState.error(err, err.stackTrace))
         .then((_) => _refreshRatings(ref, movieId));
   }
-
-  @override
-  RateState build() => const RateState.idle();
 
   void _refreshRatings(Ref ref, int movieId) {
     ref.invalidate(getMovieDetailsProvider(movieId));

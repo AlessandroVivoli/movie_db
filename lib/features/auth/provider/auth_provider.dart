@@ -12,12 +12,47 @@ part 'auth_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class Auth extends _$Auth {
+  @override
+  AuthState build() => const AuthState.loggedOut();
+
+  Future<void> init() async {
+    final sessionId = ref.read(localStorageProvider).getSessionId();
+
+    if (sessionId == null) {
+      state = const AuthState.loggedOut();
+      return;
+    }
+
+    state = const AuthState.loading();
+
+    state = await ref
+        .read(accountServiceProvider)
+        .getAccountDetails(sessionId: sessionId)
+        .then(
+          (details) => AuthState.loggedIn(
+            User(
+              accountDetails: details,
+              sessionId: sessionId,
+            ),
+          ),
+        )
+        .catchError(AuthState.error);
+  }
+
   Future<void> login(String username, String password) async {
     state = const AuthState.loading();
 
     state = await _login(username, password)
         .then(AuthState.loggedIn)
         .catchError(_handleLoginError);
+  }
+
+  Future<void> logout() async {
+    state = const AuthState.loading();
+
+    state = await _logout()
+        .then((_) => const AuthState.loggedOut())
+        .catchError(AuthState.error);
   }
 
   AuthState _handleLoginError(Object error, StackTrace stackTrace) {
@@ -57,14 +92,6 @@ class Auth extends _$Auth {
         );
   }
 
-  Future<void> logout() async {
-    state = const AuthState.loading();
-
-    state = await _logout()
-        .then((_) => const AuthState.loggedOut())
-        .catchError(AuthState.error);
-  }
-
   Future<void> _logout() {
     final sessionId = ref.read(localStorageProvider).getSessionId();
 
@@ -75,34 +102,5 @@ class Auth extends _$Auth {
     ref.read(localStorageProvider).setSessionId(null);
 
     return ref.read(authServiceProvider).logout(sessionId: sessionId);
-  }
-
-  Future<void> init() async {
-    final sessionId = ref.read(localStorageProvider).getSessionId();
-
-    if (sessionId == null) {
-      state = const AuthState.loggedOut();
-      return;
-    }
-
-    state = const AuthState.loading();
-
-    state = await ref
-        .read(accountServiceProvider)
-        .getAccountDetails(sessionId: sessionId)
-        .then(
-          (details) => AuthState.loggedIn(
-            User(
-              accountDetails: details,
-              sessionId: sessionId,
-            ),
-          ),
-        )
-        .catchError(AuthState.error);
-  }
-
-  @override
-  AuthState build() {
-    return const AuthState.loggedOut();
   }
 }

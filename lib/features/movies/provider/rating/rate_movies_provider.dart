@@ -11,6 +11,9 @@ part 'rate_movies_provider.g.dart';
 
 @riverpod
 class RateMovies extends _$RateMovies {
+  @override
+  RateState build() => const RateState.idle();
+
   void rateMovie(int movieId, double rating) {
     state = const RateState.loading();
 
@@ -26,9 +29,6 @@ class RateMovies extends _$RateMovies {
         .catchError((err) => state = RateState.error(err, err.stackTrace))
         .then((_) => _refreshRatings(ref, movieId));
   }
-
-  @override
-  RateState build() => const RateState.idle();
 
   void _refreshRatings(Ref ref, int movieId) {
     ref.invalidate(getMovieDetailsProvider(movieId));
