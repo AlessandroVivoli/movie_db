@@ -1,5 +1,3 @@
-
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../auth/provider/auth_provider.dart';
@@ -22,18 +20,11 @@ class Favorites extends _$Favorites {
     state = const AccountMoviesState.loading();
 
     state = await _addMovieToFavorites(movieId: movieId, favorite: favorite)
-        .then((_) => _onSuccess(movieId, favorite))
+        .then((_) => const AccountMoviesState.success())
         .catchError(AccountMoviesState.error);
-  }
 
-  void _refreshFavorites(Ref ref, int movieId) {
     ref.invalidate(getMovieDetailsProvider(movieId));
     ref.invalidate(getFavoriteMoviesProvider);
-  }
-
-  AccountMoviesState _onSuccess(int movieId, bool favorite) {
-    _refreshFavorites(ref, movieId);
-    return const AccountMoviesState.success();
   }
 
   Future<void> _addMovieToFavorites({

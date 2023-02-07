@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../account/provider/get_rated_movies_provider.dart';
@@ -26,14 +25,10 @@ class RateMovies extends _$RateMovies {
           sessionId: sessionId,
           rating: rating,
         )
-        .then((_) => _refreshRatings(ref, movieId))
+        .then((_) => const RateState.success())
         .catchError((err) => state = RateState.error(err, err.stackTrace));
-  }
 
-  void _refreshRatings(Ref ref, int movieId) {
     ref.invalidate(getMovieDetailsProvider(movieId));
     ref.invalidate(getRatedMoviesProvider);
-
-    state = const RateState.success();
   }
 }

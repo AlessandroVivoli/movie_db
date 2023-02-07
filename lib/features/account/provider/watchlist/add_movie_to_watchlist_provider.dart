@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../auth/provider/auth_provider.dart';
@@ -21,18 +20,11 @@ class Watchlist extends _$Watchlist {
     state = const AccountMoviesState.loading();
 
     state = await _addMovieToWatchlist(movieId: movieId, watchlist: watchlist)
-        .then((_) => _onSuccess(movieId, watchlist))
+        .then((_) => const AccountMoviesState.success())
         .catchError(AccountMoviesState.error);
-  }
 
-  void _refreshWatchlist(Ref ref, int movieId) {
     ref.invalidate(getMovieDetailsProvider(movieId));
     ref.invalidate(getMovieWatchlistProvider);
-  }
-
-  AccountMoviesState _onSuccess(int movieId, bool watchlist) {
-    _refreshWatchlist(ref, movieId);
-    return const AccountMoviesState.success();
   }
 
   Future<void> _addMovieToWatchlist({

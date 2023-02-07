@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../account/provider/get_rated_movies_provider.dart';
@@ -14,22 +13,18 @@ class DeleteRating extends _$DeleteRating {
   @override
   RateState build() => const RateState.idle();
 
-  void deleteRating(int movieId) {
+  void deleteRating(int movieId) async {
     state = const RateState.loading();
 
     final sessionId = ref.watch(localStorageProvider).getSessionId()!;
 
-    ref
+    state = await ref
         .read(movieServiceProvider)
         .deleteRating(id: movieId, sessionId: sessionId)
-        .then((_) => _refreshRatings(ref, movieId))
-        .catchError((err) => state = RateState.error(err, err.stackTrace));
-  }
+        .then((_) => const RateState.success())
+        .catchError(RateState.error);
 
-  void _refreshRatings(Ref ref, int movieId) {
     ref.invalidate(getMovieDetailsProvider(movieId));
     ref.invalidate(getRatedMoviesProvider);
-
-    state = const RateState.success();
   }
 }
