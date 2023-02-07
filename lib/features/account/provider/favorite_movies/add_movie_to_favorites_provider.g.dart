@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$FavoritesHash() => r'4f222ab8bc695212d8c7daf11fe7979f08bb8cc5';
+String _$FavoritesHash() => r'9ba82161bb79628dcffda123e1fe960c0bf3b75c';
 
 /// See also [Favorites].
 final favoritesProvider =

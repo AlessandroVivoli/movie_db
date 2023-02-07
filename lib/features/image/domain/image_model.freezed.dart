@@ -24,7 +24,7 @@ mixin _$ImageModel {
   String get filePath => throw _privateConstructorUsedError;
   int get height => throw _privateConstructorUsedError;
   String? get iso_639_1 => throw _privateConstructorUsedError;
-  int get voteAverage => throw _privateConstructorUsedError;
+  double get voteAverage => throw _privateConstructorUsedError;
   int get voteCount => throw _privateConstructorUsedError;
   int get width => throw _privateConstructorUsedError;
 
@@ -45,7 +45,7 @@ abstract class $ImageModelCopyWith<$Res> {
       String filePath,
       int height,
       String? iso_639_1,
-      int voteAverage,
+      double voteAverage,
       int voteCount,
       int width});
 }
@@ -91,7 +91,7 @@ class _$ImageModelCopyWithImpl<$Res, $Val extends ImageModel>
       voteAverage: null == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       voteCount: null == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
@@ -117,7 +117,7 @@ abstract class _$$_ImageModelCopyWith<$Res>
       String filePath,
       int height,
       String? iso_639_1,
-      int voteAverage,
+      double voteAverage,
       int voteCount,
       int width});
 }
@@ -161,7 +161,7 @@ class __$$_ImageModelCopyWithImpl<$Res>
       voteAverage: null == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       voteCount: null == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
@@ -198,7 +198,7 @@ class _$_ImageModel implements _ImageModel {
   @override
   final String? iso_639_1;
   @override
-  final int voteAverage;
+  final double voteAverage;
   @override
   final int voteCount;
   @override
@@ -253,7 +253,7 @@ abstract class _ImageModel implements ImageModel {
       required final String filePath,
       required final int height,
       required final String? iso_639_1,
-      required final int voteAverage,
+      required final double voteAverage,
       required final int voteCount,
       required final int width}) = _$_ImageModel;
 
@@ -269,7 +269,7 @@ abstract class _ImageModel implements ImageModel {
   @override
   String? get iso_639_1;
   @override
-  int get voteAverage;
+  double get voteAverage;
   @override
   int get voteCount;
   @override
