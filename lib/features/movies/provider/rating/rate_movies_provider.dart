@@ -26,8 +26,8 @@ class RateMovies extends _$RateMovies {
           sessionId: sessionId,
           rating: rating,
         )
-        .catchError((err) => state = RateState.error(err, err.stackTrace))
-        .then((_) => _refreshRatings(ref, movieId));
+        .then((_) => _refreshRatings(ref, movieId))
+        .catchError((err) => state = RateState.error(err, err.stackTrace));
   }
 
   void _refreshRatings(Ref ref, int movieId) {

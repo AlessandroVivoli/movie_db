@@ -22,8 +22,8 @@ class DeleteRating extends _$DeleteRating {
     ref
         .read(movieServiceProvider)
         .deleteRating(id: movieId, sessionId: sessionId)
-        .catchError((err) => state = RateState.error(err, err.stackTrace))
-        .then((_) => _refreshRatings(ref, movieId));
+        .then((_) => _refreshRatings(ref, movieId))
+        .catchError((err) => state = RateState.error(err, err.stackTrace));
   }
 
   void _refreshRatings(Ref ref, int movieId) {

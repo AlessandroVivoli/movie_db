@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$DeleteRatingHash() => r'aab6b9ce367feac13a698e0d63164911876871a6';
+String _$DeleteRatingHash() => r'fc6413300ea4cdeaa7a266d5dc526db9a3808de3';
 
 /// See also [DeleteRating].
 final deleteRatingProvider =
