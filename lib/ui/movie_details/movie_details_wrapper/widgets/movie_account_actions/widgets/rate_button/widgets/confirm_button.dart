@@ -22,10 +22,7 @@ class ConfirmButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = ref.watch(rateMoviesProvider).maybeWhen(
-          loading: () => true,
-          orElse: () => false,
-        );
+    final provider = ref.watch(rateMoviesProvider);
 
     final localization = AppLocalizations.of(context)!;
 
@@ -34,24 +31,24 @@ class ConfirmButton extends ConsumerWidget {
         error: (error, stackTrace) {
           context.showErrorSnackBar(localization.rateError);
 
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.pop(context, false);
-          });
+          Navigator.pop(context, false);
         },
         success: () {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.pop(context, true);
-          });
+          Navigator.pop(context, true);
         },
       );
     });
 
-    return _ConfirmButton(
-      rating: rating,
-      originalRating: originalRating,
-      movieId: movieId,
-      user: user,
-      isLoading: isLoading,
+    return provider.maybeWhen(
+      loading: () => const Center(
+        child: CircularProgressIndicator(),
+      ),
+      orElse: () => _ConfirmButton(
+        rating: rating,
+        originalRating: originalRating,
+        movieId: movieId,
+        user: user,
+      ),
     );
   }
 }
@@ -62,27 +59,19 @@ class _ConfirmButton extends ConsumerWidget {
     required this.originalRating,
     required this.movieId,
     required this.user,
-    required this.isLoading,
   });
 
   final double rating;
   final double originalRating;
   final int movieId;
   final User user;
-  final bool isLoading;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localization = AppLocalizations.of(context)!;
 
-    if (isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
     return OutlinedButton(
-      onPressed: (rating > 0 && originalRating != rating && !isLoading)
+      onPressed: (rating > 0 && originalRating != rating)
           ? () {
               ref.read(rateMoviesProvider.notifier).rateMovie(movieId, rating);
             }

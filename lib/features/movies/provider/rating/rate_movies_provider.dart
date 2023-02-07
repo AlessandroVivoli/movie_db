@@ -13,12 +13,12 @@ class RateMovies extends _$RateMovies {
   @override
   RateState build() => const RateState.idle();
 
-  void rateMovie(int movieId, double rating) {
+  void rateMovie(int movieId, double rating) async {
     state = const RateState.loading();
 
     final sessionId = ref.watch(localStorageProvider).getSessionId()!;
 
-    ref
+    state = await ref
         .read(movieServiceProvider)
         .rateMovie(
           id: movieId,

@@ -24,42 +24,32 @@ class SubmitButton extends ConsumerWidget {
 
     final localization = AppLocalizations.of(context)!;
 
-    return auth.when(
-      loggedIn: (user) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.pop(context, false);
-        });
+    ref.listen(
+      authProvider,
+      (previous, next) {
+        next.whenOrNull(
+          loggedIn: (user) {
+            Navigator.pop(context, false);
+          },
+          error: (error, stack) {
+            var message = localization.generalLoginErrorMessage;
 
-        return _Button(
-          formKey: formKey,
-          usernameController: usernameController,
-          passwordController: passwordController,
+            if (error is InvalidUserError) {
+              message = localization.wrongCredentialsErrorMessage;
+            }
+
+            context.showErrorSnackBar(message);
+          },
         );
       },
-      loggedOut: () {
-        return _Button(
-          formKey: formKey,
-          usernameController: usernameController,
-          passwordController: passwordController,
-        );
-      },
-      error: (error, stack) {
-        var message = localization.generalLoginErrorMessage;
+    );
 
-        if (error is InvalidUserError) {
-          message = localization.wrongCredentialsErrorMessage;
-        }
-
-        context.showErrorSnackBar(message);
-
-        return _Button(
-          formKey: formKey,
-          usernameController: usernameController,
-          passwordController: passwordController,
-        );
-      },
-      loading: () => const Center(
-        child: CircularProgressIndicator(),
+    return auth.maybeWhen(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      orElse: () => _Button(
+        formKey: formKey,
+        usernameController: usernameController,
+        passwordController: passwordController,
       ),
     );
   }

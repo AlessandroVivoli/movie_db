@@ -20,35 +20,32 @@ class DeleteButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = ref.watch(deleteRatingProvider).maybeWhen(
-          loading: () => true,
-          orElse: () => false,
-        );
+    final provider = ref.watch(deleteRatingProvider);
 
     final localization = AppLocalizations.of(context)!;
 
     ref.listen(deleteRatingProvider, (previous, next) {
       next.whenOrNull(
-        success: () {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.pop(context);
-          });
-        },
+        success: () => Navigator.pop(context),
         error: (error, stackTrace) {
           context.showErrorSnackBar(localization.deleteRatingError);
 
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.pop(context);
-          });
+          Navigator.pop(context);
         },
       );
     });
 
-    return _DeleteButton(
-      movieId: movieId,
-      originalRating: originalRating,
-      user: user,
-      isLoading: isLoading,
+    return provider.maybeWhen(
+      loading: () => const Center(
+        child: CircularProgressIndicator(
+          color: Colors.red,
+        ),
+      ),
+      orElse: () => _DeleteButton(
+        movieId: movieId,
+        originalRating: originalRating,
+        user: user,
+      ),
     );
   }
 }
@@ -58,23 +55,15 @@ class _DeleteButton extends ConsumerWidget {
     required this.originalRating,
     required this.user,
     required this.movieId,
-    required this.isLoading,
   });
 
   final double originalRating;
   final User user;
   final int movieId;
-  final bool isLoading;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localization = AppLocalizations.of(context)!;
-
-    if (isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(color: Colors.red),
-      );
-    }
 
     return OutlinedButton(
       onPressed: (originalRating > 0)
