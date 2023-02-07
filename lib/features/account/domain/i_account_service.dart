@@ -1,4 +1,5 @@
 import '../../auth/domain/user.dart';
+import '../../movies/domain/movie_list.dart';
 import 'account_details.dart';
 
 abstract class IAccountService {
@@ -21,5 +22,23 @@ abstract class IAccountService {
     required User user,
     required int movieId,
     required bool watchlist,
+  });
+
+  /// Returns the user favorite movie list.
+  Future<MovieListModel> getFavoriteMovies({
+    required User user,
+    int page = 1,
+  });
+
+  /// Returns the user movie watchlist.
+  Future<MovieListModel> getMovieWatchlist({
+    required User user,
+    int page = 1,
+  });
+
+  /// Returns the user rated movie list.
+  Future<MovieListModel> getRatedMovies({
+    required User user,
+    int page = 1,
   });
 }

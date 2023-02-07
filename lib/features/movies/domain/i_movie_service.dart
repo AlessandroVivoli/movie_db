@@ -1,7 +1,6 @@
-import '../../auth/domain/user.dart';
 import '../../time_window/domain/time_window.dart';
-import 'account_state/movie_account_state.dart';
 import 'movie.dart';
+import 'movie_account_state/movie_account_state.dart';
 import 'movie_details.dart';
 import 'movie_list.dart';
 import 'sort_by.dart';
@@ -41,31 +40,10 @@ abstract class IMovieService {
   /// Returns similar [List] of [Movie] using the provided movie [id]
   Future<List<Movie>> getSimilarMovies({required int id});
 
-  /// Returns the [List] of [Movie] credits using the provided [personId]
-  Future<List<Movie>> getPersonCredits({required int personId});
-
   /// Returns the [MovieAccountState] of movie using the movie [id] and [sessionId]
   Future<MovieAccountState> getAccountMovieState({
     required int id,
     required String sessionId,
-  });
-
-  /// Returns the user favorite movie list.
-  Future<MovieListModel> getFavoriteMovies({
-    required User user,
-    int page = 1,
-  });
-
-  /// Returns the user movie watchlist.
-  Future<MovieListModel> getMovieWatchlist({
-    required User user,
-    int page = 1,
-  });
-
-  /// Returns the user rated movie list.
-  Future<MovieListModel> getRatedMovies({
-    required User user,
-    int page = 1,
   });
 
   /// Sets the movie [rating] using the movie [id] and [sessionId]

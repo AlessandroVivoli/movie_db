@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$getPersonCreditsHash() => r'f4a873269cebed19eeae78d73921cd6ca536ce19';
+String _$getPersonCreditsHash() => r'c0edd7e17e8fca5f7bace45d164b6ec405b6d144';
 
 /// See also [getPersonCredits].
 class GetPersonCreditsProvider extends AutoDisposeFutureProvider<List<Movie>> {

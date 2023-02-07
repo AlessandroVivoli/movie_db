@@ -29,18 +29,16 @@ class _SystemHash {
   }
 }
 
-String _$getMovieWatchlistHash() => r'88a3509a7ab0906d1ae40603e290b341b2e62218';
+String _$getMovieWatchlistHash() => r'42b8149dd7e781ad837ec54f9c00bb19b8f18627';
 
 /// See also [getMovieWatchlist].
 class GetMovieWatchlistProvider
     extends AutoDisposeFutureProvider<MovieListModel> {
   GetMovieWatchlistProvider({
-    required this.user,
     this.page = 1,
   }) : super(
           (ref) => getMovieWatchlist(
             ref,
-            user: user,
             page: page,
           ),
           from: getMovieWatchlistProvider,
@@ -51,20 +49,16 @@ class GetMovieWatchlistProvider
                   : _$getMovieWatchlistHash,
         );
 
-  final User user;
   final int page;
 
   @override
   bool operator ==(Object other) {
-    return other is GetMovieWatchlistProvider &&
-        other.user == user &&
-        other.page == page;
+    return other is GetMovieWatchlistProvider && other.page == page;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, user.hashCode);
     hash = _SystemHash.combine(hash, page.hashCode);
 
     return _SystemHash.finish(hash);
@@ -80,11 +74,9 @@ class GetMovieWatchlistFamily extends Family<AsyncValue<MovieListModel>> {
   GetMovieWatchlistFamily();
 
   GetMovieWatchlistProvider call({
-    required User user,
     int page = 1,
   }) {
     return GetMovieWatchlistProvider(
-      user: user,
       page: page,
     );
   }
@@ -94,7 +86,6 @@ class GetMovieWatchlistFamily extends Family<AsyncValue<MovieListModel>> {
     covariant GetMovieWatchlistProvider provider,
   ) {
     return call(
-      user: provider.user,
       page: provider.page,
     );
   }

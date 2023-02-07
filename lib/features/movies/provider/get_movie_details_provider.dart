@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../local_storage/provider/local_storage_provider.dart';
-import '../domain/account_state/movie_account_state.dart';
 import '../domain/i_movie_service.dart';
+import '../domain/movie_account_state/movie_account_state.dart';
 import '../domain/movie_details.dart';
 import 'movie_service_provider.dart';
 

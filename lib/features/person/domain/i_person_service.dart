@@ -1,3 +1,4 @@
+import '../../movies/domain/movie.dart';
 import '../../time_window/domain/time_window.dart';
 import 'person.dart';
 import 'person_details.dart';
@@ -16,4 +17,7 @@ abstract class IPersonService {
 
   /// Returns the [List] of [Person] cast using the provided [movieId].
   Future<List<Person>> getCast({required int movieId});
+
+  /// Returns the [List] of [Movie] credits using the provided [personId]
+  Future<List<Movie>> getPersonCredits({required int personId});
 }

@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
 
-import '../../auth/domain/user.dart';
 import '../../time_window/domain/time_window.dart';
-import '../domain/account_state/movie_account_state.dart';
 import '../domain/i_movie_service.dart';
 import '../domain/movie.dart';
+import '../domain/movie_account_state/movie_account_state.dart';
 import '../domain/movie_details.dart';
 import '../domain/movie_list.dart';
 import '../domain/sort_by.dart';
@@ -72,15 +71,6 @@ class MovieService implements IMovieService {
   }
 
   @override
-  Future<List<Movie>> getPersonCredits({required int personId}) {
-    return _dio
-        .get('/person/$personId/movie_credits')
-        .then((res) => List<Map<String, Object?>>.from(res.data['cast']))
-        .then((rawList) => rawList.map(Movie.fromJson))
-        .then((movies) => movies.toList());
-  }
-
-  @override
   Future<MovieAccountState> getAccountMovieState({
     required int id,
     required String sessionId,
@@ -94,60 +84,6 @@ class MovieService implements IMovieService {
         )
         .then((res) => Map<String, Object?>.from(res.data))
         .then(MovieAccountState.fromJson);
-  }
-
-  @override
-  Future<MovieListModel> getFavoriteMovies({
-    required User user,
-    int page = 1,
-  }) {
-    return _dio
-        .get(
-          '/account/${user.accountDetails.id}/favorite/movies',
-          queryParameters: {
-            'session_id': user.sessionId,
-            'sort_by': 'created_at.desc',
-            'page': '$page',
-          },
-        )
-        .then((res) => Map<String, Object?>.from(res.data))
-        .then(MovieListModel.fromJson);
-  }
-
-  @override
-  Future<MovieListModel> getMovieWatchlist({
-    required User user,
-    int page = 1,
-  }) {
-    return _dio
-        .get(
-          '/account/${user.accountDetails.id}/watchlist/movies',
-          queryParameters: {
-            'session_id': user.sessionId,
-            'sort_by': 'created_at.desc',
-            'page': '$page',
-          },
-        )
-        .then((res) => Map<String, Object?>.from(res.data))
-        .then(MovieListModel.fromJson);
-  }
-
-  @override
-  Future<MovieListModel> getRatedMovies({
-    required User user,
-    int page = 1,
-  }) {
-    return _dio
-        .get(
-          '/account/${user.accountDetails.id}/rated/movies',
-          queryParameters: {
-            'session_id': user.sessionId,
-            'sort_by': 'created_at.desc',
-            'page': '$page',
-          },
-        )
-        .then((res) => Map<String, Object?>.from(res.data))
-        .then(MovieListModel.fromJson);
   }
 
   @override

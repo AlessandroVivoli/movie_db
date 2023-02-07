@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../features/movies/domain/account_state/rate/movie_rate.dart';
+import '../../../../../features/movies/domain/movie_account_state/rate/movie_rate.dart';
 import '../../../../../features/movies/domain/movie_details.dart';
 import 'widgets/favorite_button.dart';
 import 'widgets/rate_button/rate_button.dart';

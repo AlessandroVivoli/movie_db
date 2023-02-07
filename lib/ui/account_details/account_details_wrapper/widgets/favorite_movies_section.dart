@@ -61,7 +61,7 @@ class _FavoriteMoviesHookBuilder extends HookConsumerWidget {
     return Consumer(
       builder: (context, ref, child) {
         final favoriteMovies = ref.watch(
-          getFavoriteMoviesProvider(user: user, page: page.value),
+          getFavoriteMoviesProvider(page: page.value),
         );
 
         final localization = AppLocalizations.of(context)!;

@@ -29,18 +29,16 @@ class _SystemHash {
   }
 }
 
-String _$getFavoriteMoviesHash() => r'5a7a8d91d365436e3e99ab018d53ed72e2433b92';
+String _$getFavoriteMoviesHash() => r'7f2c65aa30002b48654b3f94c226518b085a775a';
 
 /// See also [getFavoriteMovies].
 class GetFavoriteMoviesProvider
     extends AutoDisposeFutureProvider<MovieListModel> {
   GetFavoriteMoviesProvider({
-    required this.user,
     this.page = 1,
   }) : super(
           (ref) => getFavoriteMovies(
             ref,
-            user: user,
             page: page,
           ),
           from: getFavoriteMoviesProvider,
@@ -51,20 +49,16 @@ class GetFavoriteMoviesProvider
                   : _$getFavoriteMoviesHash,
         );
 
-  final User user;
   final int page;
 
   @override
   bool operator ==(Object other) {
-    return other is GetFavoriteMoviesProvider &&
-        other.user == user &&
-        other.page == page;
+    return other is GetFavoriteMoviesProvider && other.page == page;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, user.hashCode);
     hash = _SystemHash.combine(hash, page.hashCode);
 
     return _SystemHash.finish(hash);
@@ -80,11 +74,9 @@ class GetFavoriteMoviesFamily extends Family<AsyncValue<MovieListModel>> {
   GetFavoriteMoviesFamily();
 
   GetFavoriteMoviesProvider call({
-    required User user,
     int page = 1,
   }) {
     return GetFavoriteMoviesProvider(
-      user: user,
       page: page,
     );
   }
@@ -94,7 +86,6 @@ class GetFavoriteMoviesFamily extends Family<AsyncValue<MovieListModel>> {
     covariant GetFavoriteMoviesProvider provider,
   ) {
     return call(
-      user: provider.user,
       page: provider.page,
     );
   }

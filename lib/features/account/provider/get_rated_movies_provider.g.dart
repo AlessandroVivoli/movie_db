@@ -29,17 +29,15 @@ class _SystemHash {
   }
 }
 
-String _$getRatedMoviesHash() => r'6f837a252290b5d506d96635f8469aea112a451c';
+String _$getRatedMoviesHash() => r'e9d13e2cbe0ffb34e6a4d60bccfb0f37bf7c4864';
 
 /// See also [getRatedMovies].
 class GetRatedMoviesProvider extends AutoDisposeFutureProvider<MovieListModel> {
   GetRatedMoviesProvider({
-    required this.user,
     this.page = 1,
   }) : super(
           (ref) => getRatedMovies(
             ref,
-            user: user,
             page: page,
           ),
           from: getRatedMoviesProvider,
@@ -50,20 +48,16 @@ class GetRatedMoviesProvider extends AutoDisposeFutureProvider<MovieListModel> {
                   : _$getRatedMoviesHash,
         );
 
-  final User user;
   final int page;
 
   @override
   bool operator ==(Object other) {
-    return other is GetRatedMoviesProvider &&
-        other.user == user &&
-        other.page == page;
+    return other is GetRatedMoviesProvider && other.page == page;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, user.hashCode);
     hash = _SystemHash.combine(hash, page.hashCode);
 
     return _SystemHash.finish(hash);
@@ -79,11 +73,9 @@ class GetRatedMoviesFamily extends Family<AsyncValue<MovieListModel>> {
   GetRatedMoviesFamily();
 
   GetRatedMoviesProvider call({
-    required User user,
     int page = 1,
   }) {
     return GetRatedMoviesProvider(
-      user: user,
       page: page,
     );
   }
@@ -93,7 +85,6 @@ class GetRatedMoviesFamily extends Family<AsyncValue<MovieListModel>> {
     covariant GetRatedMoviesProvider provider,
   ) {
     return call(
-      user: provider.user,
       page: provider.page,
     );
   }

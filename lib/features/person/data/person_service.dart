@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../../movies/domain/movie.dart';
 import '../../time_window/domain/time_window.dart';
 import '../domain/i_person_service.dart';
 import '../domain/person.dart';
@@ -36,5 +37,14 @@ class PersonService implements IPersonService {
         .then((res) => List<Map<String, Object?>>.from(res.data['cast']))
         .then((rawList) => rawList.map(Person.fromJson))
         .then((persons) => persons.toList());
+  }
+
+  @override
+  Future<List<Movie>> getPersonCredits({required int personId}) {
+    return _dio
+        .get('/person/$personId/movie_credits')
+        .then((res) => List<Map<String, Object?>>.from(res.data['cast']))
+        .then((rawList) => rawList.map(Movie.fromJson))
+        .then((movies) => movies.toList());
   }
 }

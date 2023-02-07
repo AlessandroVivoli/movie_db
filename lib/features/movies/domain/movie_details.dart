@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../genre/domain/genre.dart';
-import 'account_state/movie_account_state.dart';
+import 'movie_account_state/movie_account_state.dart';
 import 'production_company.dart';
 import 'production_country.dart';
 import 'spoken_language.dart';
