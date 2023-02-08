@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'get_genres_provider.dart';
+part of 'get_tv_genres_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,13 +29,13 @@ class _SystemHash {
   }
 }
 
-String _$getGenresHash() => r'00ffaac08006d46a809ae7ec726e5313eb8207e2';
+String _$getTVGenresHash() => r'aa1a5cf6e78690e5ad7dcb99c25efaee862f4966';
 
-/// See also [getGenres].
-final getGenresProvider = FutureProvider<List<Genre>>(
-  getGenres,
-  name: r'getGenresProvider',
+/// See also [getTVGenres].
+final getTVGenresProvider = AutoDisposeFutureProvider<List<Genre>>(
+  getTVGenres,
+  name: r'getTVGenresProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$getGenresHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$getTVGenresHash,
 );
-typedef GetGenresRef = FutureProviderRef<List<Genre>>;
+typedef GetTVGenresRef = AutoDisposeFutureProviderRef<List<Genre>>;

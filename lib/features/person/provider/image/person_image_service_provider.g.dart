@@ -30,14 +30,14 @@ class _SystemHash {
 }
 
 String _$personImageServiceHash() =>
-    r'465783d1bd9112eb6c8970801f58dc9ed9dcaaee';
+    r'af4299f788c6ced450ee25ebbcd00f222bff6f88';
 
 /// See also [personImageService].
-final personImageServiceProvider = AutoDisposeProvider<IPersonImageService>(
+final personImageServiceProvider = Provider<IPersonImageService>(
   personImageService,
   name: r'personImageServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$personImageServiceHash,
 );
-typedef PersonImageServiceRef = AutoDisposeProviderRef<IPersonImageService>;
+typedef PersonImageServiceRef = ProviderRef<IPersonImageService>;

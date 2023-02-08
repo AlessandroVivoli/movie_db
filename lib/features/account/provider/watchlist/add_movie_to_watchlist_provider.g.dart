@@ -29,19 +29,19 @@ class _SystemHash {
   }
 }
 
-String _$WatchlistHash() => r'd5b8c494c6933d284d3ca09cd29ce8e230b2a2d3';
+String _$WatchlistHash() => r'ba5fd0f5cd53bf6bec2e3b3a90de56257b60070e';
 
 /// See also [Watchlist].
 final watchlistProvider =
-    AutoDisposeNotifierProvider<Watchlist, AccountMoviesState>(
+    AutoDisposeNotifierProvider<Watchlist, AccountMediaState>(
   Watchlist.new,
   name: r'watchlistProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$WatchlistHash,
 );
-typedef WatchlistRef = AutoDisposeNotifierProviderRef<AccountMoviesState>;
+typedef WatchlistRef = AutoDisposeNotifierProviderRef<AccountMediaState>;
 
-abstract class _$Watchlist extends AutoDisposeNotifier<AccountMoviesState> {
+abstract class _$Watchlist extends AutoDisposeNotifier<AccountMediaState> {
   @override
-  AccountMoviesState build();
+  AccountMediaState build();
 }

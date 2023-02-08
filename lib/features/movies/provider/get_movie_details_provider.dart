@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../account/domain/account_media_status/account_media_status.dart';
 import '../../local_storage/provider/local_storage_provider.dart';
 import '../domain/i_movie_service.dart';
-import '../domain/movie_account_state/movie_account_state.dart';
 import '../domain/movie_details.dart';
 import 'movie_service_provider.dart';
 
@@ -19,7 +19,7 @@ Future<MovieDetails> getMovieDetails(GetMovieDetailsRef ref, int movieId) {
   );
 }
 
-Future<MovieAccountState?> _getMovieState(
+Future<AccountMediaStatus?> _getMovieState(
   FutureProviderRef ref,
   IMovieService movieService,
   int movieId,

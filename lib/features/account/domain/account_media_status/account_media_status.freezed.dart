@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'movie_account_state.dart';
+part of 'account_media_status.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-MovieAccountState _$MovieAccountStateFromJson(Map<String, dynamic> json) {
-  return _MovieAccountState.fromJson(json);
+AccountMediaStatus _$AccountMediaStatusFromJson(Map<String, dynamic> json) {
+  return _AccountMediaStatus.fromJson(json);
 }
 
 /// @nodoc
-mixin _$MovieAccountState {
+mixin _$AccountMediaStatus {
   int get id => throw _privateConstructorUsedError;
   bool get favorite => throw _privateConstructorUsedError;
   dynamic get rated => throw _privateConstructorUsedError;
@@ -27,23 +27,23 @@ mixin _$MovieAccountState {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $MovieAccountStateCopyWith<MovieAccountState> get copyWith =>
+  $AccountMediaStatusCopyWith<AccountMediaStatus> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MovieAccountStateCopyWith<$Res> {
-  factory $MovieAccountStateCopyWith(
-          MovieAccountState value, $Res Function(MovieAccountState) then) =
-      _$MovieAccountStateCopyWithImpl<$Res, MovieAccountState>;
+abstract class $AccountMediaStatusCopyWith<$Res> {
+  factory $AccountMediaStatusCopyWith(
+          AccountMediaStatus value, $Res Function(AccountMediaStatus) then) =
+      _$AccountMediaStatusCopyWithImpl<$Res, AccountMediaStatus>;
   @useResult
   $Res call({int id, bool favorite, dynamic rated, bool watchlist});
 }
 
 /// @nodoc
-class _$MovieAccountStateCopyWithImpl<$Res, $Val extends MovieAccountState>
-    implements $MovieAccountStateCopyWith<$Res> {
-  _$MovieAccountStateCopyWithImpl(this._value, this._then);
+class _$AccountMediaStatusCopyWithImpl<$Res, $Val extends AccountMediaStatus>
+    implements $AccountMediaStatusCopyWith<$Res> {
+  _$AccountMediaStatusCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -80,22 +80,22 @@ class _$MovieAccountStateCopyWithImpl<$Res, $Val extends MovieAccountState>
 }
 
 /// @nodoc
-abstract class _$$_MovieAccountStateCopyWith<$Res>
-    implements $MovieAccountStateCopyWith<$Res> {
-  factory _$$_MovieAccountStateCopyWith(_$_MovieAccountState value,
-          $Res Function(_$_MovieAccountState) then) =
-      __$$_MovieAccountStateCopyWithImpl<$Res>;
+abstract class _$$_AccountMediaStatusCopyWith<$Res>
+    implements $AccountMediaStatusCopyWith<$Res> {
+  factory _$$_AccountMediaStatusCopyWith(_$_AccountMediaStatus value,
+          $Res Function(_$_AccountMediaStatus) then) =
+      __$$_AccountMediaStatusCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, bool favorite, dynamic rated, bool watchlist});
 }
 
 /// @nodoc
-class __$$_MovieAccountStateCopyWithImpl<$Res>
-    extends _$MovieAccountStateCopyWithImpl<$Res, _$_MovieAccountState>
-    implements _$$_MovieAccountStateCopyWith<$Res> {
-  __$$_MovieAccountStateCopyWithImpl(
-      _$_MovieAccountState _value, $Res Function(_$_MovieAccountState) _then)
+class __$$_AccountMediaStatusCopyWithImpl<$Res>
+    extends _$AccountMediaStatusCopyWithImpl<$Res, _$_AccountMediaStatus>
+    implements _$$_AccountMediaStatusCopyWith<$Res> {
+  __$$_AccountMediaStatusCopyWithImpl(
+      _$_AccountMediaStatus _value, $Res Function(_$_AccountMediaStatus) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +106,7 @@ class __$$_MovieAccountStateCopyWithImpl<$Res>
     Object? rated = freezed,
     Object? watchlist = null,
   }) {
-    return _then(_$_MovieAccountState(
+    return _then(_$_AccountMediaStatus(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -129,15 +129,15 @@ class __$$_MovieAccountStateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MovieAccountState implements _MovieAccountState {
-  const _$_MovieAccountState(
+class _$_AccountMediaStatus implements _AccountMediaStatus {
+  const _$_AccountMediaStatus(
       {required this.id,
       required this.favorite,
       required this.rated,
       required this.watchlist});
 
-  factory _$_MovieAccountState.fromJson(Map<String, dynamic> json) =>
-      _$$_MovieAccountStateFromJson(json);
+  factory _$_AccountMediaStatus.fromJson(Map<String, dynamic> json) =>
+      _$$_AccountMediaStatusFromJson(json);
 
   @override
   final int id;
@@ -150,14 +150,14 @@ class _$_MovieAccountState implements _MovieAccountState {
 
   @override
   String toString() {
-    return 'MovieAccountState(id: $id, favorite: $favorite, rated: $rated, watchlist: $watchlist)';
+    return 'AccountMediaStatus(id: $id, favorite: $favorite, rated: $rated, watchlist: $watchlist)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MovieAccountState &&
+            other is _$_AccountMediaStatus &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.favorite, favorite) ||
                 other.favorite == favorite) &&
@@ -174,27 +174,27 @@ class _$_MovieAccountState implements _MovieAccountState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MovieAccountStateCopyWith<_$_MovieAccountState> get copyWith =>
-      __$$_MovieAccountStateCopyWithImpl<_$_MovieAccountState>(
+  _$$_AccountMediaStatusCopyWith<_$_AccountMediaStatus> get copyWith =>
+      __$$_AccountMediaStatusCopyWithImpl<_$_AccountMediaStatus>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MovieAccountStateToJson(
+    return _$$_AccountMediaStatusToJson(
       this,
     );
   }
 }
 
-abstract class _MovieAccountState implements MovieAccountState {
-  const factory _MovieAccountState(
+abstract class _AccountMediaStatus implements AccountMediaStatus {
+  const factory _AccountMediaStatus(
       {required final int id,
       required final bool favorite,
       required final dynamic rated,
-      required final bool watchlist}) = _$_MovieAccountState;
+      required final bool watchlist}) = _$_AccountMediaStatus;
 
-  factory _MovieAccountState.fromJson(Map<String, dynamic> json) =
-      _$_MovieAccountState.fromJson;
+  factory _AccountMediaStatus.fromJson(Map<String, dynamic> json) =
+      _$_AccountMediaStatus.fromJson;
 
   @override
   int get id;
@@ -206,6 +206,6 @@ abstract class _MovieAccountState implements MovieAccountState {
   bool get watchlist;
   @override
   @JsonKey(ignore: true)
-  _$$_MovieAccountStateCopyWith<_$_MovieAccountState> get copyWith =>
+  _$$_AccountMediaStatusCopyWith<_$_AccountMediaStatus> get copyWith =>
       throw _privateConstructorUsedError;
 }

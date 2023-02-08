@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 
+import '../../account/domain/account_media_status/account_media_status.dart';
 import '../../time_window/domain/time_window.dart';
 import '../domain/i_movie_service.dart';
 import '../domain/movie.dart';
-import '../domain/movie_account_state/movie_account_state.dart';
 import '../domain/movie_details.dart';
 import '../domain/movie_list.dart';
 import '../domain/sort_by.dart';
@@ -71,7 +71,7 @@ class MovieService implements IMovieService {
   }
 
   @override
-  Future<MovieAccountState> getAccountMovieState({
+  Future<AccountMediaStatus> getAccountMovieState({
     required int id,
     required String sessionId,
   }) {
@@ -83,7 +83,7 @@ class MovieService implements IMovieService {
           },
         )
         .then((res) => Map<String, Object?>.from(res.data))
-        .then(MovieAccountState.fromJson);
+        .then(AccountMediaStatus.fromJson);
   }
 
   @override

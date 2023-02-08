@@ -1,6 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../auth/domain/user.dart';
 import '../../../auth/provider/auth_provider.dart';
 import '../../../movies/domain/movie_list.dart';
 import '../account_service_provider.dart';

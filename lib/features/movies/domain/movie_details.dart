@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../account/domain/account_media_status/account_media_status.dart';
 import '../../genre/domain/genre.dart';
-import 'movie_account_state/movie_account_state.dart';
-import 'production_company.dart';
-import 'production_country.dart';
-import 'spoken_language.dart';
+import '../../production/domain/production_company.dart';
+import '../../production/domain/production_country.dart';
+import '../../spoken_language/domain/spoken_language.dart';
 
 part 'movie_details.freezed.dart';
 part 'movie_details.g.dart';
@@ -36,7 +36,7 @@ class MovieDetails with _$MovieDetails {
     required bool video,
     required double voteAverage,
     required int voteCount,
-    required MovieAccountState? state,
+    required AccountMediaStatus? state,
   }) = _MovieDetails;
 
   factory MovieDetails.fromJson(Map<String, Object?> json) =>

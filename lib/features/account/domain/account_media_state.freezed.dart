@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'account_movies_state.dart';
+part of 'account_media_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$AccountMoviesState {
+mixin _$AccountMediaState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() success,
@@ -63,16 +63,16 @@ mixin _$AccountMoviesState {
 }
 
 /// @nodoc
-abstract class $AccountMoviesStateCopyWith<$Res> {
-  factory $AccountMoviesStateCopyWith(
-          AccountMoviesState value, $Res Function(AccountMoviesState) then) =
-      _$AccountMoviesStateCopyWithImpl<$Res, AccountMoviesState>;
+abstract class $AccountMediaStateCopyWith<$Res> {
+  factory $AccountMediaStateCopyWith(
+          AccountMediaState value, $Res Function(AccountMediaState) then) =
+      _$AccountMediaStateCopyWithImpl<$Res, AccountMediaState>;
 }
 
 /// @nodoc
-class _$AccountMoviesStateCopyWithImpl<$Res, $Val extends AccountMoviesState>
-    implements $AccountMoviesStateCopyWith<$Res> {
-  _$AccountMoviesStateCopyWithImpl(this._value, this._then);
+class _$AccountMediaStateCopyWithImpl<$Res, $Val extends AccountMediaState>
+    implements $AccountMediaStateCopyWith<$Res> {
+  _$AccountMediaStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -89,7 +89,7 @@ abstract class _$$AccountMoviesSuccessCopyWith<$Res> {
 
 /// @nodoc
 class __$$AccountMoviesSuccessCopyWithImpl<$Res>
-    extends _$AccountMoviesStateCopyWithImpl<$Res, _$AccountMoviesSuccess>
+    extends _$AccountMediaStateCopyWithImpl<$Res, _$AccountMoviesSuccess>
     implements _$$AccountMoviesSuccessCopyWith<$Res> {
   __$$AccountMoviesSuccessCopyWithImpl(_$AccountMoviesSuccess _value,
       $Res Function(_$AccountMoviesSuccess) _then)
@@ -103,7 +103,7 @@ class _$AccountMoviesSuccess implements AccountMoviesSuccess {
 
   @override
   String toString() {
-    return 'AccountMoviesState.success()';
+    return 'AccountMediaState.success()';
   }
 
   @override
@@ -184,7 +184,7 @@ class _$AccountMoviesSuccess implements AccountMoviesSuccess {
   }
 }
 
-abstract class AccountMoviesSuccess implements AccountMoviesState {
+abstract class AccountMoviesSuccess implements AccountMediaState {
   const factory AccountMoviesSuccess() = _$AccountMoviesSuccess;
 }
 
@@ -197,7 +197,7 @@ abstract class _$$AccountMoviesLoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$$AccountMoviesLoadingCopyWithImpl<$Res>
-    extends _$AccountMoviesStateCopyWithImpl<$Res, _$AccountMoviesLoading>
+    extends _$AccountMediaStateCopyWithImpl<$Res, _$AccountMoviesLoading>
     implements _$$AccountMoviesLoadingCopyWith<$Res> {
   __$$AccountMoviesLoadingCopyWithImpl(_$AccountMoviesLoading _value,
       $Res Function(_$AccountMoviesLoading) _then)
@@ -211,7 +211,7 @@ class _$AccountMoviesLoading implements AccountMoviesLoading {
 
   @override
   String toString() {
-    return 'AccountMoviesState.loading()';
+    return 'AccountMediaState.loading()';
   }
 
   @override
@@ -292,7 +292,7 @@ class _$AccountMoviesLoading implements AccountMoviesLoading {
   }
 }
 
-abstract class AccountMoviesLoading implements AccountMoviesState {
+abstract class AccountMoviesLoading implements AccountMediaState {
   const factory AccountMoviesLoading() = _$AccountMoviesLoading;
 }
 
@@ -307,7 +307,7 @@ abstract class _$$AccountMoviesErrorCopyWith<$Res> {
 
 /// @nodoc
 class __$$AccountMoviesErrorCopyWithImpl<$Res>
-    extends _$AccountMoviesStateCopyWithImpl<$Res, _$AccountMoviesError>
+    extends _$AccountMediaStateCopyWithImpl<$Res, _$AccountMoviesError>
     implements _$$AccountMoviesErrorCopyWith<$Res> {
   __$$AccountMoviesErrorCopyWithImpl(
       _$AccountMoviesError _value, $Res Function(_$AccountMoviesError) _then)
@@ -341,7 +341,7 @@ class _$AccountMoviesError implements AccountMoviesError {
 
   @override
   String toString() {
-    return 'AccountMoviesState.error(error: $error, stackTrace: $stackTrace)';
+    return 'AccountMediaState.error(error: $error, stackTrace: $stackTrace)';
   }
 
   @override
@@ -434,7 +434,7 @@ class _$AccountMoviesError implements AccountMoviesError {
   }
 }
 
-abstract class AccountMoviesError implements AccountMoviesState {
+abstract class AccountMoviesError implements AccountMediaState {
   const factory AccountMoviesError(
       final Object error, final StackTrace stackTrace) = _$AccountMoviesError;
 

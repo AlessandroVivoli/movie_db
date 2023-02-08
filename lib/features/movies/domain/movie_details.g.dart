@@ -42,7 +42,7 @@ _$_MovieDetails _$$_MovieDetailsFromJson(Map<String, dynamic> json) =>
       voteCount: json['vote_count'] as int,
       state: json['state'] == null
           ? null
-          : MovieAccountState.fromJson(json['state'] as Map<String, dynamic>),
+          : AccountMediaStatus.fromJson(json['state'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_MovieDetailsToJson(_$_MovieDetails instance) =>

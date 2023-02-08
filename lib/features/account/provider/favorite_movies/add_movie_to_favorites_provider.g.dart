@@ -29,19 +29,19 @@ class _SystemHash {
   }
 }
 
-String _$FavoritesHash() => r'9ba82161bb79628dcffda123e1fe960c0bf3b75c';
+String _$FavoritesHash() => r'91a97331a7523feebb4e006866b225fc139bcfd8';
 
 /// See also [Favorites].
 final favoritesProvider =
-    AutoDisposeNotifierProvider<Favorites, AccountMoviesState>(
+    AutoDisposeNotifierProvider<Favorites, AccountMediaState>(
   Favorites.new,
   name: r'favoritesProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$FavoritesHash,
 );
-typedef FavoritesRef = AutoDisposeNotifierProviderRef<AccountMoviesState>;
+typedef FavoritesRef = AutoDisposeNotifierProviderRef<AccountMediaState>;
 
-abstract class _$Favorites extends AutoDisposeNotifier<AccountMoviesState> {
+abstract class _$Favorites extends AutoDisposeNotifier<AccountMediaState> {
   @override
-  AccountMoviesState build();
+  AccountMediaState build();
 }

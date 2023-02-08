@@ -47,7 +47,7 @@ mixin _$MovieDetails {
   bool get video => throw _privateConstructorUsedError;
   double get voteAverage => throw _privateConstructorUsedError;
   int get voteCount => throw _privateConstructorUsedError;
-  MovieAccountState? get state => throw _privateConstructorUsedError;
+  AccountMediaStatus? get state => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -86,9 +86,9 @@ abstract class $MovieDetailsCopyWith<$Res> {
       bool video,
       double voteAverage,
       int voteCount,
-      MovieAccountState? state});
+      AccountMediaStatus? state});
 
-  $MovieAccountStateCopyWith<$Res>? get state;
+  $AccountMediaStatusCopyWith<$Res>? get state;
 }
 
 /// @nodoc
@@ -230,18 +230,18 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
       state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as MovieAccountState?,
+              as AccountMediaStatus?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $MovieAccountStateCopyWith<$Res>? get state {
+  $AccountMediaStatusCopyWith<$Res>? get state {
     if (_value.state == null) {
       return null;
     }
 
-    return $MovieAccountStateCopyWith<$Res>(_value.state!, (value) {
+    return $AccountMediaStatusCopyWith<$Res>(_value.state!, (value) {
       return _then(_value.copyWith(state: value) as $Val);
     });
   }
@@ -280,10 +280,10 @@ abstract class _$$_MovieDetailsCopyWith<$Res>
       bool video,
       double voteAverage,
       int voteCount,
-      MovieAccountState? state});
+      AccountMediaStatus? state});
 
   @override
-  $MovieAccountStateCopyWith<$Res>? get state;
+  $AccountMediaStatusCopyWith<$Res>? get state;
 }
 
 /// @nodoc
@@ -423,7 +423,7 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
       state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as MovieAccountState?,
+              as AccountMediaStatus?,
     ));
   }
 }
@@ -544,7 +544,7 @@ class _$_MovieDetails implements _MovieDetails {
   @override
   final int voteCount;
   @override
-  final MovieAccountState? state;
+  final AccountMediaStatus? state;
 
   @override
   String toString() {
@@ -667,7 +667,7 @@ abstract class _MovieDetails implements MovieDetails {
       required final bool video,
       required final double voteAverage,
       required final int voteCount,
-      required final MovieAccountState? state}) = _$_MovieDetails;
+      required final AccountMediaStatus? state}) = _$_MovieDetails;
 
   factory _MovieDetails.fromJson(Map<String, dynamic> json) =
       _$_MovieDetails.fromJson;
@@ -721,7 +721,7 @@ abstract class _MovieDetails implements MovieDetails {
   @override
   int get voteCount;
   @override
-  MovieAccountState? get state;
+  AccountMediaStatus? get state;
   @override
   @JsonKey(ignore: true)
   _$$_MovieDetailsCopyWith<_$_MovieDetails> get copyWith =>

@@ -1,6 +1,6 @@
+import '../../account/domain/account_media_status/account_media_status.dart';
 import '../../time_window/domain/time_window.dart';
 import 'movie.dart';
-import 'movie_account_state/movie_account_state.dart';
 import 'movie_details.dart';
 import 'movie_list.dart';
 import 'sort_by.dart';
@@ -40,8 +40,8 @@ abstract class IMovieService {
   /// Returns similar [List] of [Movie] using the provided movie [id]
   Future<List<Movie>> getSimilarMovies({required int id});
 
-  /// Returns the [MovieAccountState] of movie using the movie [id] and [sessionId]
-  Future<MovieAccountState> getAccountMovieState({
+  /// Returns the [AccountMediaStatus] of movie using the movie [id] and [sessionId]
+  Future<AccountMediaStatus> getAccountMovieState({
     required int id,
     required String sessionId,
   });
