@@ -43,4 +43,9 @@ ThemeData mainTheme = ThemeData(
   drawerTheme: const DrawerThemeData(
     backgroundColor: Color.fromARGB(255, 17, 25, 37),
   ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: const Color.fromARGB(255, 16, 28, 41),
+    selectedItemColor: const Color.fromARGB(255, 217, 176, 22),
+    unselectedItemColor: Colors.grey.shade700,
+  ),
 );
