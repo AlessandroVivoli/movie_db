@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../../../../features/movies/domain/movie_account_state/rate/movie_rate.dart';
+import '../../../../../../../features/rated/domain/rated.dart';
 import 'widgets/rating_dialog.dart';
 
 class RateButton extends HookWidget {
@@ -12,7 +12,7 @@ class RateButton extends HookWidget {
     required this.movieId,
   });
 
-  final MovieRate rate;
+  final Rated rate;
   final int movieId;
 
   @override

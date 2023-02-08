@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../features/movies/domain/movie_account_state/rate/movie_rate.dart';
 import '../../../../../features/movies/domain/movie_details.dart';
+import '../../../../../features/rated/domain/rated.dart';
 import 'widgets/favorite_button.dart';
 import 'widgets/rate_button/rate_button.dart';
 import 'widgets/watchlist_button.dart';
@@ -28,8 +28,8 @@ class MovieAccountActions extends StatelessWidget {
         children: [
           RateButton(
             rate: (movieDetails.state!.rated is bool)
-                ? const MovieRate(value: 0)
-                : MovieRate.fromJson(rated),
+                ? const Rated(value: 0)
+                : Rated.fromJson(rated),
             movieId: movieDetails.id,
           ),
           Row(
