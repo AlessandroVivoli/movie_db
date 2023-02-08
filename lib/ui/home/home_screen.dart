@@ -10,17 +10,20 @@ import '../../core/widgets/carousel/movie_carousel/movie_carousel.dart';
 import '../../core/widgets/errors/error_text.dart';
 import '../../core/widgets/genre_tab/genre_tab.dart';
 import '../../core/widgets/search/custom_search_delegate.dart';
+import '../../features/genre/provider/get_genres_provider.dart';
+import '../../features/movies/provider/get_top_rated_movies_provider.dart';
 import '../../features/movies/provider/get_trending_movies_provider.dart';
+import '../../features/person/provider/get_trending_persons_provider.dart';
 import '../../features/time_window/domain/time_window.dart';
 import 'home_wrapper/home_wrapper.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key, required this.title});
 
   final String title;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
     return SafeArea(
@@ -36,18 +39,28 @@ class HomeScreen extends StatelessWidget {
             },
           ),
         ),
-        body: CustomScrollView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          slivers: [
-            _AppBar(title: title),
-            const SliverToBoxAdapter(
-              child: LimitedBox(
-                maxHeight: 300,
-                child: GenreTab(),
+        body: RefreshIndicator(
+          onRefresh: () {
+            return Future(() {
+              ref.invalidate(getTrendingMoviesProvider);
+              ref.invalidate(getGenresProvider);
+              ref.invalidate(getTrendingPersonsProvider);
+              ref.invalidate(getTopRatedMoviesProvider);
+            });
+          },
+          child: CustomScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            slivers: [
+              _AppBar(title: title),
+              const SliverToBoxAdapter(
+                child: LimitedBox(
+                  maxHeight: 300,
+                  child: GenreTab(),
+                ),
               ),
-            ),
-            const SliverToBoxAdapter(child: HomeWrapper()),
-          ],
+              const SliverToBoxAdapter(child: HomeWrapper()),
+            ],
+          ),
         ),
       ),
     );

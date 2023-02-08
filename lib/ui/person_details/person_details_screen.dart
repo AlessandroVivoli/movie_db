@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/extensions/build_context_extensions.dart';
 import '../../core/widgets/errors/error_text.dart';
+import '../../features/person/provider/get_person_credits_provider.dart';
 import '../../features/person/provider/get_person_details_provider.dart';
 import 'person_details_body/person_details_body.dart';
 
@@ -37,7 +38,12 @@ class _PersonDetailsBodyBuilder extends ConsumerWidget {
     final localization = AppLocalizations.of(context)!;
 
     return personDetails.when(
-      data: (details) => PersonDetailsBody(personDetails: details),
+      data: (details) => RefreshIndicator(
+          onRefresh: () => Future(() {
+                ref.invalidate(getPersonDetailsProvider(personId));
+                ref.invalidate(getPersonCreditsProvider(personId));
+              }),
+          child: PersonDetailsBody(personDetails: details)),
       error: (error, stackTrace) {
         context.showErrorSnackBar(localization.getPersonDetailsError);
 

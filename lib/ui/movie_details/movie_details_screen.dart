@@ -8,6 +8,8 @@ import '../../core/extensions/build_context_extensions.dart';
 import '../../core/widgets/errors/error_text.dart';
 import '../../features/movies/domain/movie_details.dart';
 import '../../features/movies/provider/get_movie_details_provider.dart';
+import '../../features/movies/provider/get_similar_movies_provider.dart';
+import '../../features/person/provider/get_cast_provider.dart';
 import 'backdrop/backdrop.dart';
 import 'movie_details_wrapper/movie_details_wrapper.dart';
 import 'play_button/play_button.dart';
@@ -47,7 +49,13 @@ class _MovieDetailsWrapper extends ConsumerWidget {
     final localization = AppLocalizations.of(context)!;
 
     return movieDetails.when(
-      data: (details) => _MovieDetailsBody(details: details),
+      data: (details) => RefreshIndicator(
+          onRefresh: () => Future(() {
+                ref.invalidate(getMovieDetailsProvider(movieId));
+                ref.invalidate(getCastProvider(movieId));
+                ref.invalidate(getSimilarMoviesProvider(movieId));
+              }),
+          child: _MovieDetailsBody(details: details)),
       error: (error, stackTrace) {
         context.showErrorSnackBar(localization.getMovieDetailsError);
 

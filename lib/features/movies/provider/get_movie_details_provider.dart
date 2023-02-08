@@ -13,9 +13,9 @@ Future<MovieDetails> getMovieDetails(GetMovieDetailsRef ref, int movieId) {
   final movieService = ref.watch(movieServiceProvider);
 
   return _getMovieState(ref, movieService, movieId).then(
-    (movieState) => movieService
-        .getMovieDetails(id: movieId)
-        .then((movieDetails) => movieDetails.copyWith(state: movieState)),
+    (movieState) => movieService.getMovieDetails(id: movieId).then(
+          (movieDetails) => movieDetails.copyWith(state: movieState),
+        ),
   );
 }
 
