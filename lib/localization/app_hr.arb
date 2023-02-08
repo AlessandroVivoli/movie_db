@@ -74,8 +74,8 @@
   "personCreditsLabel": "Zasluge",
   "personDepartmentLabel": "Poznat po",
   "personLifetimeLabel": "Godište",
-  "translateGenres": "{value, select, Action{Akcija} Adventure{Avantura} Animation{Animirani} Comedy{Komedija} Crime{Kriminalni} Documentary{Documentarac} Family{Obiteljski} Fantasy{Fantazija} History{Povijesni} Horror{Horor} Music{Glazbeni} Mistery{Misterij} Romance{Romantički} ScienceFiction{Znanstvena Fantastika} TVMovie{TV Film} Thriller{Triler} War{Ratni} other{{value}}}",
-  "@translateGenres": {
+  "translateMovieGenres": "{value, select, Action{Akcija} Adventure{Avantura} Animation{Animirani} Comedy{Komedija} Crime{Kriminalni} Documentary{Documentarac} Family{Obiteljski} Fantasy{Fantazija} History{Povijesni} Horror{Horor} Music{Glazbeni} Mistery{Misterij} Romance{Romantički} ScienceFiction{Znanstvena Fantastika} TVMovie{TV Film} Thriller{Triler} War{Ratni} other{{value}}}",
+  "@translateMovieGenres": {
     "placeholders": {
       "value": {
         "type": "String"
@@ -89,5 +89,9 @@
         "type": "String"
       }
     }
-  }
+  },
+  "noMovieGenres": "Nije pronađen nijedan filmski žanr.",
+  "getMovieGenresError": "Nije moguće dobiti filmske žanrove",
+  "noTVGenres": "Nije pronađen nijedan tv žanr.",
+  "getTVGenresError": "Nije moguće dobiti tv žanrove"
 }

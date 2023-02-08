@@ -166,8 +166,8 @@
   "personDepartmentLabel": "Known for",
   "personLifetimeLabel": "Lifetime",
   "noBiography": "No biography",
-  "translateGenres": "{value, select, ScienceFiction{Science Fiction} TVMovie{TV Movie} other{{value}}}",
-  "@translateGenres": {
+  "translateMovieGenres": "{value, select, ScienceFiction{Science Fiction} TVMovie{TV Movie} other{{value}}}",
+  "@translateMovieGenres": {
     "description": "Genres based on locale",
     "placeholders": {
       "value": {
@@ -184,5 +184,21 @@
         "type": "String"
       }
     }
+  },
+  "noMovieGenres": "No movie genres found.",
+  "@noMovieGenres": {
+    "description": "Indicating that no movie genre was found when fetching movie genres."
+  },
+  "getMovieGenresError": "Could not get movie genres",
+  "@getMovieGenresError": {
+    "description": "Indicating an error that was thrown while fetching movie genres."
+  },
+  "noTVGenres": "No tv genres found.",
+  "@noTVGenres": {
+    "description": "Indicating that no tv genre was found when fetching tv genres."
+  },
+  "getTVGenresError": "Could not get tv genres",
+  "@getTVGenresError": {
+    "description": "Indicating an error that was thrown while fetching tv genres."
   }
 }
