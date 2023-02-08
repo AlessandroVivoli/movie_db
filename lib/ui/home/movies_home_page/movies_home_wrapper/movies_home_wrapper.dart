@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../trending_persons_section.dart';
 import 'widgets/top_rated_movies_section.dart';
-import 'widgets/trending_persons_section.dart';
 
-class HomeWrapper extends StatelessWidget {
-  const HomeWrapper({
+class MoviesHomeWrapper extends StatelessWidget {
+  const MoviesHomeWrapper({
     super.key,
   });
 
