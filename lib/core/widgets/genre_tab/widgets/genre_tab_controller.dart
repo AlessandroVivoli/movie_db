@@ -30,7 +30,7 @@ class GenreTabController extends ConsumerWidget {
               (index) {
                 return Tab(
                   child: Text(
-                    localization.translateGenres(
+                    localization.translateMovieGenres(
                       data[index].name.replaceAll(' ', ''),
                     ),
                   ),
