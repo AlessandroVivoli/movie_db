@@ -20,7 +20,7 @@ AccountMediaStatus _$AccountMediaStatusFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AccountMediaStatus {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   bool get favorite => throw _privateConstructorUsedError;
   dynamic get rated => throw _privateConstructorUsedError;
   bool get watchlist => throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ abstract class $AccountMediaStatusCopyWith<$Res> {
           AccountMediaStatus value, $Res Function(AccountMediaStatus) then) =
       _$AccountMediaStatusCopyWithImpl<$Res, AccountMediaStatus>;
   @useResult
-  $Res call({int id, bool favorite, dynamic rated, bool watchlist});
+  $Res call({int? id, bool favorite, dynamic rated, bool watchlist});
 }
 
 /// @nodoc
@@ -53,16 +53,16 @@ class _$AccountMediaStatusCopyWithImpl<$Res, $Val extends AccountMediaStatus>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? favorite = null,
     Object? rated = freezed,
     Object? watchlist = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       favorite: null == favorite
           ? _value.favorite
           : favorite // ignore: cast_nullable_to_non_nullable
@@ -87,7 +87,7 @@ abstract class _$$_AccountMediaStatusCopyWith<$Res>
       __$$_AccountMediaStatusCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, bool favorite, dynamic rated, bool watchlist});
+  $Res call({int? id, bool favorite, dynamic rated, bool watchlist});
 }
 
 /// @nodoc
@@ -101,16 +101,16 @@ class __$$_AccountMediaStatusCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? favorite = null,
     Object? rated = freezed,
     Object? watchlist = null,
   }) {
     return _then(_$_AccountMediaStatus(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       favorite: null == favorite
           ? _value.favorite
           : favorite // ignore: cast_nullable_to_non_nullable
@@ -140,7 +140,7 @@ class _$_AccountMediaStatus implements _AccountMediaStatus {
       _$$_AccountMediaStatusFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final bool favorite;
   @override
@@ -188,7 +188,7 @@ class _$_AccountMediaStatus implements _AccountMediaStatus {
 
 abstract class _AccountMediaStatus implements AccountMediaStatus {
   const factory _AccountMediaStatus(
-      {required final int id,
+      {required final int? id,
       required final bool favorite,
       required final dynamic rated,
       required final bool watchlist}) = _$_AccountMediaStatus;
@@ -197,7 +197,7 @@ abstract class _AccountMediaStatus implements AccountMediaStatus {
       _$_AccountMediaStatus.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   bool get favorite;
   @override

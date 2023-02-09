@@ -6,7 +6,7 @@ part 'account_media_status.g.dart';
 @freezed
 class AccountMediaStatus with _$AccountMediaStatus {
   const factory AccountMediaStatus({
-    required int id,
+    required int? id,
     required bool favorite,
     required dynamic rated,
     required bool watchlist,

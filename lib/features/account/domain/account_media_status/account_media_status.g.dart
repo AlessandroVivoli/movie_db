@@ -9,7 +9,7 @@ part of 'account_media_status.dart';
 _$_AccountMediaStatus _$$_AccountMediaStatusFromJson(
         Map<String, dynamic> json) =>
     _$_AccountMediaStatus(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       favorite: json['favorite'] as bool,
       rated: json['rated'],
       watchlist: json['watchlist'] as bool,
