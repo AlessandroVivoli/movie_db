@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 class Rating extends StatelessWidget {
   final double rating;
-  final double? padding;
-  final double? size;
+  final double padding;
+  final double size;
   final MainAxisAlignment? alignment;
-  final int? digits;
+  final int digits;
+  final bool showNum;
 
   final void Function(int index)? onRate;
 
@@ -16,6 +17,7 @@ class Rating extends StatelessWidget {
     this.size = 10,
     this.alignment = MainAxisAlignment.center,
     this.digits = 1,
+    this.showNum = true,
     this.onRate,
   });
 
@@ -26,7 +28,7 @@ class Rating extends StatelessWidget {
     final goldenStars = List<Widget>.generate(
       starRating.floor(),
       (index) => Padding(
-        padding: EdgeInsets.symmetric(horizontal: padding!),
+        padding: EdgeInsets.symmetric(horizontal: padding),
         child: Icon(
           Icons.star,
           size: size,
@@ -38,7 +40,7 @@ class Rating extends StatelessWidget {
     if (starRating - starRating.floor() > 0) {
       goldenStars.add(
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: padding!),
+          padding: EdgeInsets.symmetric(horizontal: padding),
           child: ClipRect(
             clipBehavior: Clip.hardEdge,
             child: Align(
@@ -61,14 +63,15 @@ class Rating extends StatelessWidget {
       child: Row(
         mainAxisAlignment: alignment!,
         children: [
-          SizedBox(
-            width: 30 + (digits! - 1) * 5,
-            child: Text(
-              rating
-                  .toStringAsFixed(digits!)
-                  .replaceFirst(RegExp(r'(?<=)\.0+'), ''),
+          if (showNum)
+            SizedBox(
+              width: 30 + (digits - 1) * 5,
+              child: Text(
+                rating
+                    .toStringAsFixed(digits)
+                    .replaceFirst(RegExp(r'(?<=)\.0+'), ''),
+              ),
             ),
-          ),
           Stack(
             children: [
               Row(
@@ -77,7 +80,7 @@ class Rating extends StatelessWidget {
                 children: List<Widget>.generate(
                   5,
                   (index) => Padding(
-                    padding: EdgeInsets.symmetric(horizontal: padding!),
+                    padding: EdgeInsets.symmetric(horizontal: padding),
                     child: Icon(
                       Icons.star,
                       size: size,
@@ -103,7 +106,7 @@ class Rating extends StatelessWidget {
                     },
                     child: SizedBox(
                       height: size,
-                      width: size! + padding! * 2,
+                      width: size + padding * 2,
                     ),
                   ),
                 ),
