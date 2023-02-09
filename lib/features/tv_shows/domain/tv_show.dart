@@ -6,7 +6,6 @@ part 'tv_show.freezed.dart';
 part 'tv_show.g.dart';
 
 @freezed
-@DateTimeConverter()
 class TVShow with _$TVShow {
   const factory TVShow({
     required String? posterPath,
@@ -15,7 +14,7 @@ class TVShow with _$TVShow {
     required String? backdropPath,
     required double voteAverage,
     required String overview,
-    required DateTime? firstAirDate,
+    @DateTimeConverter() required DateTime? firstAirDate,
     required List<String> originCountry,
     required List<int> genreIds,
     required int voteCount,

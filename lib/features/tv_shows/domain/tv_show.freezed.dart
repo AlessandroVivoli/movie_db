@@ -26,6 +26,7 @@ mixin _$TVShow {
   String? get backdropPath => throw _privateConstructorUsedError;
   double get voteAverage => throw _privateConstructorUsedError;
   String get overview => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime? get firstAirDate => throw _privateConstructorUsedError;
   List<String> get originCountry => throw _privateConstructorUsedError;
   List<int> get genreIds => throw _privateConstructorUsedError;
@@ -50,7 +51,7 @@ abstract class $TVShowCopyWith<$Res> {
       String? backdropPath,
       double voteAverage,
       String overview,
-      DateTime? firstAirDate,
+      @DateTimeConverter() DateTime? firstAirDate,
       List<String> originCountry,
       List<int> genreIds,
       int voteCount,
@@ -150,7 +151,7 @@ abstract class _$$_TVShowCopyWith<$Res> implements $TVShowCopyWith<$Res> {
       String? backdropPath,
       double voteAverage,
       String overview,
-      DateTime? firstAirDate,
+      @DateTimeConverter() DateTime? firstAirDate,
       List<String> originCountry,
       List<int> genreIds,
       int voteCount,
@@ -244,7 +245,7 @@ class _$_TVShow implements _TVShow {
       required this.backdropPath,
       required this.voteAverage,
       required this.overview,
-      required this.firstAirDate,
+      @DateTimeConverter() required this.firstAirDate,
       required final List<String> originCountry,
       required final List<int> genreIds,
       required this.voteCount,
@@ -269,6 +270,7 @@ class _$_TVShow implements _TVShow {
   @override
   final String overview;
   @override
+  @DateTimeConverter()
   final DateTime? firstAirDate;
   final List<String> _originCountry;
   @override
@@ -365,7 +367,7 @@ abstract class _TVShow implements TVShow {
       required final String? backdropPath,
       required final double voteAverage,
       required final String overview,
-      required final DateTime? firstAirDate,
+      @DateTimeConverter() required final DateTime? firstAirDate,
       required final List<String> originCountry,
       required final List<int> genreIds,
       required final int voteCount,
@@ -387,6 +389,7 @@ abstract class _TVShow implements TVShow {
   @override
   String get overview;
   @override
+  @DateTimeConverter()
   DateTime? get firstAirDate;
   @override
   List<String> get originCountry;

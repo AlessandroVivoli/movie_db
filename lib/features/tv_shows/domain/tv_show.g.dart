@@ -13,9 +13,8 @@ _$_TVShow _$$_TVShowFromJson(Map<String, dynamic> json) => _$_TVShow(
       backdropPath: json['backdrop_path'] as String?,
       voteAverage: (json['vote_average'] as num).toDouble(),
       overview: json['overview'] as String,
-      firstAirDate: json['first_air_date'] == null
-          ? null
-          : DateTime.parse(json['first_air_date'] as String),
+      firstAirDate: _$JsonConverterFromJson<String, DateTime?>(
+          json['first_air_date'], const DateTimeConverter().fromJson),
       originCountry: (json['origin_country'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -33,10 +32,16 @@ Map<String, dynamic> _$$_TVShowToJson(_$_TVShow instance) => <String, dynamic>{
       'backdrop_path': instance.backdropPath,
       'vote_average': instance.voteAverage,
       'overview': instance.overview,
-      'first_air_date': instance.firstAirDate?.toIso8601String(),
+      'first_air_date': const DateTimeConverter().toJson(instance.firstAirDate),
       'origin_country': instance.originCountry,
       'genre_ids': instance.genreIds,
       'vote_count': instance.voteCount,
       'name': instance.name,
       'original_name': instance.originalName,
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
