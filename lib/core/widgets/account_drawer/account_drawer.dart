@@ -43,7 +43,9 @@ class AccountDrawer extends HookConsumerWidget {
         );
       },
       loggedOut: () {
-        widget.value = const LoggedOutDrawerView();
+        widget.value = LoggedOutDrawerView(
+          onLogin: (onLogin != null) ? onLogin : null,
+        );
       },
     );
 
