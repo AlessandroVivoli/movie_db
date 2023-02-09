@@ -5,6 +5,7 @@ import '../../genre/domain/genre.dart';
 import '../../networks/domain/network.dart';
 import '../../production/domain/production_company.dart';
 import '../../production/domain/production_country.dart';
+import '../../reviews/domain/review_list_model.dart';
 import '../../spoken_language/domain/spoken_language.dart';
 import 'episodes/tv_episode.dart';
 import 'seasons/tv_season.dart';
@@ -14,19 +15,18 @@ part 'tv_show_details.freezed.dart';
 part 'tv_show_details.g.dart';
 
 @freezed
-@DateTimeConverter()
 class TVShowDetails with _$TVShowDetails {
   const factory TVShowDetails({
     required String? backdropPath,
     required List<TVShowCreator> createdBy,
     required List<int> episodeRunTime,
-    required DateTime? firstAirDate,
+    @DateTimeConverter() required DateTime? firstAirDate,
     required List<Genre> genres,
     required String homepage,
     required int id,
     required bool inProduction,
     required List<String> languages,
-    required DateTime? lastAirDate,
+    @DateTimeConverter() required DateTime? lastAirDate,
     required TVEpisode lastEpisodeToAir,
     required String name,
     required TVEpisode? nextEpisodeToAir,
@@ -48,6 +48,7 @@ class TVShowDetails with _$TVShowDetails {
     required String type,
     required double voteAverage,
     required int voteCount,
+    required ReviewListModel reviews,
   }) = _TVShowDetails;
 
   factory TVShowDetails.fromJson(Map<String, Object?> json) =>

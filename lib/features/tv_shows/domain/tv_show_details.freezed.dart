@@ -23,12 +23,14 @@ mixin _$TVShowDetails {
   String? get backdropPath => throw _privateConstructorUsedError;
   List<TVShowCreator> get createdBy => throw _privateConstructorUsedError;
   List<int> get episodeRunTime => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime? get firstAirDate => throw _privateConstructorUsedError;
   List<Genre> get genres => throw _privateConstructorUsedError;
   String get homepage => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   bool get inProduction => throw _privateConstructorUsedError;
   List<String> get languages => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime? get lastAirDate => throw _privateConstructorUsedError;
   TVEpisode get lastEpisodeToAir => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
@@ -54,6 +56,7 @@ mixin _$TVShowDetails {
   String get type => throw _privateConstructorUsedError;
   double get voteAverage => throw _privateConstructorUsedError;
   int get voteCount => throw _privateConstructorUsedError;
+  ReviewListModel get reviews => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -71,13 +74,13 @@ abstract class $TVShowDetailsCopyWith<$Res> {
       {String? backdropPath,
       List<TVShowCreator> createdBy,
       List<int> episodeRunTime,
-      DateTime? firstAirDate,
+      @DateTimeConverter() DateTime? firstAirDate,
       List<Genre> genres,
       String homepage,
       int id,
       bool inProduction,
       List<String> languages,
-      DateTime? lastAirDate,
+      @DateTimeConverter() DateTime? lastAirDate,
       TVEpisode lastEpisodeToAir,
       String name,
       TVEpisode? nextEpisodeToAir,
@@ -98,10 +101,12 @@ abstract class $TVShowDetailsCopyWith<$Res> {
       String tagline,
       String type,
       double voteAverage,
-      int voteCount});
+      int voteCount,
+      ReviewListModel reviews});
 
   $TVEpisodeCopyWith<$Res> get lastEpisodeToAir;
   $TVEpisodeCopyWith<$Res>? get nextEpisodeToAir;
+  $ReviewListModelCopyWith<$Res> get reviews;
 }
 
 /// @nodoc
@@ -148,6 +153,7 @@ class _$TVShowDetailsCopyWithImpl<$Res, $Val extends TVShowDetails>
     Object? type = null,
     Object? voteAverage = null,
     Object? voteCount = null,
+    Object? reviews = null,
   }) {
     return _then(_value.copyWith(
       backdropPath: freezed == backdropPath
@@ -274,6 +280,10 @@ class _$TVShowDetailsCopyWithImpl<$Res, $Val extends TVShowDetails>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int,
+      reviews: null == reviews
+          ? _value.reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as ReviewListModel,
     ) as $Val);
   }
 
@@ -296,6 +306,14 @@ class _$TVShowDetailsCopyWithImpl<$Res, $Val extends TVShowDetails>
       return _then(_value.copyWith(nextEpisodeToAir: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReviewListModelCopyWith<$Res> get reviews {
+    return $ReviewListModelCopyWith<$Res>(_value.reviews, (value) {
+      return _then(_value.copyWith(reviews: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -310,13 +328,13 @@ abstract class _$$_TVShowDetailsCopyWith<$Res>
       {String? backdropPath,
       List<TVShowCreator> createdBy,
       List<int> episodeRunTime,
-      DateTime? firstAirDate,
+      @DateTimeConverter() DateTime? firstAirDate,
       List<Genre> genres,
       String homepage,
       int id,
       bool inProduction,
       List<String> languages,
-      DateTime? lastAirDate,
+      @DateTimeConverter() DateTime? lastAirDate,
       TVEpisode lastEpisodeToAir,
       String name,
       TVEpisode? nextEpisodeToAir,
@@ -337,12 +355,15 @@ abstract class _$$_TVShowDetailsCopyWith<$Res>
       String tagline,
       String type,
       double voteAverage,
-      int voteCount});
+      int voteCount,
+      ReviewListModel reviews});
 
   @override
   $TVEpisodeCopyWith<$Res> get lastEpisodeToAir;
   @override
   $TVEpisodeCopyWith<$Res>? get nextEpisodeToAir;
+  @override
+  $ReviewListModelCopyWith<$Res> get reviews;
 }
 
 /// @nodoc
@@ -387,6 +408,7 @@ class __$$_TVShowDetailsCopyWithImpl<$Res>
     Object? type = null,
     Object? voteAverage = null,
     Object? voteCount = null,
+    Object? reviews = null,
   }) {
     return _then(_$_TVShowDetails(
       backdropPath: freezed == backdropPath
@@ -513,6 +535,10 @@ class __$$_TVShowDetailsCopyWithImpl<$Res>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int,
+      reviews: null == reviews
+          ? _value.reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as ReviewListModel,
     ));
   }
 }
@@ -524,13 +550,13 @@ class _$_TVShowDetails implements _TVShowDetails {
       {required this.backdropPath,
       required final List<TVShowCreator> createdBy,
       required final List<int> episodeRunTime,
-      required this.firstAirDate,
+      @DateTimeConverter() required this.firstAirDate,
       required final List<Genre> genres,
       required this.homepage,
       required this.id,
       required this.inProduction,
       required final List<String> languages,
-      required this.lastAirDate,
+      @DateTimeConverter() required this.lastAirDate,
       required this.lastEpisodeToAir,
       required this.name,
       required this.nextEpisodeToAir,
@@ -551,7 +577,8 @@ class _$_TVShowDetails implements _TVShowDetails {
       required this.tagline,
       required this.type,
       required this.voteAverage,
-      required this.voteCount})
+      required this.voteCount,
+      required this.reviews})
       : _createdBy = createdBy,
         _episodeRunTime = episodeRunTime,
         _genres = genres,
@@ -585,6 +612,7 @@ class _$_TVShowDetails implements _TVShowDetails {
   }
 
   @override
+  @DateTimeConverter()
   final DateTime? firstAirDate;
   final List<Genre> _genres;
   @override
@@ -609,6 +637,7 @@ class _$_TVShowDetails implements _TVShowDetails {
   }
 
   @override
+  @DateTimeConverter()
   final DateTime? lastAirDate;
   @override
   final TVEpisode lastEpisodeToAir;
@@ -690,10 +719,12 @@ class _$_TVShowDetails implements _TVShowDetails {
   final double voteAverage;
   @override
   final int voteCount;
+  @override
+  final ReviewListModel reviews;
 
   @override
   String toString() {
-    return 'TVShowDetails(backdropPath: $backdropPath, createdBy: $createdBy, episodeRunTime: $episodeRunTime, firstAirDate: $firstAirDate, genres: $genres, homepage: $homepage, id: $id, inProduction: $inProduction, languages: $languages, lastAirDate: $lastAirDate, lastEpisodeToAir: $lastEpisodeToAir, name: $name, nextEpisodeToAir: $nextEpisodeToAir, networks: $networks, numberOfEpisodes: $numberOfEpisodes, numberOfSeasons: $numberOfSeasons, originCountry: $originCountry, orignalLanguage: $orignalLanguage, originalName: $originalName, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, productionCountries: $productionCountries, seasons: $seasons, spokenLanguages: $spokenLanguages, status: $status, tagline: $tagline, type: $type, voteAverage: $voteAverage, voteCount: $voteCount)';
+    return 'TVShowDetails(backdropPath: $backdropPath, createdBy: $createdBy, episodeRunTime: $episodeRunTime, firstAirDate: $firstAirDate, genres: $genres, homepage: $homepage, id: $id, inProduction: $inProduction, languages: $languages, lastAirDate: $lastAirDate, lastEpisodeToAir: $lastEpisodeToAir, name: $name, nextEpisodeToAir: $nextEpisodeToAir, networks: $networks, numberOfEpisodes: $numberOfEpisodes, numberOfSeasons: $numberOfSeasons, originCountry: $originCountry, orignalLanguage: $orignalLanguage, originalName: $originalName, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, productionCountries: $productionCountries, seasons: $seasons, spokenLanguages: $spokenLanguages, status: $status, tagline: $tagline, type: $type, voteAverage: $voteAverage, voteCount: $voteCount, reviews: $reviews)';
   }
 
   @override
@@ -754,7 +785,8 @@ class _$_TVShowDetails implements _TVShowDetails {
             (identical(other.voteAverage, voteAverage) ||
                 other.voteAverage == voteAverage) &&
             (identical(other.voteCount, voteCount) ||
-                other.voteCount == voteCount));
+                other.voteCount == voteCount) &&
+            (identical(other.reviews, reviews) || other.reviews == reviews));
   }
 
   @JsonKey(ignore: true)
@@ -791,7 +823,8 @@ class _$_TVShowDetails implements _TVShowDetails {
         tagline,
         type,
         voteAverage,
-        voteCount
+        voteCount,
+        reviews
       ]);
 
   @JsonKey(ignore: true)
@@ -813,13 +846,13 @@ abstract class _TVShowDetails implements TVShowDetails {
       {required final String? backdropPath,
       required final List<TVShowCreator> createdBy,
       required final List<int> episodeRunTime,
-      required final DateTime? firstAirDate,
+      @DateTimeConverter() required final DateTime? firstAirDate,
       required final List<Genre> genres,
       required final String homepage,
       required final int id,
       required final bool inProduction,
       required final List<String> languages,
-      required final DateTime? lastAirDate,
+      @DateTimeConverter() required final DateTime? lastAirDate,
       required final TVEpisode lastEpisodeToAir,
       required final String name,
       required final TVEpisode? nextEpisodeToAir,
@@ -840,7 +873,8 @@ abstract class _TVShowDetails implements TVShowDetails {
       required final String tagline,
       required final String type,
       required final double voteAverage,
-      required final int voteCount}) = _$_TVShowDetails;
+      required final int voteCount,
+      required final ReviewListModel reviews}) = _$_TVShowDetails;
 
   factory _TVShowDetails.fromJson(Map<String, dynamic> json) =
       _$_TVShowDetails.fromJson;
@@ -852,6 +886,7 @@ abstract class _TVShowDetails implements TVShowDetails {
   @override
   List<int> get episodeRunTime;
   @override
+  @DateTimeConverter()
   DateTime? get firstAirDate;
   @override
   List<Genre> get genres;
@@ -864,6 +899,7 @@ abstract class _TVShowDetails implements TVShowDetails {
   @override
   List<String> get languages;
   @override
+  @DateTimeConverter()
   DateTime? get lastAirDate;
   @override
   TVEpisode get lastEpisodeToAir;
@@ -907,6 +943,8 @@ abstract class _TVShowDetails implements TVShowDetails {
   double get voteAverage;
   @override
   int get voteCount;
+  @override
+  ReviewListModel get reviews;
   @override
   @JsonKey(ignore: true)
   _$$_TVShowDetailsCopyWith<_$_TVShowDetails> get copyWith =>

@@ -15,9 +15,8 @@ _$_TVShowDetails _$$_TVShowDetailsFromJson(Map<String, dynamic> json) =>
       episodeRunTime: (json['episode_run_time'] as List<dynamic>)
           .map((e) => e as int)
           .toList(),
-      firstAirDate: json['first_air_date'] == null
-          ? null
-          : DateTime.parse(json['first_air_date'] as String),
+      firstAirDate: _$JsonConverterFromJson<String, DateTime?>(
+          json['first_air_date'], const DateTimeConverter().fromJson),
       genres: (json['genres'] as List<dynamic>)
           .map((e) => Genre.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -26,9 +25,8 @@ _$_TVShowDetails _$$_TVShowDetailsFromJson(Map<String, dynamic> json) =>
       inProduction: json['in_production'] as bool,
       languages:
           (json['languages'] as List<dynamic>).map((e) => e as String).toList(),
-      lastAirDate: json['last_air_date'] == null
-          ? null
-          : DateTime.parse(json['last_air_date'] as String),
+      lastAirDate: _$JsonConverterFromJson<String, DateTime?>(
+          json['last_air_date'], const DateTimeConverter().fromJson),
       lastEpisodeToAir: TVEpisode.fromJson(
           json['last_episode_to_air'] as Map<String, dynamic>),
       name: json['name'] as String,
@@ -66,6 +64,8 @@ _$_TVShowDetails _$$_TVShowDetailsFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String,
       voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int,
+      reviews:
+          ReviewListModel.fromJson(json['reviews'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_TVShowDetailsToJson(_$_TVShowDetails instance) =>
@@ -73,13 +73,13 @@ Map<String, dynamic> _$$_TVShowDetailsToJson(_$_TVShowDetails instance) =>
       'backdrop_path': instance.backdropPath,
       'created_by': instance.createdBy.map((e) => e.toJson()).toList(),
       'episode_run_time': instance.episodeRunTime,
-      'first_air_date': instance.firstAirDate?.toIso8601String(),
+      'first_air_date': const DateTimeConverter().toJson(instance.firstAirDate),
       'genres': instance.genres.map((e) => e.toJson()).toList(),
       'homepage': instance.homepage,
       'id': instance.id,
       'in_production': instance.inProduction,
       'languages': instance.languages,
-      'last_air_date': instance.lastAirDate?.toIso8601String(),
+      'last_air_date': const DateTimeConverter().toJson(instance.lastAirDate),
       'last_episode_to_air': instance.lastEpisodeToAir.toJson(),
       'name': instance.name,
       'next_episode_to_air': instance.nextEpisodeToAir?.toJson(),
@@ -104,4 +104,11 @@ Map<String, dynamic> _$$_TVShowDetailsToJson(_$_TVShowDetails instance) =>
       'type': instance.type,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
+      'reviews': instance.reviews.toJson(),
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
