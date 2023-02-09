@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/errors/invalid_user_error.dart';
-import '../../account/provider/account_service_provider.dart';
 import '../../local_storage/provider/local_storage_provider.dart';
 import '../domain/auth_state.dart';
 import '../domain/user.dart';
@@ -26,7 +25,7 @@ class Auth extends _$Auth {
     state = const AuthState.loading();
 
     state = await ref
-        .read(accountServiceProvider)
+        .read(authServiceProvider)
         .getAccountDetails(sessionId: sessionId)
         .then(
           (details) => AuthState.loggedIn(
@@ -82,7 +81,7 @@ class Auth extends _$Auth {
     ref.read(localStorageProvider).setSessionId(sessionId);
 
     return ref
-        .read(accountServiceProvider)
+        .read(authServiceProvider)
         .getAccountDetails(sessionId: sessionId)
         .then(
           (accountDetails) => User(

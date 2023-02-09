@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../auth/provider/auth_provider.dart';
 import '../../localization/provider/locale_state_provider.dart';
 import '../data/query_interceptor.dart';
 
@@ -17,7 +18,12 @@ Dio dio(DioRef ref) {
     BaseOptions(baseUrl: dotenv.get('BASE_URL')),
   )..interceptors.addAll(
       [
-        QueryInterceptor(locale: locale),
+        QueryInterceptor(
+          locale: locale,
+          sessionId: ref
+              .watch(authProvider)
+              .whenOrNull(loggedIn: (user) => user.sessionId),
+        ),
         if (!kDebugMode) PrettyDioLogger(),
       ],
     );

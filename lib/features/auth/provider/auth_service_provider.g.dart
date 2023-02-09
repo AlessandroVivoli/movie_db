@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$authServiceHash() => r'55e8e5aa2ab62d8f319662fb2f89be5f4211073f';
+String _$authServiceHash() => r'8480ec7cf7bc523a7afa20be1efb2cfc2f1555a6';
 
 /// See also [authService].
 final authServiceProvider = Provider<IAuthService>(
