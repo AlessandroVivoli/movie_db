@@ -18,7 +18,7 @@ class MovieAccountActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rated = movieDetails.state!.rated;
+    final rated = movieDetails.accountStates!.rated;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 10, top: 10),
@@ -27,7 +27,7 @@ class MovieAccountActions extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           RateButton(
-            rate: (movieDetails.state!.rated is bool)
+            rate: (movieDetails.accountStates!.rated is bool)
                 ? const Rated(value: 0)
                 : Rated.fromJson(rated),
             movieId: movieDetails.id,
@@ -36,11 +36,11 @@ class MovieAccountActions extends StatelessWidget {
             children: [
               FavoriteButton(
                 movieId: movieDetails.id,
-                favorite: movieDetails.state!.favorite,
+                favorite: movieDetails.accountStates!.favorite,
               ),
               WatchlistButton(
                 movieId: movieDetails.id,
-                watchlist: movieDetails.state!.watchlist,
+                watchlist: movieDetails.accountStates!.watchlist,
               ),
             ],
           ),
