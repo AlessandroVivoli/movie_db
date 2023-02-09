@@ -9,7 +9,7 @@ import 'get_movie_watchlist_provider.dart';
 part 'add_movie_to_watchlist_provider.g.dart';
 
 @riverpod
-class Watchlist extends _$Watchlist {
+class MovieWatchlist extends _$MovieWatchlist {
   @override
   AccountMediaState build() => const AccountMediaState.success();
 
@@ -33,9 +33,10 @@ class Watchlist extends _$Watchlist {
   }) {
     final user = ref.read(authProvider).whenOrNull(loggedIn: (user) => user)!;
 
-    return ref.read(accountServiceProvider).addMovieToWatchList(
-          user: user,
-          movieId: movieId,
+    return ref.read(accountServiceProvider).addToWatchlist(
+          accountId: user.accountDetails.id,
+          mediaId: movieId,
+          mediaType: 'movie',
           watchlist: watchlist,
         );
   }

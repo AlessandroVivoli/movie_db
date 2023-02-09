@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$getRatedMoviesHash() => r'e9d13e2cbe0ffb34e6a4d60bccfb0f37bf7c4864';
+String _$getRatedMoviesHash() => r'0f8be7ec8a265d9a89e8247b52d84a9e9a54c52d';
 
 /// See also [getRatedMovies].
 class GetRatedMoviesProvider extends AutoDisposeFutureProvider<MovieListModel> {

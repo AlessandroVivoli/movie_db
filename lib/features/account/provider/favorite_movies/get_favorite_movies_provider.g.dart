@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$getFavoriteMoviesHash() => r'7f2c65aa30002b48654b3f94c226518b085a775a';
+String _$getFavoriteMoviesHash() => r'69af34a1d365c014e2da9b9d66d06dfd22b3fea9';
 
 /// See also [getFavoriteMovies].
 class GetFavoriteMoviesProvider

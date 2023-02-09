@@ -34,7 +34,7 @@ class Favorites extends _$Favorites {
     final user = ref.read(authProvider).whenOrNull(loggedIn: (user) => user)!;
 
     return ref.watch(accountServiceProvider).markMovieAsFavorite(
-          user: user,
+          accountId: user.accountDetails.id,
           movieId: movieId,
           favorite: favorite,
         );

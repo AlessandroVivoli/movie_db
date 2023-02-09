@@ -14,7 +14,7 @@ Future<MovieListModel> getMovieWatchlist(
   final user = ref.watch(authProvider).whenOrNull(loggedIn: (user) => user)!;
 
   return ref.read(accountServiceProvider).getMovieWatchlist(
-        user: user,
+        accountId: user.accountDetails.id,
         page: page,
       );
 }

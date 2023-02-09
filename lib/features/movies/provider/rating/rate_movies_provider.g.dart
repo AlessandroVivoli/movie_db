@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$RateMoviesHash() => r'13330bdb2b9224b1a09382b7201e43e26a8d8f4f';
+String _$RateMoviesHash() => r'383a5590a9a8aaa0eeb58cd50a27309510179295';
 
 /// See also [RateMovies].
 final rateMoviesProvider = AutoDisposeNotifierProvider<RateMovies, RateState>(

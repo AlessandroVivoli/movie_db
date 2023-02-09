@@ -14,7 +14,7 @@ Future<MovieListModel> getRatedMovies(
   final user = ref.watch(authProvider).whenOrNull(loggedIn: (user) => user)!;
 
   return ref.read(accountServiceProvider).getRatedMovies(
-        user: user,
+        accountId: user.accountDetails.id,
         page: page,
       );
 }

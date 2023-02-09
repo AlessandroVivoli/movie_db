@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$getMovieWatchlistHash() => r'42b8149dd7e781ad837ec54f9c00bb19b8f18627';
+String _$getMovieWatchlistHash() => r'0da1fbcce1c814a42de447629a0d54202da5d567';
 
 /// See also [getMovieWatchlist].
 class GetMovieWatchlistProvider
