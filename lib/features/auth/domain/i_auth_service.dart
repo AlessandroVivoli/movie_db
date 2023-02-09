@@ -1,3 +1,5 @@
+import '../../account/domain/account_details.dart';
+
 abstract class IAuthService {
   /// Used from logging in to the tmdb account
   ///
@@ -15,4 +17,6 @@ abstract class IAuthService {
 
   /// Used to logout user from the tmdb account
   Future<void> logout({required String sessionId});
+
+  Future<AccountDetails> getAccountDetails({required String sessionId});
 }
