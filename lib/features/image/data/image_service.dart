@@ -7,6 +7,10 @@ class ImageService extends IImageService {
   String? getImageUrl({required String? path}) {
     if (path == null) return null;
 
+    if (path.contains('https') || path.contains('http')) {
+      return path.replaceFirstMapped(RegExp(r'^\/'), (match) => '');
+    }
+
     return '${dotenv.get('BASE_IMG_URL')}original$path';
   }
 }
