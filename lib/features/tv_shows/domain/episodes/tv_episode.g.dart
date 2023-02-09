@@ -7,9 +7,8 @@ part of 'tv_episode.dart';
 // **************************************************************************
 
 _$_TVEpisode _$$_TVEpisodeFromJson(Map<String, dynamic> json) => _$_TVEpisode(
-      airDate: json['air_date'] == null
-          ? null
-          : DateTime.parse(json['air_date'] as String),
+      airDate: _$JsonConverterFromJson<String, DateTime?>(
+          json['air_date'], const DateTimeConverter().fromJson),
       episodeNumber: json['episode_number'] as int,
       id: json['id'] as int,
       name: json['name'] as String,
@@ -23,7 +22,7 @@ _$_TVEpisode _$$_TVEpisodeFromJson(Map<String, dynamic> json) => _$_TVEpisode(
 
 Map<String, dynamic> _$$_TVEpisodeToJson(_$_TVEpisode instance) =>
     <String, dynamic>{
-      'air_date': instance.airDate?.toIso8601String(),
+      'air_date': const DateTimeConverter().toJson(instance.airDate),
       'episode_number': instance.episodeNumber,
       'id': instance.id,
       'name': instance.name,
@@ -34,3 +33,9 @@ Map<String, dynamic> _$$_TVEpisodeToJson(_$_TVEpisode instance) =>
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);

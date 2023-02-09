@@ -20,6 +20,7 @@ TVEpisode _$TVEpisodeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TVEpisode {
+  @DateTimeConverter()
   DateTime? get airDate => throw _privateConstructorUsedError;
   int get episodeNumber => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
@@ -43,7 +44,7 @@ abstract class $TVEpisodeCopyWith<$Res> {
       _$TVEpisodeCopyWithImpl<$Res, TVEpisode>;
   @useResult
   $Res call(
-      {DateTime? airDate,
+      {@DateTimeConverter() DateTime? airDate,
       int episodeNumber,
       int id,
       String name,
@@ -132,7 +133,7 @@ abstract class _$$_TVEpisodeCopyWith<$Res> implements $TVEpisodeCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {DateTime? airDate,
+      {@DateTimeConverter() DateTime? airDate,
       int episodeNumber,
       int id,
       String name,
@@ -215,7 +216,7 @@ class __$$_TVEpisodeCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TVEpisode implements _TVEpisode {
   const _$_TVEpisode(
-      {required this.airDate,
+      {@DateTimeConverter() required this.airDate,
       required this.episodeNumber,
       required this.id,
       required this.name,
@@ -230,6 +231,7 @@ class _$_TVEpisode implements _TVEpisode {
       _$$_TVEpisodeFromJson(json);
 
   @override
+  @DateTimeConverter()
   final DateTime? airDate;
   @override
   final int episodeNumber;
@@ -310,7 +312,7 @@ class _$_TVEpisode implements _TVEpisode {
 
 abstract class _TVEpisode implements TVEpisode {
   const factory _TVEpisode(
-      {required final DateTime? airDate,
+      {@DateTimeConverter() required final DateTime? airDate,
       required final int episodeNumber,
       required final int id,
       required final String name,
@@ -325,6 +327,7 @@ abstract class _TVEpisode implements TVEpisode {
       _$_TVEpisode.fromJson;
 
   @override
+  @DateTimeConverter()
   DateTime? get airDate;
   @override
   int get episodeNumber;
