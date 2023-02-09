@@ -8,10 +8,9 @@ part 'tv_episode_details.freezed.dart';
 part 'tv_episode_details.g.dart';
 
 @freezed
-@DateTimeConverter()
 class TVEpisodeDetails with _$TVEpisodeDetails {
   const factory TVEpisodeDetails({
-    required DateTime? airDate,
+    @DateTimeConverter() required DateTime? airDate,
     required List<Crew> crew,
     required int episeodeNumber,
     required List<GuestStar> guestStars,

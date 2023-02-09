@@ -20,6 +20,7 @@ TVEpisodeDetails _$TVEpisodeDetailsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TVEpisodeDetails {
+  @DateTimeConverter()
   DateTime? get airDate => throw _privateConstructorUsedError;
   List<Crew> get crew => throw _privateConstructorUsedError;
   int get episeodeNumber => throw _privateConstructorUsedError;
@@ -46,7 +47,7 @@ abstract class $TVEpisodeDetailsCopyWith<$Res> {
       _$TVEpisodeDetailsCopyWithImpl<$Res, TVEpisodeDetails>;
   @useResult
   $Res call(
-      {DateTime? airDate,
+      {@DateTimeConverter() DateTime? airDate,
       List<Crew> crew,
       int episeodeNumber,
       List<GuestStar> guestStars,
@@ -148,7 +149,7 @@ abstract class _$$_TVEpisodeDetailsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {DateTime? airDate,
+      {@DateTimeConverter() DateTime? airDate,
       List<Crew> crew,
       int episeodeNumber,
       List<GuestStar> guestStars,
@@ -243,7 +244,7 @@ class __$$_TVEpisodeDetailsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TVEpisodeDetails implements _TVEpisodeDetails {
   const _$_TVEpisodeDetails(
-      {required this.airDate,
+      {@DateTimeConverter() required this.airDate,
       required final List<Crew> crew,
       required this.episeodeNumber,
       required final List<GuestStar> guestStars,
@@ -262,6 +263,7 @@ class _$_TVEpisodeDetails implements _TVEpisodeDetails {
       _$$_TVEpisodeDetailsFromJson(json);
 
   @override
+  @DateTimeConverter()
   final DateTime? airDate;
   final List<Crew> _crew;
   @override
@@ -363,7 +365,7 @@ class _$_TVEpisodeDetails implements _TVEpisodeDetails {
 
 abstract class _TVEpisodeDetails implements TVEpisodeDetails {
   const factory _TVEpisodeDetails(
-      {required final DateTime? airDate,
+      {@DateTimeConverter() required final DateTime? airDate,
       required final List<Crew> crew,
       required final int episeodeNumber,
       required final List<GuestStar> guestStars,
@@ -380,6 +382,7 @@ abstract class _TVEpisodeDetails implements TVEpisodeDetails {
       _$_TVEpisodeDetails.fromJson;
 
   @override
+  @DateTimeConverter()
   DateTime? get airDate;
   @override
   List<Crew> get crew;
