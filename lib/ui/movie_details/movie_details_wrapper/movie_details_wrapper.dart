@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/auth/provider/auth_provider.dart';
+import '../../../core/widgets/review_section/review_section.dart';
 import '../../../features/movies/domain/movie_details.dart';
 import 'widgets/movie_account_actions/movie_account_actions.dart';
 import 'widgets/movie_casts.dart';
@@ -50,6 +51,7 @@ class MovieDetailsWrapper extends ConsumerWidget {
           child: MovieCasts(details: details),
         ),
         SimilarMovieList(details: details),
+        ReviewsSection(reviews: details.reviews.results)
       ],
     );
   }
