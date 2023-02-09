@@ -9,9 +9,8 @@ part of 'tv_season_details.dart';
 _$_TVSeasonDetails _$$_TVSeasonDetailsFromJson(Map<String, dynamic> json) =>
     _$_TVSeasonDetails(
       seasonId: json['_id'] as String,
-      airDate: json['air_date'] == null
-          ? null
-          : DateTime.parse(json['air_date'] as String),
+      airDate: _$JsonConverterFromJson<String, DateTime?>(
+          json['air_date'], const DateTimeConverter().fromJson),
       episodes: (json['episodes'] as List<dynamic>)
           .map((e) => TVEpisode.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -25,7 +24,7 @@ _$_TVSeasonDetails _$$_TVSeasonDetailsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_TVSeasonDetailsToJson(_$_TVSeasonDetails instance) =>
     <String, dynamic>{
       '_id': instance.seasonId,
-      'air_date': instance.airDate?.toIso8601String(),
+      'air_date': const DateTimeConverter().toJson(instance.airDate),
       'episodes': instance.episodes.map((e) => e.toJson()).toList(),
       'name': instance.name,
       'overview': instance.overview,
@@ -33,3 +32,9 @@ Map<String, dynamic> _$$_TVSeasonDetailsToJson(_$_TVSeasonDetails instance) =>
       'poster_path': instance.posterPath,
       'season_number': instance.seasonNumber,
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);

@@ -22,6 +22,7 @@ TVSeasonDetails _$TVSeasonDetailsFromJson(Map<String, dynamic> json) {
 mixin _$TVSeasonDetails {
   @JsonKey(name: '_id')
   String get seasonId => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime? get airDate => throw _privateConstructorUsedError;
   List<TVEpisode> get episodes => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
@@ -44,7 +45,7 @@ abstract class $TVSeasonDetailsCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String seasonId,
-      DateTime? airDate,
+      @DateTimeConverter() DateTime? airDate,
       List<TVEpisode> episodes,
       String name,
       String overview,
@@ -122,7 +123,7 @@ abstract class _$$_TVSeasonDetailsCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String seasonId,
-      DateTime? airDate,
+      @DateTimeConverter() DateTime? airDate,
       List<TVEpisode> episodes,
       String name,
       String overview,
@@ -193,7 +194,7 @@ class __$$_TVSeasonDetailsCopyWithImpl<$Res>
 class _$_TVSeasonDetails implements _TVSeasonDetails {
   const _$_TVSeasonDetails(
       {@JsonKey(name: '_id') required this.seasonId,
-      required this.airDate,
+      @DateTimeConverter() required this.airDate,
       required final List<TVEpisode> episodes,
       required this.name,
       required this.overview,
@@ -209,6 +210,7 @@ class _$_TVSeasonDetails implements _TVSeasonDetails {
   @JsonKey(name: '_id')
   final String seasonId;
   @override
+  @DateTimeConverter()
   final DateTime? airDate;
   final List<TVEpisode> _episodes;
   @override
@@ -283,7 +285,7 @@ class _$_TVSeasonDetails implements _TVSeasonDetails {
 abstract class _TVSeasonDetails implements TVSeasonDetails {
   const factory _TVSeasonDetails(
       {@JsonKey(name: '_id') required final String seasonId,
-      required final DateTime? airDate,
+      @DateTimeConverter() required final DateTime? airDate,
       required final List<TVEpisode> episodes,
       required final String name,
       required final String overview,
@@ -298,6 +300,7 @@ abstract class _TVSeasonDetails implements TVSeasonDetails {
   @JsonKey(name: '_id')
   String get seasonId;
   @override
+  @DateTimeConverter()
   DateTime? get airDate;
   @override
   List<TVEpisode> get episodes;

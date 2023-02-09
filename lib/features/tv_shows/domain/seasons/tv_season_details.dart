@@ -7,11 +7,10 @@ part 'tv_season_details.freezed.dart';
 part 'tv_season_details.g.dart';
 
 @freezed
-@DateTimeConverter()
 class TVSeasonDetails with _$TVSeasonDetails {
   const factory TVSeasonDetails({
     @JsonKey(name: '_id') required String seasonId,
-    required DateTime? airDate,
+    @DateTimeConverter() required DateTime? airDate,
     required List<TVEpisode> episodes,
     required String name,
     required String overview,
