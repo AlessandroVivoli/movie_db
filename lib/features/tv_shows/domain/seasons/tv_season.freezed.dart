@@ -20,6 +20,7 @@ TVSeason _$TVSeasonFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TVSeason {
+  @DateTimeConverter()
   DateTime? get airDate => throw _privateConstructorUsedError;
   int get episodeCount => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
@@ -40,7 +41,7 @@ abstract class $TVSeasonCopyWith<$Res> {
       _$TVSeasonCopyWithImpl<$Res, TVSeason>;
   @useResult
   $Res call(
-      {DateTime? airDate,
+      {@DateTimeConverter() DateTime? airDate,
       int episodeCount,
       int id,
       String name,
@@ -111,7 +112,7 @@ abstract class _$$_TVSeasonCopyWith<$Res> implements $TVSeasonCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {DateTime? airDate,
+      {@DateTimeConverter() DateTime? airDate,
       int episodeCount,
       int id,
       String name,
@@ -176,7 +177,7 @@ class __$$_TVSeasonCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TVSeason implements _TVSeason {
   const _$_TVSeason(
-      {required this.airDate,
+      {@DateTimeConverter() required this.airDate,
       required this.episodeCount,
       required this.id,
       required this.name,
@@ -188,6 +189,7 @@ class _$_TVSeason implements _TVSeason {
       _$$_TVSeasonFromJson(json);
 
   @override
+  @DateTimeConverter()
   final DateTime? airDate;
   @override
   final int episodeCount;
@@ -246,7 +248,7 @@ class _$_TVSeason implements _TVSeason {
 
 abstract class _TVSeason implements TVSeason {
   const factory _TVSeason(
-      {required final DateTime? airDate,
+      {@DateTimeConverter() required final DateTime? airDate,
       required final int episodeCount,
       required final int id,
       required final String name,
@@ -257,6 +259,7 @@ abstract class _TVSeason implements TVSeason {
   factory _TVSeason.fromJson(Map<String, dynamic> json) = _$_TVSeason.fromJson;
 
   @override
+  @DateTimeConverter()
   DateTime? get airDate;
   @override
   int get episodeCount;

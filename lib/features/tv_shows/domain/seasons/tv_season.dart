@@ -6,10 +6,9 @@ part 'tv_season.freezed.dart';
 part 'tv_season.g.dart';
 
 @freezed
-@DateTimeConverter()
 class TVSeason with _$TVSeason {
   const factory TVSeason({
-    required DateTime? airDate,
+    @DateTimeConverter() required DateTime? airDate,
     required int episodeCount,
     required int id,
     required String name,
