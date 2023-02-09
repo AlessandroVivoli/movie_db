@@ -1,4 +1,3 @@
-import '../../account/domain/account_media_status/account_media_status.dart';
 import '../../time_window/domain/time_window.dart';
 import 'movie.dart';
 import 'movie_details.dart';
@@ -40,27 +39,13 @@ abstract class IMovieService {
   /// Returns similar [List] of [Movie] using the provided movie [id]
   Future<List<Movie>> getSimilarMovies({required int id});
 
-  /// Returns the [AccountMediaStatus] of movie using the movie [id] and [sessionId]
-  Future<AccountMediaStatus> getAccountMovieState({
-    required int id,
-    required String sessionId,
-  });
-
-  /// Sets the movie [rating] using the movie [id] and [sessionId]
-  Future<void> rateMovie({
-    required int id,
-    required String sessionId,
-    required double rating,
-  });
+  /// Sets the movie [rating] using the movie [id]
+  Future<void> rateMovie({required int id, required double rating});
 
   /// Deletes the movie rating set by user
   ///
-  /// [id] is the movie id\
-  /// [sessionId] is the user session id
-  Future<void> deleteRating({
-    required int id,
-    required String sessionId,
-  });
+  /// [id] is the movie id
+  Future<void> deleteRating({required int id});
 
   Future<MovieListModel> searchMovies({
     required String query,

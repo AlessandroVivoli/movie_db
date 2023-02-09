@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 
-import '../../account/domain/account_media_status/account_media_status.dart';
 import '../../time_window/domain/time_window.dart';
 import '../domain/i_movie_service.dart';
 import '../domain/movie.dart';
@@ -56,7 +55,12 @@ class MovieService implements IMovieService {
   @override
   Future<MovieDetails> getMovieDetails({required int id}) {
     return _dio
-        .get('/movie/$id')
+        .get(
+          '/movie/$id',
+          queryParameters: {
+            'append_to_response': 'reviews,account_states',
+          },
+        )
         .then((res) => Map<String, Object?>.from(res.data))
         .then(MovieDetails.fromJson);
   }
@@ -71,33 +75,10 @@ class MovieService implements IMovieService {
   }
 
   @override
-  Future<AccountMediaStatus> getAccountMovieState({
-    required int id,
-    required String sessionId,
-  }) {
-    return _dio
-        .get(
-          '/movie/$id/account_states',
-          queryParameters: {
-            'session_id': sessionId,
-          },
-        )
-        .then((res) => Map<String, Object?>.from(res.data))
-        .then(AccountMediaStatus.fromJson);
-  }
-
-  @override
-  Future<void> rateMovie({
-    required int id,
-    required String sessionId,
-    required double rating,
-  }) {
+  Future<void> rateMovie({required int id, required double rating}) {
     return _dio
         .post(
           '/movie/$id/rating',
-          queryParameters: {
-            'session_id': sessionId,
-          },
           data: {
             'value': rating,
           },
@@ -107,16 +88,10 @@ class MovieService implements IMovieService {
   }
 
   @override
-  Future<void> deleteRating({
-    required int id,
-    required String sessionId,
-  }) {
+  Future<void> deleteRating({required int id}) {
     return _dio
         .delete(
           '/movie/$id/rating',
-          queryParameters: {
-            'session_id': sessionId,
-          },
           options: Options(contentType: 'application/json;charset=utf-8'),
         )
         .then((res) => res.data['status_code']);
