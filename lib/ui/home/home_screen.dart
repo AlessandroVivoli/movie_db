@@ -15,23 +15,14 @@ import 'movies_home_page/movies_home_page.dart';
 import 'tv_home_page/tv_home_page.dart';
 import 'watchlist_page/watchlist_page.dart';
 
-class HomeScreen extends HookConsumerWidget {
+class HomeScreen extends HookWidget {
   const HomeScreen({super.key, required this.title});
 
   final String title;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(authProvider).whenOrNull(loggedIn: (user) => user);
-
-    final selectedIndex = useState(0);
-
-    final widgets = <Widget>[
-      MoviesHomePage(title: title),
-      TVHomePage(title: title),
-      WatchlistPage(title: title),
-      FavoritesPage(title: title)
-    ];
+  Widget build(BuildContext context) {
+    final selectedIndex = useValueNotifier(0);
 
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
@@ -41,100 +32,135 @@ class HomeScreen extends HookConsumerWidget {
         key: scaffoldKey,
         drawer: Drawer(
           child: AccountDrawer(
-            onLogin: () async {
-              if (scaffoldKey.currentState != null) {
-                scaffoldKey.currentState!.closeDrawer();
-              }
-            },
+            onLogin: () => scaffoldKey.currentState?.closeDrawer(),
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          enableFeedback: true,
-          elevation: 10,
-          currentIndex: selectedIndex.value,
-          items: [
-            BottomNavigationBarItem(
-              backgroundColor:
-                  Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-              activeIcon: const Icon(Icons.movie),
-              icon: const Icon(Icons.movie_outlined),
-              label: 'Movies',
-            ),
-            BottomNavigationBarItem(
-              backgroundColor:
-                  Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-              icon: const Icon(Icons.tv),
-              label: 'TV Shows',
-            ),
-            if (user != null)
-              BottomNavigationBarItem(
-                backgroundColor:
-                    Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-                activeIcon: const Icon(Icons.bookmark),
-                icon: const Icon(Icons.bookmark_outline),
-                label: 'Watchlist',
-              ),
-            if (user != null)
-              BottomNavigationBarItem(
-                backgroundColor:
-                    Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-                activeIcon: const Icon(Icons.favorite),
-                icon: const Icon(Icons.favorite_border_outlined),
-                label: 'Favorites',
-              ),
-            BottomNavigationBarItem(
-              backgroundColor:
-                  Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-              icon: const Icon(Icons.search),
-              label: 'Search',
-            ),
-          ],
-          onTap: (index) async {
-            if ((index == 2 && user == null) || (index == 4 && user != null)) {
-              final movieId = await showSearch(
-                context: context,
-                delegate: CustomSearchDelegate(),
-              );
-
-              if (movieId != null) {
-                WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                  Navigator.pushNamed(
-                    context,
-                    AppRoute.movie,
-                    arguments: movieId,
-                  );
-                });
-              }
-
-              return;
-            }
-
-            selectedIndex.value = index;
-          },
-        ),
-        body: RefreshIndicator(
-          onRefresh: () {
-            return Future(() {
-              final index = selectedIndex.value;
-              if (widgets[index] is MoviesHomePage) {
-                ref.invalidate(getTrendingMoviesProvider);
-                ref.invalidate(getTopRatedMoviesProvider);
-                ref.invalidate(getMovieGenresProvider);
-              } else if (widgets[index] is TVHomePage) {
-              } else if (widgets[index] is FavoritesPage) {
-              } else if (widgets[index] is WatchlistPage) {}
-
-              final isMoviesOrTV = widgets[index] is MoviesHomePage ||
-                  widgets[index] is TVHomePage;
-
-              if (isMoviesOrTV) {
-                ref.invalidate(getTrendingPersonsProvider);
-              }
-            });
-          },
-          child: widgets[selectedIndex.value],
-        ),
+        bottomNavigationBar: _BottomNavigationBar(selectedIndex: selectedIndex),
+        body: _RefreshIndicator(index: selectedIndex, title: title),
       ),
+    );
+  }
+}
+
+class _RefreshIndicator extends HookConsumerWidget {
+  const _RefreshIndicator({
+    required this.index,
+    required this.title,
+  });
+
+  final ValueNotifier<int> index;
+  final String title;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final widgets = <Widget>[
+      MoviesHomePage(title: title),
+      TVHomePage(title: title),
+      WatchlistPage(title: title),
+      FavoritesPage(title: title)
+    ];
+
+    final selectedIndex = useValueListenable(index);
+
+    return RefreshIndicator(
+      onRefresh: () {
+        return Future(() {
+          final index = selectedIndex;
+          if (widgets[index] is MoviesHomePage) {
+            ref.invalidate(getTrendingMoviesProvider);
+            ref.invalidate(getTopRatedMoviesProvider);
+            ref.invalidate(getMovieGenresProvider);
+          } else if (widgets[index] is TVHomePage) {
+          } else if (widgets[index] is FavoritesPage) {
+          } else if (widgets[index] is WatchlistPage) {}
+
+          final isMoviesOrTV =
+              widgets[index] is MoviesHomePage || widgets[index] is TVHomePage;
+
+          if (isMoviesOrTV) {
+            ref.invalidate(getTrendingPersonsProvider);
+          }
+        });
+      },
+      child: widgets[selectedIndex],
+    );
+  }
+}
+
+class _BottomNavigationBar extends HookConsumerWidget {
+  final ValueNotifier<int> selectedIndex;
+
+  const _BottomNavigationBar({required this.selectedIndex});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(authProvider).whenOrNull(loggedIn: (user) => user);
+
+    final index = useValueListenable(selectedIndex);
+
+    return BottomNavigationBar(
+      enableFeedback: true,
+      elevation: 10,
+      currentIndex: index,
+      items: [
+        BottomNavigationBarItem(
+          backgroundColor:
+              Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+          activeIcon: const Icon(Icons.movie),
+          icon: const Icon(Icons.movie_outlined),
+          label: 'Movies',
+        ),
+        BottomNavigationBarItem(
+          backgroundColor:
+              Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+          icon: const Icon(Icons.tv),
+          label: 'TV Shows',
+        ),
+        if (user != null)
+          BottomNavigationBarItem(
+            backgroundColor:
+                Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+            activeIcon: const Icon(Icons.bookmark),
+            icon: const Icon(Icons.bookmark_outline),
+            label: 'Watchlist',
+          ),
+        if (user != null)
+          BottomNavigationBarItem(
+            backgroundColor:
+                Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+            activeIcon: const Icon(Icons.favorite),
+            icon: const Icon(Icons.favorite_border_outlined),
+            label: 'Favorites',
+          ),
+        BottomNavigationBarItem(
+          backgroundColor:
+              Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+          icon: const Icon(Icons.search),
+          label: 'Search',
+        ),
+      ],
+      onTap: (index) async {
+        if ((index == 2 && user == null) || (index == 4 && user != null)) {
+          final movieId = await showSearch(
+            context: context,
+            delegate: CustomSearchDelegate(),
+          );
+
+          if (movieId != null) {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              Navigator.pushNamed(
+                context,
+                AppRoute.movie,
+                arguments: movieId,
+              );
+            });
+          }
+
+          return;
+        }
+
+        selectedIndex.value = index;
+      },
     );
   }
 }
