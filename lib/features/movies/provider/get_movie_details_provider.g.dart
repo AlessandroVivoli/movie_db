@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$getMovieDetailsHash() => r'402451cfca37ea461bdd11343d827324d8ab486a';
+String _$getMovieDetailsHash() => r'b34d259c70f1b0a292cb01238b63231ff508b50b';
 
 /// See also [getMovieDetails].
 class GetMovieDetailsProvider extends AutoDisposeFutureProvider<MovieDetails> {
