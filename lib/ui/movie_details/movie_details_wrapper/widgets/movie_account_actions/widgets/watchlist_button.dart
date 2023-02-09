@@ -22,13 +22,13 @@ class WatchlistButton extends ConsumerWidget {
     final user = ref.watch(authProvider);
 
     final loading = ref
-        .watch(watchlistProvider)
+        .watch(movieWatchlistProvider)
         .maybeWhen(loading: () => true, orElse: () => false);
 
     final localization = AppLocalizations.of(context)!;
 
     ref.listen(
-      watchlistProvider,
+      movieWatchlistProvider,
       (previous, next) {
         next.whenOrNull(
           error: (error, stackTrace) {
@@ -56,7 +56,9 @@ class WatchlistButton extends ConsumerWidget {
               onPressed: loading
                   ? null
                   : () {
-                      ref.read(watchlistProvider.notifier).addMovieToWatchlist(
+                      ref
+                          .read(movieWatchlistProvider.notifier)
+                          .addMovieToWatchlist(
                             movieId: movieId,
                             watchlist: !watchlist,
                           );
