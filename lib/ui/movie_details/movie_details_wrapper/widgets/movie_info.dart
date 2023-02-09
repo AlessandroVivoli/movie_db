@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class MovieInfo extends StatelessWidget {
   final int budget;
   final int? runtime;
-  final String releaseDate;
+  final DateTime? releaseDate;
 
   const MovieInfo({
     super.key,
@@ -105,13 +105,11 @@ class _ReleaseDateText extends StatelessWidget {
     required this.releaseDate,
   });
 
-  final String releaseDate;
+  final DateTime? releaseDate;
 
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
-
-    final dateTime = DateTime.tryParse(releaseDate);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,7 +125,9 @@ class _ReleaseDateText extends StatelessWidget {
           height: 10,
         ),
         Text(
-          (dateTime != null) ? localization.releaseDateValue(dateTime) : '?',
+          (releaseDate != null)
+              ? localization.releaseDateValue(releaseDate!)
+              : '?',
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontWeight: FontWeight.w600,
