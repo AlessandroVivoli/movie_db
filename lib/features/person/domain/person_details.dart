@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/converters/date_time_converter.dart';
+
 part 'person_details.freezed.dart';
 part 'person_details.g.dart';
 
@@ -10,9 +12,9 @@ class PersonDetails with _$PersonDetails {
   const PersonDetails._();
 
   const factory PersonDetails({
-    required String? birthday,
+    @DateTimeConverter() required DateTime? birthday,
     required String? knownForDepartment,
-    required String? deathday,
+    @DateTimeConverter() required DateTime? deathday,
     required int id,
     required String name,
     required List<String>? alsoKnownAs,
@@ -30,30 +32,25 @@ class PersonDetails with _$PersonDetails {
       _$PersonDetailsFromJson(json);
 
   String get age {
-    final birthdayDate = DateTime.tryParse(birthday ?? '');
+    if (birthday == null) return 'No age recorded';
 
-    if (birthdayDate == null) return 'No age recorded';
-
-    final age = DateTime.now().difference(birthdayDate);
+    final age = DateTime.now().difference(birthday!);
     return '${(age.inDays / 365).floor()}';
   }
 
   String getLifetime(bool extendedDate, Locale locale) {
-    final birthdayDate = DateTime.tryParse(birthday ?? '');
-    final deathdayDate = DateTime.tryParse(deathday ?? '');
-
     final String pattern = (extendedDate)
         ? _localePattern[locale.languageCode]![1]
         : _localePattern[locale.languageCode]![0];
 
-    final birthdayFormat = (birthdayDate == null)
+    final birthdayFormat = (birthday == null)
         ? '?'
-        : DateFormat(pattern, locale.languageCode).format(birthdayDate);
-    final deathdayFormat = (deathdayDate == null)
+        : DateFormat(pattern, locale.languageCode).format(birthday!);
+    final deathdayFormat = (deathday == null)
         ? '?'
-        : DateFormat(pattern, locale.languageCode).format(deathdayDate);
+        : DateFormat(pattern, locale.languageCode).format(deathday!);
 
-    final lifetimeFormat = (birthdayDate == null && deathdayDate == null)
+    final lifetimeFormat = (birthday == null && deathday == null)
         ? '?'
         : '$birthdayFormat - $deathdayFormat';
 

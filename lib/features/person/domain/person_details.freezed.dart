@@ -20,9 +20,11 @@ PersonDetails _$PersonDetailsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PersonDetails {
-  String? get birthday => throw _privateConstructorUsedError;
+  @DateTimeConverter()
+  DateTime? get birthday => throw _privateConstructorUsedError;
   String? get knownForDepartment => throw _privateConstructorUsedError;
-  String? get deathday => throw _privateConstructorUsedError;
+  @DateTimeConverter()
+  DateTime? get deathday => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   List<String>? get alsoKnownAs => throw _privateConstructorUsedError;
@@ -48,9 +50,9 @@ abstract class $PersonDetailsCopyWith<$Res> {
       _$PersonDetailsCopyWithImpl<$Res, PersonDetails>;
   @useResult
   $Res call(
-      {String? birthday,
+      {@DateTimeConverter() DateTime? birthday,
       String? knownForDepartment,
-      String? deathday,
+      @DateTimeConverter() DateTime? deathday,
       int id,
       String name,
       List<String>? alsoKnownAs,
@@ -96,7 +98,7 @@ class _$PersonDetailsCopyWithImpl<$Res, $Val extends PersonDetails>
       birthday: freezed == birthday
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       knownForDepartment: freezed == knownForDepartment
           ? _value.knownForDepartment
           : knownForDepartment // ignore: cast_nullable_to_non_nullable
@@ -104,7 +106,7 @@ class _$PersonDetailsCopyWithImpl<$Res, $Val extends PersonDetails>
       deathday: freezed == deathday
           ? _value.deathday
           : deathday // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -162,9 +164,9 @@ abstract class _$$_PersonDetailsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? birthday,
+      {@DateTimeConverter() DateTime? birthday,
       String? knownForDepartment,
-      String? deathday,
+      @DateTimeConverter() DateTime? deathday,
       int id,
       String name,
       List<String>? alsoKnownAs,
@@ -208,7 +210,7 @@ class __$$_PersonDetailsCopyWithImpl<$Res>
       birthday: freezed == birthday
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       knownForDepartment: freezed == knownForDepartment
           ? _value.knownForDepartment
           : knownForDepartment // ignore: cast_nullable_to_non_nullable
@@ -216,7 +218,7 @@ class __$$_PersonDetailsCopyWithImpl<$Res>
       deathday: freezed == deathday
           ? _value.deathday
           : deathday // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -269,9 +271,9 @@ class __$$_PersonDetailsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PersonDetails extends _PersonDetails {
   const _$_PersonDetails(
-      {required this.birthday,
+      {@DateTimeConverter() required this.birthday,
       required this.knownForDepartment,
-      required this.deathday,
+      @DateTimeConverter() required this.deathday,
       required this.id,
       required this.name,
       required final List<String>? alsoKnownAs,
@@ -290,11 +292,13 @@ class _$_PersonDetails extends _PersonDetails {
       _$$_PersonDetailsFromJson(json);
 
   @override
-  final String? birthday;
+  @DateTimeConverter()
+  final DateTime? birthday;
   @override
   final String? knownForDepartment;
   @override
-  final String? deathday;
+  @DateTimeConverter()
+  final DateTime? deathday;
   @override
   final int id;
   @override
@@ -396,9 +400,9 @@ class _$_PersonDetails extends _PersonDetails {
 
 abstract class _PersonDetails extends PersonDetails {
   const factory _PersonDetails(
-      {required final String? birthday,
+      {@DateTimeConverter() required final DateTime? birthday,
       required final String? knownForDepartment,
-      required final String? deathday,
+      @DateTimeConverter() required final DateTime? deathday,
       required final int id,
       required final String name,
       required final List<String>? alsoKnownAs,
@@ -416,11 +420,13 @@ abstract class _PersonDetails extends PersonDetails {
       _$_PersonDetails.fromJson;
 
   @override
-  String? get birthday;
+  @DateTimeConverter()
+  DateTime? get birthday;
   @override
   String? get knownForDepartment;
   @override
-  String? get deathday;
+  @DateTimeConverter()
+  DateTime? get deathday;
   @override
   int get id;
   @override

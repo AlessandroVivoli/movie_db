@@ -28,7 +28,8 @@ _$_MovieDetails _$$_MovieDetailsFromJson(Map<String, dynamic> json) =>
       productionCountries: (json['production_countries'] as List<dynamic>?)
           ?.map((e) => ProductionCountry.fromJson(e as Map<String, dynamic>))
           .toList(),
-      releaseDate: json['release_date'] as String,
+      releaseDate: _$JsonConverterFromJson<String, DateTime?>(
+          json['release_date'], const DateTimeConverter().fromJson),
       revenue: json['revenue'] as int,
       runtime: json['runtime'] as int?,
       spokenLanguages: (json['spoken_languages'] as List<dynamic>)
@@ -40,9 +41,12 @@ _$_MovieDetails _$$_MovieDetailsFromJson(Map<String, dynamic> json) =>
       video: json['video'] as bool,
       voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int,
-      state: json['state'] == null
+      accountStates: json['account_states'] == null
           ? null
-          : AccountMediaStatus.fromJson(json['state'] as Map<String, dynamic>),
+          : AccountMediaStatus.fromJson(
+              json['account_states'] as Map<String, dynamic>),
+      reviews:
+          ReviewListModel.fromJson(json['reviews'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_MovieDetailsToJson(_$_MovieDetails instance) =>
@@ -63,7 +67,7 @@ Map<String, dynamic> _$$_MovieDetailsToJson(_$_MovieDetails instance) =>
           instance.productionCompanies?.map((e) => e.toJson()).toList(),
       'production_countries':
           instance.productionCountries?.map((e) => e.toJson()).toList(),
-      'release_date': instance.releaseDate,
+      'release_date': const DateTimeConverter().toJson(instance.releaseDate),
       'revenue': instance.revenue,
       'runtime': instance.runtime,
       'spoken_languages':
@@ -74,5 +78,12 @@ Map<String, dynamic> _$$_MovieDetailsToJson(_$_MovieDetails instance) =>
       'video': instance.video,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
-      'state': instance.state?.toJson(),
+      'account_states': instance.accountStates?.toJson(),
+      'reviews': instance.reviews.toJson(),
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);

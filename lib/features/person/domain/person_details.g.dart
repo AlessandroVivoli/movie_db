@@ -8,9 +8,11 @@ part of 'person_details.dart';
 
 _$_PersonDetails _$$_PersonDetailsFromJson(Map<String, dynamic> json) =>
     _$_PersonDetails(
-      birthday: json['birthday'] as String?,
+      birthday: _$JsonConverterFromJson<String, DateTime?>(
+          json['birthday'], const DateTimeConverter().fromJson),
       knownForDepartment: json['known_for_department'] as String?,
-      deathday: json['deathday'] as String?,
+      deathday: _$JsonConverterFromJson<String, DateTime?>(
+          json['deathday'], const DateTimeConverter().fromJson),
       id: json['id'] as int,
       name: json['name'] as String,
       alsoKnownAs: (json['also_known_as'] as List<dynamic>?)
@@ -28,9 +30,9 @@ _$_PersonDetails _$$_PersonDetailsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_PersonDetailsToJson(_$_PersonDetails instance) =>
     <String, dynamic>{
-      'birthday': instance.birthday,
+      'birthday': const DateTimeConverter().toJson(instance.birthday),
       'known_for_department': instance.knownForDepartment,
-      'deathday': instance.deathday,
+      'deathday': const DateTimeConverter().toJson(instance.deathday),
       'id': instance.id,
       'name': instance.name,
       'also_known_as': instance.alsoKnownAs,
@@ -43,3 +45,9 @@ Map<String, dynamic> _$$_PersonDetailsToJson(_$_PersonDetails instance) =>
       'imdb_id': instance.imdbId,
       'homepage': instance.homepage,
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);

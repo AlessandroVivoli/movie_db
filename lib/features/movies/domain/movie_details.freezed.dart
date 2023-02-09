@@ -36,7 +36,8 @@ mixin _$MovieDetails {
       throw _privateConstructorUsedError;
   List<ProductionCountry>? get productionCountries =>
       throw _privateConstructorUsedError;
-  String get releaseDate => throw _privateConstructorUsedError;
+  @DateTimeConverter()
+  DateTime? get releaseDate => throw _privateConstructorUsedError;
   int get revenue => throw _privateConstructorUsedError;
   int? get runtime => throw _privateConstructorUsedError;
   List<SpokenLanguage> get spokenLanguages =>
@@ -47,7 +48,8 @@ mixin _$MovieDetails {
   bool get video => throw _privateConstructorUsedError;
   double get voteAverage => throw _privateConstructorUsedError;
   int get voteCount => throw _privateConstructorUsedError;
-  AccountMediaStatus? get state => throw _privateConstructorUsedError;
+  AccountMediaStatus? get accountStates => throw _privateConstructorUsedError;
+  ReviewListModel get reviews => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -76,7 +78,7 @@ abstract class $MovieDetailsCopyWith<$Res> {
       String? posterPath,
       List<ProductionCompany>? productionCompanies,
       List<ProductionCountry>? productionCountries,
-      String releaseDate,
+      @DateTimeConverter() DateTime? releaseDate,
       int revenue,
       int? runtime,
       List<SpokenLanguage> spokenLanguages,
@@ -86,9 +88,11 @@ abstract class $MovieDetailsCopyWith<$Res> {
       bool video,
       double voteAverage,
       int voteCount,
-      AccountMediaStatus? state});
+      AccountMediaStatus? accountStates,
+      ReviewListModel reviews});
 
-  $AccountMediaStatusCopyWith<$Res>? get state;
+  $AccountMediaStatusCopyWith<$Res>? get accountStates;
+  $ReviewListModelCopyWith<$Res> get reviews;
 }
 
 /// @nodoc
@@ -118,7 +122,7 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
     Object? posterPath = freezed,
     Object? productionCompanies = freezed,
     Object? productionCountries = freezed,
-    Object? releaseDate = null,
+    Object? releaseDate = freezed,
     Object? revenue = null,
     Object? runtime = freezed,
     Object? spokenLanguages = null,
@@ -128,7 +132,8 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
     Object? video = null,
     Object? voteAverage = null,
     Object? voteCount = null,
-    Object? state = freezed,
+    Object? accountStates = freezed,
+    Object? reviews = null,
   }) {
     return _then(_value.copyWith(
       adult: null == adult
@@ -187,10 +192,10 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
           ? _value.productionCountries
           : productionCountries // ignore: cast_nullable_to_non_nullable
               as List<ProductionCountry>?,
-      releaseDate: null == releaseDate
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime?,
       revenue: null == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
@@ -227,22 +232,34 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int,
-      state: freezed == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
+      accountStates: freezed == accountStates
+          ? _value.accountStates
+          : accountStates // ignore: cast_nullable_to_non_nullable
               as AccountMediaStatus?,
+      reviews: null == reviews
+          ? _value.reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as ReviewListModel,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $AccountMediaStatusCopyWith<$Res>? get state {
-    if (_value.state == null) {
+  $AccountMediaStatusCopyWith<$Res>? get accountStates {
+    if (_value.accountStates == null) {
       return null;
     }
 
-    return $AccountMediaStatusCopyWith<$Res>(_value.state!, (value) {
-      return _then(_value.copyWith(state: value) as $Val);
+    return $AccountMediaStatusCopyWith<$Res>(_value.accountStates!, (value) {
+      return _then(_value.copyWith(accountStates: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReviewListModelCopyWith<$Res> get reviews {
+    return $ReviewListModelCopyWith<$Res>(_value.reviews, (value) {
+      return _then(_value.copyWith(reviews: value) as $Val);
     });
   }
 }
@@ -270,7 +287,7 @@ abstract class _$$_MovieDetailsCopyWith<$Res>
       String? posterPath,
       List<ProductionCompany>? productionCompanies,
       List<ProductionCountry>? productionCountries,
-      String releaseDate,
+      @DateTimeConverter() DateTime? releaseDate,
       int revenue,
       int? runtime,
       List<SpokenLanguage> spokenLanguages,
@@ -280,10 +297,13 @@ abstract class _$$_MovieDetailsCopyWith<$Res>
       bool video,
       double voteAverage,
       int voteCount,
-      AccountMediaStatus? state});
+      AccountMediaStatus? accountStates,
+      ReviewListModel reviews});
 
   @override
-  $AccountMediaStatusCopyWith<$Res>? get state;
+  $AccountMediaStatusCopyWith<$Res>? get accountStates;
+  @override
+  $ReviewListModelCopyWith<$Res> get reviews;
 }
 
 /// @nodoc
@@ -311,7 +331,7 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
     Object? posterPath = freezed,
     Object? productionCompanies = freezed,
     Object? productionCountries = freezed,
-    Object? releaseDate = null,
+    Object? releaseDate = freezed,
     Object? revenue = null,
     Object? runtime = freezed,
     Object? spokenLanguages = null,
@@ -321,7 +341,8 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
     Object? video = null,
     Object? voteAverage = null,
     Object? voteCount = null,
-    Object? state = freezed,
+    Object? accountStates = freezed,
+    Object? reviews = null,
   }) {
     return _then(_$_MovieDetails(
       adult: null == adult
@@ -380,10 +401,10 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
           ? _value._productionCountries
           : productionCountries // ignore: cast_nullable_to_non_nullable
               as List<ProductionCountry>?,
-      releaseDate: null == releaseDate
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime?,
       revenue: null == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
@@ -420,10 +441,14 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int,
-      state: freezed == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
+      accountStates: freezed == accountStates
+          ? _value.accountStates
+          : accountStates // ignore: cast_nullable_to_non_nullable
               as AccountMediaStatus?,
+      reviews: null == reviews
+          ? _value.reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as ReviewListModel,
     ));
   }
 }
@@ -446,7 +471,7 @@ class _$_MovieDetails implements _MovieDetails {
       required this.posterPath,
       required final List<ProductionCompany>? productionCompanies,
       required final List<ProductionCountry>? productionCountries,
-      required this.releaseDate,
+      @DateTimeConverter() required this.releaseDate,
       required this.revenue,
       required this.runtime,
       required final List<SpokenLanguage> spokenLanguages,
@@ -456,7 +481,8 @@ class _$_MovieDetails implements _MovieDetails {
       required this.video,
       required this.voteAverage,
       required this.voteCount,
-      required this.state})
+      required this.accountStates,
+      required this.reviews})
       : _genres = genres,
         _productionCompanies = productionCompanies,
         _productionCountries = productionCountries,
@@ -518,7 +544,8 @@ class _$_MovieDetails implements _MovieDetails {
   }
 
   @override
-  final String releaseDate;
+  @DateTimeConverter()
+  final DateTime? releaseDate;
   @override
   final int revenue;
   @override
@@ -544,11 +571,13 @@ class _$_MovieDetails implements _MovieDetails {
   @override
   final int voteCount;
   @override
-  final AccountMediaStatus? state;
+  final AccountMediaStatus? accountStates;
+  @override
+  final ReviewListModel reviews;
 
   @override
   String toString() {
-    return 'MovieDetails(adult: $adult, backdropPath: $backdropPath, budget: $budget, genres: $genres, homepage: $homepage, id: $id, imdbId: $imdbId, originalLanguage: $originalLanguage, originalTitle: $originalTitle, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, productionCountries: $productionCountries, releaseDate: $releaseDate, revenue: $revenue, runtime: $runtime, spokenLanguages: $spokenLanguages, status: $status, tagline: $tagline, title: $title, video: $video, voteAverage: $voteAverage, voteCount: $voteCount, state: $state)';
+    return 'MovieDetails(adult: $adult, backdropPath: $backdropPath, budget: $budget, genres: $genres, homepage: $homepage, id: $id, imdbId: $imdbId, originalLanguage: $originalLanguage, originalTitle: $originalTitle, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, productionCountries: $productionCountries, releaseDate: $releaseDate, revenue: $revenue, runtime: $runtime, spokenLanguages: $spokenLanguages, status: $status, tagline: $tagline, title: $title, video: $video, voteAverage: $voteAverage, voteCount: $voteCount, accountStates: $accountStates, reviews: $reviews)';
   }
 
   @override
@@ -593,7 +622,9 @@ class _$_MovieDetails implements _MovieDetails {
                 other.voteAverage == voteAverage) &&
             (identical(other.voteCount, voteCount) ||
                 other.voteCount == voteCount) &&
-            (identical(other.state, state) || other.state == state));
+            (identical(other.accountStates, accountStates) ||
+                other.accountStates == accountStates) &&
+            (identical(other.reviews, reviews) || other.reviews == reviews));
   }
 
   @JsonKey(ignore: true)
@@ -624,7 +655,8 @@ class _$_MovieDetails implements _MovieDetails {
         video,
         voteAverage,
         voteCount,
-        state
+        accountStates,
+        reviews
       ]);
 
   @JsonKey(ignore: true)
@@ -657,7 +689,7 @@ abstract class _MovieDetails implements MovieDetails {
       required final String? posterPath,
       required final List<ProductionCompany>? productionCompanies,
       required final List<ProductionCountry>? productionCountries,
-      required final String releaseDate,
+      @DateTimeConverter() required final DateTime? releaseDate,
       required final int revenue,
       required final int? runtime,
       required final List<SpokenLanguage> spokenLanguages,
@@ -667,7 +699,8 @@ abstract class _MovieDetails implements MovieDetails {
       required final bool video,
       required final double voteAverage,
       required final int voteCount,
-      required final AccountMediaStatus? state}) = _$_MovieDetails;
+      required final AccountMediaStatus? accountStates,
+      required final ReviewListModel reviews}) = _$_MovieDetails;
 
   factory _MovieDetails.fromJson(Map<String, dynamic> json) =
       _$_MovieDetails.fromJson;
@@ -701,7 +734,8 @@ abstract class _MovieDetails implements MovieDetails {
   @override
   List<ProductionCountry>? get productionCountries;
   @override
-  String get releaseDate;
+  @DateTimeConverter()
+  DateTime? get releaseDate;
   @override
   int get revenue;
   @override
@@ -721,7 +755,9 @@ abstract class _MovieDetails implements MovieDetails {
   @override
   int get voteCount;
   @override
-  AccountMediaStatus? get state;
+  AccountMediaStatus? get accountStates;
+  @override
+  ReviewListModel get reviews;
   @override
   @JsonKey(ignore: true)
   _$$_MovieDetailsCopyWith<_$_MovieDetails> get copyWith =>
