@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$getTVWatchlistHash() => r'c3385582e32553b1905fdeeaeefc514e84df0a46';
+String _$getTVWatchlistHash() => r'd0e80bc34d76c706556c8eaa64e944a0ee2b465d';
 
 /// See also [getTVWatchlist].
 class GetTVWatchlistProvider extends AutoDisposeFutureProvider<TVListModel> {

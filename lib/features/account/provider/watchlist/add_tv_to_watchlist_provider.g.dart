@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$TVWatchlistHash() => r'f25f88ed2245c720cdb83a3427bc32f6aff6f4bc';
+String _$TVWatchlistHash() => r'c672e53275d24abf70f431c1020ba99631549134';
 
 /// See also [TVWatchlist].
 final tVWatchlistProvider =
