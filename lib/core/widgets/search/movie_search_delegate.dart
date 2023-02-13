@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import 'widgets/result_list/result_list.dart';
 import 'widgets/suggestion_list/suggestion_list.dart';
 
-class CustomSearchDelegate extends SearchDelegate<int?> {
+class MovieSearchDelegate extends SearchDelegate<int?> {
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
       if (query.isNotEmpty)
         IconButton(
-          onPressed: () {
-            query = '';
-          },
+          onPressed: () => query = '',
           icon: const Icon(Icons.clear),
         ),
     ];
