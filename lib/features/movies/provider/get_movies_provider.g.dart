@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$getMoviesHash() => r'27eefdabdffb7dd8f564551724765225e1e36fd2';
+String _$getMoviesHash() => r'235dd6873bf126afe0b952e55f0dcefc96ccb40e';
 
 /// See also [getMovies].
 class GetMoviesProvider extends FutureProvider<List<Movie>> {
@@ -48,7 +48,7 @@ class GetMoviesProvider extends FutureProvider<List<Movie>> {
                   : _$getMoviesHash,
         );
 
-  final MovieArguments args;
+  final MediaArguments args;
 
   @override
   bool operator ==(Object other) {
@@ -73,7 +73,7 @@ class GetMoviesFamily extends Family<AsyncValue<List<Movie>>> {
   GetMoviesFamily();
 
   GetMoviesProvider call(
-    MovieArguments args,
+    MediaArguments args,
   ) {
     return GetMoviesProvider(
       args,
