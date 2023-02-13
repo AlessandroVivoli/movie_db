@@ -1,8 +1,8 @@
+import '../../media/domain/sort_by.dart';
 import '../../time_window/domain/time_window.dart';
 import 'movie.dart';
 import 'movie_details.dart';
 import 'movie_list.dart';
-import 'sort_by.dart';
 
 abstract class IMovieService {
   /// Returns trending [List] of [Movie] future.

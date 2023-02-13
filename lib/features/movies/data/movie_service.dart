@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 
+import '../../media/domain/sort_by.dart';
 import '../../time_window/domain/time_window.dart';
 import '../domain/i_movie_service.dart';
 import '../domain/movie.dart';
 import '../domain/movie_details.dart';
 import '../domain/movie_list.dart';
-import '../domain/sort_by.dart';
 
 class MovieService implements IMovieService {
   final Dio _dio;
