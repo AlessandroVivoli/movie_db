@@ -5,6 +5,8 @@ import '../../../../features/movies/domain/backdrop_sizes_enum.dart';
 import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
 import '../../../../routing/routes.dart';
 import '../../backdrop_image/backdrop_image.dart';
+import '../shared/carousel_play_icon.dart';
+import '../shared/carousel_title_text.dart';
 
 class MovieCarouselItem extends ConsumerWidget {
   final String? image;
@@ -31,8 +33,8 @@ class MovieCarouselItem extends ConsumerWidget {
           ),
           placeholderIcon: const Icon(Icons.movie),
         ),
-        _TitleText(title: title),
-        const _PlayIcon(),
+        CarouselTitleText(title: title),
+        const PlayIcon(),
         GestureDetector(
           onTap: () {
             Navigator.pushNamed(
@@ -43,61 +45,6 @@ class MovieCarouselItem extends ConsumerWidget {
           },
         ),
       ],
-    );
-  }
-}
-
-class _PlayIcon extends StatelessWidget {
-  const _PlayIcon();
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.play_circle_outline,
-                color: Theme.of(context).colorScheme.primary,
-                size: 70,
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class _TitleText extends StatelessWidget {
-  const _TitleText({required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 30, left: 10, right: 10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 190,
-            child: Text(
-              title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          )
-        ],
-      ),
     );
   }
 }

@@ -14,22 +14,35 @@ class MovieCarousel extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = usePageController();
+    final page = useState(0);
 
     return SizedBox(
       height: height,
       child: Stack(
         children: [
-          PageView.builder(
-            controller: controller,
-            itemCount: movies.length,
-            pageSnapping: true,
-            itemBuilder: (context, index) {
-              return MovieCarouselItem(
-                image: movies[index].backdropPath,
-                title: movies[index].title!,
-                id: movies[index].id,
+          NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (notification) {
+              controller.animateToPage(
+                (page.value == 0) ? movies.length - 1 : 0,
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.linear,
               );
+
+              return true;
             },
+            child: PageView.builder(
+              onPageChanged: (index) => page.value = index,
+              controller: controller,
+              itemCount: movies.length,
+              pageSnapping: true,
+              itemBuilder: (context, index) {
+                return MovieCarouselItem(
+                  image: movies[index].backdropPath,
+                  title: movies[index].title!,
+                  id: movies[index].id,
+                );
+              },
+            ),
           ),
           Positioned(
             bottom: 0,
