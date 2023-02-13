@@ -31,7 +31,7 @@ class GenreList extends ConsumerWidget {
               ),
             ),
             child: Text(
-              localization.translateMovieGenres(
+              localization.translateGenres(
                 genres[index].name.replaceAll(' ', ''),
               ),
               style: TextStyle(color: Theme.of(context).colorScheme.secondary),

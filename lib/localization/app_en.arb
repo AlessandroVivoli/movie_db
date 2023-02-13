@@ -166,8 +166,8 @@
   "personDepartmentLabel": "Known for",
   "personLifetimeLabel": "Lifetime",
   "noBiography": "No biography",
-  "translateMovieGenres": "{value, select, ScienceFiction{Science Fiction} TVMovie{TV Movie} other{{value}}}",
-  "@translateMovieGenres": {
+  "translateGenres": "{value, select, ScienceFiction{Science Fiction} TVMovie{TV Movie} ActionAndAdventure{Action & Adventure} SciFiAndFantasy{Sci-Fi & Fantasy} WarAndPolitics{War & Politics} other{{value}}}",
+  "@translateGenres": {
     "description": "Genres based on locale",
     "placeholders": {
       "value": {
@@ -200,5 +200,12 @@
   "getTVGenresError": "Could not get tv genres",
   "@getTVGenresError": {
     "description": "Indicating an error that was thrown while fetching tv genres."
-  }
+  },
+  "topRatedTvsSectionTitle": "Top rated tvs",
+  "bottomBarMoviesLabel": "Movies",
+  "bottomBarTVShowsLabel": "TV Shows",
+  "bottomBarWatchlistLabel": "Watchlist",
+  "bottomBarFavoritesLabel": "Favorites",
+  "noPopularMovies": "No popular movie found.",
+  "getPopularMoviesError": "Could not get popular movies"
 }

@@ -74,8 +74,8 @@
   "personCreditsLabel": "Zasluge",
   "personDepartmentLabel": "Poznat po",
   "personLifetimeLabel": "Godište",
-  "translateMovieGenres": "{value, select, Action{Akcija} Adventure{Avantura} Animation{Animirani} Comedy{Komedija} Crime{Kriminalni} Documentary{Documentarac} Family{Obiteljski} Fantasy{Fantazija} History{Povijesni} Horror{Horor} Music{Glazbeni} Mistery{Misterij} Romance{Romantički} ScienceFiction{Znanstvena Fantastika} TVMovie{TV Film} Thriller{Triler} War{Ratni} other{{value}}}",
-  "@translateMovieGenres": {
+  "translateGenres": "{value, select, Action{Akcija} Adventure{Avantura} Animation{Animirani} Comedy{Komedija} Crime{Kriminalni} Documentary{Documentarac} Family{Obiteljski} Fantasy{Fantazija} History{Povijesni} Horror{Horor} Music{Glazbeni} Mistery{Misterij} Romance{Romantički} ScienceFiction{Znanstvena Fantastika} TVMovie{TV Film} Thriller{Triler} War{Ratni} ActionAndAdventure{Akcija & Avantura} SciFiAndFantasy{Sci-Fi & Fantazija} WarAndPolitics{Rat & Politika} Kids{Dječji} Mystery{Misterij} News{Vijesti} Soap{Sapunice} Talk{Razgovor} other{{value}}}",
+  "@translateGenres": {
     "placeholders": {
       "value": {
         "type": "String"
@@ -93,5 +93,12 @@
   "noMovieGenres": "Nije pronađen nijedan filmski žanr.",
   "getMovieGenresError": "Nije moguće dobiti filmske žanrove",
   "noTVGenres": "Nije pronađen nijedan tv žanr.",
-  "getTVGenresError": "Nije moguće dobiti tv žanrove"
+  "getTVGenresError": "Nije moguće dobiti tv žanrove",
+  "topRatedTvsSectionTitle": "Top rated tvs",
+  "bottomBarMoviesLabel": "Filmovi",
+  "bottomBarTVShowsLabel": "TV Serije",
+  "bottomBarWatchlistLabel": "Popis gledanja",
+  "bottomBarFavoritesLabel": "Favoriti",
+  "noPopularMovies": "Nije pronađen nijedan popularni film.",
+  "getPopularMoviesError": "Nije moguće dobiti popularne filmove"
 }
