@@ -23,6 +23,7 @@ _$_TVShow _$$_TVShowFromJson(Map<String, dynamic> json) => _$_TVShow(
       voteCount: json['vote_count'] as int,
       name: json['name'] as String,
       originalName: json['original_name'] as String,
+      adult: json['adult'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_TVShowToJson(_$_TVShow instance) => <String, dynamic>{
@@ -38,6 +39,7 @@ Map<String, dynamic> _$$_TVShowToJson(_$_TVShow instance) => <String, dynamic>{
       'vote_count': instance.voteCount,
       'name': instance.name,
       'original_name': instance.originalName,
+      'adult': instance.adult,
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

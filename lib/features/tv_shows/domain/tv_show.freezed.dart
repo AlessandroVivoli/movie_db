@@ -33,6 +33,7 @@ mixin _$TVShow {
   int get voteCount => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get originalName => throw _privateConstructorUsedError;
+  bool get adult => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -56,7 +57,8 @@ abstract class $TVShowCopyWith<$Res> {
       List<int> genreIds,
       int voteCount,
       String name,
-      String originalName});
+      String originalName,
+      bool adult});
 }
 
 /// @nodoc
@@ -84,6 +86,7 @@ class _$TVShowCopyWithImpl<$Res, $Val extends TVShow>
     Object? voteCount = null,
     Object? name = null,
     Object? originalName = null,
+    Object? adult = null,
   }) {
     return _then(_value.copyWith(
       posterPath: freezed == posterPath
@@ -134,6 +137,10 @@ class _$TVShowCopyWithImpl<$Res, $Val extends TVShow>
           ? _value.originalName
           : originalName // ignore: cast_nullable_to_non_nullable
               as String,
+      adult: null == adult
+          ? _value.adult
+          : adult // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -156,7 +163,8 @@ abstract class _$$_TVShowCopyWith<$Res> implements $TVShowCopyWith<$Res> {
       List<int> genreIds,
       int voteCount,
       String name,
-      String originalName});
+      String originalName,
+      bool adult});
 }
 
 /// @nodoc
@@ -181,6 +189,7 @@ class __$$_TVShowCopyWithImpl<$Res>
     Object? voteCount = null,
     Object? name = null,
     Object? originalName = null,
+    Object? adult = null,
   }) {
     return _then(_$_TVShow(
       posterPath: freezed == posterPath
@@ -231,6 +240,10 @@ class __$$_TVShowCopyWithImpl<$Res>
           ? _value.originalName
           : originalName // ignore: cast_nullable_to_non_nullable
               as String,
+      adult: null == adult
+          ? _value.adult
+          : adult // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -250,7 +263,8 @@ class _$_TVShow implements _TVShow {
       required final List<int> genreIds,
       required this.voteCount,
       required this.name,
-      required this.originalName})
+      required this.originalName,
+      this.adult = false})
       : _originCountry = originCountry,
         _genreIds = genreIds;
 
@@ -294,10 +308,13 @@ class _$_TVShow implements _TVShow {
   final String name;
   @override
   final String originalName;
+  @override
+  @JsonKey()
+  final bool adult;
 
   @override
   String toString() {
-    return 'TVShow(posterPath: $posterPath, popularity: $popularity, id: $id, backdropPath: $backdropPath, voteAverage: $voteAverage, overview: $overview, firstAirDate: $firstAirDate, originCountry: $originCountry, genreIds: $genreIds, voteCount: $voteCount, name: $name, originalName: $originalName)';
+    return 'TVShow(posterPath: $posterPath, popularity: $popularity, id: $id, backdropPath: $backdropPath, voteAverage: $voteAverage, overview: $overview, firstAirDate: $firstAirDate, originCountry: $originCountry, genreIds: $genreIds, voteCount: $voteCount, name: $name, originalName: $originalName, adult: $adult)';
   }
 
   @override
@@ -325,7 +342,8 @@ class _$_TVShow implements _TVShow {
                 other.voteCount == voteCount) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.originalName, originalName) ||
-                other.originalName == originalName));
+                other.originalName == originalName) &&
+            (identical(other.adult, adult) || other.adult == adult));
   }
 
   @JsonKey(ignore: true)
@@ -343,7 +361,8 @@ class _$_TVShow implements _TVShow {
       const DeepCollectionEquality().hash(_genreIds),
       voteCount,
       name,
-      originalName);
+      originalName,
+      adult);
 
   @JsonKey(ignore: true)
   @override
@@ -372,7 +391,8 @@ abstract class _TVShow implements TVShow {
       required final List<int> genreIds,
       required final int voteCount,
       required final String name,
-      required final String originalName}) = _$_TVShow;
+      required final String originalName,
+      final bool adult}) = _$_TVShow;
 
   factory _TVShow.fromJson(Map<String, dynamic> json) = _$_TVShow.fromJson;
 
@@ -401,6 +421,8 @@ abstract class _TVShow implements TVShow {
   String get name;
   @override
   String get originalName;
+  @override
+  bool get adult;
   @override
   @JsonKey(ignore: true)
   _$$_TVShowCopyWith<_$_TVShow> get copyWith =>

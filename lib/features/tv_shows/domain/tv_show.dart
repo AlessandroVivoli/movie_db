@@ -20,6 +20,7 @@ class TVShow with _$TVShow {
     required int voteCount,
     required String name,
     required String originalName,
+    @Default(false) bool adult,
   }) = _TVShow;
 
   factory TVShow.fromJson(Map<String, Object?> json) => _$TVShowFromJson(json);
