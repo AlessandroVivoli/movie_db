@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'movie_arguments.dart';
+part of 'media_arguments.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MovieArguments _$$_MovieArgumentsFromJson(Map<String, dynamic> json) =>
-    _$_MovieArguments(
+_$_MediaArguments _$$_MediaArgumentsFromJson(Map<String, dynamic> json) =>
+    _$_MediaArguments(
       withGenres:
           (json['with_genres'] as List<dynamic>).map((e) => e as int).toList(),
       sortBy: json['sort_by'] == null
@@ -16,7 +16,7 @@ _$_MovieArguments _$$_MovieArgumentsFromJson(Map<String, dynamic> json) =>
       includeAdult: json['include_adult'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_MovieArgumentsToJson(_$_MovieArguments instance) =>
+Map<String, dynamic> _$$_MediaArgumentsToJson(_$_MediaArguments instance) =>
     <String, dynamic>{
       'with_genres': instance.withGenres,
       'sort_by': instance.sortBy.toJson(),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../features/movies/domain/movie_arguments.dart';
-import '../../../../features/movies/domain/sort_by.dart';
+import '../../../../features/media/domain/media_arguments.dart';
+import '../../../../features/media/domain/sort_by.dart';
 import '../../../../features/movies/provider/get_movies_provider.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../../errors/error_text.dart';
@@ -23,7 +23,7 @@ class GenreTabMovies extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final movieList = ref.watch(
       getMoviesProvider(
-        MovieArguments(
+        MediaArguments(
           withGenres: [genreId],
           includeAdult: includeAdult,
           sortBy: SortBy.popularityDesc,
@@ -36,8 +36,8 @@ class GenreTabMovies extends ConsumerWidget {
     return movieList.when(
       data: (movies) {
         if (movies.isEmpty) {
-          return const Center(
-            child: Text('Nothing found.'),
+          return Center(
+            child: Text(localization.noPopularMovies),
           );
         }
 
@@ -47,7 +47,7 @@ class GenreTabMovies extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar('Could not get movies.');
+        context.showErrorSnackBar(localization.getPopularMoviesError);
 
         return Center(
           child: ErrorText(localization.unexpectedErrorMessage),
