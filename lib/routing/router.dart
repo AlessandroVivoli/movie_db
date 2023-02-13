@@ -5,6 +5,7 @@ import '../ui/auth/login_screen.dart';
 import '../ui/home/home_screen.dart';
 import '../ui/movie_details/movie_details_screen.dart';
 import '../ui/person_details/person_details_screen.dart';
+import '../ui/tv_show/tv_details/tv_details_screen.dart';
 import '../ui/video/video_screen.dart';
 import 'routes.dart';
 
@@ -56,6 +57,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case AppRoute.account:
       return MaterialPageRoute(
         builder: (context) => const AccountDetailsScreen(),
+      );
+
+    case AppRoute.tv:
+      final tvId = settings.arguments as int;
+
+      return MaterialPageRoute(
+        builder: (context) => TVDetailsScreen(
+          tvId: tvId,
+        ),
       );
     default:
       throw Exception('Route ${settings.name} doesn\'t exist');

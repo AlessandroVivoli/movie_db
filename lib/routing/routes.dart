@@ -5,4 +5,5 @@ abstract class AppRoute {
   static const play = 'play';
   static const login = 'login';
   static const account = 'account';
+  static const tv = 'tv';
 }
