@@ -6,6 +6,7 @@ import '../domain/i_tv_show_service.dart';
 
 part 'tv_show_service_provider.g.dart';
 
-@riverpod
-ITVShowService tvShowService(TvShowServiceRef ref) =>
-    TVShowService(ref.watch(dioProvider));
+@Riverpod(keepAlive: true)
+ITVShowService tvShowService(TvShowServiceRef ref) {
+  return TVShowService(ref.watch(dioProvider));
+}

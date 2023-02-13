@@ -29,14 +29,14 @@ class _SystemHash {
   }
 }
 
-String _$tvShowServiceHash() => r'fa70c3fb4d3140460383c539affbd0c503becbc3';
+String _$tvShowServiceHash() => r'f89566b5b09e213cba177b786001d4164422a3d6';
 
 /// See also [tvShowService].
-final tvShowServiceProvider = AutoDisposeProvider<ITVShowService>(
+final tvShowServiceProvider = Provider<ITVShowService>(
   tvShowService,
   name: r'tvShowServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$tvShowServiceHash,
 );
-typedef TvShowServiceRef = AutoDisposeProviderRef<ITVShowService>;
+typedef TvShowServiceRef = ProviderRef<ITVShowService>;
