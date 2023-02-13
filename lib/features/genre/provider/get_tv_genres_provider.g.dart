@@ -29,13 +29,13 @@ class _SystemHash {
   }
 }
 
-String _$getTVGenresHash() => r'aa1a5cf6e78690e5ad7dcb99c25efaee862f4966';
+String _$getTVGenresHash() => r'b74288efc1e06f6a8de9779a2bbb15c080e1c677';
 
 /// See also [getTVGenres].
-final getTVGenresProvider = AutoDisposeFutureProvider<List<Genre>>(
+final getTVGenresProvider = FutureProvider<List<Genre>>(
   getTVGenres,
   name: r'getTVGenresProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$getTVGenresHash,
 );
-typedef GetTVGenresRef = AutoDisposeFutureProviderRef<List<Genre>>;
+typedef GetTVGenresRef = FutureProviderRef<List<Genre>>;
