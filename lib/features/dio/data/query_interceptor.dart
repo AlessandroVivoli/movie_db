@@ -3,6 +3,15 @@ import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+final _ignoreLanguages = [
+  'hr',
+];
+
+final _ignorePaths = [
+  '/genre/movie/list',
+  '/genre/tv/list',
+];
+
 class QueryInterceptor extends Interceptor {
   final Locale locale;
   final String? sessionId;
@@ -11,10 +20,11 @@ class QueryInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    final containsLanguage = _ignoreLanguages.contains(locale.languageCode);
+    final containsPath = _ignorePaths.contains(options.path);
+
     final language =
-        (locale.languageCode == 'hr' && options.path == '/genre/movie/list')
-            ? const Locale('en')
-            : locale;
+        (containsLanguage && containsPath) ? const Locale('en') : locale;
 
     options.queryParameters.addAll({
       'api_key': dotenv.get('TMDB_API_KEY'),
