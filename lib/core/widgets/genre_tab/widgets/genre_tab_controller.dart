@@ -4,16 +4,19 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/genre/domain/genre.dart';
 import 'genre_tab_movies.dart';
+import 'genre_tab_tvs.dart';
 
 class GenreTabController extends ConsumerWidget {
   const GenreTabController({
     super.key,
     required this.data,
     this.includeAdult = false,
+    required this.mediaType,
   });
 
   final List<Genre> data;
   final bool includeAdult;
+  final String mediaType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,6 +25,7 @@ class GenreTabController extends ConsumerWidget {
     return DefaultTabController(
       length: data.length,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           TabBar(
             isScrollable: true,
@@ -31,24 +35,33 @@ class GenreTabController extends ConsumerWidget {
                 return Tab(
                   child: Text(
                     localization.translateMovieGenres(
-                      data[index].name.replaceAll(' ', ''),
+                      data[index]
+                          .name
+                          .replaceAll(' ', '')
+                          .replaceAll('&', 'And')
+                          .replaceAll('-', ''),
                     ),
                   ),
                 );
               },
             ),
           ),
-          LimitedBox(
-            maxHeight: 250,
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 250),
             child: TabBarView(
               children: List<Widget>.generate(
                 data.length,
                 (index) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: GenreTabMovies(
-                    genreId: data[index].id,
-                    includeAdult: includeAdult,
-                  ),
+                  child: (mediaType == 'movie')
+                      ? GenreTabMovies(
+                          genreId: data[index].id,
+                          includeAdult: includeAdult,
+                        )
+                      : GenreTabTvs(
+                          genreId: data[index].id,
+                          includeAdult: includeAdult,
+                        ),
                 ),
               ),
             ),
