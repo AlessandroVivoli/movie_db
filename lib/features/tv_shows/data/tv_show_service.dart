@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../account/domain/account_media_status/account_media_status.dart';
-import '../../movies/domain/sort_by.dart';
+import '../../media/domain/sort_by.dart';
 import '../../time_window/domain/time_window.dart';
 import '../domain/i_tv_show_service.dart';
 import '../domain/tv_show.dart';
@@ -35,6 +35,7 @@ class TVShowService extends ITVShowService {
   Future<List<TVShow>> getTVShows({
     List<int>? withGenres,
     SortBy sortBy = SortBy.popularityDesc,
+    bool includeAdult = false,
   }) {
     return _dio
         .get(
@@ -42,6 +43,7 @@ class TVShowService extends ITVShowService {
           queryParameters: {
             'with_genres': withGenres?.join(','),
             'sort_by': sortBy.toString(),
+            'include_adult': includeAdult,
           },
         )
         .then((res) => List<Map<String, Object?>>.from(res.data['results']))
@@ -61,8 +63,8 @@ class TVShowService extends ITVShowService {
     TimeWindow timeWindow = TimeWindow.week,
   }) {
     return _dio
-        .get('/rending/tv/$timeWindow')
-        .then((res) => List<Map<String, Object?>>.from(res.data['resuilts']))
+        .get('/trending/tv/$timeWindow')
+        .then((res) => List<Map<String, Object?>>.from(res.data['results']))
         .then((list) => list.map(TVShow.fromJson).toList());
   }
 
