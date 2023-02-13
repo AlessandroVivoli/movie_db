@@ -15,10 +15,10 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 120),
+      constraints: const BoxConstraints(maxWidth: 120, minHeight: 200),
       child: GestureDetector(
-        onTap: () async {
-          await Navigator.pushNamed(
+        onTap: () {
+          Navigator.pushNamed(
             context,
             AppRoute.movie,
             arguments: movie.id,
