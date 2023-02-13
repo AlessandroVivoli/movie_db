@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'movie_images.dart';
+part of 'media_images.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MovieImages _$$_MovieImagesFromJson(Map<String, dynamic> json) =>
-    _$_MovieImages(
+_$_MediaImages _$$_MediaImagesFromJson(Map<String, dynamic> json) =>
+    _$_MediaImages(
       id: json['id'] as int,
       backdrops: (json['backdrops'] as List<dynamic>)
           .map((e) => ImageModel.fromJson(e as Map<String, dynamic>))
@@ -17,7 +17,7 @@ _$_MovieImages _$$_MovieImagesFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_MovieImagesToJson(_$_MovieImages instance) =>
+Map<String, dynamic> _$$_MediaImagesToJson(_$_MediaImages instance) =>
     <String, dynamic>{
       'id': instance.id,
       'backdrops': instance.backdrops.map((e) => e.toJson()).toList(),
