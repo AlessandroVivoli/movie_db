@@ -8,14 +8,13 @@ import '../../../../../core/widgets/movie_list/movie_list.dart';
 import '../../../../../features/movies/provider/get_top_rated_movies_provider.dart';
 
 class TopRatedMoviesSection extends StatelessWidget {
-  const TopRatedMoviesSection({
-    super.key,
-  });
+  const TopRatedMoviesSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: const [
         _TopRatedMoviesText(),
         _TopRatedMoviesList(),
