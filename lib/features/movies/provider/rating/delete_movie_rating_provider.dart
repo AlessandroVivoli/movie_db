@@ -5,10 +5,10 @@ import '../../domain/rate_state.dart';
 import '../get_movie_details_provider.dart';
 import '../movie_service_provider.dart';
 
-part 'delete_rating_provider.g.dart';
+part 'delete_movie_rating_provider.g.dart';
 
 @riverpod
-class DeleteRating extends _$DeleteRating {
+class DeleteMovieRating extends _$DeleteMovieRating {
   @override
   RateState build() => const RateState.idle();
 

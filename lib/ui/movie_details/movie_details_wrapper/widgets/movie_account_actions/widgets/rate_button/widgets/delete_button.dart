@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../../features/auth/domain/user.dart';
 import '../../../../../../../../core/extensions/build_context_extensions.dart';
-import '../../../../../../../../features/movies/provider/rating/delete_rating_provider.dart';
+import '../../../../../../../../features/movies/provider/rating/delete_movie_rating_provider.dart';
 
 class DeleteButton extends ConsumerWidget {
   const DeleteButton({
@@ -20,11 +20,11 @@ class DeleteButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(deleteRatingProvider);
+    final provider = ref.watch(deleteMovieRatingProvider);
 
     final localization = AppLocalizations.of(context)!;
 
-    ref.listen(deleteRatingProvider, (previous, next) {
+    ref.listen(deleteMovieRatingProvider, (previous, next) {
       next.whenOrNull(
         success: () => Navigator.pop(context),
         error: (error, stackTrace) {
@@ -67,7 +67,8 @@ class _DeleteButton extends ConsumerWidget {
 
     return OutlinedButton(
       onPressed: (originalRating > 0)
-          ? () => ref.read(deleteRatingProvider.notifier).deleteRating(movieId)
+          ? () =>
+              ref.read(deleteMovieRatingProvider.notifier).deleteRating(movieId)
           : null,
       style: OutlinedButton.styleFrom(
         foregroundColor: Colors.red,
