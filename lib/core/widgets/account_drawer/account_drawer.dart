@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../features/account/provider/favorite_movies/get_favorite_movies_provider.dart';
+import '../../../features/account/provider/favorites/get_favorite_movies_provider.dart';
 import '../../../features/account/provider/get_rated_movies_provider.dart';
 import '../../../features/account/provider/watchlist/get_movie_watchlist_provider.dart';
 import '../../../features/auth/provider/auth_provider.dart';
