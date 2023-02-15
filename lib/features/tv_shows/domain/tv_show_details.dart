@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/converters/date_time_converter.dart';
+import '../../account/domain/account_media_status/account_media_status.dart';
 import '../../genre/domain/genre.dart';
 import '../../networks/domain/network.dart';
 import '../../production/domain/production_company.dart';
@@ -34,7 +35,7 @@ class TVShowDetails with _$TVShowDetails {
     required int numberOfEpisodes,
     required int numberOfSeasons,
     required List<String> originCountry,
-    required String orignalLanguage,
+    required String? orignalLanguage,
     required String originalName,
     required String overview,
     required double popularity,
@@ -48,6 +49,7 @@ class TVShowDetails with _$TVShowDetails {
     required String type,
     required double voteAverage,
     required int voteCount,
+    required AccountMediaStatus? accountStates,
     required ReviewListModel reviews,
   }) = _TVShowDetails;
 

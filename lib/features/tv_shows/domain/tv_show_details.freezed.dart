@@ -39,7 +39,7 @@ mixin _$TVShowDetails {
   int get numberOfEpisodes => throw _privateConstructorUsedError;
   int get numberOfSeasons => throw _privateConstructorUsedError;
   List<String> get originCountry => throw _privateConstructorUsedError;
-  String get orignalLanguage => throw _privateConstructorUsedError;
+  String? get orignalLanguage => throw _privateConstructorUsedError;
   String get originalName => throw _privateConstructorUsedError;
   String get overview => throw _privateConstructorUsedError;
   double get popularity => throw _privateConstructorUsedError;
@@ -56,6 +56,7 @@ mixin _$TVShowDetails {
   String get type => throw _privateConstructorUsedError;
   double get voteAverage => throw _privateConstructorUsedError;
   int get voteCount => throw _privateConstructorUsedError;
+  AccountMediaStatus? get accountStates => throw _privateConstructorUsedError;
   ReviewListModel get reviews => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -88,7 +89,7 @@ abstract class $TVShowDetailsCopyWith<$Res> {
       int numberOfEpisodes,
       int numberOfSeasons,
       List<String> originCountry,
-      String orignalLanguage,
+      String? orignalLanguage,
       String originalName,
       String overview,
       double popularity,
@@ -102,10 +103,12 @@ abstract class $TVShowDetailsCopyWith<$Res> {
       String type,
       double voteAverage,
       int voteCount,
+      AccountMediaStatus? accountStates,
       ReviewListModel reviews});
 
   $TVEpisodeCopyWith<$Res> get lastEpisodeToAir;
   $TVEpisodeCopyWith<$Res>? get nextEpisodeToAir;
+  $AccountMediaStatusCopyWith<$Res>? get accountStates;
   $ReviewListModelCopyWith<$Res> get reviews;
 }
 
@@ -139,7 +142,7 @@ class _$TVShowDetailsCopyWithImpl<$Res, $Val extends TVShowDetails>
     Object? numberOfEpisodes = null,
     Object? numberOfSeasons = null,
     Object? originCountry = null,
-    Object? orignalLanguage = null,
+    Object? orignalLanguage = freezed,
     Object? originalName = null,
     Object? overview = null,
     Object? popularity = null,
@@ -153,6 +156,7 @@ class _$TVShowDetailsCopyWithImpl<$Res, $Val extends TVShowDetails>
     Object? type = null,
     Object? voteAverage = null,
     Object? voteCount = null,
+    Object? accountStates = freezed,
     Object? reviews = null,
   }) {
     return _then(_value.copyWith(
@@ -224,10 +228,10 @@ class _$TVShowDetailsCopyWithImpl<$Res, $Val extends TVShowDetails>
           ? _value.originCountry
           : originCountry // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      orignalLanguage: null == orignalLanguage
+      orignalLanguage: freezed == orignalLanguage
           ? _value.orignalLanguage
           : orignalLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       originalName: null == originalName
           ? _value.originalName
           : originalName // ignore: cast_nullable_to_non_nullable
@@ -280,6 +284,10 @@ class _$TVShowDetailsCopyWithImpl<$Res, $Val extends TVShowDetails>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int,
+      accountStates: freezed == accountStates
+          ? _value.accountStates
+          : accountStates // ignore: cast_nullable_to_non_nullable
+              as AccountMediaStatus?,
       reviews: null == reviews
           ? _value.reviews
           : reviews // ignore: cast_nullable_to_non_nullable
@@ -304,6 +312,18 @@ class _$TVShowDetailsCopyWithImpl<$Res, $Val extends TVShowDetails>
 
     return $TVEpisodeCopyWith<$Res>(_value.nextEpisodeToAir!, (value) {
       return _then(_value.copyWith(nextEpisodeToAir: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AccountMediaStatusCopyWith<$Res>? get accountStates {
+    if (_value.accountStates == null) {
+      return null;
+    }
+
+    return $AccountMediaStatusCopyWith<$Res>(_value.accountStates!, (value) {
+      return _then(_value.copyWith(accountStates: value) as $Val);
     });
   }
 
@@ -342,7 +362,7 @@ abstract class _$$_TVShowDetailsCopyWith<$Res>
       int numberOfEpisodes,
       int numberOfSeasons,
       List<String> originCountry,
-      String orignalLanguage,
+      String? orignalLanguage,
       String originalName,
       String overview,
       double popularity,
@@ -356,12 +376,15 @@ abstract class _$$_TVShowDetailsCopyWith<$Res>
       String type,
       double voteAverage,
       int voteCount,
+      AccountMediaStatus? accountStates,
       ReviewListModel reviews});
 
   @override
   $TVEpisodeCopyWith<$Res> get lastEpisodeToAir;
   @override
   $TVEpisodeCopyWith<$Res>? get nextEpisodeToAir;
+  @override
+  $AccountMediaStatusCopyWith<$Res>? get accountStates;
   @override
   $ReviewListModelCopyWith<$Res> get reviews;
 }
@@ -394,7 +417,7 @@ class __$$_TVShowDetailsCopyWithImpl<$Res>
     Object? numberOfEpisodes = null,
     Object? numberOfSeasons = null,
     Object? originCountry = null,
-    Object? orignalLanguage = null,
+    Object? orignalLanguage = freezed,
     Object? originalName = null,
     Object? overview = null,
     Object? popularity = null,
@@ -408,6 +431,7 @@ class __$$_TVShowDetailsCopyWithImpl<$Res>
     Object? type = null,
     Object? voteAverage = null,
     Object? voteCount = null,
+    Object? accountStates = freezed,
     Object? reviews = null,
   }) {
     return _then(_$_TVShowDetails(
@@ -479,10 +503,10 @@ class __$$_TVShowDetailsCopyWithImpl<$Res>
           ? _value._originCountry
           : originCountry // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      orignalLanguage: null == orignalLanguage
+      orignalLanguage: freezed == orignalLanguage
           ? _value.orignalLanguage
           : orignalLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       originalName: null == originalName
           ? _value.originalName
           : originalName // ignore: cast_nullable_to_non_nullable
@@ -535,6 +559,10 @@ class __$$_TVShowDetailsCopyWithImpl<$Res>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int,
+      accountStates: freezed == accountStates
+          ? _value.accountStates
+          : accountStates // ignore: cast_nullable_to_non_nullable
+              as AccountMediaStatus?,
       reviews: null == reviews
           ? _value.reviews
           : reviews // ignore: cast_nullable_to_non_nullable
@@ -578,6 +606,7 @@ class _$_TVShowDetails implements _TVShowDetails {
       required this.type,
       required this.voteAverage,
       required this.voteCount,
+      required this.accountStates,
       required this.reviews})
       : _createdBy = createdBy,
         _episodeRunTime = episodeRunTime,
@@ -666,7 +695,7 @@ class _$_TVShowDetails implements _TVShowDetails {
   }
 
   @override
-  final String orignalLanguage;
+  final String? orignalLanguage;
   @override
   final String originalName;
   @override
@@ -720,11 +749,13 @@ class _$_TVShowDetails implements _TVShowDetails {
   @override
   final int voteCount;
   @override
+  final AccountMediaStatus? accountStates;
+  @override
   final ReviewListModel reviews;
 
   @override
   String toString() {
-    return 'TVShowDetails(backdropPath: $backdropPath, createdBy: $createdBy, episodeRunTime: $episodeRunTime, firstAirDate: $firstAirDate, genres: $genres, homepage: $homepage, id: $id, inProduction: $inProduction, languages: $languages, lastAirDate: $lastAirDate, lastEpisodeToAir: $lastEpisodeToAir, name: $name, nextEpisodeToAir: $nextEpisodeToAir, networks: $networks, numberOfEpisodes: $numberOfEpisodes, numberOfSeasons: $numberOfSeasons, originCountry: $originCountry, orignalLanguage: $orignalLanguage, originalName: $originalName, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, productionCountries: $productionCountries, seasons: $seasons, spokenLanguages: $spokenLanguages, status: $status, tagline: $tagline, type: $type, voteAverage: $voteAverage, voteCount: $voteCount, reviews: $reviews)';
+    return 'TVShowDetails(backdropPath: $backdropPath, createdBy: $createdBy, episodeRunTime: $episodeRunTime, firstAirDate: $firstAirDate, genres: $genres, homepage: $homepage, id: $id, inProduction: $inProduction, languages: $languages, lastAirDate: $lastAirDate, lastEpisodeToAir: $lastEpisodeToAir, name: $name, nextEpisodeToAir: $nextEpisodeToAir, networks: $networks, numberOfEpisodes: $numberOfEpisodes, numberOfSeasons: $numberOfSeasons, originCountry: $originCountry, orignalLanguage: $orignalLanguage, originalName: $originalName, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, productionCountries: $productionCountries, seasons: $seasons, spokenLanguages: $spokenLanguages, status: $status, tagline: $tagline, type: $type, voteAverage: $voteAverage, voteCount: $voteCount, accountStates: $accountStates, reviews: $reviews)';
   }
 
   @override
@@ -786,6 +817,8 @@ class _$_TVShowDetails implements _TVShowDetails {
                 other.voteAverage == voteAverage) &&
             (identical(other.voteCount, voteCount) ||
                 other.voteCount == voteCount) &&
+            (identical(other.accountStates, accountStates) ||
+                other.accountStates == accountStates) &&
             (identical(other.reviews, reviews) || other.reviews == reviews));
   }
 
@@ -824,6 +857,7 @@ class _$_TVShowDetails implements _TVShowDetails {
         type,
         voteAverage,
         voteCount,
+        accountStates,
         reviews
       ]);
 
@@ -860,7 +894,7 @@ abstract class _TVShowDetails implements TVShowDetails {
       required final int numberOfEpisodes,
       required final int numberOfSeasons,
       required final List<String> originCountry,
-      required final String orignalLanguage,
+      required final String? orignalLanguage,
       required final String originalName,
       required final String overview,
       required final double popularity,
@@ -874,6 +908,7 @@ abstract class _TVShowDetails implements TVShowDetails {
       required final String type,
       required final double voteAverage,
       required final int voteCount,
+      required final AccountMediaStatus? accountStates,
       required final ReviewListModel reviews}) = _$_TVShowDetails;
 
   factory _TVShowDetails.fromJson(Map<String, dynamic> json) =
@@ -916,7 +951,7 @@ abstract class _TVShowDetails implements TVShowDetails {
   @override
   List<String> get originCountry;
   @override
-  String get orignalLanguage;
+  String? get orignalLanguage;
   @override
   String get originalName;
   @override
@@ -943,6 +978,8 @@ abstract class _TVShowDetails implements TVShowDetails {
   double get voteAverage;
   @override
   int get voteCount;
+  @override
+  AccountMediaStatus? get accountStates;
   @override
   ReviewListModel get reviews;
   @override

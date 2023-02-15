@@ -42,7 +42,7 @@ _$_TVShowDetails _$$_TVShowDetailsFromJson(Map<String, dynamic> json) =>
       originCountry: (json['origin_country'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      orignalLanguage: json['orignal_language'] as String,
+      orignalLanguage: json['orignal_language'] as String?,
       originalName: json['original_name'] as String,
       overview: json['overview'] as String,
       popularity: (json['popularity'] as num).toDouble(),
@@ -64,6 +64,10 @@ _$_TVShowDetails _$$_TVShowDetailsFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String,
       voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int,
+      accountStates: json['account_states'] == null
+          ? null
+          : AccountMediaStatus.fromJson(
+              json['account_states'] as Map<String, dynamic>),
       reviews:
           ReviewListModel.fromJson(json['reviews'] as Map<String, dynamic>),
     );
@@ -104,6 +108,7 @@ Map<String, dynamic> _$$_TVShowDetailsToJson(_$_TVShowDetails instance) =>
       'type': instance.type,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
+      'account_states': instance.accountStates?.toJson(),
       'reviews': instance.reviews.toJson(),
     };
 
