@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'add_movie_to_watchlist_provider.dart';
+part of 'add_to_watchlist_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,20 +29,19 @@ class _SystemHash {
   }
 }
 
-String _$MovieWatchlistHash() => r'f3236b07825c2a202e4a395c7b75bbae0eb8392a';
+String _$WatchlistHash() => r'9ee0c776594edab4b2b27577d53b5be360641e9d';
 
-/// See also [MovieWatchlist].
-final movieWatchlistProvider =
-    AutoDisposeNotifierProvider<MovieWatchlist, AccountMediaState>(
-  MovieWatchlist.new,
-  name: r'movieWatchlistProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$MovieWatchlistHash,
+/// See also [Watchlist].
+final watchlistProvider =
+    AutoDisposeNotifierProvider<Watchlist, AccountMediaState>(
+  Watchlist.new,
+  name: r'watchlistProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$WatchlistHash,
 );
-typedef MovieWatchlistRef = AutoDisposeNotifierProviderRef<AccountMediaState>;
+typedef WatchlistRef = AutoDisposeNotifierProviderRef<AccountMediaState>;
 
-abstract class _$MovieWatchlist extends AutoDisposeNotifier<AccountMediaState> {
+abstract class _$Watchlist extends AutoDisposeNotifier<AccountMediaState> {
   @override
   AccountMediaState build();
 }
