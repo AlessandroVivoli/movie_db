@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'rate_movies_provider.dart';
+part of 'rate_media_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,18 +29,18 @@ class _SystemHash {
   }
 }
 
-String _$RateMoviesHash() => r'383a5590a9a8aaa0eeb58cd50a27309510179295';
+String _$RateMediaHash() => r'6c77f3a4c698d8063275fcf555d4fe71e69df80e';
 
-/// See also [RateMovies].
-final rateMoviesProvider = AutoDisposeNotifierProvider<RateMovies, RateState>(
-  RateMovies.new,
-  name: r'rateMoviesProvider',
+/// See also [RateMedia].
+final rateMediaProvider = AutoDisposeNotifierProvider<RateMedia, RateState>(
+  RateMedia.new,
+  name: r'rateMediaProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$RateMoviesHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$RateMediaHash,
 );
-typedef RateMoviesRef = AutoDisposeNotifierProviderRef<RateState>;
+typedef RateMediaRef = AutoDisposeNotifierProviderRef<RateState>;
 
-abstract class _$RateMovies extends AutoDisposeNotifier<RateState> {
+abstract class _$RateMedia extends AutoDisposeNotifier<RateState> {
   @override
   RateState build();
 }
