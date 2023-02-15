@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'add_movie_to_favorites_provider.dart';
+part of 'add_to_favorites_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$FavoritesHash() => r'5af4f5baea143df86dddc121fdc9692063a24efb';
+String _$FavoritesHash() => r'd0c79486afd50490769726f6003fc793652c2745';
 
 /// See also [Favorites].
 final favoritesProvider =
