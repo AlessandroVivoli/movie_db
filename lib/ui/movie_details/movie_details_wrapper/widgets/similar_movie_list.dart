@@ -5,16 +5,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/extensions/build_context_extensions.dart';
 import '../../../../core/widgets/errors/error_text.dart';
 import '../../../../core/widgets/movie_list/movie_list.dart';
-import '../../../../features/movies/domain/movie_details.dart';
 import '../../../../features/movies/provider/get_similar_movies_provider.dart';
 
 class SimilarMovieList extends StatelessWidget {
   const SimilarMovieList({
     super.key,
-    required this.details,
+    required this.movieId,
   });
 
-  final MovieDetails details;
+  final int movieId;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class SimilarMovieList extends StatelessWidget {
           height: 300,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
-            child: _SimilarMoviesBuilder(details: details),
+            child: _SimilarMoviesBuilder(movieId: movieId),
           ),
         ),
       ],
@@ -47,14 +46,14 @@ class SimilarMovieList extends StatelessWidget {
 
 class _SimilarMoviesBuilder extends ConsumerWidget {
   const _SimilarMoviesBuilder({
-    required this.details,
+    required this.movieId,
   });
 
-  final MovieDetails details;
+  final int movieId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final similarMovieList = ref.watch(getSimilarMoviesProvider(details.id));
+    final similarMovieList = ref.watch(getSimilarMoviesProvider(movieId));
 
     final localization = AppLocalizations.of(context)!;
 
