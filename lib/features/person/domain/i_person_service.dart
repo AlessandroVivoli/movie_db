@@ -15,8 +15,11 @@ abstract class IPersonService {
   /// Returns [PersonDetials] future using the provided person [id].
   Future<PersonDetails> getPersonDetails({required int id});
 
-  /// Returns the [List] of [Person] cast using the provided [movieId].
-  Future<List<Person>> getCast({required int movieId});
+  /// Returns the [List] of [Person] cast using the provided [mediaId].
+  Future<List<Person>> getCast({
+    required int mediaId,
+    required String mediaType,
+  });
 
   /// Returns the [List] of [Movie] credits using the provided [personId]
   Future<List<Movie>> getPersonCredits({required int personId});

@@ -31,9 +31,12 @@ class PersonService implements IPersonService {
   }
 
   @override
-  Future<List<Person>> getCast({required int movieId}) {
+  Future<List<Person>> getCast({
+    required int mediaId,
+    required String mediaType,
+  }) {
     return _dio
-        .get('/movie/$movieId/credits')
+        .get('/$mediaType/$mediaId/credits')
         .then((res) => List<Map<String, Object?>>.from(res.data['cast']))
         .then((rawList) => rawList.map(Person.fromJson))
         .then((persons) => persons.toList());
