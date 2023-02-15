@@ -10,9 +10,9 @@ import '../../features/movies/domain/movie_details.dart';
 import '../../features/movies/provider/get_movie_details_provider.dart';
 import '../../features/movies/provider/get_similar_movies_provider.dart';
 import '../../features/person/provider/get_cast_provider.dart';
+import '../play_button/play_button.dart';
 import 'backdrop/backdrop.dart';
 import 'movie_details_wrapper/movie_details_wrapper.dart';
-import 'play_button/play_button.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
   final int movieId;
@@ -52,7 +52,7 @@ class _MovieDetailsWrapper extends ConsumerWidget {
       data: (details) => RefreshIndicator(
           onRefresh: () => Future(() {
                 ref.invalidate(getMovieDetailsProvider(movieId));
-                ref.invalidate(getCastProvider(movieId));
+                ref.invalidate(getCastProvider(movieId, 'movie'));
                 ref.invalidate(getSimilarMoviesProvider(movieId));
               }),
           child: _MovieDetailsBody(details: details)),
@@ -77,43 +77,37 @@ class _MovieDetailsWrapper extends ConsumerWidget {
   }
 }
 
-class _MovieDetailsBody extends StatelessWidget {
-  const _MovieDetailsBody({
-    required this.details,
-  });
+class _MovieDetailsBody extends HookWidget {
+  const _MovieDetailsBody({required this.details});
 
   final MovieDetails details;
 
   @override
   Widget build(BuildContext context) {
-    return HookBuilder(
-      builder: (context) {
-        final scrollController = useScrollController();
+    final scrollController = useScrollController();
 
-        return Stack(
-          children: [
-            CustomScrollView(
-              controller: scrollController,
-              slivers: [
-                MovieDetailsBackdrop(details: details),
-                SliverToBoxAdapter(
-                  child: MovieDetailsWrapper(
-                    details: details,
-                  ),
-                )
-              ],
-            ),
-            PlayButton(
-              controller: scrollController,
-              onPressed: () => Navigator.pushNamed(
-                context,
-                AppRoute.play,
-                arguments: details.id,
+    return Stack(
+      children: [
+        CustomScrollView(
+          controller: scrollController,
+          slivers: [
+            MovieDetailsBackdrop(details: details),
+            SliverToBoxAdapter(
+              child: MovieDetailsWrapper(
+                details: details,
               ),
             )
           ],
-        );
-      },
+        ),
+        PlayButton(
+          controller: scrollController,
+          onPressed: () => Navigator.pushNamed(
+            context,
+            AppRoute.play,
+            arguments: [details.id, 'movie'],
+          ),
+        )
+      ],
     );
   }
 }
