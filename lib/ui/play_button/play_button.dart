@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../features/play_button/hooks/play_button_hook.dart';
+import '../../../features/play_button/hooks/play_button_hook.dart';
 
 class PlayButton extends HookWidget {
   final ScrollController controller;
