@@ -9,13 +9,18 @@ import '../../features/video/provider/get_videos_provider.dart';
 import 'player/player.dart';
 
 class VideoScreen extends ConsumerWidget {
-  final int movieId;
+  final int mediaId;
+  final String mediaType;
 
-  const VideoScreen({super.key, required this.movieId});
+  const VideoScreen({
+    super.key,
+    required this.mediaId,
+    required this.mediaType,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final videos = ref.watch(getVideosProvider(movieId));
+    final videos = ref.watch(getVideosProvider(mediaId, mediaType));
 
     final localization = AppLocalizations.of(context)!;
 
