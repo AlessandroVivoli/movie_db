@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'delete_movie_rating_provider.dart';
+part of 'delete_rating_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,20 +29,19 @@ class _SystemHash {
   }
 }
 
-String _$DeleteMovieRatingHash() => r'65fd04ef836aa8b5d11f6ac99820c3ff1b1b0604';
+String _$DeleteRatingHash() => r'dd69d39aeee0e48ba458bd714351e30988d42650';
 
-/// See also [DeleteMovieRating].
-final deleteMovieRatingProvider =
-    AutoDisposeNotifierProvider<DeleteMovieRating, RateState>(
-  DeleteMovieRating.new,
-  name: r'deleteMovieRatingProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$DeleteMovieRatingHash,
+/// See also [DeleteRating].
+final deleteRatingProvider =
+    AutoDisposeNotifierProvider<DeleteRating, RateState>(
+  DeleteRating.new,
+  name: r'deleteRatingProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$DeleteRatingHash,
 );
-typedef DeleteMovieRatingRef = AutoDisposeNotifierProviderRef<RateState>;
+typedef DeleteRatingRef = AutoDisposeNotifierProviderRef<RateState>;
 
-abstract class _$DeleteMovieRating extends AutoDisposeNotifier<RateState> {
+abstract class _$DeleteRating extends AutoDisposeNotifier<RateState> {
   @override
   RateState build();
 }
