@@ -5,7 +5,8 @@ import '../ui/auth/login_screen.dart';
 import '../ui/home/home_screen.dart';
 import '../ui/movie_details/movie_details_screen.dart';
 import '../ui/person_details/person_details_screen.dart';
-import '../ui/tv_show/tv_details/tv_details_screen.dart';
+import '../ui/tv_details/season_details/season_details.dart';
+import '../ui/tv_details/tv_details_screen.dart';
 import '../ui/video/video_screen.dart';
 import 'routes.dart';
 
@@ -39,11 +40,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     // VideoScreen
     case AppRoute.play:
-      final movieId = settings.arguments as int;
+      final arguments = settings.arguments as List<dynamic>;
 
       return MaterialPageRoute(
         builder: (context) => VideoScreen(
-          movieId: movieId,
+          mediaId: arguments[0],
+          mediaType: arguments[1],
         ),
       );
 
@@ -67,6 +69,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           tvId: tvId,
         ),
       );
+
+    case AppRoute.season:
+    case AppRoute.episode:
+      final seasonId = settings.arguments as int;
+
+      return MaterialPageRoute(builder: (context) => const SeasonDetails());
     default:
       throw Exception('Route ${settings.name} doesn\'t exist');
   }

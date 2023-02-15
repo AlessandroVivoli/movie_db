@@ -6,4 +6,6 @@ abstract class AppRoute {
   static const login = 'login';
   static const account = 'account';
   static const tv = 'tv';
+  static const season = 'season';
+  static const episode = 'episode';
 }
