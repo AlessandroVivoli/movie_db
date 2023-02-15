@@ -15,7 +15,7 @@ class MovieDescription extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          localization.movieDescriptionLabel.toUpperCase(),
+          localization.descriptionLabel.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w600,
