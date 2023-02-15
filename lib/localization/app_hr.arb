@@ -55,7 +55,7 @@
   "topRatedMoviesSectionTitle": "Najbolje ocijenjeni filmovi",
   "trendingPersonsSectionTitle": "Popularne osobe ovog tjedna",
   "movieCastsLabel": "Filmska postava",
-  "movieDescriptionLabel": "Opis",
+  "descriptionLabel": "Opis",
   "genresSectionTitle": "Žanrovi",
   "movieBudgetLabel": "Buđet",
   "movieDurationLabel": "Trajanje filma",
@@ -106,5 +106,7 @@
   "noTvSearchResult": "Nije pronađena nijedna tv serija.",
   "nothingFound": "Nije ništa pronađeno",
   "searchMoviesError": "Nije moguće tražiti filmove",
-  "searchTVShowsError": "Nije moguće tražiti tv serije"
+  "searchTVShowsError": "Nije moguće tražiti tv serije",
+  "getTVDetailsError": "Nije moguće dobiti detalje o tv seriji",
+  "seasonsLabel": "Sezone"
 }

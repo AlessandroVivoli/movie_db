@@ -145,7 +145,7 @@
   "topRatedMoviesSectionTitle": "Top rated movies",
   "trendingPersonsSectionTitle": "Trending persons this week",
   "movieCastsLabel": "Casts",
-  "movieDescriptionLabel": "Overview",
+  "descriptionLabel": "Overview",
   "genresSectionTitle": "Genres",
   "movieBudgetLabel": "Budget",
   "movieDurationLabel": "Duration",
@@ -212,5 +212,7 @@
   "noTvSearchResult": "No tv show found.",
   "nothingFound": "Nothing found.",
   "searchMoviesError": "Could not search for movies",
-  "searchTVShowsError": "Could not search for tv shows"
+  "searchTVShowsError": "Could not search for tv shows",
+  "getTVDetailsError": "Could not get tv show details",
+  "seasonsLabel": "Seasons"
 }
