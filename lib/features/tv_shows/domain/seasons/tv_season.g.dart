@@ -13,7 +13,7 @@ _$_TVSeason _$$_TVSeasonFromJson(Map<String, dynamic> json) => _$_TVSeason(
       id: json['id'] as int,
       name: json['name'] as String,
       overview: json['overview'] as String,
-      posterPath: json['poster_path'] as String,
+      posterPath: json['poster_path'] as String?,
       seasonNumber: json['season_number'] as int,
     );
 

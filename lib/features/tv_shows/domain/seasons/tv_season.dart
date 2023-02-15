@@ -13,7 +13,7 @@ class TVSeason with _$TVSeason {
     required int id,
     required String name,
     required String overview,
-    required String posterPath,
+    required String? posterPath,
     required int seasonNumber,
   }) = _TVSeason;
 

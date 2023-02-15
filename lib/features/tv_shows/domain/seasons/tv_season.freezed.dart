@@ -26,7 +26,7 @@ mixin _$TVSeason {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get overview => throw _privateConstructorUsedError;
-  String get posterPath => throw _privateConstructorUsedError;
+  String? get posterPath => throw _privateConstructorUsedError;
   int get seasonNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $TVSeasonCopyWith<$Res> {
       int id,
       String name,
       String overview,
-      String posterPath,
+      String? posterPath,
       int seasonNumber});
 }
 
@@ -68,7 +68,7 @@ class _$TVSeasonCopyWithImpl<$Res, $Val extends TVSeason>
     Object? id = null,
     Object? name = null,
     Object? overview = null,
-    Object? posterPath = null,
+    Object? posterPath = freezed,
     Object? seasonNumber = null,
   }) {
     return _then(_value.copyWith(
@@ -92,10 +92,10 @@ class _$TVSeasonCopyWithImpl<$Res, $Val extends TVSeason>
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String,
-      posterPath: null == posterPath
+      posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       seasonNumber: null == seasonNumber
           ? _value.seasonNumber
           : seasonNumber // ignore: cast_nullable_to_non_nullable
@@ -117,7 +117,7 @@ abstract class _$$_TVSeasonCopyWith<$Res> implements $TVSeasonCopyWith<$Res> {
       int id,
       String name,
       String overview,
-      String posterPath,
+      String? posterPath,
       int seasonNumber});
 }
 
@@ -137,7 +137,7 @@ class __$$_TVSeasonCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? overview = null,
-    Object? posterPath = null,
+    Object? posterPath = freezed,
     Object? seasonNumber = null,
   }) {
     return _then(_$_TVSeason(
@@ -161,10 +161,10 @@ class __$$_TVSeasonCopyWithImpl<$Res>
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String,
-      posterPath: null == posterPath
+      posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       seasonNumber: null == seasonNumber
           ? _value.seasonNumber
           : seasonNumber // ignore: cast_nullable_to_non_nullable
@@ -200,7 +200,7 @@ class _$_TVSeason implements _TVSeason {
   @override
   final String overview;
   @override
-  final String posterPath;
+  final String? posterPath;
   @override
   final int seasonNumber;
 
@@ -253,7 +253,7 @@ abstract class _TVSeason implements TVSeason {
       required final int id,
       required final String name,
       required final String overview,
-      required final String posterPath,
+      required final String? posterPath,
       required final int seasonNumber}) = _$_TVSeason;
 
   factory _TVSeason.fromJson(Map<String, dynamic> json) = _$_TVSeason.fromJson;
@@ -270,7 +270,7 @@ abstract class _TVSeason implements TVSeason {
   @override
   String get overview;
   @override
-  String get posterPath;
+  String? get posterPath;
   @override
   int get seasonNumber;
   @override
