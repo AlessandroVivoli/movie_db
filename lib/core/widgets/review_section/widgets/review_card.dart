@@ -119,7 +119,7 @@ class _ReviewAuthoUsername extends StatelessWidget {
               const SizedBox(width: 2),
               if (review.updatedAt != null)
                 Text(
-                  '(updated)',
+                  '(edited)',
                   style: TextStyle(
                     fontSize: 10,
                     color: Theme.of(context).colorScheme.secondary,
