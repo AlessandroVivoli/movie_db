@@ -25,7 +25,7 @@ class PersonBiography extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          (biography.characters.isEmpty) ? 'No biography' : biography,
+          (biography.characters.isEmpty) ? localization.noBiography : biography,
           textAlign: TextAlign.justify,
         ),
       ],

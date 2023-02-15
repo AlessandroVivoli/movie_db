@@ -27,10 +27,12 @@ class _TopRatedTVsText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
-        'Top rated tvs'.toUpperCase(),
+        localization.topRatedTvsSectionTitle.toUpperCase(),
         style: TextStyle(
           color: Theme.of(context).colorScheme.secondary,
           fontWeight: FontWeight.w600,
