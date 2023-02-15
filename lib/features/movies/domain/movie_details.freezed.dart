@@ -29,7 +29,7 @@ mixin _$MovieDetails {
   String? get imdbId => throw _privateConstructorUsedError;
   String get originalLanguage => throw _privateConstructorUsedError;
   String get originalTitle => throw _privateConstructorUsedError;
-  String? get overview => throw _privateConstructorUsedError;
+  String get overview => throw _privateConstructorUsedError;
   double get popularity => throw _privateConstructorUsedError;
   String? get posterPath => throw _privateConstructorUsedError;
   List<ProductionCompany>? get productionCompanies =>
@@ -73,7 +73,7 @@ abstract class $MovieDetailsCopyWith<$Res> {
       String? imdbId,
       String originalLanguage,
       String originalTitle,
-      String? overview,
+      String overview,
       double popularity,
       String? posterPath,
       List<ProductionCompany>? productionCompanies,
@@ -117,7 +117,7 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
     Object? imdbId = freezed,
     Object? originalLanguage = null,
     Object? originalTitle = null,
-    Object? overview = freezed,
+    Object? overview = null,
     Object? popularity = null,
     Object? posterPath = freezed,
     Object? productionCompanies = freezed,
@@ -172,10 +172,10 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
               as String,
-      overview: freezed == overview
+      overview: null == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       popularity: null == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
@@ -282,7 +282,7 @@ abstract class _$$_MovieDetailsCopyWith<$Res>
       String? imdbId,
       String originalLanguage,
       String originalTitle,
-      String? overview,
+      String overview,
       double popularity,
       String? posterPath,
       List<ProductionCompany>? productionCompanies,
@@ -326,7 +326,7 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
     Object? imdbId = freezed,
     Object? originalLanguage = null,
     Object? originalTitle = null,
-    Object? overview = freezed,
+    Object? overview = null,
     Object? popularity = null,
     Object? posterPath = freezed,
     Object? productionCompanies = freezed,
@@ -381,10 +381,10 @@ class __$$_MovieDetailsCopyWithImpl<$Res>
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
               as String,
-      overview: freezed == overview
+      overview: null == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       popularity: null == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
@@ -516,7 +516,7 @@ class _$_MovieDetails implements _MovieDetails {
   @override
   final String originalTitle;
   @override
-  final String? overview;
+  final String overview;
   @override
   final double popularity;
   @override
@@ -684,7 +684,7 @@ abstract class _MovieDetails implements MovieDetails {
       required final String? imdbId,
       required final String originalLanguage,
       required final String originalTitle,
-      required final String? overview,
+      required final String overview,
       required final double popularity,
       required final String? posterPath,
       required final List<ProductionCompany>? productionCompanies,
@@ -724,7 +724,7 @@ abstract class _MovieDetails implements MovieDetails {
   @override
   String get originalTitle;
   @override
-  String? get overview;
+  String get overview;
   @override
   double get popularity;
   @override

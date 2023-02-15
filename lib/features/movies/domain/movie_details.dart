@@ -23,7 +23,7 @@ class MovieDetails with _$MovieDetails {
     required String? imdbId,
     required String originalLanguage,
     required String originalTitle,
-    required String? overview,
+    required String overview,
     required double popularity,
     required String? posterPath,
     required List<ProductionCompany>? productionCompanies,

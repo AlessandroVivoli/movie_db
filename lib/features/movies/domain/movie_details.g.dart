@@ -19,7 +19,7 @@ _$_MovieDetails _$$_MovieDetailsFromJson(Map<String, dynamic> json) =>
       imdbId: json['imdb_id'] as String?,
       originalLanguage: json['original_language'] as String,
       originalTitle: json['original_title'] as String,
-      overview: json['overview'] as String?,
+      overview: json['overview'] as String,
       popularity: (json['popularity'] as num).toDouble(),
       posterPath: json['poster_path'] as String?,
       productionCompanies: (json['production_companies'] as List<dynamic>?)
