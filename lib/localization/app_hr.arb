@@ -101,5 +101,10 @@
   "bottomBarWatchlistLabel": "Popis gledanja",
   "bottomBarFavoritesLabel": "Favoriti",
   "noPopularMovies": "Nije pronađen nijedan popularni film.",
-  "getPopularMoviesError": "Nije moguće dobiti popularne filmove"
+  "getPopularMoviesError": "Nije moguće dobiti popularne filmove",
+  "noMovieSearchResult": "Nije pronađen nijedan film.",
+  "noTvSearchResult": "Nije pronađena nijedna tv serija.",
+  "nothingFound": "Nije ništa pronađeno",
+  "searchMoviesError": "Nije moguće tražiti filmove",
+  "searchTVShowsError": "Nije moguće tražiti tv serije"
 }

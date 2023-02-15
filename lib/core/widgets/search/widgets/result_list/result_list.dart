@@ -6,13 +6,19 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../features/auth/provider/auth_provider.dart';
 import '../../../../../features/movies/domain/movie_list.dart';
 import '../../../../../features/movies/provider/search_movies_provider.dart';
+import '../../../../../features/tv_shows/domain/tv_list_model.dart';
+import '../../../../../features/tv_shows/provider/search_tv_shows_provider.dart';
 import '../../../errors/error_text.dart';
 import '../../../movie_card/movie_card.dart';
+import '../../../tv_card/tv_card.dart';
 
-class ResultList extends HookConsumerWidget {
+class ResultList<T> extends HookConsumerWidget {
   final String query;
 
-  const ResultList({super.key, required this.query});
+  const ResultList({
+    super.key,
+    required this.query,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,27 +28,41 @@ class ResultList extends HookConsumerWidget {
             .watch(authProvider)
             .whenOrNull(loggedIn: (user) => user.accountDetails.includeAdult) ??
         false;
-    final search = ref.watch(
-      searchMoviesProvider(
-        query: query,
-        includeAdult: includeAdult,
-        page: page.value,
-      ),
-    );
+
+    late final AsyncValue search;
+
+    if (T == MovieListModel) {
+      search = ref.watch(
+        searchMoviesProvider(
+          query: query,
+          includeAdult: includeAdult,
+          page: page.value,
+        ),
+      );
+    } else {
+      search = ref.watch(
+        searchTVShowsProvider(
+          query: query,
+          includeAdult: includeAdult,
+          page: page.value,
+        ),
+      );
+    }
 
     final localization = AppLocalizations.of(context)!;
 
     return search.when(
       data: (data) {
-        final list = data.results;
+        final list = data.results as List;
 
         if (list.isEmpty) {
-          return Column(
-            children: const [
-              Center(
-                child: Text('No movies found.'),
-              ),
-            ],
+          return Center(
+            child: Text(
+              textAlign: TextAlign.center,
+              T == MovieListModel
+                  ? localization.noMovieSearchResult
+                  : localization.noTvSearchResult,
+            ),
           );
         }
 
@@ -59,8 +79,12 @@ class ResultList extends HookConsumerWidget {
                         width: 120,
                         height: 250,
                         margin: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 10),
-                        child: MovieCard(movie: list[index]),
+                          horizontal: 5,
+                          vertical: 10,
+                        ),
+                        child: (T == MovieListModel)
+                            ? MovieCard(movie: list[index])
+                            : TVCard(tvShow: list[index]),
                       );
                     },
                   ),
@@ -78,16 +102,25 @@ class ResultList extends HookConsumerWidget {
         return Column(
           children: [
             const Expanded(
-              child: Center(child: CircularProgressIndicator()),
-            ),
-            _Paginator(
-              page: page,
-              data: const MovieListModel(
-                page: 1,
-                results: [],
-                totalPages: 0,
-                totalResults: 0,
+              child: Center(
+                child: CircularProgressIndicator(),
               ),
+            ),
+            _Paginator<T>(
+              page: page,
+              data: (T == MovieListModel)
+                  ? const MovieListModel(
+                      page: 1,
+                      results: [],
+                      totalPages: 0,
+                      totalResults: 0,
+                    )
+                  : const TVListModel(
+                      page: 1,
+                      results: [],
+                      totalPages: 0,
+                      totalResults: 0,
+                    ),
             ),
           ],
         );
@@ -96,14 +129,14 @@ class ResultList extends HookConsumerWidget {
   }
 }
 
-class _Paginator extends HookWidget {
+class _Paginator<T> extends HookWidget {
   const _Paginator({
     required this.page,
     required this.data,
   });
 
   final ValueNotifier<int> page;
-  final MovieListModel data;
+  final dynamic data;
 
   @override
   Widget build(BuildContext context) {

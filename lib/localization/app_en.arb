@@ -207,5 +207,10 @@
   "bottomBarWatchlistLabel": "Watchlist",
   "bottomBarFavoritesLabel": "Favorites",
   "noPopularMovies": "No popular movie found.",
-  "getPopularMoviesError": "Could not get popular movies"
+  "getPopularMoviesError": "Could not get popular movies",
+  "noMovieSearchResult": "No movie found.",
+  "noTvSearchResult": "No tv show found.",
+  "nothingFound": "Nothing found.",
+  "searchMoviesError": "Could not search for movies",
+  "searchTVShowsError": "Could not search for tv shows"
 }

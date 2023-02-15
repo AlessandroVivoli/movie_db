@@ -1,6 +1,7 @@
 import '../../account/domain/account_media_status/account_media_status.dart';
 import '../../media/domain/sort_by.dart';
 import '../../time_window/domain/time_window.dart';
+import 'tv_list_model.dart';
 import 'tv_show.dart';
 import 'tv_show_details.dart';
 
@@ -29,4 +30,10 @@ abstract class ITVShowService {
   Future<void> deleteTVRating({required int id});
 
   Future<TVShowDetails> getTVShowDetails({required int id});
+
+  Future<TVListModel> searchTVShows({
+    required String query,
+    bool includeAdult = false,
+    int page = 1,
+  });
 }

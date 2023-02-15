@@ -4,14 +4,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../features/auth/provider/auth_provider.dart';
 import '../../../../../features/movies/domain/backdrop_sizes_enum.dart';
+import '../../../../../features/movies/domain/movie_list.dart';
 import '../../../../../features/movies/provider/images/movie_image_service_provider.dart';
 import '../../../../../features/movies/provider/search_movies_provider.dart';
+import '../../../../../features/tv_shows/provider/search_tv_shows_provider.dart';
 import '../../../../../routing/routes.dart';
 import '../../../../extensions/build_context_extensions.dart';
 import '../../../custom_image/custom_network_image.dart';
 import '../../../errors/error_text.dart';
 
-class SuggestionList extends ConsumerWidget {
+class SuggestionList<T> extends ConsumerWidget {
   final String query;
 
   const SuggestionList({super.key, required this.query});
@@ -23,12 +25,23 @@ class SuggestionList extends ConsumerWidget {
     }
 
     final user = ref.watch(authProvider).whenOrNull(loggedIn: (user) => user);
-    final search = ref.watch(
-      searchMoviesProvider(
-        query: query,
-        includeAdult: user?.accountDetails.includeAdult ?? false,
-      ),
-    );
+    late final AsyncValue search;
+
+    if (T == MovieListModel) {
+      search = ref.watch(
+        searchMoviesProvider(
+          query: query,
+          includeAdult: user?.accountDetails.includeAdult ?? false,
+        ),
+      );
+    } else {
+      search = ref.watch(
+        searchTVShowsProvider(
+          query: query,
+          includeAdult: user?.accountDetails.includeAdult ?? false,
+        ),
+      );
+    }
 
     final localization = AppLocalizations.of(context)!;
 
@@ -38,8 +51,10 @@ class SuggestionList extends ConsumerWidget {
         final list = model.results;
 
         if (list.isEmpty) {
-          return const Center(
-            child: Text('Nothing found.'),
+          return Center(
+            child: Text(
+              localization.nothingFound,
+            ),
           );
         }
 
@@ -50,12 +65,12 @@ class SuggestionList extends ConsumerWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  AppRoute.movie,
+                  (T == MovieListModel) ? AppRoute.movie : AppRoute.tv,
                   arguments: list[index].id,
                 );
               },
               title: Text(
-                list[index].title!,
+                (T == MovieListModel) ? list[index].title! : list[index].name,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 14,
@@ -89,7 +104,9 @@ class SuggestionList extends ConsumerWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: CustomNetworkImage(
-                    placeholderIcon: const Icon(Icons.movie),
+                    placeholderIcon: Icon(
+                      (T == MovieListModel) ? Icons.movie : Icons.tv,
+                    ),
                     url:
                         ref.read(movieImageServiceProvider).getMovieBackdropUrl(
                               size: BackdropSizes.w300,
@@ -103,7 +120,11 @@ class SuggestionList extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar('Could not search for movies.');
+        context.showErrorSnackBar(
+          T == MovieListModel
+              ? localization.searchMoviesError
+              : localization.searchTVShowsError,
+        );
 
         return Center(
           child: ErrorText(localization.unexpectedErrorMessage),

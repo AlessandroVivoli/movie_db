@@ -4,6 +4,7 @@ import '../../account/domain/account_media_status/account_media_status.dart';
 import '../../media/domain/sort_by.dart';
 import '../../time_window/domain/time_window.dart';
 import '../domain/i_tv_show_service.dart';
+import '../domain/tv_list_model.dart';
 import '../domain/tv_show.dart';
 import '../domain/tv_show_details.dart';
 
@@ -92,5 +93,24 @@ class TVShowService extends ITVShowService {
         )
         .then((res) => Map<String, Object?>.from(res.data))
         .then(TVShowDetails.fromJson);
+  }
+
+  @override
+  Future<TVListModel> searchTVShows({
+    required String query,
+    bool includeAdult = false,
+    int page = 1,
+  }) {
+    return _dio
+        .get(
+          '/search/tv',
+          queryParameters: {
+            'query': query,
+            'include_adult': includeAdult,
+            'page': page
+          },
+        )
+        .then((res) => Map<String, Object?>.from(res.data))
+        .then(TVListModel.fromJson);
   }
 }

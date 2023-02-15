@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../features/movies/domain/movie_list.dart';
 import 'widgets/result_list/result_list.dart';
 import 'widgets/suggestion_list/suggestion_list.dart';
 
@@ -27,12 +28,12 @@ class MovieSearchDelegate extends SearchDelegate<int?> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return ResultList(query: query.trim());
+    return ResultList<MovieListModel>(query: query.trim());
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return SuggestionList(query: query.trim());
+    return SuggestionList<MovieListModel>(query: query.trim());
   }
 
   @override
