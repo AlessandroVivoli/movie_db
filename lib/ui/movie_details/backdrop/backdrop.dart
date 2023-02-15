@@ -16,8 +16,6 @@ class MovieDetailsBackdrop extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final imageService = ref.watch(movieImageServiceProvider);
 
-    final orientation = MediaQuery.of(context).orientation;
-
     return SliverAppBar(
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -25,19 +23,23 @@ class MovieDetailsBackdrop extends ConsumerWidget {
       pinned: true,
       expandedHeight: 250,
       flexibleSpace: FlexibleSpaceBar(
-        title: SizedBox(
-          height: 20,
-          width: (orientation == Orientation.portrait) ? 200 : 400,
-          child: Center(
-            child: Text(
-              details.title,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontSize: 16,
+        title: OrientationBuilder(builder: (context, orientation) {
+          final width = orientation == Orientation.portrait ? 200.0 : 400.0;
+
+          return SizedBox(
+            height: 20,
+            width: width,
+            child: Center(
+              child: Text(
+                details.title,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        }),
         centerTitle: true,
         background: BackdropImage(
           imgUrl: imageService.getMovieBackdropUrl(
