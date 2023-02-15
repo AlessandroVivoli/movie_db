@@ -14,7 +14,7 @@ class CustomNetworkImage extends StatelessWidget {
   final double? height;
 
   final String? url;
-  final Icon placeholderIcon;
+  final Widget placeholderIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +34,20 @@ class CustomNetworkImage extends StatelessWidget {
         ),
       );
     }
-    return Icon(
-      placeholderIcon.icon,
-      color: placeholderIcon.color ?? Colors.white,
-      size: placeholderIcon.size,
+
+    if (placeholderIcon is Icon) {
+      final icon = placeholderIcon as Icon;
+
+      return Icon(
+        icon.icon,
+        color: icon.color ?? Colors.white,
+        size: icon.size,
+      );
+    }
+
+    return Container(
+      color: Theme.of(context).colorScheme.surface,
+      child: Center(child: placeholderIcon),
     );
   }
 }
