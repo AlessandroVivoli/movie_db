@@ -6,6 +6,9 @@ import 'person_service_provider.dart';
 part 'get_cast_provider.g.dart';
 
 @riverpod
-Future<List<Person>> getCast(GetCastRef ref, int movieId) {
-  return ref.watch(personServiceProvider).getCast(movieId: movieId);
+Future<List<Person>> getCast(GetCastRef ref, int mediaId, String mediaType) {
+  return ref.watch(personServiceProvider).getCast(
+        mediaId: mediaId,
+        mediaType: mediaType,
+      );
 }

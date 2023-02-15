@@ -29,16 +29,18 @@ class _SystemHash {
   }
 }
 
-String _$getCastHash() => r'8e0fd12bf43f4166e66902e291cd3e9b94437d22';
+String _$getCastHash() => r'9ed3ff9eb9d8160d3c4ea43dbdccd3aead1cbfa8';
 
 /// See also [getCast].
 class GetCastProvider extends AutoDisposeFutureProvider<List<Person>> {
   GetCastProvider(
-    this.movieId,
+    this.mediaId,
+    this.mediaType,
   ) : super(
           (ref) => getCast(
             ref,
-            movieId,
+            mediaId,
+            mediaType,
           ),
           from: getCastProvider,
           name: r'getCastProvider',
@@ -48,17 +50,21 @@ class GetCastProvider extends AutoDisposeFutureProvider<List<Person>> {
                   : _$getCastHash,
         );
 
-  final int movieId;
+  final int mediaId;
+  final String mediaType;
 
   @override
   bool operator ==(Object other) {
-    return other is GetCastProvider && other.movieId == movieId;
+    return other is GetCastProvider &&
+        other.mediaId == mediaId &&
+        other.mediaType == mediaType;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, movieId.hashCode);
+    hash = _SystemHash.combine(hash, mediaId.hashCode);
+    hash = _SystemHash.combine(hash, mediaType.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -73,10 +79,12 @@ class GetCastFamily extends Family<AsyncValue<List<Person>>> {
   GetCastFamily();
 
   GetCastProvider call(
-    int movieId,
+    int mediaId,
+    String mediaType,
   ) {
     return GetCastProvider(
-      movieId,
+      mediaId,
+      mediaType,
     );
   }
 
@@ -85,7 +93,8 @@ class GetCastFamily extends Family<AsyncValue<List<Person>>> {
     covariant GetCastProvider provider,
   ) {
     return call(
-      provider.movieId,
+      provider.mediaId,
+      provider.mediaType,
     );
   }
 
