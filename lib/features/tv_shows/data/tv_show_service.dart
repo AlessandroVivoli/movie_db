@@ -113,4 +113,12 @@ class TVShowService extends ITVShowService {
         .then((res) => Map<String, Object?>.from(res.data))
         .then(TVListModel.fromJson);
   }
+
+  @override
+  Future<List<TVShow>> getSimilarTVShows({required int tvId}) {
+    return _dio
+        .get('/tv/$tvId/similar')
+        .then((res) => List<Map<String, Object?>>.from(res.data['results']))
+        .then((rawList) => rawList.map(TVShow.fromJson).toList());
+  }
 }

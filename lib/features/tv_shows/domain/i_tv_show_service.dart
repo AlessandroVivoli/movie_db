@@ -36,4 +36,6 @@ abstract class ITVShowService {
     bool includeAdult = false,
     int page = 1,
   });
+
+  Future<List<TVShow>> getSimilarTVShows({required int tvId});
 }
