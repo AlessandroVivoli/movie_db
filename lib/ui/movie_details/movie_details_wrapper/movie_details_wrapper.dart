@@ -4,10 +4,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../features/auth/provider/auth_provider.dart';
 import '../../../core/widgets/review_section/review_section.dart';
 import '../../../features/movies/domain/movie_details.dart';
-import 'widgets/movie_account_actions/movie_account_actions.dart';
-import 'widgets/movie_casts.dart';
+import '../../media_widgets/media_account_actions/media_account_actions.dart';
+import '../../media_widgets/media_cast.dart';
+import '../../media_widgets/media_genres.dart';
 import 'widgets/movie_description.dart';
-import 'widgets/movie_genres.dart';
 import 'widgets/movie_info.dart';
 import 'widgets/movie_rating.dart';
 import 'widgets/similar_movie_list.dart';
@@ -33,24 +33,27 @@ class MovieDetailsWrapper extends ConsumerWidget {
             children: [
               MovieRating(details.voteAverage),
               user.maybeWhen(
-                loggedIn: (user) => MovieAccountActions(movieDetails: details),
+                loggedIn: (user) => MediaAccountActions(
+                  mediaId: details.id,
+                  accountStates: details.accountStates!,
+                ),
                 orElse: () => const SizedBox(height: 0),
               ),
-              MovieDescription(details.overview!),
+              MovieDescription(details.overview),
               MovieInfo(
                 budget: details.budget,
                 runtime: details.runtime,
                 releaseDate: details.releaseDate,
               ),
-              MovieGenres(details: details),
+              MediaGenres(genres: details.genres),
             ],
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 20),
-          child: MovieCasts(details: details),
+          child: MediaCasts(mediaId: details.id, mediaType: 'movie'),
         ),
-        SimilarMovieList(details: details),
+        SimilarMovieList(movieId: details.id),
         ReviewsSection(reviews: details.reviews.results)
       ],
     );
