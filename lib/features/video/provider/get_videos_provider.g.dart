@@ -29,16 +29,18 @@ class _SystemHash {
   }
 }
 
-String _$getVideosHash() => r'be01ffb3c7f746234827810f44626611657da387';
+String _$getVideosHash() => r'083dd81e11966deba42b5ffea904e5c236dbc3a6';
 
 /// See also [getVideos].
 class GetVideosProvider extends AutoDisposeFutureProvider<List<Video>> {
   GetVideosProvider(
     this.movieId,
+    this.mediaType,
   ) : super(
           (ref) => getVideos(
             ref,
             movieId,
+            mediaType,
           ),
           from: getVideosProvider,
           name: r'getVideosProvider',
@@ -49,16 +51,20 @@ class GetVideosProvider extends AutoDisposeFutureProvider<List<Video>> {
         );
 
   final int movieId;
+  final String mediaType;
 
   @override
   bool operator ==(Object other) {
-    return other is GetVideosProvider && other.movieId == movieId;
+    return other is GetVideosProvider &&
+        other.movieId == movieId &&
+        other.mediaType == mediaType;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, movieId.hashCode);
+    hash = _SystemHash.combine(hash, mediaType.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -74,9 +80,11 @@ class GetVideosFamily extends Family<AsyncValue<List<Video>>> {
 
   GetVideosProvider call(
     int movieId,
+    String mediaType,
   ) {
     return GetVideosProvider(
       movieId,
+      mediaType,
     );
   }
 
@@ -86,6 +94,7 @@ class GetVideosFamily extends Family<AsyncValue<List<Video>>> {
   ) {
     return call(
       provider.movieId,
+      provider.mediaType,
     );
   }
 

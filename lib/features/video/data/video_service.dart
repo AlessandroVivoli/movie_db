@@ -9,9 +9,12 @@ class VideoService implements IVideoService {
   const VideoService(Dio dio) : _dio = dio;
 
   @override
-  Future<List<Video>> getVideos({required int movieId}) {
+  Future<List<Video>> getVideos({
+    required int mediaId,
+    required String mediaType,
+  }) {
     return _dio
-        .get('/movie/$movieId/videos')
+        .get('/$mediaType/$mediaId/videos')
         .then((res) => List<Map<String, Object?>>.from(res.data['results']))
         .then((rawList) => rawList.map(Video.fromJson))
         .then((videos) => videos.toList());
