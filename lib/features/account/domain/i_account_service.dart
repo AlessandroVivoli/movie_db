@@ -5,10 +5,11 @@ abstract class IAccountService {
   /// Marks the movie favorite if the [favorite] is true.
   ///
   /// Returns the status code of the api response.
-  Future<int> markMovieAsFavorite({
+  Future<int> markAsFavorite({
     required int accountId,
-    required int movieId,
+    required int mediaId,
     required bool favorite,
+    required String mediaType,
   });
 
   /// Adds movie to the watchlist if the [watchlist] is true.
@@ -19,6 +20,12 @@ abstract class IAccountService {
     required int mediaId,
     required String mediaType,
     required bool watchlist,
+  });
+
+  /// Returns the user favorite tv show list.
+  Future<TVListModel> getFavoriteTVShows({
+    required int accountId,
+    int page = 1,
   });
 
   /// Returns the user favorite movie list.
@@ -35,6 +42,11 @@ abstract class IAccountService {
 
   /// Returns the user rated movie list.
   Future<MovieListModel> getRatedMovies({
+    required int accountId,
+    int page = 1,
+  });
+
+  Future<TVListModel> getRatedTVShows({
     required int accountId,
     int page = 1,
   });

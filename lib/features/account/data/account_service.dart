@@ -10,17 +10,18 @@ class AccountService implements IAccountService {
   const AccountService(Dio dio) : _dio = dio;
 
   @override
-  Future<int> markMovieAsFavorite({
+  Future<int> markAsFavorite({
     required int accountId,
-    required int movieId,
+    required int mediaId,
     required bool favorite,
+    required String mediaType,
   }) {
     return _dio
         .post(
           '/account/$accountId/favorite',
           data: {
-            'media_type': 'movie',
-            'media_id': movieId,
+            'media_type': mediaType,
+            'media_id': mediaId,
             'favorite': favorite,
           },
           options: Options(contentType: 'application/json;charset=utf-8'),
@@ -43,6 +44,20 @@ class AccountService implements IAccountService {
         'watchlist': watchlist,
       },
     ).then((res) => res.data['status_code']);
+  }
+
+  @override
+  Future<TVListModel> getFavoriteTVShows({
+    required int accountId,
+    int page = 1,
+  }) {
+    return _dio
+        .get('/account/$accountId/favorite/tv', queryParameters: {
+          'sort_by': 'created_at.desc',
+          'page': page,
+        })
+        .then((res) => Map<String, Object?>.from(res.data))
+        .then(TVListModel.fromJson);
   }
 
   @override
@@ -106,6 +121,17 @@ class AccountService implements IAccountService {
             'page': '$page',
           },
         )
+        .then((res) => Map<String, Object?>.from(res.data))
+        .then(TVListModel.fromJson);
+  }
+
+  @override
+  Future<TVListModel> getRatedTVShows({required int accountId, int page = 1}) {
+    return _dio
+        .get('/account/$accountId/rated/tv', queryParameters: {
+          'sort_by': 'created_at.desc',
+          'page': page,
+        })
         .then((res) => Map<String, Object?>.from(res.data))
         .then(TVListModel.fromJson);
   }
