@@ -32,7 +32,11 @@ class GenreList extends ConsumerWidget {
             ),
             child: Text(
               localization.translateGenres(
-                genres[index].name.replaceAll(' ', ''),
+                genres[index]
+                    .name
+                    .replaceAll(' ', '')
+                    .replaceAll('&', 'And')
+                    .replaceAll('-', ''),
               ),
               style: TextStyle(color: Theme.of(context).colorScheme.secondary),
             ),
