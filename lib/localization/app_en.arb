@@ -214,5 +214,12 @@
   "searchMoviesError": "Could not search for movies",
   "searchTVShowsError": "Could not search for tv shows",
   "getTVDetailsError": "Could not get tv show details",
-  "seasonsLabel": "Seasons"
+  "seasonsLabel": "Seasons",
+  "noReviews": "No reviews.",
+  "noPopularTVShows": "No popular tv show found.",
+  "popularTVShowsError": "Could not get popular tv shows",
+  "noTrendingTVShows": "No trending tv show found.",
+  "trendingTVShowsError": "Could not get trending tv shows",
+  "noTopRatedTVShows": "No top rated tv show found.",
+  "topRatedTVShowsError": "Could not get top rated tv shows"
 }

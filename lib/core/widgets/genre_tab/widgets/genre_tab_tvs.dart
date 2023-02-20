@@ -31,8 +31,8 @@ class GenreTabTvs extends ConsumerWidget {
     return tvList.when(
       data: (tvs) {
         if (tvs.isEmpty) {
-          return const Center(
-            child: Text('No popular tv show found.'),
+          return Center(
+            child: Text(context.locale.noPopularTVShows),
           );
         }
 
@@ -42,7 +42,7 @@ class GenreTabTvs extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar('Could not get popular tvs');
+        context.showErrorSnackBar(context.locale.popularTVShowsError);
 
         return Center(
           child: ErrorText(context.locale.unexpectedErrorMessage),

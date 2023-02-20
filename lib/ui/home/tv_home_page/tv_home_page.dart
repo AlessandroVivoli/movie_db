@@ -86,15 +86,15 @@ class _TrendingTVsCarousel extends ConsumerWidget {
         final tvList = tvs.take(6).toList();
 
         if (tvList.isEmpty) {
-          return const Center(
-            child: Text('No trending tv show found.'),
+          return Center(
+            child: Text(context.locale.noTrendingTVShows),
           );
         }
 
         return TVCarousel(tvs: tvList);
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar('Could not get trending tv shows');
+        context.showErrorSnackBar(context.locale.trendingTVShowsError);
 
         return Center(
           child: ErrorText(context.locale.unexpectedErrorMessage),

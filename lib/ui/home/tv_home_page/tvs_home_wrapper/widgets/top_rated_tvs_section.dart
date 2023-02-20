@@ -51,8 +51,8 @@ class _TopRatedTVsList extends ConsumerWidget {
       child: topRatedTVs.when(
         data: (tvs) {
           if (tvs.isEmpty) {
-            return const Center(
-              child: Text('No top rated tv show found.'),
+            return Center(
+              child: Text(context.locale.noTopRatedTVShows),
             );
           }
 
@@ -62,7 +62,7 @@ class _TopRatedTVsList extends ConsumerWidget {
           );
         },
         error: (error, stackTrace) {
-          context.showErrorSnackBar('Could not get top rated tv shows');
+          context.showErrorSnackBar(context.locale.topRatedTVShowsError);
 
           return Center(
             child: ErrorText(context.locale.unexpectedErrorMessage),

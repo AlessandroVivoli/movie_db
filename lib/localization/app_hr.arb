@@ -108,5 +108,12 @@
   "searchMoviesError": "Nije moguće tražiti filmove",
   "searchTVShowsError": "Nije moguće tražiti tv serije",
   "getTVDetailsError": "Nije moguće dobiti detalje o tv seriji",
-  "seasonsLabel": "Sezone"
+  "seasonsLabel": "Sezone",
+  "noReviews": "Nema recenzije.",
+  "noPopularTVShows": "Nije pronađena nijedna popularna tv serija.",
+  "popularTVShowsError": "Nije moguće dobiti popularne tv serije",
+  "noTrendingTVShows": "Nije pronađen nijedna trending tv serija.",
+  "trendingTVShowsError": "Nije moguće dobiti trending tv serije",
+  "noTopRatedTVShows": "Nije pronađen nijedna najbolje ocjenjena tv serija.",
+  "topRatedTVShowsError": "Nije moguće dobiti najbolje ocjenjene tv serije"
 }

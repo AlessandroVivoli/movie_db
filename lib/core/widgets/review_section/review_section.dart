@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../features/reviews/domain/review.dart';
+import '../../extensions/build_context_extensions.dart';
 import 'widgets/review_card.dart';
 
 class ReviewsSection extends StatelessWidget {
@@ -39,7 +40,7 @@ class _ReviewList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (reviews.isEmpty) return const Text('No reviews.');
+    if (reviews.isEmpty) return Text(context.locale.noReviews);
 
     return ListView.separated(
       physics: const NeverScrollableScrollPhysics(),
