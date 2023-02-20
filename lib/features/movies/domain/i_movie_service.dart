@@ -10,7 +10,7 @@ abstract class IMovieService {
   /// [timeWindow] can only be `week` or `day`.\
   /// Defaults to `week`.
   Future<List<Movie>> getTrendingMovies({
-    TimeWindow timeWindow = TimeWindow.week,
+    String timeWindow = TimeWindow.week,
   });
 
   /// Returns top rated [List] of [Movie] future.

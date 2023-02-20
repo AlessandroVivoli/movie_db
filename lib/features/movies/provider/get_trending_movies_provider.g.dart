@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$getTrendingMoviesHash() => r'14c2f652ab4d975801289620b04d575a72e5591c';
+String _$getTrendingMoviesHash() => r'8f79a51cd153f186268888b65ff54bfaff52a522';
 
 /// See also [getTrendingMovies].
 class GetTrendingMoviesProvider extends FutureProvider<List<Movie>> {
@@ -48,7 +48,7 @@ class GetTrendingMoviesProvider extends FutureProvider<List<Movie>> {
                   : _$getTrendingMoviesHash,
         );
 
-  final TimeWindow timeWindow;
+  final String timeWindow;
 
   @override
   bool operator ==(Object other) {
@@ -73,7 +73,7 @@ class GetTrendingMoviesFamily extends Family<AsyncValue<List<Movie>>> {
   GetTrendingMoviesFamily();
 
   GetTrendingMoviesProvider call(
-    TimeWindow timeWindow,
+    String timeWindow,
   ) {
     return GetTrendingMoviesProvider(
       timeWindow,

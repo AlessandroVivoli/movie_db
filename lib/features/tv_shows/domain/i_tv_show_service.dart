@@ -9,7 +9,7 @@ abstract class ITVShowService {
   const ITVShowService();
 
   Future<List<TVShow>> getTrendingTVShows({
-    TimeWindow timeWindow = TimeWindow.week,
+    String timeWindow = TimeWindow.week,
   });
 
   Future<List<TVShow>> getTopRatedTVShows();

@@ -9,7 +9,7 @@ abstract class IPersonService {
   /// [timeWindow] can only be `week` or `day`.\
   /// Defaults to `week`.
   Future<List<Person>> getTrendingPersons({
-    TimeWindow timeWindow = TimeWindow.week,
+    String timeWindow = TimeWindow.week,
   });
 
   /// Returns [PersonDetials] future using the provided person [id].

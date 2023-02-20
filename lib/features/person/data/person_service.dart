@@ -13,7 +13,7 @@ class PersonService implements IPersonService {
 
   @override
   Future<List<Person>> getTrendingPersons({
-    TimeWindow timeWindow = TimeWindow.week,
+    String timeWindow = TimeWindow.week,
   }) {
     return _dio
         .get('/trending/person/$timeWindow')

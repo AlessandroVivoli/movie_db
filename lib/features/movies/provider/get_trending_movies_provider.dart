@@ -9,7 +9,7 @@ part 'get_trending_movies_provider.g.dart';
 @Riverpod(keepAlive: true)
 Future<List<Movie>> getTrendingMovies(
   GetTrendingMoviesRef ref,
-  TimeWindow timeWindow,
+  String timeWindow,
 ) {
   return ref
       .read(movieServiceProvider)

@@ -30,7 +30,7 @@ class _SystemHash {
 }
 
 String _$getTrendingTVShowsHash() =>
-    r'45213159fdf4c2917fcd31660143bdc7d998e92b';
+    r'33bd1776a60cc8fe063ea1a4fe1c51f3ccc8c095';
 
 /// See also [getTrendingTVShows].
 class GetTrendingTVShowsProvider extends FutureProvider<List<TVShow>> {
@@ -49,7 +49,7 @@ class GetTrendingTVShowsProvider extends FutureProvider<List<TVShow>> {
                   : _$getTrendingTVShowsHash,
         );
 
-  final TimeWindow timeWindow;
+  final String timeWindow;
 
   @override
   bool operator ==(Object other) {
@@ -75,7 +75,7 @@ class GetTrendingTVShowsFamily extends Family<AsyncValue<List<TVShow>>> {
   GetTrendingTVShowsFamily();
 
   GetTrendingTVShowsProvider call(
-    TimeWindow timeWindow,
+    String timeWindow,
   ) {
     return GetTrendingTVShowsProvider(
       timeWindow,

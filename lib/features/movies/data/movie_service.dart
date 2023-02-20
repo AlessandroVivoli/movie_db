@@ -14,7 +14,7 @@ class MovieService implements IMovieService {
 
   @override
   Future<List<Movie>> getTrendingMovies({
-    TimeWindow timeWindow = TimeWindow.week,
+    String timeWindow = TimeWindow.week,
   }) {
     return _dio
         .get('/trending/movie/$timeWindow')

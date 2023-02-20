@@ -61,7 +61,7 @@ class TVShowService extends ITVShowService {
 
   @override
   Future<List<TVShow>> getTrendingTVShows({
-    TimeWindow timeWindow = TimeWindow.week,
+    String timeWindow = TimeWindow.week,
   }) {
     return _dio
         .get('/trending/tv/$timeWindow')
