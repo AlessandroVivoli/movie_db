@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../features/auth/provider/auth_provider.dart';
 import '../../../../../features/movies/domain/movie_list.dart';
 import '../../../../../features/movies/provider/search_movies_provider.dart';
-import '../../../../../features/tv_shows/domain/tv_list_model.dart';
 import '../../../../../features/tv_shows/provider/search_tv_shows_provider.dart';
 import '../../../../extensions/build_context_extensions.dart';
 import '../../../errors/error_text.dart';
@@ -29,9 +28,11 @@ class ResultList<T> extends HookConsumerWidget {
             .whenOrNull(loggedIn: (user) => user.accountDetails.includeAdult) ??
         false;
 
+    final isMovie = T == MovieListModel;
+
     late final AsyncValue search;
 
-    if (T == MovieListModel) {
+    if (isMovie) {
       search = ref.watch(
         searchMoviesProvider(
           query: query,
@@ -57,7 +58,7 @@ class ResultList<T> extends HookConsumerWidget {
           return Center(
             child: Text(
               textAlign: TextAlign.center,
-              T == MovieListModel
+              isMovie
                   ? context.locale.noMovieSearchResult
                   : context.locale.noTvSearchResult,
             ),
@@ -80,7 +81,7 @@ class ResultList<T> extends HookConsumerWidget {
                           horizontal: 5,
                           vertical: 10,
                         ),
-                        child: (T == MovieListModel)
+                        child: (isMovie)
                             ? MovieCard(movie: list[index])
                             : TVCard(tvShow: list[index]),
                       );
@@ -89,7 +90,7 @@ class ResultList<T> extends HookConsumerWidget {
                 ),
               ),
             ),
-            _Paginator(page: page, data: data),
+            _Paginator(page: page, totalPages: data.totalPages),
           ],
         );
       },
@@ -104,22 +105,7 @@ class ResultList<T> extends HookConsumerWidget {
                 child: CircularProgressIndicator(),
               ),
             ),
-            _Paginator<T>(
-              page: page,
-              data: (T == MovieListModel)
-                  ? const MovieListModel(
-                      page: 1,
-                      results: [],
-                      totalPages: 0,
-                      totalResults: 0,
-                    )
-                  : const TVListModel(
-                      page: 1,
-                      results: [],
-                      totalPages: 0,
-                      totalResults: 0,
-                    ),
-            ),
+            _Paginator(page: page, totalPages: 0),
           ],
         );
       },
@@ -127,14 +113,14 @@ class ResultList<T> extends HookConsumerWidget {
   }
 }
 
-class _Paginator<T> extends HookWidget {
+class _Paginator extends HookWidget {
   const _Paginator({
     required this.page,
-    required this.data,
+    required this.totalPages,
   });
 
   final ValueNotifier<int> page;
-  final dynamic data;
+  final int totalPages;
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +143,7 @@ class _Paginator<T> extends HookWidget {
           Text('${page.value}'),
           IconButton(
             icon: const Icon(Icons.chevron_right),
-            onPressed: (currentPage.value != data.totalPages)
+            onPressed: (currentPage.value != totalPages)
                 ? () {
                     currentPage.value++;
                     page.value++;

@@ -19,6 +19,8 @@ class SuggestionList<T> extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isMovie = T == MovieListModel;
+
     if (query.isEmpty) {
       return const Center();
     }
@@ -26,7 +28,7 @@ class SuggestionList<T> extends ConsumerWidget {
     final user = ref.watch(authProvider).whenOrNull(loggedIn: (user) => user);
     late final AsyncValue search;
 
-    if (T == MovieListModel) {
+    if (isMovie) {
       search = ref.watch(
         searchMoviesProvider(
           query: query,
@@ -62,12 +64,12 @@ class SuggestionList<T> extends ConsumerWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  (T == MovieListModel) ? AppRoute.movie : AppRoute.tv,
+                  (isMovie) ? AppRoute.movie : AppRoute.tv,
                   arguments: list[index].id,
                 );
               },
               title: Text(
-                (T == MovieListModel) ? list[index].title! : list[index].name,
+                (isMovie) ? list[index].title! : list[index].name,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 14,
@@ -102,7 +104,7 @@ class SuggestionList<T> extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(5),
                   child: CustomNetworkImage(
                     placeholder: Icon(
-                      (T == MovieListModel) ? Icons.movie : Icons.tv,
+                      (isMovie) ? Icons.movie : Icons.tv,
                     ),
                     url:
                         ref.read(movieImageServiceProvider).getMovieBackdropUrl(
@@ -118,7 +120,7 @@ class SuggestionList<T> extends ConsumerWidget {
       },
       error: (error, stackTrace) {
         context.showErrorSnackBar(
-          T == MovieListModel
+          isMovie
               ? context.locale.searchMoviesError
               : context.locale.searchTVShowsError,
         );
