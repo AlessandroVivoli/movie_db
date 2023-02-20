@@ -1,3 +1,4 @@
+
 class InvalidUserError implements Exception {
   final Object error;
   final StackTrace stackTrace;
