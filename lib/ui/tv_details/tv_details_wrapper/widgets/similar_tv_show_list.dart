@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/extensions/build_context_extensions.dart';
@@ -48,8 +47,6 @@ class _SimilarTVShowsBuilder extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final similarTVShowsList = ref.watch(getSimilarTVShowsProvider(tvId));
 
-    final localization = AppLocalizations.of(context)!;
-
     return similarTVShowsList.when(
       data: (similarTVShows) {
         if (similarTVShows.isEmpty) {
@@ -67,7 +64,7 @@ class _SimilarTVShowsBuilder extends ConsumerWidget {
         context.showErrorSnackBar('Could not get similar tv shows.');
 
         return Center(
-          child: ErrorText(localization.unexpectedErrorMessage),
+          child: ErrorText(context.locale.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

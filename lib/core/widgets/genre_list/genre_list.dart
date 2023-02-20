@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../features/genre/domain/genre.dart';
+import '../../extensions/build_context_extensions.dart';
 import '../../extensions/list_extensions.dart';
 
 class GenreList extends ConsumerWidget {
@@ -12,8 +12,6 @@ class GenreList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localization = AppLocalizations.of(context)!;
-
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -31,7 +29,7 @@ class GenreList extends ConsumerWidget {
               ),
             ),
             child: Text(
-              localization.translateGenres(
+              context.locale.translateGenres(
                 genres[index]
                     .name
                     .replaceAll(' ', '')

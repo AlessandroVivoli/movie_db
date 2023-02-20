@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/extensions/build_context_extensions.dart';
@@ -17,15 +16,13 @@ class SimilarMovieList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(
-            localization.similarMoviesSectionTitle.toUpperCase(),
+            context.locale.similarMoviesSectionTitle.toUpperCase(),
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.w600,
@@ -55,13 +52,11 @@ class _SimilarMoviesBuilder extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final similarMovieList = ref.watch(getSimilarMoviesProvider(movieId));
 
-    final localization = AppLocalizations.of(context)!;
-
     return similarMovieList.when(
       data: (similarMovies) {
         if (similarMovies.isEmpty) {
           return Center(
-            child: Text(localization.noSimilarMovies),
+            child: Text(context.locale.noSimilarMovies),
           );
         }
 
@@ -71,10 +66,10 @@ class _SimilarMoviesBuilder extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar(localization.getSimilarMoviesError);
+        context.showErrorSnackBar(context.locale.getSimilarMoviesError);
 
         return Center(
-          child: ErrorText(localization.unexpectedErrorMessage),
+          child: ErrorText(context.locale.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

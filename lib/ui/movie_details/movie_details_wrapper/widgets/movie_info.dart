@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../core/extensions/build_context_extensions.dart';
 
 class MovieInfo extends StatelessWidget {
   final int budget;
@@ -37,13 +38,11 @@ class _BudgetText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          localization.movieBudgetLabel.toUpperCase(),
+          context.locale.movieBudgetLabel.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w600,
@@ -73,13 +72,11 @@ class _DurationText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          localization.movieDurationLabel.toUpperCase(),
+          context.locale.movieDurationLabel.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w600,
@@ -109,13 +106,11 @@ class _ReleaseDateText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          localization.releaseDateLabel.toUpperCase(),
+          context.locale.releaseDateLabel.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w600,
@@ -126,7 +121,7 @@ class _ReleaseDateText extends StatelessWidget {
         ),
         Text(
           (releaseDate != null)
-              ? localization.releaseDateValue(releaseDate!)
+              ? context.locale.releaseDateValue(releaseDate!)
               : '?',
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,

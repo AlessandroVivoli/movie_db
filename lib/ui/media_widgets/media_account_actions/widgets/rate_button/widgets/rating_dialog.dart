@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../../features/auth/provider/auth_provider.dart';
 import '../../../../../../../../core/widgets/errors/error_text.dart';
 import '../../../../../../../../core/widgets/rating/rating.dart';
+import '../../../../../../core/extensions/build_context_extensions.dart';
 import 'confirm_button.dart';
 import 'delete_button.dart';
 
@@ -23,8 +23,6 @@ class RatingDialog extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final rating = useState(this.rating);
     final user = ref.watch(authProvider);
-
-    final localization = AppLocalizations.of(context)!;
 
     return user.maybeWhen(
       loggedIn: (user) => Center(
@@ -74,7 +72,7 @@ class RatingDialog extends HookConsumerWidget {
         ),
       ),
       orElse: () => Center(
-        child: ErrorText(localization.notLoggedInErrorMessage),
+        child: ErrorText(context.locale.notLoggedInErrorMessage),
       ),
     );
   }

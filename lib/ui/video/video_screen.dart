@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/extensions/build_context_extensions.dart';
@@ -21,8 +20,6 @@ class VideoScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final videos = ref.watch(getVideosProvider(mediaId, mediaType));
-
-    final localization = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -47,17 +44,17 @@ class VideoScreen extends ConsumerWidget {
 
           if (videos.isEmpty) {
             return Center(
-              child: Text(localization.noTrailer),
+              child: Text(context.locale.noTrailer),
             );
           }
 
           return Player(video: videos.first);
         },
         error: (error, stackTrace) {
-          context.showErrorSnackBar(localization.trailerError);
+          context.showErrorSnackBar(context.locale.trailerError);
 
           return Center(
-            child: ErrorText(localization.unexpectedErrorMessage),
+            child: ErrorText(context.locale.unexpectedErrorMessage),
           );
         },
         loading: () => const Center(

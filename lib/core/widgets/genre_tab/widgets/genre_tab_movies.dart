@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/media/domain/media_arguments.dart';
@@ -31,13 +30,11 @@ class GenreTabMovies extends ConsumerWidget {
       ),
     );
 
-    final localization = AppLocalizations.of(context)!;
-
     return movieList.when(
       data: (movies) {
         if (movies.isEmpty) {
           return Center(
-            child: Text(localization.noPopularMovies),
+            child: Text(context.locale.noPopularMovies),
           );
         }
 
@@ -47,10 +44,10 @@ class GenreTabMovies extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar(localization.getPopularMoviesError);
+        context.showErrorSnackBar(context.locale.getPopularMoviesError);
 
         return Center(
-          child: ErrorText(localization.unexpectedErrorMessage),
+          child: ErrorText(context.locale.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../features/image/provider/image_service_provider.dart';
 import '../../../../features/reviews/domain/review.dart';
+import '../../../extensions/build_context_extensions.dart';
 import '../../custom_image/custom_network_image.dart';
 import '../../rating/rating.dart';
 
@@ -21,8 +22,6 @@ class ReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     final width = MediaQuery.of(context).size.width - 20;
 
     final formattedContent = review.content.replaceAll(
@@ -58,7 +57,7 @@ class ReviewCard extends StatelessWidget {
               ),
               _ReviewAuthoUsername(
                 review: review,
-                localization: localization,
+                localization: context.locale,
               ),
             ],
           ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../features/account/provider/account_avatar_service_provider.dart';
 import '../../../features/auth/provider/auth_provider.dart';
+import '../../core/extensions/build_context_extensions.dart';
 import '../../core/widgets/backdrop_image/backdrop_image.dart';
 import '../../core/widgets/errors/error_text.dart';
 import '../../features/person/domain/profile_sizes_enum.dart';
@@ -50,15 +50,13 @@ class _UsernameText extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authProvider);
 
-    final localization = AppLocalizations.of(context)!;
-
     return user.maybeWhen(
       loggedIn: (user) => Text(
         user.accountDetails.username,
         overflow: TextOverflow.ellipsis,
       ),
       loading: () => const CircularProgressIndicator(),
-      orElse: () => ErrorText(localization.notLoggedInErrorMessage),
+      orElse: () => ErrorText(context.locale.notLoggedInErrorMessage),
     );
   }
 }
@@ -71,8 +69,6 @@ class _AccountDetailsImage extends ConsumerWidget {
     final user = ref.watch(authProvider);
     final accountAvatarService = ref.watch(accountAvatarServiceProvider);
     final imageService = ref.watch(personImageServiceProvider);
-
-    final localization = AppLocalizations.of(context)!;
 
     return user.maybeWhen(
       loggedIn: (user) => BackdropImage(
@@ -91,7 +87,7 @@ class _AccountDetailsImage extends ConsumerWidget {
         ),
       ),
       orElse: () => Center(
-        child: ErrorText(localization.notLoggedInErrorMessage),
+        child: ErrorText(context.locale.notLoggedInErrorMessage),
       ),
     );
   }

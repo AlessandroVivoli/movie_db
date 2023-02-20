@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../core/extensions/build_context_extensions.dart';
 
 class TVInfo extends StatelessWidget {
   const TVInfo({
@@ -15,8 +16,6 @@ class TVInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,7 +33,7 @@ class TVInfo extends StatelessWidget {
                   ),
                   const TextSpan(text: ' '),
                   TextSpan(
-                    text: localization.releaseDateValue(released!),
+                    text: context.locale.releaseDateValue(released!),
                   ),
                 ],
               ),
@@ -54,7 +53,7 @@ class TVInfo extends StatelessWidget {
                   ),
                   const TextSpan(text: ' '),
                   TextSpan(
-                    text: localization.releaseDateValue(lastReleaseDate!),
+                    text: context.locale.releaseDateValue(lastReleaseDate!),
                   ),
                 ],
               ),

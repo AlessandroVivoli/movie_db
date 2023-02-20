@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../features/auth/provider/auth_provider.dart';
@@ -19,14 +18,12 @@ class TVGenreTab extends ConsumerWidget {
           orElse: () => false,
         );
 
-    final localization = AppLocalizations.of(context)!;
-
     return SizedBox(
       height: 300,
       child: genres.when(
         data: (genreList) {
           if (genreList.isEmpty) {
-            return Center(child: Text(localization.noTVGenres));
+            return Center(child: Text(context.locale.noTVGenres));
           }
 
           return GenreTabController(
@@ -36,10 +33,10 @@ class TVGenreTab extends ConsumerWidget {
           );
         },
         error: (error, stackTrace) {
-          context.showErrorSnackBar(localization.getTVGenresError);
+          context.showErrorSnackBar(context.locale.getTVGenresError);
 
           return Center(
-            child: Text(localization.unexpectedErrorMessage),
+            child: Text(context.locale.unexpectedErrorMessage),
           );
         },
         loading: () => const Center(

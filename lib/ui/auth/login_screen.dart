@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../core/extensions/build_context_extensions.dart';
 import 'widgets/password_text_field.dart';
 import 'widgets/submit_button.dart';
 import 'widgets/username_text_field.dart';
@@ -55,15 +55,13 @@ class _FormWidgets extends HookWidget {
     final passwordController = useTextEditingController(text: null);
     final passwordNode = useFocusNode();
 
-    final localization = AppLocalizations.of(context)!;
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Center(
           child: Text(
-            localization.loginScreenTitle,
+            context.locale.loginScreenTitle,
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,
@@ -91,7 +89,7 @@ class _FormWidgets extends HookWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                '${localization.poweredByLabel} ',
+                '${context.locale.poweredByLabel} ',
                 style: const TextStyle(
                   fontSize: 12,
                 ),

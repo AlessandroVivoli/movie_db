@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../core/extensions/build_context_extensions.dart';
@@ -19,13 +18,11 @@ class DeleteButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(deleteRatingProvider);
 
-    final localization = AppLocalizations.of(context)!;
-
     ref.listen(deleteRatingProvider, (previous, next) {
       next.whenOrNull(
         success: () => Navigator.pop(context),
         error: (error, stackTrace) {
-          context.showErrorSnackBar(localization.deleteRatingError);
+          context.showErrorSnackBar(context.locale.deleteRatingError);
 
           Navigator.pop(context);
         },
@@ -57,8 +54,6 @@ class _DeleteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     return OutlinedButton(
       onPressed:
           (originalRating > 0 && (onDelete != null)) ? () => onDelete!() : null,
@@ -69,7 +64,7 @@ class _DeleteButton extends StatelessWidget {
           width: 2,
         ),
       ),
-      child: Text(localization.rateDeleteButtonLabel),
+      child: Text(context.locale.rateDeleteButtonLabel),
     );
   }
 }

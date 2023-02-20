@@ -10,6 +10,7 @@ import '../../../features/auth/provider/auth_provider.dart';
 import '../../../features/local_storage/provider/local_storage_provider.dart';
 import '../../../features/localization/provider/locale_state_provider.dart';
 import '../../../routing/routes.dart';
+import '../../extensions/build_context_extensions.dart';
 import 'widgets/logged_in_drawer_view/logged_in_drawer_view.dart';
 import 'widgets/logged_out_drawer_view/logged_out_drawer_view.dart';
 
@@ -70,7 +71,6 @@ class _LocaleColumn extends HookConsumerWidget {
 
     final locale = ref.watch(localeStateProvider);
     const supportedLocales = AppLocalizations.supportedLocales;
-    final localization = AppLocalizations.of(context)!;
 
     return Column(
       children: [
@@ -89,7 +89,7 @@ class _LocaleColumn extends HookConsumerWidget {
                   (index) => DropdownMenuItem(
                     value: supportedLocales[index],
                     child: Text(
-                      localization.languageSelection(
+                      context.locale.languageSelection(
                         supportedLocales[index].languageCode,
                       ),
                     ),

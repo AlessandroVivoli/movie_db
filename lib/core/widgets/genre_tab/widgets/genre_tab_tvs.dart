@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/media/domain/media_arguments.dart';
@@ -29,8 +28,6 @@ class GenreTabTvs extends ConsumerWidget {
       ),
     );
 
-    final localization = AppLocalizations.of(context)!;
-
     return tvList.when(
       data: (tvs) {
         if (tvs.isEmpty) {
@@ -48,7 +45,7 @@ class GenreTabTvs extends ConsumerWidget {
         context.showErrorSnackBar('Could not get popular tvs');
 
         return Center(
-          child: ErrorText(localization.unexpectedErrorMessage),
+          child: ErrorText(context.locale.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/extensions/build_context_extensions.dart';
@@ -91,25 +90,23 @@ class _TrendingMoviesCarousel extends ConsumerWidget {
       getTrendingMoviesProvider(TimeWindow.week),
     );
 
-    final localization = AppLocalizations.of(context)!;
-
     return trendingMovies.when(
       data: (movies) {
         final movieList = movies.take(6).toList();
 
         if (movieList.isEmpty) {
           return Center(
-            child: Text(localization.noTrendingMovies),
+            child: Text(context.locale.noTrendingMovies),
           );
         }
 
         return MovieCarousel(movies: movieList);
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar(localization.getTrendingMoviesError);
+        context.showErrorSnackBar(context.locale.getTrendingMoviesError);
 
         return Center(
-          child: ErrorText(localization.unexpectedErrorMessage),
+          child: ErrorText(context.locale.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

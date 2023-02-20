@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/auth/provider/auth_provider.dart';
+import '../../../core/extensions/build_context_extensions.dart';
 import '../../../core/widgets/errors/error_text.dart';
 import 'widgets/account_details_name_text.dart';
 import 'widgets/favorite_movies_section.dart';
@@ -15,8 +15,6 @@ class AccountDetailsWrapper extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authProvider);
-
-    final localization = AppLocalizations.of(context)!;
 
     return user.maybeWhen(
       loggedIn: (user) => Padding(
@@ -39,7 +37,7 @@ class AccountDetailsWrapper extends HookConsumerWidget {
         ),
       ),
       orElse: () => Center(
-        child: ErrorText(localization.notLoggedInErrorMessage),
+        child: ErrorText(context.locale.notLoggedInErrorMessage),
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/extensions/build_context_extensions.dart';
@@ -82,8 +81,6 @@ class _TrendingTVsCarousel extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final trendingTvs = ref.watch(getTrendingTVShowsProvider(TimeWindow.week));
 
-    final localization = AppLocalizations.of(context)!;
-
     return trendingTvs.when(
       data: (tvs) {
         final tvList = tvs.take(6).toList();
@@ -100,7 +97,7 @@ class _TrendingTVsCarousel extends ConsumerWidget {
         context.showErrorSnackBar('Could not get trending tv shows');
 
         return Center(
-          child: ErrorText(localization.unexpectedErrorMessage),
+          child: ErrorText(context.locale.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../core/extensions/build_context_extensions.dart';
 
 class PersonBiography extends StatelessWidget {
   const PersonBiography({
@@ -11,13 +12,11 @@ class PersonBiography extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          localization.personBiographyLabel.toUpperCase(),
+          context.locale.personBiographyLabel.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w500,
@@ -25,7 +24,9 @@ class PersonBiography extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          (biography.characters.isEmpty) ? localization.noBiography : biography,
+          (biography.characters.isEmpty)
+              ? context.locale.noBiography
+              : biography,
           textAlign: TextAlign.justify,
         ),
       ],

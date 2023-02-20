@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../core/extensions/build_context_extensions.dart';
 import '../../core/widgets/account_drawer/account_drawer.dart';
 import '../../features/auth/provider/auth_provider.dart';
 import '../../features/genre/provider/get_movie_genres_provider.dart';
@@ -99,8 +99,6 @@ class _BottomNavigationBar extends HookConsumerWidget {
 
     final index = useValueListenable(selectedIndex);
 
-    final localization = AppLocalizations.of(context)!;
-
     return BottomNavigationBar(
       enableFeedback: true,
       elevation: 10,
@@ -111,13 +109,13 @@ class _BottomNavigationBar extends HookConsumerWidget {
               Theme.of(context).bottomNavigationBarTheme.backgroundColor,
           activeIcon: const Icon(Icons.movie),
           icon: const Icon(Icons.movie_outlined),
-          label: localization.bottomBarMoviesLabel,
+          label: context.locale.bottomBarMoviesLabel,
         ),
         BottomNavigationBarItem(
           backgroundColor:
               Theme.of(context).bottomNavigationBarTheme.backgroundColor,
           icon: const Icon(Icons.tv),
-          label: localization.bottomBarTVShowsLabel,
+          label: context.locale.bottomBarTVShowsLabel,
         ),
         if (user != null)
           BottomNavigationBarItem(
@@ -125,7 +123,7 @@ class _BottomNavigationBar extends HookConsumerWidget {
                 Theme.of(context).bottomNavigationBarTheme.backgroundColor,
             activeIcon: const Icon(Icons.bookmark),
             icon: const Icon(Icons.bookmark_outline),
-            label: localization.bottomBarWatchlistLabel,
+            label: context.locale.bottomBarWatchlistLabel,
           ),
         if (user != null)
           BottomNavigationBarItem(
@@ -133,7 +131,7 @@ class _BottomNavigationBar extends HookConsumerWidget {
                 Theme.of(context).bottomNavigationBarTheme.backgroundColor,
             activeIcon: const Icon(Icons.favorite),
             icon: const Icon(Icons.favorite_border_outlined),
-            label: localization.bottomBarFavoritesLabel,
+            label: context.locale.bottomBarFavoritesLabel,
           ),
       ],
       onTap: (index) => selectedIndex.value = index,

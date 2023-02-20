@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -19,15 +18,13 @@ class WatchlistSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            localization.watchlistSectionTitle,
+            context.locale.watchlistSectionTitle,
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
               fontSize: 18,
@@ -62,13 +59,11 @@ class _WatchlistHookWidget extends HookConsumerWidget {
       getMovieWatchlistProvider(page: page.value),
     );
 
-    final localization = AppLocalizations.of(context)!;
-
     return movieWatchlist.when(
       data: (movies) {
         if (movies.totalResults == 0) {
           return Center(
-            child: Text(localization.noWatchlist),
+            child: Text(context.locale.noWatchlist),
           );
         }
 
@@ -80,10 +75,10 @@ class _WatchlistHookWidget extends HookConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar(localization.getWatchlistError);
+        context.showErrorSnackBar(context.locale.getWatchlistError);
 
         return Center(
-          child: ErrorText(localization.unexpectedErrorMessage),
+          child: ErrorText(context.locale.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

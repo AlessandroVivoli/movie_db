@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/extensions/build_context_extensions.dart';
@@ -28,14 +27,12 @@ class _TopRatedMoviesText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
           Text(
-            localization.topRatedMoviesSectionTitle.toUpperCase(),
+            context.locale.topRatedMoviesSectionTitle.toUpperCase(),
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.w600,
@@ -54,15 +51,13 @@ class _TopRatedMoviesList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final topRatedMovies = ref.watch(getTopRatedMoviesProvider);
 
-    final localization = AppLocalizations.of(context)!;
-
     return LimitedBox(
       maxHeight: 250,
       child: topRatedMovies.when(
         data: (movies) {
           if (movies.isEmpty) {
             return Center(
-              child: Text(localization.noTopRatedMovies),
+              child: Text(context.locale.noTopRatedMovies),
             );
           }
 
@@ -72,10 +67,10 @@ class _TopRatedMoviesList extends ConsumerWidget {
           );
         },
         error: (error, stackTrace) {
-          context.showErrorSnackBar(localization.getTopRatedMoviesError);
+          context.showErrorSnackBar(context.locale.getTopRatedMoviesError);
 
           return Center(
-            child: ErrorText(localization.unexpectedErrorMessage),
+            child: ErrorText(context.locale.unexpectedErrorMessage),
           );
         },
         loading: () => const Center(

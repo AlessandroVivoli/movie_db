@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/extensions/build_context_extensions.dart';
@@ -17,13 +16,11 @@ class PersonCredits extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          localization.personCreditsLabel.toUpperCase(),
+          context.locale.personCreditsLabel.toUpperCase(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w600,
@@ -45,25 +42,23 @@ class _CreditsList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final credits = ref.watch(getPersonCreditsProvider(personId));
 
-    final localization = AppLocalizations.of(context)!;
-
     return SizedBox(
       height: 250,
       child: credits.when(
         data: (movies) {
           if (movies.isEmpty) {
             return Center(
-              child: Text(localization.noMovieCredits),
+              child: Text(context.locale.noMovieCredits),
             );
           }
 
           return MovieList(movieList: movies);
         },
         error: (error, stackTrace) {
-          context.showErrorSnackBar(localization.getMovieCreditsError);
+          context.showErrorSnackBar(context.locale.getMovieCreditsError);
 
           return Center(
-            child: ErrorText(localization.unexpectedErrorMessage),
+            child: ErrorText(context.locale.unexpectedErrorMessage),
           );
         },
         loading: () => const Center(

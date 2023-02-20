@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -8,6 +7,7 @@ import '../../../../../features/movies/domain/movie_list.dart';
 import '../../../../../features/movies/provider/search_movies_provider.dart';
 import '../../../../../features/tv_shows/domain/tv_list_model.dart';
 import '../../../../../features/tv_shows/provider/search_tv_shows_provider.dart';
+import '../../../../extensions/build_context_extensions.dart';
 import '../../../errors/error_text.dart';
 import '../../../movie_card/movie_card.dart';
 import '../../../tv_card/tv_card.dart';
@@ -49,8 +49,6 @@ class ResultList<T> extends HookConsumerWidget {
       );
     }
 
-    final localization = AppLocalizations.of(context)!;
-
     return search.when(
       data: (data) {
         final list = data.results as List;
@@ -60,8 +58,8 @@ class ResultList<T> extends HookConsumerWidget {
             child: Text(
               textAlign: TextAlign.center,
               T == MovieListModel
-                  ? localization.noMovieSearchResult
-                  : localization.noTvSearchResult,
+                  ? context.locale.noMovieSearchResult
+                  : context.locale.noTvSearchResult,
             ),
           );
         }
@@ -96,7 +94,7 @@ class ResultList<T> extends HookConsumerWidget {
         );
       },
       error: (_, __) => Center(
-        child: ErrorText(localization.unexpectedErrorMessage),
+        child: ErrorText(context.locale.unexpectedErrorMessage),
       ),
       loading: () {
         return Column(

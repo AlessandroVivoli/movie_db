@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../features/account/domain/account_details.dart';
+import '../../../../extensions/build_context_extensions.dart';
 
 class LoggedInDrawerView extends StatelessWidget {
   const LoggedInDrawerView({
@@ -17,25 +17,23 @@ class LoggedInDrawerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       children: [
         ListTile(
           title: Text(
-            localization.helloLabel(accountDetails.username),
+            context.locale.helloLabel(accountDetails.username),
           ),
         ),
         OutlinedButton.icon(
           onPressed: onProfilePressed,
           icon: const Icon(Icons.person),
-          label: Text(localization.profileButtonLabel),
+          label: Text(context.locale.profileButtonLabel),
         ),
         OutlinedButton.icon(
           onPressed: onPressed,
           icon: const Icon(Icons.logout),
-          label: Text(localization.logoutButtonLabel),
+          label: Text(context.locale.logoutButtonLabel),
         ),
       ],
     );

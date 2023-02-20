@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/extensions/build_context_extensions.dart';
@@ -35,8 +34,6 @@ class _PersonDetailsBodyBuilder extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final personDetails = ref.watch(getPersonDetailsProvider(personId));
 
-    final localization = AppLocalizations.of(context)!;
-
     return personDetails.when(
       data: (details) => RefreshIndicator(
           onRefresh: () => Future(() {
@@ -45,13 +42,13 @@ class _PersonDetailsBodyBuilder extends ConsumerWidget {
               }),
           child: PersonDetailsBody(personDetails: details)),
       error: (error, stackTrace) {
-        context.showErrorSnackBar(localization.getPersonDetailsError);
+        context.showErrorSnackBar(context.locale.getPersonDetailsError);
 
         return Column(
           children: [
             AppBar(),
             Center(
-              child: ErrorText(localization.unexpectedErrorMessage),
+              child: ErrorText(context.locale.unexpectedErrorMessage),
             ),
           ],
         );

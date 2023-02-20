@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../features/auth/provider/auth_provider.dart';
 import '../../../../../routing/routes.dart';
+import '../../../../extensions/build_context_extensions.dart';
 
 class LoggedOutDrawerView extends ConsumerWidget {
   final void Function()? onLogin;
@@ -12,8 +12,6 @@ class LoggedOutDrawerView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localization = AppLocalizations.of(context)!;
-
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       children: [
@@ -30,7 +28,7 @@ class LoggedOutDrawerView extends ConsumerWidget {
             },
           ),
           icon: const Icon(Icons.login),
-          label: Text(localization.loginButtonLabel),
+          label: Text(context.locale.loginButtonLabel),
         ),
       ],
     );

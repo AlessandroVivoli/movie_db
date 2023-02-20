@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../features/person/domain/person_details.dart';
@@ -45,8 +44,6 @@ class _PersonCarouselBuilder extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final personImages = ref.watch(getPersonImagesProvider(personDetails.id));
 
-    final localization = AppLocalizations.of(context)!;
-
     return personImages.when(
       data: (images) {
         if (images.isEmpty) {
@@ -63,10 +60,10 @@ class _PersonCarouselBuilder extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar(localization.getPersonImagesError);
+        context.showErrorSnackBar(context.locale.getPersonImagesError);
 
         return Center(
-          child: ErrorText(localization.unexpectedErrorMessage),
+          child: ErrorText(context.locale.unexpectedErrorMessage),
         );
       },
       loading: () => const Center(

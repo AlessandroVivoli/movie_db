@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -27,8 +26,6 @@ class FavoriteButton extends ConsumerWidget {
           orElse: () => false,
         );
 
-    final localization = AppLocalizations.of(context)!;
-
     ref.listen(
       favoritesProvider,
       (previous, next) {
@@ -36,8 +33,8 @@ class FavoriteButton extends ConsumerWidget {
           error: (error, stackTrace) {
             context.showErrorSnackBar(
               !favorite
-                  ? localization.addFavoriteError
-                  : localization.removeFavoriteError,
+                  ? context.locale.addFavoriteError
+                  : context.locale.removeFavoriteError,
             );
           },
         );
@@ -55,7 +52,7 @@ class FavoriteButton extends ConsumerWidget {
               (favorite) ? Colors.pink : Theme.of(context).colorScheme.primary,
         ),
       ),
-      orElse: () => ErrorText(localization.notLoggedInErrorMessage),
+      orElse: () => ErrorText(context.locale.notLoggedInErrorMessage),
     );
   }
 }

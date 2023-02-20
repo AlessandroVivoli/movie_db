@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../features/auth/provider/auth_provider.dart';
@@ -43,8 +42,6 @@ class SuggestionList<T> extends ConsumerWidget {
       );
     }
 
-    final localization = AppLocalizations.of(context)!;
-
     return search.when(
       loading: () => const Center(child: CircularProgressIndicator()),
       data: (model) {
@@ -53,7 +50,7 @@ class SuggestionList<T> extends ConsumerWidget {
         if (list.isEmpty) {
           return Center(
             child: Text(
-              localization.nothingFound,
+              context.locale.nothingFound,
             ),
           );
         }
@@ -122,12 +119,12 @@ class SuggestionList<T> extends ConsumerWidget {
       error: (error, stackTrace) {
         context.showErrorSnackBar(
           T == MovieListModel
-              ? localization.searchMoviesError
-              : localization.searchTVShowsError,
+              ? context.locale.searchMoviesError
+              : context.locale.searchTVShowsError,
         );
 
         return Center(
-          child: ErrorText(localization.unexpectedErrorMessage),
+          child: ErrorText(context.locale.unexpectedErrorMessage),
         );
       },
     );

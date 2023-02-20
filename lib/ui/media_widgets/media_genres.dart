@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../core/extensions/build_context_extensions.dart';
 import '../../core/widgets/genre_list/genre_list.dart';
 import '../../features/genre/domain/genre.dart';
 
@@ -14,15 +14,13 @@ class MediaGenres extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 20),
           child: Text(
-            localization.genresSectionTitle.toUpperCase(),
+            context.locale.genresSectionTitle.toUpperCase(),
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.w600,

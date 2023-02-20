@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../features/auth/provider/auth_provider.dart';
@@ -25,8 +24,6 @@ class WatchlistButton extends ConsumerWidget {
         .watch(watchlistProvider)
         .maybeWhen(loading: () => true, orElse: () => false);
 
-    final localization = AppLocalizations.of(context)!;
-
     ref.listen(
       watchlistProvider,
       (previous, next) {
@@ -34,8 +31,8 @@ class WatchlistButton extends ConsumerWidget {
           error: (error, stackTrace) {
             context.showErrorSnackBar(
               !watchlist
-                  ? localization.addWatchlistError
-                  : localization.removeWatchlistError,
+                  ? context.locale.addWatchlistError
+                  : context.locale.removeWatchlistError,
             );
           },
         );
@@ -57,6 +54,6 @@ class WatchlistButton extends ConsumerWidget {
                   ? null
                   : () => onWatchlistPressed!(!watchlist),
             ),
-        orElse: () => ErrorText(localization.notLoggedInErrorMessage));
+        orElse: () => ErrorText(context.locale.notLoggedInErrorMessage));
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -39,8 +38,6 @@ class _TVDetailsWrapper extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tvDetails = ref.watch(getTVDetailsProvider(tvId));
 
-    final localization = AppLocalizations.of(context)!;
-
     return tvDetails.when(
       data: (details) => RefreshIndicator(
         child: _TVDetailsBody(details: details),
@@ -51,14 +48,14 @@ class _TVDetailsWrapper extends ConsumerWidget {
         }),
       ),
       error: (error, stackTrace) {
-        context.showErrorSnackBar(localization.getTVDetailsError);
+        context.showErrorSnackBar(context.locale.getTVDetailsError);
 
         return Column(
           children: [
             AppBar(),
             Expanded(
               child: Center(
-                child: ErrorText(localization.unexpectedErrorMessage),
+                child: ErrorText(context.locale.unexpectedErrorMessage),
               ),
             ),
           ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -46,8 +45,6 @@ class _MovieDetailsWrapper extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final movieDetails = ref.watch(getMovieDetailsProvider(movieId));
 
-    final localization = AppLocalizations.of(context)!;
-
     return movieDetails.when(
       data: (details) => RefreshIndicator(
           onRefresh: () => Future(() {
@@ -57,14 +54,14 @@ class _MovieDetailsWrapper extends ConsumerWidget {
               }),
           child: _MovieDetailsBody(details: details)),
       error: (error, stackTrace) {
-        context.showErrorSnackBar(localization.getMovieDetailsError);
+        context.showErrorSnackBar(context.locale.getMovieDetailsError);
 
         return Column(
           children: [
             AppBar(),
             Expanded(
               child: Center(
-                child: ErrorText(localization.unexpectedErrorMessage),
+                child: ErrorText(context.locale.unexpectedErrorMessage),
               ),
             ),
           ],

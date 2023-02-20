@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../core/extensions/build_context_extensions.dart';
@@ -21,12 +20,10 @@ class ConfirmButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(rateMediaProvider);
 
-    final localization = AppLocalizations.of(context)!;
-
     ref.listen(rateMediaProvider, (previous, next) {
       next.whenOrNull(
         error: (error, stackTrace) {
-          context.showErrorSnackBar(localization.rateError);
+          context.showErrorSnackBar(context.locale.rateError);
 
           Navigator.pop(context, false);
         },
@@ -62,8 +59,6 @@ class _ConfirmButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
     return OutlinedButton(
       onPressed: (rating > 0 && originalRating != rating && (onRate != null))
           ? () => onRate!(rating)
@@ -76,7 +71,7 @@ class _ConfirmButton extends StatelessWidget {
           width: 2,
         ),
       ),
-      child: Text(localization.rateConfirmButtonLabel),
+      child: Text(context.locale.rateConfirmButtonLabel),
     );
   }
 }
