@@ -1,7 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../media/domain/media_arguments.dart';
-import '../../media/domain/sort_by.dart';
 import '../domain/tv_show.dart';
 import 'tv_show_service_provider.dart';
 

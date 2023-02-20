@@ -74,7 +74,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case AppRoute.episode:
       final seasonId = settings.arguments as int;
 
-      return MaterialPageRoute(builder: (context) => const SeasonDetails());
+      return MaterialPageRoute(
+          builder: (context) => SeasonDetails(seasonId: seasonId));
     default:
       throw Exception('Route ${settings.name} doesn\'t exist');
   }

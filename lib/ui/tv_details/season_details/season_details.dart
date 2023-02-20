@@ -1,8 +1,9 @@
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter/material.dart';
 
 class SeasonDetails extends StatelessWidget {
-  const SeasonDetails({super.key});
+  const SeasonDetails({super.key, required this.seasonId});
+
+  final int seasonId;
 
   @override
   Widget build(BuildContext context) {
