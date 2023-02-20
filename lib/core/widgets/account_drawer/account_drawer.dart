@@ -81,7 +81,7 @@ class _LocaleColumn extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text('${AppLocalizations.of(context)!.localizationLabel}:'),
+              Text('${context.locale.localizationLabel}:'),
               DropdownButton(
                 value: locale,
                 items: List.generate(
