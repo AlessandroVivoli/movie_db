@@ -10,7 +10,7 @@ import '../../../../../features/tv_shows/provider/search_tv_shows_provider.dart'
 import '../../../../../routing/routes.dart';
 import '../../../../extensions/build_context_extensions.dart';
 import '../../../custom_image/custom_network_image.dart';
-import '../../../errors/error_text.dart';
+import '../../../error_text/error_text.dart';
 
 class SuggestionList<T> extends ConsumerWidget {
   final String query;

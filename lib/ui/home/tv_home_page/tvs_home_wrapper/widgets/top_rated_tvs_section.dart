@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/extensions/build_context_extensions.dart';
-import '../../../../../core/widgets/errors/error_text.dart';
+import '../../../../../core/widgets/error_text/error_text.dart';
 import '../../../../../core/widgets/tv_list/tv_list.dart';
 import '../../../../../features/tv_shows/provider/get_top_rated_tv_shows_provider.dart';
 

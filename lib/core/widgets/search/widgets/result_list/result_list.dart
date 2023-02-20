@@ -7,7 +7,7 @@ import '../../../../../features/movies/domain/movie_list.dart';
 import '../../../../../features/movies/provider/search_movies_provider.dart';
 import '../../../../../features/tv_shows/provider/search_tv_shows_provider.dart';
 import '../../../../extensions/build_context_extensions.dart';
-import '../../../errors/error_text.dart';
+import '../../../error_text/error_text.dart';
 import '../../../movie_card/movie_card.dart';
 import '../../../tv_card/tv_card.dart';
 

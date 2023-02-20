@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../../features/auth/provider/auth_provider.dart';
-import '../../../../../../../../core/widgets/errors/error_text.dart';
+import '../../../../../../core/widgets/error_text/error_text.dart';
 import '../../../../../../../../core/widgets/rating/rating.dart';
 import '../../../../../../core/extensions/build_context_extensions.dart';
 import 'confirm_button.dart';

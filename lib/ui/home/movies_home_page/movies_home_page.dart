@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/extensions/build_context_extensions.dart';
 import '../../../core/widgets/carousel/movie_carousel/movie_carousel.dart';
-import '../../../core/widgets/errors/error_text.dart';
+import '../../../core/widgets/error_text/error_text.dart';
 import '../../../core/widgets/genre_tab/movie_genre_tab.dart';
 import '../../../core/widgets/search/movie_search_delegate.dart';
 import '../../../features/movies/provider/get_trending_movies_provider.dart';

@@ -5,7 +5,7 @@ import '../../../../features/media/domain/media_arguments.dart';
 import '../../../../features/media/domain/sort_by.dart';
 import '../../../../features/movies/provider/get_movies_provider.dart';
 import '../../../extensions/build_context_extensions.dart';
-import '../../errors/error_text.dart';
+import '../../error_text/error_text.dart';
 import '../../movie_list/movie_list.dart';
 
 class GenreTabMovies extends ConsumerWidget {

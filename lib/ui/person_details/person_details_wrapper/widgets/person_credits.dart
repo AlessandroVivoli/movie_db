@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/extensions/build_context_extensions.dart';
-import '../../../../core/widgets/errors/error_text.dart';
+import '../../../../core/widgets/error_text/error_text.dart';
 import '../../../../core/widgets/movie_list/movie_list.dart';
 import '../../../../features/person/provider/get_person_credits_provider.dart';
 

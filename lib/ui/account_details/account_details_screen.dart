@@ -6,7 +6,7 @@ import '../../../features/account/provider/account_avatar_service_provider.dart'
 import '../../../features/auth/provider/auth_provider.dart';
 import '../../core/extensions/build_context_extensions.dart';
 import '../../core/widgets/backdrop_image/backdrop_image.dart';
-import '../../core/widgets/errors/error_text.dart';
+import '../../core/widgets/error_text/error_text.dart';
 import '../../features/person/domain/profile_sizes_enum.dart';
 import '../../features/person/provider/image/person_image_service_provider.dart';
 import 'account_details_wrapper/account_details_wrapper.dart';

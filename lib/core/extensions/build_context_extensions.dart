@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../widgets/errors/error_snack_bar_content.dart';
+import '../widgets/dialogs/error_snack_bar_content.dart';
 
 extension ShowSnackBar on BuildContext {
   void showSimpleSnackBar(String text) {

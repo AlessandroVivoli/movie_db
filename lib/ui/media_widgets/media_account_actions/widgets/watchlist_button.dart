@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../features/auth/provider/auth_provider.dart';
 import '../../../../../../core/extensions/build_context_extensions.dart';
-import '../../../../../../core/widgets/errors/error_text.dart';
+import '../../../../core/widgets/error_text/error_text.dart';
 import '../../../../features/account/provider/watchlist/add_to_watchlist_provider.dart';
 
 class WatchlistButton extends ConsumerWidget {
