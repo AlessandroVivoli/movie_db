@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_service_provider.dart';
+part of 'query_interceptor_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,13 +29,21 @@ class _SystemHash {
   }
 }
 
-String _$authServiceHash() => r'd7d37ef8f9a42c395e63bb65072bc0c2e2a92c2b';
+String _$QueryInterceptorStateHash() =>
+    r'a027830d188fc4c34d0b067d6f2898c1396e945f';
 
-/// See also [authService].
-final authServiceProvider = Provider<IAuthService>(
-  authService,
-  name: r'authServiceProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$authServiceHash,
+/// See also [QueryInterceptorState].
+final queryInterceptorStateProvider =
+    NotifierProvider<QueryInterceptorState, QueryInterceptor>(
+  QueryInterceptorState.new,
+  name: r'queryInterceptorStateProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$QueryInterceptorStateHash,
 );
-typedef AuthServiceRef = ProviderRef<IAuthService>;
+typedef QueryInterceptorStateRef = NotifierProviderRef<QueryInterceptor>;
+
+abstract class _$QueryInterceptorState extends Notifier<QueryInterceptor> {
+  @override
+  QueryInterceptor build();
+}

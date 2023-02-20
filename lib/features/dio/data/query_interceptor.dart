@@ -29,7 +29,7 @@ class QueryInterceptor extends Interceptor {
     options.queryParameters.addAll({
       'api_key': dotenv.get('TMDB_API_KEY'),
       'language': language.languageCode,
-      'session_id': sessionId,
+      if (sessionId != null) 'session_id': sessionId,
     });
 
     super.onRequest(options, handler);

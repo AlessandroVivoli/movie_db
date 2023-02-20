@@ -8,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/loggers/provider_logger.dart';
 import 'features/auth/provider/auth_provider.dart';
+import 'features/dio/data/query_interceptor.dart';
+import 'features/dio/provider/query_interceptor_provider.dart';
 import 'features/local_storage/data/local_storage_repository.dart';
 import 'features/local_storage/provider/local_storage_provider.dart';
 import 'features/localization/provider/locale_state_provider.dart';
@@ -70,6 +72,26 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locale = ref.watch(localeStateProvider);
+
+    ref.listen(
+      authProvider,
+      (previous, next) {
+        next.whenOrNull(
+          loggedIn: (user) => ref
+              .read(queryInterceptorStateProvider.notifier)
+              .state = QueryInterceptor(
+            locale: ref.read(queryInterceptorStateProvider).locale,
+            sessionId: user.sessionId,
+          ),
+          loggedOut: () => ref
+              .read(queryInterceptorStateProvider.notifier)
+              .state = QueryInterceptor(
+            locale: ref.read(queryInterceptorStateProvider).locale,
+            sessionId: null,
+          ),
+        );
+      },
+    );
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
