@@ -19,7 +19,7 @@ class SimilarTVShowList extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(
-            'Similar TV Shows'.toUpperCase(),
+            context.locale.similarTVShowsLabel.toUpperCase(),
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.w600,
@@ -50,8 +50,8 @@ class _SimilarTVShowsBuilder extends ConsumerWidget {
     return similarTVShowsList.when(
       data: (similarTVShows) {
         if (similarTVShows.isEmpty) {
-          return const Center(
-            child: Text('No similar tv show found.'),
+          return Center(
+            child: Text(context.locale.noSimilarTVShows),
           );
         }
 
@@ -61,7 +61,7 @@ class _SimilarTVShowsBuilder extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        context.showErrorSnackBar('Could not get similar tv shows.');
+        context.showErrorSnackBar(context.locale.similarTVShowsError);
 
         return Center(
           child: ErrorText(context.locale.unexpectedErrorMessage),

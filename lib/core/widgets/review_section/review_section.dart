@@ -18,7 +18,7 @@ class ReviewsSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
           child: Text(
-            'Reviews'.toUpperCase(),
+            context.locale.reviewsLabel.toUpperCase(),
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.w600,

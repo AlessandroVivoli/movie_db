@@ -115,5 +115,9 @@
   "noTrendingTVShows": "Nije pronađen nijedna trending tv serija.",
   "trendingTVShowsError": "Nije moguće dobiti trending tv serije",
   "noTopRatedTVShows": "Nije pronađen nijedna najbolje ocjenjena tv serija.",
-  "topRatedTVShowsError": "Nije moguće dobiti najbolje ocjenjene tv serije"
+  "topRatedTVShowsError": "Nije moguće dobiti najbolje ocjenjene tv serije",
+  "reviewsLabel": "Recenzije",
+  "noSimilarTVShows": "Nije pronađena nijedna slična tv serija.",
+  "similarTVShowsError": "Nije moguće dobiti slične tv serije",
+  "similarTVShowsLabel": "Slične TV Serije"
 }

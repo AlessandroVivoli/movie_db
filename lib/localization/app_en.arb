@@ -221,5 +221,9 @@
   "noTrendingTVShows": "No trending tv show found.",
   "trendingTVShowsError": "Could not get trending tv shows",
   "noTopRatedTVShows": "No top rated tv show found.",
-  "topRatedTVShowsError": "Could not get top rated tv shows"
+  "topRatedTVShowsError": "Could not get top rated tv shows",
+  "reviewsLabel": "Reviews",
+  "noSimilarTVShows": "No similar tv show found.",
+  "similarTVShowsError": "Could not get similar tv shows",
+  "similarTVShowsLabel": "Similar TV Shows"
 }
