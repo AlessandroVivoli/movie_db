@@ -28,7 +28,7 @@ class ImageCarouselItem extends ConsumerWidget {
                   child: InteractiveViewer(
                     maxScale: 4,
                     child: CustomNetworkImage(
-                      placeholderIcon: const Icon(Icons.person),
+                      placeholder: const Icon(Icons.person),
                       url: imageService.getImageUrl(path: image),
                     ),
                   ),

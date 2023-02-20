@@ -5,7 +5,7 @@ class CustomNetworkImage extends StatelessWidget {
   const CustomNetworkImage({
     super.key,
     this.url,
-    required this.placeholderIcon,
+    required this.placeholder,
     this.width,
     this.height,
   });
@@ -14,7 +14,7 @@ class CustomNetworkImage extends StatelessWidget {
   final double? height;
 
   final String? url;
-  final Widget placeholderIcon;
+  final Widget placeholder;
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +25,14 @@ class CustomNetworkImage extends StatelessWidget {
           height: height,
           fit: BoxFit.cover,
           imageUrl: url!,
-          progressIndicatorBuilder: (context, url, download) => Center(
-            child: CircularProgressIndicator(
-              value: download.progress,
-            ),
-          ),
+          placeholder: (context, url) => placeholder,
           errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
       );
     }
 
-    if (placeholderIcon is Icon) {
-      final icon = placeholderIcon as Icon;
+    if (placeholder is Icon) {
+      final icon = placeholder as Icon;
 
       return Icon(
         icon.icon,
@@ -47,7 +43,7 @@ class CustomNetworkImage extends StatelessWidget {
 
     return Container(
       color: Theme.of(context).colorScheme.surface,
-      child: Center(child: placeholderIcon),
+      child: Center(child: placeholder),
     );
   }
 }

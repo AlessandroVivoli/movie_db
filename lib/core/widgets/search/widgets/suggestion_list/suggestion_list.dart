@@ -101,7 +101,7 @@ class SuggestionList<T> extends ConsumerWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: CustomNetworkImage(
-                    placeholderIcon: Icon(
+                    placeholder: Icon(
                       (T == MovieListModel) ? Icons.movie : Icons.tv,
                     ),
                     url:

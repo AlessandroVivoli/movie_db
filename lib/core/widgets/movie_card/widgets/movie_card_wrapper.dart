@@ -39,7 +39,7 @@ class MovieCardWrapper extends ConsumerWidget {
                         size: PosterSizes.w500,
                         path: movie.posterPath,
                       ),
-                      placeholderIcon: const Icon(
+                      placeholder: const Icon(
                         Icons.movie,
                         size: 50,
                       ),

@@ -19,7 +19,7 @@ class BackdropImage extends StatelessWidget {
         Center(
           child: CustomNetworkImage(
             url: imgUrl,
-            placeholderIcon: placeholderIcon,
+            placeholder: placeholderIcon,
           ),
         ),
         Container(

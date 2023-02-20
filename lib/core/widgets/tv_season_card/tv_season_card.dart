@@ -45,7 +45,7 @@ class TVSeasonCard extends ConsumerWidget {
                       size: PosterSizes.w185,
                       path: season.posterPath,
                     ),
-                    placeholderIcon: Text(matches.join('').toUpperCase()),
+                    placeholder: Text(matches.join('').toUpperCase()),
                   ),
                 ),
               ),

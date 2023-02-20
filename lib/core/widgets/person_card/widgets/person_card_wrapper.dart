@@ -34,7 +34,7 @@ class PersonCardWrapper extends ConsumerWidget {
                 size: ProfileSizes.w185,
                 path: person.profilePath,
               ),
-              placeholderIcon: const Icon(
+              placeholder: const Icon(
                 Icons.person,
                 size: 40,
               ),

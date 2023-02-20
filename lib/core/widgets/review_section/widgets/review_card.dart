@@ -157,7 +157,7 @@ class _ReviewAuthorAvatar extends ConsumerWidget {
         child: Container(
           color: Theme.of(context).colorScheme.background,
           child: CustomNetworkImage(
-            placeholderIcon: const Icon(Icons.person),
+            placeholder: const Icon(Icons.person),
             url: ref.read(imageServiceProvider).getImageUrl(
                   path: review.authorDetails.avatarPath,
                 ),

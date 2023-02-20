@@ -39,7 +39,7 @@ class TVCardWrapper extends ConsumerWidget {
                         size: PosterSizes.w500,
                         path: tvShow.posterPath,
                       ),
-                      placeholderIcon: const Icon(
+                      placeholder: const Icon(
                         Icons.tv,
                         size: 50,
                       ),
