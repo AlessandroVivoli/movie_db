@@ -9,6 +9,6 @@ part 'query_interceptor_provider.g.dart';
 class QueryInterceptorState extends _$QueryInterceptorState {
   @override
   QueryInterceptor build() => QueryInterceptor(
-        locale: ref.watch(localeStateProvider),
+        locale: ref.read(localeStateProvider),
       );
 }

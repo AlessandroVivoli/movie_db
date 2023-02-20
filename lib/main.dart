@@ -93,6 +93,17 @@ class MyApp extends ConsumerWidget {
       },
     );
 
+    ref.listen(
+      localeStateProvider,
+      (previous, next) {
+        ref.read(queryInterceptorStateProvider.notifier).state =
+            QueryInterceptor(
+          locale: next,
+          sessionId: ref.read(queryInterceptorStateProvider).sessionId,
+        );
+      },
+    );
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       color: const Color.fromARGB(255, 17, 25, 37),

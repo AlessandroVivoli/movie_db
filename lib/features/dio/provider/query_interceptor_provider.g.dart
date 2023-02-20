@@ -30,7 +30,7 @@ class _SystemHash {
 }
 
 String _$QueryInterceptorStateHash() =>
-    r'a027830d188fc4c34d0b067d6f2898c1396e945f';
+    r'67aec186816fdcc7fec51e635f07e05b33e0ea1e';
 
 /// See also [QueryInterceptorState].
 final queryInterceptorStateProvider =
