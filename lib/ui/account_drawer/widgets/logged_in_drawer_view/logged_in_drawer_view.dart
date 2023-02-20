@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../features/account/domain/account_details.dart';
-import '../../../../extensions/build_context_extensions.dart';
+import '../../../../core/extensions/build_context_extensions.dart';
+import '../../../../features/account/domain/account_details.dart';
 
 class LoggedInDrawerView extends StatelessWidget {
   const LoggedInDrawerView({

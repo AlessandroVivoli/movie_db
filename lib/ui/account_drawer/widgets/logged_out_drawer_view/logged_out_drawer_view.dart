@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../features/auth/provider/auth_provider.dart';
-import '../../../../../routing/routes.dart';
-import '../../../../extensions/build_context_extensions.dart';
+import '../../../../core/extensions/build_context_extensions.dart';
+import '../../../../features/auth/provider/auth_provider.dart';
+import '../../../../routing/routes.dart';
 
 class LoggedOutDrawerView extends ConsumerWidget {
   final void Function()? onLogin;

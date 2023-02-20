@@ -3,13 +3,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/extensions/build_context_extensions.dart';
-import '../../core/widgets/account_drawer/account_drawer.dart';
 import '../../features/auth/provider/auth_provider.dart';
 import '../../features/genre/provider/get_movie_genres_provider.dart';
 import '../../features/movies/provider/get_top_rated_movies_provider.dart';
 import '../../features/movies/provider/get_trending_movies_provider.dart';
 import '../../features/person/provider/get_trending_persons_provider.dart';
 import '../../features/tv_shows/provider/get_trending_tvs_provider.dart';
+import '../account_drawer/account_drawer.dart';
 import 'favorites_page/favorites_page.dart';
 import 'movies_home_page/movies_home_page.dart';
 import 'tv_home_page/tv_home_page.dart';
