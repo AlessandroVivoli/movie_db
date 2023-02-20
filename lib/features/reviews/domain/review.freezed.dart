@@ -22,6 +22,7 @@ Review _$ReviewFromJson(Map<String, dynamic> json) {
 mixin _$Review {
   String get author => throw _privateConstructorUsedError;
   ReviewAuthorDetails get authorDetails => throw _privateConstructorUsedError;
+  @_ContentConverter()
   String get content => throw _privateConstructorUsedError;
   @DateTimeConverter()
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -43,7 +44,7 @@ abstract class $ReviewCopyWith<$Res> {
   $Res call(
       {String author,
       ReviewAuthorDetails authorDetails,
-      String content,
+      @_ContentConverter() String content,
       @DateTimeConverter() DateTime? createdAt,
       String id,
       @DateTimeConverter() DateTime? updatedAt,
@@ -123,7 +124,7 @@ abstract class _$$_ReviewCopyWith<$Res> implements $ReviewCopyWith<$Res> {
   $Res call(
       {String author,
       ReviewAuthorDetails authorDetails,
-      String content,
+      @_ContentConverter() String content,
       @DateTimeConverter() DateTime? createdAt,
       String id,
       @DateTimeConverter() DateTime? updatedAt,
@@ -190,7 +191,7 @@ class _$_Review implements _Review {
   const _$_Review(
       {required this.author,
       required this.authorDetails,
-      required this.content,
+      @_ContentConverter() required this.content,
       @DateTimeConverter() required this.createdAt,
       required this.id,
       @DateTimeConverter() required this.updatedAt,
@@ -204,6 +205,7 @@ class _$_Review implements _Review {
   @override
   final ReviewAuthorDetails authorDetails;
   @override
+  @_ContentConverter()
   final String content;
   @override
   @DateTimeConverter()
@@ -261,7 +263,7 @@ abstract class _Review implements Review {
   const factory _Review(
       {required final String author,
       required final ReviewAuthorDetails authorDetails,
-      required final String content,
+      @_ContentConverter() required final String content,
       @DateTimeConverter() required final DateTime? createdAt,
       required final String id,
       @DateTimeConverter() required final DateTime? updatedAt,
@@ -274,6 +276,7 @@ abstract class _Review implements Review {
   @override
   ReviewAuthorDetails get authorDetails;
   @override
+  @_ContentConverter()
   String get content;
   @override
   @DateTimeConverter()

@@ -10,7 +10,7 @@ _$_Review _$$_ReviewFromJson(Map<String, dynamic> json) => _$_Review(
       author: json['author'] as String,
       authorDetails: ReviewAuthorDetails.fromJson(
           json['author_details'] as Map<String, dynamic>),
-      content: json['content'] as String,
+      content: const _ContentConverter().fromJson(json['content'] as String),
       createdAt: _$JsonConverterFromJson<String, DateTime?>(
           json['created_at'], const DateTimeConverter().fromJson),
       id: json['id'] as String,
@@ -22,7 +22,7 @@ _$_Review _$$_ReviewFromJson(Map<String, dynamic> json) => _$_Review(
 Map<String, dynamic> _$$_ReviewToJson(_$_Review instance) => <String, dynamic>{
       'author': instance.author,
       'author_details': instance.authorDetails.toJson(),
-      'content': instance.content,
+      'content': const _ContentConverter().toJson(instance.content),
       'created_at': const DateTimeConverter().toJson(instance.createdAt),
       'id': instance.id,
       'updated_at': const DateTimeConverter().toJson(instance.updatedAt),

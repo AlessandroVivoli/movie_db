@@ -11,7 +11,7 @@ class Review with _$Review {
   const factory Review({
     required String author,
     required ReviewAuthorDetails authorDetails,
-    required String content,
+    @_ContentConverter() required String content,
     @DateTimeConverter() required DateTime? createdAt,
     required String id,
     @DateTimeConverter() required DateTime? updatedAt,
@@ -19,4 +19,20 @@ class Review with _$Review {
   }) = _Review;
 
   factory Review.fromJson(Map<String, Object?> json) => _$ReviewFromJson(json);
+}
+
+typedef _ContentJsonConverter = JsonConverter<String, String>;
+
+class _ContentConverter implements _ContentJsonConverter {
+  const _ContentConverter();
+
+  @override
+  String fromJson(String json) {
+    return json.replaceAll(RegExp('<em>|</em>'), '*');
+  }
+
+  @override
+  String toJson(String object) {
+    return object;
+  }
 }

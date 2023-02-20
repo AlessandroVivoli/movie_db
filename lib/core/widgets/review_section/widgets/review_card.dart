@@ -24,11 +24,6 @@ class ReviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width - 20;
 
-    final formattedContent = review.content.replaceAll(
-      RegExp('<em>|</em>'),
-      '*',
-    );
-
     return Container(
       constraints: BoxConstraints(maxWidth: width),
       padding: const EdgeInsets.all(8),
@@ -65,7 +60,7 @@ class ReviewCard extends StatelessWidget {
           Markdown(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
             physics: const NeverScrollableScrollPhysics(),
-            data: formattedContent,
+            data: review.content,
             shrinkWrap: true,
             selectable: true,
             extensionSet: md.ExtensionSet(
