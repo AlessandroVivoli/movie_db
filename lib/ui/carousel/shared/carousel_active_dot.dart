@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../features/active_dot/hooks/active_dot_hook.dart';
+import '../../../features/active_dot/hooks/active_dot_hook.dart';
 
 class CarouselActiveDot extends HookWidget {
   final PageController controller;

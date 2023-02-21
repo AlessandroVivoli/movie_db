@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../features/tv_shows/domain/tv_show.dart';
+import '../../../features/tv_shows/domain/tv_show.dart';
 import '../shared/carousel_active_dot.dart';
 import 'tv_carousel_item.dart';
 

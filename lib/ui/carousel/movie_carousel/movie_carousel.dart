@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../features/movies/domain/movie.dart';
+import '../../../features/movies/domain/movie.dart';
 import '../shared/carousel_active_dot.dart';
 import 'movie_carousel_item.dart';
 
