@@ -34,4 +34,11 @@ class QueryInterceptor extends Interceptor {
 
     super.onRequest(options, handler);
   }
+
+  QueryInterceptor copyWith({Locale? locale, Map<String, String?>? sessionId}) {
+    return QueryInterceptor(
+      locale: locale ?? this.locale,
+      sessionId: sessionId?['sessionId'] ?? this.sessionId,
+    );
+  }
 }

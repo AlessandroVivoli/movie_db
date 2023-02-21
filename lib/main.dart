@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/loggers/provider_logger.dart';
 import 'features/auth/provider/auth_provider.dart';
-import 'features/dio/data/query_interceptor.dart';
 import 'features/dio/provider/query_interceptor_provider.dart';
 import 'features/local_storage/data/local_storage_repository.dart';
 import 'features/local_storage/provider/local_storage_provider.dart';
@@ -53,9 +52,33 @@ void main() async {
     ],
   );
 
+  container.listen(
+    authProvider,
+    (previous, next) {
+      final interceptor = container.read(queryInterceptorStateProvider);
+      final interceptorNotifier = container.read(
+        queryInterceptorStateProvider.notifier,
+      );
+
+      next.whenOrNull(
+        loggedIn: (user) => interceptorNotifier.state = interceptor.copyWith(
+          sessionId: {
+            'sessionId': user.sessionId,
+          },
+        ),
+        loggedOut: () => interceptorNotifier.state = interceptor.copyWith(
+          sessionId: {
+            'sessionId': null,
+          },
+        ),
+      );
+    },
+  );
+
   await container.read(authProvider.notifier).init();
 
   final locale = container.read(localStorageProvider).getLocale();
+
   container.read(localeStateProvider.notifier).state = locale;
 
   runApp(
@@ -74,33 +97,12 @@ class MyApp extends ConsumerWidget {
     final locale = ref.watch(localeStateProvider);
 
     ref.listen(
-      authProvider,
-      (previous, next) {
-        next.whenOrNull(
-          loggedIn: (user) => ref
-              .read(queryInterceptorStateProvider.notifier)
-              .state = QueryInterceptor(
-            locale: ref.read(queryInterceptorStateProvider).locale,
-            sessionId: user.sessionId,
-          ),
-          loggedOut: () => ref
-              .read(queryInterceptorStateProvider.notifier)
-              .state = QueryInterceptor(
-            locale: ref.read(queryInterceptorStateProvider).locale,
-            sessionId: null,
-          ),
-        );
-      },
-    );
-
-    ref.listen(
       localeStateProvider,
       (previous, next) {
+        final interceptor = ref.read(queryInterceptorStateProvider);
+
         ref.read(queryInterceptorStateProvider.notifier).state =
-            QueryInterceptor(
-          locale: next,
-          sessionId: ref.read(queryInterceptorStateProvider).sessionId,
-        );
+            interceptor.copyWith(locale: next);
       },
     );
 
