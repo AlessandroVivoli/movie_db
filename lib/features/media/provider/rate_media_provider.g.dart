@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$RateMediaHash() => r'6c77f3a4c698d8063275fcf555d4fe71e69df80e';
+String _$RateMediaHash() => r'28935a9574b3f829ef8ff940729843d41bd91837';
 
 /// See also [RateMedia].
 final rateMediaProvider = AutoDisposeNotifierProvider<RateMedia, RateState>(

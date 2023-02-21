@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$WatchlistHash() => r'9ee0c776594edab4b2b27577d53b5be360641e9d';
+String _$WatchlistHash() => r'e71c3a5067c49d8af837d34ebaeded53f4f4c76e';
 
 /// See also [Watchlist].
 final watchlistProvider =

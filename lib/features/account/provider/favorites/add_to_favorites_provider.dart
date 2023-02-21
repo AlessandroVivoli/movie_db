@@ -15,7 +15,7 @@ class Favorites extends _$Favorites {
   @override
   AccountMediaState build() => const AccountMediaState.success();
 
-  void addMovieToFavorites({
+  Future<void> addMovieToFavorites({
     required int movieId,
     required bool favorite,
   }) async {
@@ -33,7 +33,7 @@ class Favorites extends _$Favorites {
     ref.invalidate(getFavoriteMoviesProvider);
   }
 
-  void addTVShowToFavorites({
+  Future<void> addTVShowToFavorites({
     required int tvId,
     required bool favorite,
   }) async {

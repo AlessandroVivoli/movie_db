@@ -3,6 +3,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/auth/provider/auth_provider.dart';
 import '../../../core/widgets/review_section/review_section.dart';
+import '../../../features/account/provider/favorites/add_to_favorites_provider.dart';
+import '../../../features/account/provider/watchlist/add_to_watchlist_provider.dart';
+import '../../../features/media/provider/delete_rating_provider.dart';
+import '../../../features/media/provider/rate_media_provider.dart';
 import '../../../features/movies/domain/movie_details.dart';
 import '../../media_widgets/media_account_actions/media_account_actions.dart';
 import '../../media_widgets/media_cast.dart';
@@ -36,6 +40,34 @@ class MovieDetailsWrapper extends ConsumerWidget {
                 loggedIn: (user) => MediaAccountActions(
                   mediaId: details.id,
                   accountStates: details.accountStates!,
+                  onFavoritePressed: (favorite) async {
+                    await ref
+                        .read(favoritesProvider.notifier)
+                        .addMovieToFavorites(
+                          movieId: details.id,
+                          favorite: favorite,
+                        );
+                  },
+                  onWatchlistPressed: (watchlist) async {
+                    await ref
+                        .read(watchlistProvider.notifier)
+                        .addMovieToWatchlist(
+                          movieId: details.id,
+                          watchlist: watchlist,
+                        );
+                  },
+                  onRate: (rating) async {
+                    if (rating == null) {
+                      return await ref
+                          .read(deleteRatingProvider.notifier)
+                          .deleteMovieRating(details.id);
+                    }
+
+                    await ref.read(rateMediaProvider.notifier).rateMovie(
+                          details.id,
+                          rating,
+                        );
+                  },
                 ),
                 orElse: () => const SizedBox(height: 0),
               ),

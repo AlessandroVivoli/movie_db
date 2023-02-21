@@ -41,24 +41,26 @@ class TVDetailsWrapper extends ConsumerWidget {
                 loggedIn: (user) => MediaAccountActions(
                   mediaId: details.id,
                   accountStates: details.accountStates!,
-                  onWatchlistPressed: (watchlist) =>
-                      ref.read(watchlistProvider.notifier).addTVShowToWatchlist(
-                            tvId: details.id,
-                            watchlist: watchlist,
-                          ),
-                  onFavoritePressed: (favorite) =>
-                      ref.read(favoritesProvider.notifier).addTVShowToFavorites(
-                            tvId: details.id,
-                            favorite: favorite,
-                          ),
-                  onRate: (rating) {
+                  onWatchlistPressed: (watchlist) async => await ref
+                      .read(watchlistProvider.notifier)
+                      .addTVShowToWatchlist(
+                        tvId: details.id,
+                        watchlist: watchlist,
+                      ),
+                  onFavoritePressed: (favorite) async => await ref
+                      .read(favoritesProvider.notifier)
+                      .addTVShowToFavorites(
+                        tvId: details.id,
+                        favorite: favorite,
+                      ),
+                  onRate: (rating) async {
                     if (rating == null) {
-                      return ref
+                      return await ref
                           .read(deleteRatingProvider.notifier)
                           .deleteTVRating(details.id);
                     }
 
-                    ref.read(rateMediaProvider.notifier).rateTVShow(
+                    await ref.read(rateMediaProvider.notifier).rateTVShow(
                           details.id,
                           rating,
                         );

@@ -9,6 +9,7 @@ import '../../../../core/widgets/paged_movie_list/paged_movie_list.dart';
 import '../../../../features/account/provider/get_rated_movies_provider.dart';
 import '../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
+import '../../../../routing/routes.dart';
 
 class RatedMoviesSection extends StatelessWidget {
   const RatedMoviesSection({super.key, required this.user});
@@ -76,6 +77,11 @@ class _RatedMoviesHookWidget extends HookConsumerWidget {
           imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
             size: PosterSizes.w154,
             path: imagePath,
+          ),
+          onCardTap: (movieId) => Navigator.pushNamed(
+            context,
+            AppRoute.movie,
+            arguments: movieId,
           ),
         );
       },

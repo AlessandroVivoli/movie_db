@@ -15,7 +15,7 @@ class DeleteRating extends _$DeleteRating {
   @override
   RateState build() => const RateState.idle();
 
-  void deleteMovieRating(int movieId) async {
+  Future<void> deleteMovieRating(int movieId) async {
     state = const RateState.loading();
 
     state = await ref
@@ -28,7 +28,7 @@ class DeleteRating extends _$DeleteRating {
     ref.invalidate(getRatedMoviesProvider);
   }
 
-  void deleteTVRating(int tvId) async {
+  Future<void> deleteTVRating(int tvId) async {
     state = const RateState.loading();
 
     state = await ref

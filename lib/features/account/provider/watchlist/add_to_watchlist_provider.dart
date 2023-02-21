@@ -15,7 +15,7 @@ class Watchlist extends _$Watchlist {
   @override
   AccountMediaState build() => const AccountMediaState.success();
 
-  void addMovieToWatchlist({
+  Future<void> addMovieToWatchlist({
     required int movieId,
     required bool watchlist,
   }) async {
@@ -33,7 +33,7 @@ class Watchlist extends _$Watchlist {
     ref.invalidate(getMovieWatchlistProvider);
   }
 
-  void addTVShowToWatchlist({
+  Future<void> addTVShowToWatchlist({
     required int tvId,
     required bool watchlist,
   }) async {

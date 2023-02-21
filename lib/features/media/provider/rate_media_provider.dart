@@ -15,7 +15,7 @@ class RateMedia extends _$RateMedia {
   @override
   RateState build() => const RateState.idle();
 
-  void rateMovie(int movieId, double rating) async {
+  Future<void> rateMovie(int movieId, double rating) async {
     state = const RateState.loading();
 
     state = await ref
@@ -28,7 +28,7 @@ class RateMedia extends _$RateMedia {
     ref.invalidate(getRatedMoviesProvider);
   }
 
-  void rateTVShow(int tvId, double rating) async {
+  Future<void> rateTVShow(int tvId, double rating) async {
     state = const RateState.loading();
 
     state = await ref
