@@ -5,9 +5,14 @@ import '../../extensions/build_context_extensions.dart';
 import 'widgets/review_card.dart';
 
 class ReviewsSection extends StatelessWidget {
-  const ReviewsSection({super.key, required this.reviews});
+  const ReviewsSection({
+    super.key,
+    required this.reviews,
+    required this.avatarBuilder,
+  });
 
   final List<Review> reviews;
+  final String? Function(String? avatarPath) avatarBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,10 @@ class ReviewsSection extends StatelessWidget {
             ),
           ),
         ),
-        _ReviewList(reviews: reviews)
+        _ReviewList(
+          reviews: reviews,
+          avatarBuilder: avatarBuilder,
+        )
       ],
     );
   }
@@ -34,9 +42,11 @@ class ReviewsSection extends StatelessWidget {
 class _ReviewList extends StatelessWidget {
   const _ReviewList({
     required this.reviews,
+    required this.avatarBuilder,
   });
 
   final List<Review> reviews;
+  final String? Function(String? avatarPath) avatarBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +59,9 @@ class _ReviewList extends StatelessWidget {
       itemBuilder: (context, index) {
         return ReviewCard(
           review: reviews[index],
+          reviewAuthorAvatarUrl: avatarBuilder(
+            reviews[index].authorDetails.avatarPath,
+          ),
         );
       },
       separatorBuilder: (context, index) => const SizedBox(height: 10),

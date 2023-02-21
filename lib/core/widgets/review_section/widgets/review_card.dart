@@ -1,12 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../features/image/provider/image_service_provider.dart';
 import '../../../../features/reviews/domain/review.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../../custom_image/custom_network_image.dart';
@@ -16,9 +13,11 @@ class ReviewCard extends StatelessWidget {
   const ReviewCard({
     super.key,
     required this.review,
+    required this.reviewAuthorAvatarUrl,
   });
 
   final Review review;
+  final String? reviewAuthorAvatarUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -46,14 +45,14 @@ class ReviewCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _ReviewAuthorAvatar(review: review),
+              _ReviewAuthorAvatar(
+                review: review,
+                reviewAuthorAvatarUrl: reviewAuthorAvatarUrl,
+              ),
               const SizedBox(
                 width: 10,
               ),
-              _ReviewAuthoUsername(
-                review: review,
-                localization: context.locale,
-              ),
+              _ReviewAuthoUsername(review: review),
             ],
           ),
           const SizedBox(height: 10),
@@ -83,13 +82,9 @@ class ReviewCard extends StatelessWidget {
 }
 
 class _ReviewAuthoUsername extends StatelessWidget {
-  const _ReviewAuthoUsername({
-    required this.review,
-    required this.localization,
-  });
+  const _ReviewAuthoUsername({required this.review});
 
   final Review review;
-  final AppLocalizations localization;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +99,7 @@ class _ReviewAuthoUsername extends StatelessWidget {
               Text(review.author),
               const SizedBox(width: 5),
               Text(
-                localization.releaseDateValue(review.createdAt!),
+                context.locale.releaseDateValue(review.createdAt!),
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.secondary,
                   fontSize: 10,
@@ -135,15 +130,17 @@ class _ReviewAuthoUsername extends StatelessWidget {
   }
 }
 
-class _ReviewAuthorAvatar extends ConsumerWidget {
+class _ReviewAuthorAvatar extends StatelessWidget {
   const _ReviewAuthorAvatar({
     required this.review,
+    required this.reviewAuthorAvatarUrl,
   });
 
   final Review review;
+  final String? reviewAuthorAvatarUrl;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return SizedBox(
       width: 50,
       height: 50,
@@ -153,9 +150,7 @@ class _ReviewAuthorAvatar extends ConsumerWidget {
           color: Theme.of(context).colorScheme.background,
           child: CustomNetworkImage(
             placeholder: const Icon(Icons.person),
-            url: ref.read(imageServiceProvider).getImageUrl(
-                  path: review.authorDetails.avatarPath,
-                ),
+            url: reviewAuthorAvatarUrl,
           ),
         ),
       ),

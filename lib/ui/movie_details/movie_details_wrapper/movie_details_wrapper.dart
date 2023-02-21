@@ -5,6 +5,7 @@ import '../../../../features/auth/provider/auth_provider.dart';
 import '../../../core/widgets/review_section/review_section.dart';
 import '../../../features/account/provider/favorites/add_to_favorites_provider.dart';
 import '../../../features/account/provider/watchlist/add_to_watchlist_provider.dart';
+import '../../../features/image/provider/image_service_provider.dart';
 import '../../../features/media/provider/delete_rating_provider.dart';
 import '../../../features/media/provider/rate_media_provider.dart';
 import '../../../features/movies/domain/movie_details.dart';
@@ -24,6 +25,8 @@ class MovieDetailsWrapper extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authProvider);
+
+    final imageService = ref.watch(imageServiceProvider);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -86,7 +89,11 @@ class MovieDetailsWrapper extends ConsumerWidget {
           child: MediaCasts(mediaId: details.id, mediaType: 'movie'),
         ),
         SimilarMovieList(movieId: details.id),
-        ReviewsSection(reviews: details.reviews.results)
+        ReviewsSection(
+          reviews: details.reviews.results,
+          avatarBuilder: (avatarPath) =>
+              imageService.getImageUrl(path: avatarPath),
+        )
       ],
     );
   }

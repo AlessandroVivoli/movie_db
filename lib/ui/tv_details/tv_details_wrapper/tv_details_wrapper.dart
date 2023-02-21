@@ -5,6 +5,7 @@ import '../../../core/widgets/review_section/review_section.dart';
 import '../../../features/account/provider/favorites/add_to_favorites_provider.dart';
 import '../../../features/account/provider/watchlist/add_to_watchlist_provider.dart';
 import '../../../features/auth/provider/auth_provider.dart';
+import '../../../features/image/provider/image_service_provider.dart';
 import '../../../features/media/provider/delete_rating_provider.dart';
 import '../../../features/media/provider/rate_media_provider.dart';
 import '../../../features/tv_shows/domain/tv_show_details.dart';
@@ -25,6 +26,8 @@ class TVDetailsWrapper extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authProvider);
+
+    final imageService = ref.read(imageServiceProvider);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -87,7 +90,11 @@ class TVDetailsWrapper extends ConsumerWidget {
           child: MediaCasts(mediaId: details.id, mediaType: 'tv'),
         ),
         SimilarTVShowList(tvId: details.id),
-        ReviewsSection(reviews: details.reviews.results)
+        ReviewsSection(
+          reviews: details.reviews.results,
+          avatarBuilder: (avatarPath) =>
+              imageService.getImageUrl(path: avatarPath),
+        )
       ],
     );
   }
