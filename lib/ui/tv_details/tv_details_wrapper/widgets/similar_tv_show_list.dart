@@ -7,6 +7,7 @@ import '../../../../core/widgets/tv_list/tv_list.dart';
 import '../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../features/tv_shows/provider/get_similar_tv_shows_provider.dart';
 import '../../../../features/tv_shows/provider/tv_image_service_provider.dart';
+import '../../../../routing/routes.dart';
 
 class SimilarTVShowList extends StatelessWidget {
   const SimilarTVShowList({super.key, required this.tvId});
@@ -64,6 +65,11 @@ class _SimilarTVShowsBuilder extends ConsumerWidget {
           imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
             size: PosterSizes.w154,
             path: imagePath,
+          ),
+          onCardTap: (tvId) => Navigator.pushNamed(
+            context,
+            AppRoute.tv,
+            arguments: tvId,
           ),
         );
       },

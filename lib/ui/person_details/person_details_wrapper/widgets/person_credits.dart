@@ -7,6 +7,7 @@ import '../../../../core/widgets/movie_list/movie_list.dart';
 import '../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
 import '../../../../features/person/provider/get_person_credits_provider.dart';
+import '../../../../routing/routes.dart';
 
 class PersonCredits extends StatelessWidget {
   const PersonCredits({
@@ -61,6 +62,11 @@ class _CreditsList extends ConsumerWidget {
             imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
               size: PosterSizes.w154,
               path: imagePath,
+            ),
+            onCardTap: (movieId) => Navigator.pushNamed(
+              context,
+              AppRoute.movie,
+              arguments: movieId,
             ),
           );
         },

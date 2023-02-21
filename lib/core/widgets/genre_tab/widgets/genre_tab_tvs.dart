@@ -5,6 +5,7 @@ import '../../../../features/media/domain/media_arguments.dart';
 import '../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../features/tv_shows/provider/get_tv_shows_provider.dart';
 import '../../../../features/tv_shows/provider/tv_image_service_provider.dart';
+import '../../../../routing/routes.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../../error_text/error_text.dart';
 import '../../tv_list/tv_list.dart';
@@ -46,6 +47,11 @@ class GenreTabTvs extends ConsumerWidget {
           imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
             size: PosterSizes.w154,
             path: imagePath,
+          ),
+          onCardTap: (tvId) => Navigator.pushNamed(
+            context,
+            AppRoute.tv,
+            arguments: tvId,
           ),
         );
       },

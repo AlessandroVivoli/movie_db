@@ -7,6 +7,7 @@ import '../../../../../core/widgets/movie_list/movie_list.dart';
 import '../../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../../features/movies/provider/get_top_rated_movies_provider.dart';
 import '../../../../../features/movies/provider/images/movie_image_service_provider.dart';
+import '../../../../../routing/routes.dart';
 
 class TopRatedMoviesSection extends StatelessWidget {
   const TopRatedMoviesSection({super.key});
@@ -72,6 +73,11 @@ class _TopRatedMoviesList extends ConsumerWidget {
               imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
                 size: PosterSizes.w154,
                 path: imagePath,
+              ),
+              onCardTap: (movieId) => Navigator.pushNamed(
+                context,
+                AppRoute.movie,
+                arguments: movieId,
               ),
             ),
           );

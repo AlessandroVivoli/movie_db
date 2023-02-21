@@ -9,6 +9,7 @@ class MovieList extends StatelessWidget {
   final ScrollController? controller;
   final double seperatorSize;
   final String? Function(String? imagePath) imageBuilder;
+  final void Function(int movieId)? onCardTap;
 
   const MovieList({
     super.key,
@@ -17,6 +18,7 @@ class MovieList extends StatelessWidget {
     this.seperatorSize = 10,
     this.controller,
     required this.imageBuilder,
+    this.onCardTap,
   });
 
   @override
@@ -34,6 +36,8 @@ class MovieList extends StatelessWidget {
         return MovieCard(
           movie: movieList[index],
           imageUrl: imageBuilder(movieList[index].posterPath),
+          onTap: () =>
+              onCardTap != null ? onCardTap!(movieList[index].id) : null,
         );
       },
     );

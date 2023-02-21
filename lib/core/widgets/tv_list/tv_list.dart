@@ -10,6 +10,7 @@ class TVList extends StatelessWidget {
   final double seperatorSize;
 
   final String? Function(String? imagePath) imageBuilder;
+  final void Function(int tvId)? onCardTap;
 
   const TVList({
     super.key,
@@ -18,6 +19,7 @@ class TVList extends StatelessWidget {
     this.controller,
     this.seperatorSize = 10,
     required this.imageBuilder,
+    this.onCardTap,
   });
 
   @override
@@ -37,6 +39,7 @@ class TVList extends StatelessWidget {
           imageUrl: imageBuilder(
             tvList[index].posterPath,
           ),
+          onTap: () => onCardTap != null ? onCardTap!(tvList[index].id) : null,
         );
       },
     );

@@ -7,12 +7,14 @@ import '../movie_list/movie_list.dart';
 class PagedMovieList extends HookWidget {
   const PagedMovieList({
     super.key,
+    this.onCardTap,
     this.onPageChanged,
     required this.movieList,
     required this.imageBuilder,
   });
 
   final MovieListModel movieList;
+  final void Function(int movieId)? onCardTap;
   final void Function(int page)? onPageChanged;
   final String? Function(String? imagePath) imageBuilder;
 
@@ -27,6 +29,7 @@ class PagedMovieList extends HookWidget {
             movieList: movieList.results,
             controller: scrollController,
             imageBuilder: imageBuilder,
+            onCardTap: onCardTap,
           ),
         ),
         SizedBox(

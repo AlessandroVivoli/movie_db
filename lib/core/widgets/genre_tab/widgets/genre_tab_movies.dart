@@ -6,6 +6,7 @@ import '../../../../features/media/domain/sort_by.dart';
 import '../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../features/movies/provider/get_movies_provider.dart';
 import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
+import '../../../../routing/routes.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../../error_text/error_text.dart';
 import '../../movie_list/movie_list.dart';
@@ -48,6 +49,11 @@ class GenreTabMovies extends ConsumerWidget {
           imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
             size: PosterSizes.w154,
             path: imagePath,
+          ),
+          onCardTap: (movieId) => Navigator.pushNamed(
+            context,
+            AppRoute.movie,
+            arguments: movieId,
           ),
         );
       },
