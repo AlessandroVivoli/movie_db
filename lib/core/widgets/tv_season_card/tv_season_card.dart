@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../features/tv_shows/domain/seasons/tv_season.dart';
 import '../../../features/tv_shows/provider/tv_image_service_provider.dart';
 import '../../../routing/routes.dart';
+import '../../extensions/build_context_extensions.dart';
 import '../custom_image/custom_network_image.dart';
 
 class TVSeasonCard extends ConsumerWidget {
@@ -12,10 +12,12 @@ class TVSeasonCard extends ConsumerWidget {
     super.key,
     required this.season,
     required this.showName,
+    required this.imageUrl,
   });
 
   final TVSeason season;
   final String showName;
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,10 +43,7 @@ class TVSeasonCard extends ConsumerWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: CustomNetworkImage(
-                    url: imageService.getTVPosterUrl(
-                      size: PosterSizes.w185,
-                      path: season.posterPath,
-                    ),
+                    url: imageUrl,
                     placeholder: Text(matches.join('').toUpperCase()),
                   ),
                 ),
@@ -60,7 +59,7 @@ class TVSeasonCard extends ConsumerWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      'Season ${season.seasonNumber}',
+                      '${context.locale.seasonLabel(1)} ${season.seasonNumber}',
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.secondary,
                         fontSize: 14,

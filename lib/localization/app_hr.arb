@@ -108,7 +108,15 @@
   "searchMoviesError": "Nije moguće tražiti filmove",
   "searchTVShowsError": "Nije moguće tražiti tv serije",
   "getTVDetailsError": "Nije moguće dobiti detalje o tv seriji",
-  "seasonsLabel": "Sezone",
+  "seasonLabel": "{seasons, plural, =0{Nema sezona} =1{Sezona} other{Sezone}}",
+  "@seasonLabel": {
+    "placeholders": {
+      "seasons": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "noReviews": "Nema recenzije.",
   "noPopularTVShows": "Nije pronađena nijedna popularna tv serija.",
   "popularTVShowsError": "Nije moguće dobiti popularne tv serije",

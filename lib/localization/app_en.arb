@@ -214,7 +214,15 @@
   "searchMoviesError": "Could not search for movies",
   "searchTVShowsError": "Could not search for tv shows",
   "getTVDetailsError": "Could not get tv show details",
-  "seasonsLabel": "Seasons",
+  "seasonLabel": "{seasons, plural, =1{Season} other{Seasons}}",
+  "@seasonLabel": {
+    "placeholders": {
+      "seasons": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "noReviews": "No reviews.",
   "noPopularTVShows": "No popular tv show found.",
   "popularTVShowsError": "Could not get popular tv shows",
