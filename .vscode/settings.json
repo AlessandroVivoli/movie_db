@@ -20,5 +20,6 @@
   "explorer.fileNesting.patterns": {
     "*.dart": "$(capture).freezed.dart, $(capture).g.dart",
     ".env*": ".env$(capture).*"
-  }
+  },
+  "cmake.sourceDirectory": "${workspaceFolder}/windows"
 }
