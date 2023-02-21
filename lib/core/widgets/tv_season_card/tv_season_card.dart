@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../features/tv_shows/domain/seasons/tv_season.dart';
-import '../../../features/tv_shows/provider/tv_image_service_provider.dart';
 import '../../../routing/routes.dart';
 import '../../extensions/build_context_extensions.dart';
 import '../custom_image/custom_network_image.dart';
 
-class TVSeasonCard extends ConsumerWidget {
+class TVSeasonCard extends StatelessWidget {
   const TVSeasonCard({
     super.key,
     required this.season,
@@ -20,9 +18,7 @@ class TVSeasonCard extends ConsumerWidget {
   final String? imageUrl;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final imageService = ref.watch(tvImageServiceProvider);
-
+  Widget build(BuildContext context) {
     final matches = RegExp(r'\w+').allMatches(showName).map((e) => e[0]?[0]);
 
     return Padding(
