@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../features/tv_shows/domain/seasons/tv_season.dart';
-import '../../../routing/routes.dart';
 import '../../extensions/build_context_extensions.dart';
 import '../custom_image/custom_network_image.dart';
 
@@ -11,11 +10,13 @@ class TVSeasonCard extends StatelessWidget {
     required this.season,
     required this.showName,
     required this.imageUrl,
+    this.onTap,
   });
 
   final TVSeason season;
   final String showName;
   final String? imageUrl;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +25,7 @@ class TVSeasonCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: GestureDetector(
-        onTap: () => Navigator.pushNamed(
-          context,
-          AppRoute.season,
-          arguments: season.id,
-        ),
+        onTap: () => onTap,
         child: SizedBox(
           width: 120,
           child: Column(
