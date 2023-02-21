@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../features/auth/provider/auth_provider.dart';
-import '../../../features/genre/provider/get_movie_genres_provider.dart';
-import '../../extensions/build_context_extensions.dart';
-import '../error_text/error_text.dart';
+import '../../features/auth/provider/auth_provider.dart';
+import '../../features/genre/provider/get_movie_genres_provider.dart';
+import '../../core/extensions/build_context_extensions.dart';
+import '../../core/widgets/error_text/error_text.dart';
 import 'widgets/genre_tab_controller.dart';
 
 class MovieGenreTab extends ConsumerWidget {

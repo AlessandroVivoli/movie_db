@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../features/genre/domain/genre.dart';
-import '../../../extensions/build_context_extensions.dart';
+import '../../../core/extensions/build_context_extensions.dart';
+import '../../../features/genre/domain/genre.dart';
 import 'genre_tab_movies.dart';
 import 'genre_tab_tvs.dart';
 

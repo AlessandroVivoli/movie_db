@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../features/auth/provider/auth_provider.dart';
-import '../../../features/genre/provider/get_tv_genres_provider.dart';
-import '../../extensions/build_context_extensions.dart';
+import '../../features/auth/provider/auth_provider.dart';
+import '../../features/genre/provider/get_tv_genres_provider.dart';
+import '../../core/extensions/build_context_extensions.dart';
 import 'widgets/genre_tab_controller.dart';
 
 class TVGenreTab extends ConsumerWidget {

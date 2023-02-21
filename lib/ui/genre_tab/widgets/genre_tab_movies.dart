@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../features/media/domain/media_arguments.dart';
-import '../../../../features/media/domain/sort_by.dart';
-import '../../../../features/movies/domain/poster_sizes_enum.dart';
-import '../../../../features/movies/provider/get_movies_provider.dart';
-import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
-import '../../../../routing/routes.dart';
-import '../../../extensions/build_context_extensions.dart';
-import '../../error_text/error_text.dart';
-import '../../movie_list/movie_list.dart';
+import '../../../features/media/domain/media_arguments.dart';
+import '../../../features/media/domain/sort_by.dart';
+import '../../../features/movies/domain/poster_sizes_enum.dart';
+import '../../../features/movies/provider/get_movies_provider.dart';
+import '../../../features/movies/provider/images/movie_image_service_provider.dart';
+import '../../../routing/routes.dart';
+import '../../../core/extensions/build_context_extensions.dart';
+import '../../../core/widgets/error_text/error_text.dart';
+import '../../../core/widgets/movie_list/movie_list.dart';
 
 class GenreTabMovies extends ConsumerWidget {
   const GenreTabMovies({
