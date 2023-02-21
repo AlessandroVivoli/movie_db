@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/tv_shows/domain/tv_list_model.dart';
+import '../../features/movies/domain/movie_list.dart';
 import 'widgets/result_list/result_list.dart';
 import 'widgets/suggestion_list/suggestion_list.dart';
 
-class TVShowSearchDelegate extends SearchDelegate<int?> {
+class MovieSearchDelegate extends SearchDelegate<int?> {
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -19,19 +19,21 @@ class TVShowSearchDelegate extends SearchDelegate<int?> {
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
-      onPressed: () => close(context, null),
+      onPressed: () {
+        close(context, null);
+      },
       icon: const Icon(Icons.arrow_back),
     );
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    return ResultList<TVListModel>(query: query.trim());
+    return ResultList<MovieListModel>(query: query.trim());
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return SuggestionList<TVListModel>(query: query.trim());
+    return SuggestionList<MovieListModel>(query: query.trim());
   }
 
   @override

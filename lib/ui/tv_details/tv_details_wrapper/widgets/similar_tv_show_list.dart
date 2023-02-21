@@ -4,7 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/extensions/build_context_extensions.dart';
 import '../../../../core/widgets/error_text/error_text.dart';
 import '../../../../core/widgets/tv_list/tv_list.dart';
+import '../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../features/tv_shows/provider/get_similar_tv_shows_provider.dart';
+import '../../../../features/tv_shows/provider/tv_image_service_provider.dart';
 
 class SimilarTVShowList extends StatelessWidget {
   const SimilarTVShowList({super.key, required this.tvId});
@@ -46,6 +48,7 @@ class _SimilarTVShowsBuilder extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final similarTVShowsList = ref.watch(getSimilarTVShowsProvider(tvId));
+    final imageService = ref.watch(tvImageServiceProvider);
 
     return similarTVShowsList.when(
       data: (similarTVShows) {
@@ -58,6 +61,10 @@ class _SimilarTVShowsBuilder extends ConsumerWidget {
         return TVList(
           tvList: similarTVShows,
           padding: 10,
+          imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
+            size: PosterSizes.w154,
+            path: imagePath,
+          ),
         );
       },
       error: (error, stackTrace) {

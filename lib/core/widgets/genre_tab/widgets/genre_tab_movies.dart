@@ -3,7 +3,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/media/domain/media_arguments.dart';
 import '../../../../features/media/domain/sort_by.dart';
+import '../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../features/movies/provider/get_movies_provider.dart';
+import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../../error_text/error_text.dart';
 import '../../movie_list/movie_list.dart';
@@ -30,6 +32,8 @@ class GenreTabMovies extends ConsumerWidget {
       ),
     );
 
+    final imageService = ref.watch(movieImageServiceProvider);
+
     return movieList.when(
       data: (movies) {
         if (movies.isEmpty) {
@@ -41,6 +45,10 @@ class GenreTabMovies extends ConsumerWidget {
         return MovieList(
           movieList: movies,
           padding: 10,
+          imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
+            size: PosterSizes.w154,
+            path: imagePath,
+          ),
         );
       },
       error: (error, stackTrace) {

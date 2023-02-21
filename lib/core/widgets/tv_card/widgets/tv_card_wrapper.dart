@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../features/tv_shows/domain/tv_show.dart';
-import '../../../../features/tv_shows/provider/tv_image_service_provider.dart';
 import '../../custom_image/custom_network_image.dart';
 import '../../rating/rating.dart';
 import '../../stroke_text/stroke_text.dart';
 
-class TVCardWrapper extends ConsumerWidget {
+class TVCardWrapper extends StatelessWidget {
   const TVCardWrapper({
     super.key,
     required this.tvShow,
+    required this.imageUrl,
   });
 
   final TVShow tvShow;
+  final String? imageUrl;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final imageService = ref.watch(tvImageServiceProvider);
-
+  Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,10 +32,7 @@ class TVCardWrapper extends ConsumerWidget {
                   ),
                   child: Center(
                     child: CustomNetworkImage(
-                      url: imageService.getTVPosterUrl(
-                        size: PosterSizes.w500,
-                        path: tvShow.posterPath,
-                      ),
+                      url: imageUrl,
                       placeholder: const Icon(
                         Icons.tv,
                         size: 50,

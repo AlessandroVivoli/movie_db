@@ -46,7 +46,7 @@ class TVSeasonList extends ConsumerWidget {
                   child: TVSeasonCard(
                     season: seasons[index],
                     showName: showName,
-                    imageUrl: imageService.getTVPosterUrl(
+                    imageUrl: imageService.getMediaPosterUrl(
                       size: PosterSizes.w154,
                       path: seasons[index].posterPath,
                     ),

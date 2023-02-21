@@ -7,12 +7,14 @@ import '../movie_list/movie_list.dart';
 class PagedMovieList extends HookWidget {
   const PagedMovieList({
     super.key,
-    required this.movieList,
     this.onPageChanged,
+    required this.movieList,
+    required this.imageBuilder,
   });
 
   final MovieListModel movieList;
   final void Function(int page)? onPageChanged;
+  final String? Function(String? imagePath) imageBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class PagedMovieList extends HookWidget {
           child: MovieList(
             movieList: movieList.results,
             controller: scrollController,
+            imageBuilder: imageBuilder,
           ),
         ),
         SizedBox(

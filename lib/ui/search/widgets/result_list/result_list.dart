@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../features/auth/provider/auth_provider.dart';
-import '../../../../../features/movies/domain/movie_list.dart';
-import '../../../../../features/movies/provider/search_movies_provider.dart';
-import '../../../../../features/tv_shows/provider/search_tv_shows_provider.dart';
-import '../../../../extensions/build_context_extensions.dart';
-import '../../../error_text/error_text.dart';
-import '../../../movie_card/movie_card.dart';
-import '../../../tv_card/tv_card.dart';
+import '../../../../core/extensions/build_context_extensions.dart';
+import '../../../../core/widgets/error_text/error_text.dart';
+import '../../../../core/widgets/movie_card/movie_card.dart';
+import '../../../../core/widgets/tv_card/tv_card.dart';
+import '../../../../features/auth/provider/auth_provider.dart';
+import '../../../../features/media/domain/i_media_image_service.dart';
+import '../../../../features/movies/domain/movie_list.dart';
+import '../../../../features/movies/domain/poster_sizes_enum.dart';
+import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
+import '../../../../features/movies/provider/search_movies_provider.dart';
+import '../../../../features/tv_shows/provider/search_tv_shows_provider.dart';
+import '../../../../features/tv_shows/provider/tv_image_service_provider.dart';
+import '../../../../routing/routes.dart';
 
 class ResultList<T> extends HookConsumerWidget {
   final String query;
@@ -30,6 +35,8 @@ class ResultList<T> extends HookConsumerWidget {
 
     final isMovie = T == MovieListModel;
 
+    IMediaImageService imageService;
+
     late final AsyncValue search;
 
     if (isMovie) {
@@ -40,6 +47,8 @@ class ResultList<T> extends HookConsumerWidget {
           page: page.value,
         ),
       );
+
+      imageService = ref.watch(movieImageServiceProvider);
     } else {
       search = ref.watch(
         searchTVShowsProvider(
@@ -48,6 +57,8 @@ class ResultList<T> extends HookConsumerWidget {
           page: page.value,
         ),
       );
+
+      imageService = ref.watch(tvImageServiceProvider);
     }
 
     return search.when(
@@ -82,8 +93,25 @@ class ResultList<T> extends HookConsumerWidget {
                           vertical: 10,
                         ),
                         child: (isMovie)
-                            ? MovieCard(movie: list[index])
-                            : TVCard(tvShow: list[index]),
+                            ? MovieCard(
+                                movie: list[index],
+                                imageUrl: imageService.getMediaPosterUrl(
+                                  size: PosterSizes.w154,
+                                  path: list[index].posterPath,
+                                ),
+                              )
+                            : TVCard(
+                                tvShow: list[index],
+                                imageUrl: imageService.getMediaPosterUrl(
+                                  size: PosterSizes.w154,
+                                  path: list[index].posterPath,
+                                ),
+                                onTap: () => Navigator.pushNamed(
+                                  context,
+                                  AppRoute.tv,
+                                  arguments: index,
+                                ),
+                              ),
                       );
                     },
                   ),

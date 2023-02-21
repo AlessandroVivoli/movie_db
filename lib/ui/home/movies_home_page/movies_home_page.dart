@@ -6,10 +6,10 @@ import '../../../core/extensions/build_context_extensions.dart';
 import '../../../core/widgets/carousel/movie_carousel/movie_carousel.dart';
 import '../../../core/widgets/error_text/error_text.dart';
 import '../../../core/widgets/genre_tab/movie_genre_tab.dart';
-import '../../../core/widgets/search/movie_search_delegate.dart';
 import '../../../features/movies/provider/get_trending_movies_provider.dart';
 import '../../../features/time_window/domain/time_window.dart';
 import '../../../routing/routes.dart';
+import '../../search/movie_search_delegate.dart';
 import 'movies_home_wrapper/movies_home_wrapper.dart';
 
 class MoviesHomePage extends StatelessWidget {

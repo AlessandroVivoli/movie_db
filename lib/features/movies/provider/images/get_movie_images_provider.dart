@@ -7,5 +7,5 @@ part 'get_movie_images_provider.g.dart';
 
 @riverpod
 Future<MediaImages> movieImages(MovieImagesRef ref, int movieId) {
-  return ref.watch(movieImageServiceProvider).getMovieImages(id: movieId);
+  return ref.watch(movieImageServiceProvider).getMediaImages(id: movieId);
 }

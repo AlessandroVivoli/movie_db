@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/movies/domain/movie.dart';
-import '../../../../features/movies/domain/poster_sizes_enum.dart';
-import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
 import '../../custom_image/custom_network_image.dart';
 import '../../rating/rating.dart';
 import '../../stroke_text/stroke_text.dart';
 
-class MovieCardWrapper extends ConsumerWidget {
+class MovieCardWrapper extends StatelessWidget {
   const MovieCardWrapper({
     super.key,
     required this.movie,
+    required this.imageUrl,
   });
 
   final Movie movie;
+  final String? imageUrl;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final imageService = ref.watch(movieImageServiceProvider);
-
+  Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,10 +32,7 @@ class MovieCardWrapper extends ConsumerWidget {
                   ),
                   child: Center(
                     child: CustomNetworkImage(
-                      url: imageService.getMoviePosterUrl(
-                        size: PosterSizes.w500,
-                        path: movie.posterPath,
-                      ),
+                      url: imageUrl,
                       placeholder: const Icon(
                         Icons.movie,
                         size: 50,

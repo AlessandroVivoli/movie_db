@@ -27,7 +27,7 @@ class TVCraouselItem extends ConsumerWidget {
     return Stack(
       children: [
         BackdropImage(
-          imgUrl: imageService.getTVBackdropUrl(
+          imgUrl: imageService.getMediaBackdropUrl(
             size: BackdropSizes.original,
             path: image,
           ),

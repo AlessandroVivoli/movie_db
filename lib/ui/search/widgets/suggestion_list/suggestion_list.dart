@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../features/auth/provider/auth_provider.dart';
-import '../../../../../features/movies/domain/backdrop_sizes_enum.dart';
-import '../../../../../features/movies/domain/movie_list.dart';
-import '../../../../../features/movies/provider/images/movie_image_service_provider.dart';
-import '../../../../../features/movies/provider/search_movies_provider.dart';
-import '../../../../../features/tv_shows/provider/search_tv_shows_provider.dart';
-import '../../../../../routing/routes.dart';
-import '../../../../extensions/build_context_extensions.dart';
-import '../../../custom_image/custom_network_image.dart';
-import '../../../error_text/error_text.dart';
+import '../../../../core/extensions/build_context_extensions.dart';
+import '../../../../core/widgets/custom_image/custom_network_image.dart';
+import '../../../../core/widgets/error_text/error_text.dart';
+import '../../../../features/auth/provider/auth_provider.dart';
+import '../../../../features/movies/domain/backdrop_sizes_enum.dart';
+import '../../../../features/movies/domain/movie_list.dart';
+import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
+import '../../../../features/movies/provider/search_movies_provider.dart';
+import '../../../../features/tv_shows/provider/search_tv_shows_provider.dart';
+import '../../../../routing/routes.dart';
 
 class SuggestionList<T> extends ConsumerWidget {
   final String query;
@@ -107,7 +107,7 @@ class SuggestionList<T> extends ConsumerWidget {
                       (isMovie) ? Icons.movie : Icons.tv,
                     ),
                     url:
-                        ref.read(movieImageServiceProvider).getMovieBackdropUrl(
+                        ref.read(movieImageServiceProvider).getMediaBackdropUrl(
                               size: BackdropSizes.w300,
                               path: list[index].backdropPath,
                             ),

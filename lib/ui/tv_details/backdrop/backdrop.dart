@@ -42,7 +42,7 @@ class TVDetailsBackdrop extends ConsumerWidget {
         }),
         centerTitle: true,
         background: BackdropImage(
-          imgUrl: imageService.getTVBackdropUrl(
+          imgUrl: imageService.getMediaBackdropUrl(
             size: BackdropSizes.original,
             path: details.backdropPath,
           ),

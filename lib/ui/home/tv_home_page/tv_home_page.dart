@@ -6,10 +6,10 @@ import '../../../core/extensions/build_context_extensions.dart';
 import '../../../core/widgets/carousel/tv_carousel/tv_carousel.dart';
 import '../../../core/widgets/error_text/error_text.dart';
 import '../../../core/widgets/genre_tab/tv_genre_tab.dart';
-import '../../../core/widgets/search/tv_show_search_delegate.dart';
 import '../../../features/time_window/domain/time_window.dart';
 import '../../../features/tv_shows/provider/get_trending_tvs_provider.dart';
 import '../../../routing/routes.dart';
+import '../../search/tv_show_search_delegate.dart';
 import 'tvs_home_wrapper/tvs_home_wrapper.dart';
 
 class TVHomePage extends StatelessWidget {

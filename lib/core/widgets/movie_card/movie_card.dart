@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
 import '../../../features/movies/domain/movie.dart';
-import '../../../routing/routes.dart';
 import 'widgets/movie_card_wrapper.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
+  final String? imageUrl;
+  final void Function()? onTap;
 
   const MovieCard({
     super.key,
     required this.movie,
+    required this.imageUrl,
+    this.onTap,
   });
 
   @override
@@ -17,14 +20,11 @@ class MovieCard extends StatelessWidget {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 120, minHeight: 200),
       child: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            AppRoute.movie,
-            arguments: movie.id,
-          );
-        },
-        child: MovieCardWrapper(movie: movie),
+        onTap: onTap,
+        child: MovieCardWrapper(
+          movie: movie,
+          imageUrl: imageUrl,
+        ),
       ),
     );
   }

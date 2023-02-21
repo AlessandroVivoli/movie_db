@@ -8,6 +8,7 @@ class MovieList extends StatelessWidget {
   final double padding;
   final ScrollController? controller;
   final double seperatorSize;
+  final String? Function(String? imagePath) imageBuilder;
 
   const MovieList({
     super.key,
@@ -15,6 +16,7 @@ class MovieList extends StatelessWidget {
     this.padding = 0,
     this.seperatorSize = 10,
     this.controller,
+    required this.imageBuilder,
   });
 
   @override
@@ -31,6 +33,7 @@ class MovieList extends StatelessWidget {
       itemBuilder: (context, index) {
         return MovieCard(
           movie: movieList[index],
+          imageUrl: imageBuilder(movieList[index].posterPath),
         );
       },
     );

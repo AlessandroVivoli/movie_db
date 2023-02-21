@@ -27,7 +27,7 @@ class MovieCarouselItem extends ConsumerWidget {
     return Stack(
       children: [
         BackdropImage(
-          imgUrl: imageService.getMovieBackdropUrl(
+          imgUrl: imageService.getMediaBackdropUrl(
             size: BackdropSizes.original,
             path: image,
           ),

@@ -4,6 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/extensions/build_context_extensions.dart';
 import '../../../../core/widgets/error_text/error_text.dart';
 import '../../../../core/widgets/movie_list/movie_list.dart';
+import '../../../../features/movies/domain/poster_sizes_enum.dart';
+import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
 import '../../../../features/person/provider/get_person_credits_provider.dart';
 
 class PersonCredits extends StatelessWidget {
@@ -42,6 +44,8 @@ class _CreditsList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final credits = ref.watch(getPersonCreditsProvider(personId));
 
+    final imageService = ref.watch(movieImageServiceProvider);
+
     return SizedBox(
       height: 250,
       child: credits.when(
@@ -52,7 +56,13 @@ class _CreditsList extends ConsumerWidget {
             );
           }
 
-          return MovieList(movieList: movies);
+          return MovieList(
+            movieList: movies,
+            imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
+              size: PosterSizes.w154,
+              path: imagePath,
+            ),
+          );
         },
         error: (error, stackTrace) {
           context.showErrorSnackBar(context.locale.getMovieCreditsError);

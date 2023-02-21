@@ -4,7 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/extensions/build_context_extensions.dart';
 import '../../../../core/widgets/error_text/error_text.dart';
 import '../../../../core/widgets/movie_list/movie_list.dart';
+import '../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../features/movies/provider/get_similar_movies_provider.dart';
+import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
 
 class SimilarMovieList extends StatelessWidget {
   const SimilarMovieList({
@@ -52,6 +54,8 @@ class _SimilarMoviesBuilder extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final similarMovieList = ref.watch(getSimilarMoviesProvider(movieId));
 
+    final imageService = ref.watch(movieImageServiceProvider);
+
     return similarMovieList.when(
       data: (similarMovies) {
         if (similarMovies.isEmpty) {
@@ -63,6 +67,10 @@ class _SimilarMoviesBuilder extends ConsumerWidget {
         return MovieList(
           movieList: similarMovies,
           padding: 10,
+          imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
+            size: PosterSizes.w154,
+            path: imagePath,
+          ),
         );
       },
       error: (error, stackTrace) {

@@ -7,6 +7,8 @@ import '../../../../core/extensions/build_context_extensions.dart';
 import '../../../../core/widgets/error_text/error_text.dart';
 import '../../../../core/widgets/paged_movie_list/paged_movie_list.dart';
 import '../../../../features/account/provider/watchlist/get_movie_watchlist_provider.dart';
+import '../../../../features/movies/domain/poster_sizes_enum.dart';
+import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
 
 class WatchlistSection extends StatelessWidget {
   const WatchlistSection({
@@ -59,6 +61,8 @@ class _WatchlistHookWidget extends HookConsumerWidget {
       getMovieWatchlistProvider(page: page.value),
     );
 
+    final imageService = ref.watch(movieImageServiceProvider);
+
     return movieWatchlist.when(
       data: (movies) {
         if (movies.totalResults == 0) {
@@ -72,6 +76,10 @@ class _WatchlistHookWidget extends HookConsumerWidget {
           onPageChanged: (index) {
             page.value = index;
           },
+          imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
+            size: PosterSizes.w154,
+            path: imagePath,
+          ),
         );
       },
       error: (error, stackTrace) {

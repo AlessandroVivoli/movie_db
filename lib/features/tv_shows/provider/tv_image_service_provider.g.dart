@@ -29,14 +29,14 @@ class _SystemHash {
   }
 }
 
-String _$tvImageServiceHash() => r'8a482bddbbae8178d11e738de389cf9aa9bcf876';
+String _$tvImageServiceHash() => r'ab04e3a7f422f97ae8f2d10e9d635a4c065dd1ab';
 
 /// See also [tvImageService].
-final tvImageServiceProvider = Provider<ITVImageService>(
+final tvImageServiceProvider = Provider<IMediaImageService>(
   tvImageService,
   name: r'tvImageServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$tvImageServiceHash,
 );
-typedef TvImageServiceRef = ProviderRef<ITVImageService>;
+typedef TvImageServiceRef = ProviderRef<IMediaImageService>;

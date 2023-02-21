@@ -42,7 +42,7 @@ class MovieDetailsBackdrop extends ConsumerWidget {
         }),
         centerTitle: true,
         background: BackdropImage(
-          imgUrl: imageService.getMovieBackdropUrl(
+          imgUrl: imageService.getMediaBackdropUrl(
             size: BackdropSizes.original,
             path: details.backdropPath,
           ),
