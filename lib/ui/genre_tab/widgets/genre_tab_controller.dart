@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/extensions/build_context_extensions.dart';
 import '../../../features/genre/domain/genre.dart';
 import 'genre_tab_movies.dart';
 import 'genre_tab_tvs.dart';
 
-class GenreTabController extends ConsumerWidget {
+class GenreTabController extends StatelessWidget {
   const GenreTabController({
     super.key,
     required this.data,
@@ -19,7 +18,7 @@ class GenreTabController extends ConsumerWidget {
   final String mediaType;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return DefaultTabController(
       length: data.length,
       child: Column(
