@@ -26,6 +26,7 @@ class GenreTabController extends StatelessWidget {
         children: [
           TabBar(
             isScrollable: true,
+            indicatorPadding: const EdgeInsets.only(bottom: 2.5),
             tabs: List<Tab>.generate(
               data.length,
               (index) {

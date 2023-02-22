@@ -34,7 +34,7 @@ ThemeData mainTheme = ThemeData(
       shape: UnderlineInputBorder(
         borderSide: BorderSide(
           color: Color.fromARGB(255, 217, 176, 22),
-          width: 5,
+          width: 2.5,
         ),
       ),
     ),

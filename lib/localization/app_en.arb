@@ -37,14 +37,10 @@
   "generalLoginErrorMessage": "Could not login",
   "unexpectedErrorMessage": "Something went wrong",
   "notLoggedInErrorMessage": "You're not logged in!",
-  "noFavorites": "No favorite movie found.",
-  "@noFavorites": {
-    "description": "Indicating that no user favorite movies were found when fetching favorite movies"
-  },
-  "getFavoritesError": "Could not get favorite movies",
-  "@getFavoritesError": {
-    "description": "Indicating an error that was thrown while fetching favorite movies"
-  },
+  "noFavoriteMovies": "No favorite movie found.",
+  "getFavoriteMoviesError": "Could not get favorite movies",
+  "noFavoriteTVShows": "No favorite tv show found.",
+  "getFavoriteTVShowError": "Could not get favorite tv shows",
   "noRated": "No rated movie found.",
   "@noRated": {
     "description": "Indicating that no user rated movies were found when fetching rated movies"
@@ -53,14 +49,10 @@
   "@getRatedError": {
     "description": "Indicating an error that was thrown while fetching rated movies"
   },
-  "noWatchlist": "No watchlist found.",
-  "@noWatchlist": {
-    "description": "Indicating that no user watchlist was found when fetching watchlist"
-  },
-  "getWatchlistError": "Could not get movie watchlist",
-  "@getWatchlistError": {
-    "description": "Indicating an error that was thrown while fetching watchlist"
-  },
+  "noMovieWatchlist": "No movie watchlist found.",
+  "getMovieWatchlistError": "Could not get movie watchlist",
+  "noTVWatchlist": "No tv show watchlist found.",
+  "getTVWatchlistError": "Could not get tv show watchlist",
   "noTrendingMovies": "No trending movie found.",
   "@noTrendingMovies": {
     "description": "Indicating that no trending movies were found when fetching trending movies"

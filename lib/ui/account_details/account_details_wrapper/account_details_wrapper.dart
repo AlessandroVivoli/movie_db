@@ -5,9 +5,7 @@ import '../../../../features/auth/provider/auth_provider.dart';
 import '../../../core/extensions/build_context_extensions.dart';
 import '../../../core/widgets/error_text/error_text.dart';
 import 'widgets/account_details_name_text.dart';
-import 'widgets/favorite_movies_section.dart';
 import 'widgets/rated_movies_section.dart';
-import 'widgets/watchlist_section.dart';
 
 class AccountDetailsWrapper extends HookConsumerWidget {
   const AccountDetailsWrapper({super.key});
@@ -24,12 +22,6 @@ class AccountDetailsWrapper extends HookConsumerWidget {
           children: [
             if (user.accountDetails.name != null)
               AccountDetailsNameText(name: user.accountDetails.name!),
-            FavoriteMoviesSection(
-              user: user,
-            ),
-            WatchlistSection(
-              user: user,
-            ),
             RatedMoviesSection(
               user: user,
             ),

@@ -34,12 +34,16 @@ class TVList extends StatelessWidget {
         return SizedBox(width: seperatorSize);
       },
       itemBuilder: (context, index) {
-        return TVCard(
-          tvShow: tvList[index],
-          imageUrl: imageBuilder(
-            tvList[index].posterPath,
+        return LimitedBox(
+          maxWidth: 117,
+          child: TVCard(
+            tvShow: tvList[index],
+            imageUrl: imageBuilder(
+              tvList[index].posterPath,
+            ),
+            onTap: () =>
+                onCardTap != null ? onCardTap!(tvList[index].id) : null,
           ),
-          onTap: () => onCardTap != null ? onCardTap!(tvList[index].id) : null,
         );
       },
     );

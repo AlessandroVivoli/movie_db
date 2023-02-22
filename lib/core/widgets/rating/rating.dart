@@ -4,15 +4,17 @@ class Rating extends StatelessWidget {
   final double rating;
   final double padding;
   final double size;
-  final MainAxisAlignment? alignment;
+  final MainAxisAlignment alignment;
   final int digits;
   final bool showNum;
+  final double digitSpacing;
 
   final void Function(int index)? onRate;
 
   const Rating({
     super.key,
     required this.rating,
+    this.digitSpacing = 30,
     this.padding = 3,
     this.size = 10,
     this.alignment = MainAxisAlignment.center,
@@ -61,7 +63,7 @@ class Rating extends StatelessWidget {
     return SizedBox(
       height: 20,
       child: Row(
-        mainAxisAlignment: alignment!,
+        mainAxisAlignment: alignment,
         children: [
           if (showNum)
             SizedBox(

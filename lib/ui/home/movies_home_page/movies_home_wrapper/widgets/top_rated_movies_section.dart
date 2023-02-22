@@ -56,8 +56,8 @@ class _TopRatedMoviesList extends ConsumerWidget {
 
     final imageService = ref.watch(movieImageServiceProvider);
 
-    return LimitedBox(
-      maxHeight: 250,
+    return SizedBox(
+      height: 240,
       child: topRatedMovies.when(
         data: (movies) {
           if (movies.isEmpty) {

@@ -10,18 +10,30 @@ class MovieCardWrapper extends StatelessWidget {
     super.key,
     required this.movie,
     required this.imageUrl,
+    required this.ratingSize,
+    required this.ratingSpacing,
+    required this.ratingAlignment,
+    required this.ratingDigitSpacing,
+    required this.showRatingNum,
   });
 
   final Movie movie;
   final String? imageUrl;
+  final double ratingSize;
+  final double ratingSpacing;
+  final MainAxisAlignment ratingAlignment;
+  final double ratingDigitSpacing;
+  final bool showRatingNum;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Expanded(
+        AspectRatio(
+          aspectRatio: 2 / 3,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: Stack(
@@ -51,7 +63,7 @@ class MovieCardWrapper extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -64,9 +76,11 @@ class MovieCardWrapper extends StatelessWidget {
               ),
               Rating(
                 rating: movie.voteAverage,
-                size: 12,
-                padding: 1,
-                alignment: MainAxisAlignment.start,
+                size: ratingSize,
+                padding: ratingSpacing,
+                alignment: ratingAlignment,
+                digitSpacing: ratingDigitSpacing,
+                showNum: showRatingNum,
               )
             ],
           ),

@@ -52,7 +52,7 @@ class ReviewCard extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              _ReviewAuthoUsername(review: review),
+              Expanded(child: _ReviewAuthoUsername(review: review)),
             ],
           ),
           const SizedBox(height: 10),
@@ -95,8 +95,17 @@ class _ReviewAuthoUsername extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Text(review.author),
+              Expanded(
+                child: Text(
+                  review.author,
+                  overflow: TextOverflow.fade,
+                  maxLines: 1,
+                  softWrap: false,
+                ),
+              ),
               const SizedBox(width: 5),
               Text(
                 context.locale.releaseDateValue(review.createdAt!),

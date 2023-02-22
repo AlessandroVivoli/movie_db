@@ -33,11 +33,14 @@ class MovieList extends StatelessWidget {
         return SizedBox(width: seperatorSize);
       },
       itemBuilder: (context, index) {
-        return MovieCard(
-          movie: movieList[index],
-          imageUrl: imageBuilder(movieList[index].posterPath),
-          onTap: () =>
-              onCardTap != null ? onCardTap!(movieList[index].id) : null,
+        return LimitedBox(
+          maxWidth: 117,
+          child: MovieCard(
+            movie: movieList[index],
+            imageUrl: imageBuilder(movieList[index].posterPath),
+            onTap: () =>
+                onCardTap != null ? onCardTap!(movieList[index].id) : null,
+          ),
         );
       },
     );

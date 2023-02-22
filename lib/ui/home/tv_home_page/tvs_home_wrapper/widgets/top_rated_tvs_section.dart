@@ -50,8 +50,8 @@ class _TopRatedTVsList extends ConsumerWidget {
     final topRatedTVs = ref.watch(getTopRatedTVShowsProvider);
     final imageService = ref.watch(tvImageServiceProvider);
 
-    return LimitedBox(
-      maxHeight: 250,
+    return SizedBox(
+      height: 240,
       child: topRatedTVs.when(
         data: (tvs) {
           if (tvs.isEmpty) {
