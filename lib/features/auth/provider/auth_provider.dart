@@ -70,7 +70,7 @@ class Auth extends _$Auth {
     return AuthState.error(error, stackTrace);
   }
 
-  Future<User> _login(String username, String password) async {
+  Future<User> _login(String username, String password) {
     return ref
         .read(authServiceProvider)
         .login(username: username, password: password)

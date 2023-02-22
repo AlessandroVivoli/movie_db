@@ -37,7 +37,6 @@ class TVSeasonList extends ConsumerWidget {
           SizedBox(
             height: 250,
             child: ListView.builder(
-              shrinkWrap: true,
               itemCount: seasons.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {

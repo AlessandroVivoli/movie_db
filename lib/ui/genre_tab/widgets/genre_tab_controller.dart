@@ -47,7 +47,7 @@ class GenreTabController extends ConsumerWidget {
           ConstrainedBox(
             constraints: const BoxConstraints(maxHeight: 250),
             child: TabBarView(
-              children: List<Widget>.generate(
+              children: List.generate(
                 data.length,
                 (index) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),

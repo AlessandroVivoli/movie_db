@@ -11,7 +11,7 @@ Future<MovieListModel> searchMovies(
   required String query,
   bool includeAdult = false,
   int page = 1,
-}) async {
+}) {
   return ref
       .watch(movieServiceProvider)
       .searchMovies(query: query, includeAdult: includeAdult, page: page);

@@ -37,3 +37,33 @@ analyzer:
   exclude:
     - lib/**/*.g.dart
     - lib/**/*.freezed.dart
+
+dart_code_metrics:
+  rules:
+    - avoid-redundant-async
+    - avoid-unnecessary-type-assertions
+    - avoid-unnecessary-type-casts
+    - avoid-unrelated-type-assertions
+    - avoid-returning-widgets
+    - avoid-shrink-wrap-in-lists
+    - avoid-wrapping-in-padding
+    - avoid-banned-imports:
+        entries:
+          - paths: [".*/domain/.*\\.dart"]
+            deny:
+              [
+                ".*/data/.*\\.dart",
+                ".*/presentation/.*\\.dart",
+                "package:flutter*",
+              ]
+            message: "Do not import following: data layer, presentation layer, third-party or Flutter references into domain as it voilates DDD rules!"
+          - paths: [".*/core/.*\\.dart"]
+            deny: [".*/features/.*\\.dart", ".*/presentation/.*\\.dart"]
+            message: "Importing features and presentation layer into core is not allowed, only other way around"
+          - paths: [".*/features/.*\\.dart"]
+            deny: [".*/presentation/.*\\.dart"]
+            message: "Importing presentation layer into features is not allowed!"
+          - paths: [".*/presentation/.*\\.dart"]
+            deny: [".*/data/.*\\.dart"]
+            message: "Importing data layer into presentation layer is not allowed!"
+        severity: error (edited)
