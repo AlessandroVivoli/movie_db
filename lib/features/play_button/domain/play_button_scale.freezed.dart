@@ -118,9 +118,7 @@ class __$$_PlayButtonScaleCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PlayButtonScale
-    with DiagnosticableTreeMixin
-    implements _PlayButtonScale {
+class _$_PlayButtonScale implements _PlayButtonScale {
   const _$_PlayButtonScale(
       {required this.top, required this.offset, required this.scale});
 
@@ -135,18 +133,8 @@ class _$_PlayButtonScale
   final double scale;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'PlayButtonScale(top: $top, offset: $offset, scale: $scale)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'PlayButtonScale'))
-      ..add(DiagnosticsProperty('top', top))
-      ..add(DiagnosticsProperty('offset', offset))
-      ..add(DiagnosticsProperty('scale', scale));
   }
 
   @override
