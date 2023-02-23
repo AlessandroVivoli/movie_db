@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../features/tv_shows/domain/tv_show.dart';
 import '../../custom_image/custom_network_image.dart';
 import '../../rating/rating.dart';
 import '../../stroke_text/stroke_text.dart';
@@ -8,22 +7,27 @@ import '../../stroke_text/stroke_text.dart';
 class TVCardWrapper extends StatelessWidget {
   const TVCardWrapper({
     super.key,
-    required this.tvShow,
     required this.imageUrl,
     required this.ratingSize,
     required this.ratingSpacing,
     required this.ratingAlignment,
     required this.ratingDigitSpacing,
     required this.showRatingNum,
+    required this.adult,
+    required this.name,
+    required this.voteAverage,
   });
 
-  final TVShow tvShow;
   final String? imageUrl;
   final double ratingSize;
   final double ratingSpacing;
   final MainAxisAlignment ratingAlignment;
   final double ratingDigitSpacing;
   final bool showRatingNum;
+
+  final bool adult;
+  final String name;
+  final double voteAverage;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +55,7 @@ class TVCardWrapper extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (tvShow.adult)
+                if (adult)
                   const Positioned(
                     top: 8,
                     right: 8,
@@ -68,12 +72,12 @@ class TVCardWrapper extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 5),
                 child: Text(
-                  tvShow.name,
+                  name,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
               Rating(
-                rating: tvShow.voteAverage,
+                rating: voteAverage,
                 size: ratingSize,
                 padding: ratingSpacing,
                 alignment: ratingAlignment,

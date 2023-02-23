@@ -60,17 +60,20 @@ class _SimilarTVShowsBuilder extends ConsumerWidget {
         }
 
         return TVList(
-          tvList: similarTVShows,
           padding: 10,
-          imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
+          imageBuilder: (index) => imageService.getMediaPosterUrl(
             size: PosterSizes.w154,
-            path: imagePath,
+            path: similarTVShows[index].posterPath,
           ),
           onCardTap: (tvId) => Navigator.pushNamed(
             context,
             AppRoute.tv,
             arguments: tvId,
           ),
+          length: similarTVShows.length,
+          averageVoteBuilder: (index) => similarTVShows[index].voteAverage,
+          isAdultBuilder: (index) => similarTVShows[index].adult,
+          nameBuilder: (index) => similarTVShows[index].name,
         );
       },
       error: (error, stackTrace) {

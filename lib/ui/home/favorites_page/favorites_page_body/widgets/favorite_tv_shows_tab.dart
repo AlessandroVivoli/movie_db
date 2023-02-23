@@ -8,6 +8,7 @@ import '../../../../../core/widgets/tv_card/tv_card.dart';
 import '../../../../../features/account/provider/favorites/get_favorite_tv_shows_provider.dart';
 import '../../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../../features/tv_shows/provider/tv_image_service_provider.dart';
+import '../../../../../routing/routes.dart';
 
 class FavoriteTVShowsTab extends HookConsumerWidget {
   const FavoriteTVShowsTab({
@@ -54,12 +55,19 @@ class FavoriteTVShowsTab extends HookConsumerWidget {
                   ratingDigitSpacing: 15,
                   ratingSpacing: .5,
                   ratingAlignment: MainAxisAlignment.start,
-                  tvShow: tvShow,
                   imageUrl: imageService.getMediaPosterUrl(
                     size: PosterSizes.w154,
                     path: tvShow.posterPath,
                   ),
                   showRatingNum: false,
+                  adult: tvShow.adult,
+                  name: tvShow.name,
+                  voteAverage: tvShow.voteAverage,
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    AppRoute.tv,
+                    arguments: tvShow.id,
+                  ),
                 ),
               ),
             ),

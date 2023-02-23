@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/tv_shows/domain/tv_show.dart';
 import 'widgets/tv_card_wrapper.dart';
 
 class TVCard extends StatelessWidget {
-  final TVShow tvShow;
   final String? imageUrl;
   final double ratingSize;
   final double ratingSpacing;
@@ -12,11 +10,14 @@ class TVCard extends StatelessWidget {
   final MainAxisAlignment ratingAlignment;
   final bool showRatingNum;
 
+  final bool adult;
+  final String name;
+  final double voteAverage;
+
   final void Function()? onTap;
 
   const TVCard({
     super.key,
-    required this.tvShow,
     required this.imageUrl,
     this.onTap,
     this.ratingSpacing = 1,
@@ -24,6 +25,9 @@ class TVCard extends StatelessWidget {
     this.ratingDigitSpacing = 30,
     this.ratingAlignment = MainAxisAlignment.start,
     this.showRatingNum = true,
+    required this.adult,
+    required this.name,
+    required this.voteAverage,
   });
 
   @override
@@ -31,13 +35,15 @@ class TVCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: TVCardWrapper(
-        tvShow: tvShow,
         imageUrl: imageUrl,
         ratingAlignment: ratingAlignment,
         ratingDigitSpacing: ratingDigitSpacing,
         ratingSize: ratingSize,
         ratingSpacing: ratingSpacing,
         showRatingNum: showRatingNum,
+        adult: adult,
+        name: name,
+        voteAverage: voteAverage,
       ),
     );
   }

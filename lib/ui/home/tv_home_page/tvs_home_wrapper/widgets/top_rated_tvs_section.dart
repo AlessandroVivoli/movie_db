@@ -63,16 +63,19 @@ class _TopRatedTVsList extends ConsumerWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 5),
             child: TVList(
-              tvList: tvs,
-              imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
+              imageBuilder: (index) => imageService.getMediaPosterUrl(
                 size: PosterSizes.w154,
-                path: imagePath,
+                path: tvs[index].posterPath,
               ),
               onCardTap: (tvId) => Navigator.pushNamed(
                 context,
                 AppRoute.tv,
                 arguments: tvId,
               ),
+              averageVoteBuilder: (index) => tvs[index].voteAverage,
+              isAdultBuilder: (index) => tvs[index].adult,
+              nameBuilder: (index) => tvs[index].name,
+              length: tvs.length,
             ),
           );
         },

@@ -76,50 +76,12 @@ class ResultList<T> extends HookConsumerWidget {
           );
         }
 
-        return Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Wrap(
-                  textDirection: TextDirection.ltr,
-                  children: List.generate(
-                    list.length,
-                    (index) {
-                      return Container(
-                        width: 120,
-                        height: 250,
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 5,
-                          vertical: 10,
-                        ),
-                        child: (isMovie)
-                            ? MovieCard(
-                                movie: list[index],
-                                imageUrl: imageService.getMediaPosterUrl(
-                                  size: PosterSizes.w154,
-                                  path: list[index].posterPath,
-                                ),
-                              )
-                            : TVCard(
-                                tvShow: list[index],
-                                imageUrl: imageService.getMediaPosterUrl(
-                                  size: PosterSizes.w154,
-                                  path: list[index].posterPath,
-                                ),
-                                onTap: () => Navigator.pushNamed(
-                                  context,
-                                  AppRoute.tv,
-                                  arguments: index,
-                                ),
-                              ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
-            _Paginator(page: page, totalPages: data.totalPages),
-          ],
+        return _ResultColumn(
+          list: list,
+          isMovie: isMovie,
+          imageService: imageService,
+          page: page,
+          data: data,
         );
       },
       error: (_, __) => Center(
@@ -137,6 +99,98 @@ class ResultList<T> extends HookConsumerWidget {
           ],
         );
       },
+    );
+  }
+}
+
+class _ResultColumn extends StatelessWidget {
+  const _ResultColumn({
+    required this.list,
+    required this.isMovie,
+    required this.imageService,
+    required this.page,
+    required this.data,
+  });
+
+  final List list;
+  final bool isMovie;
+  final IMediaImageService imageService;
+  final ValueNotifier<int> page;
+  final dynamic data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            child: Wrap(
+              textDirection: TextDirection.ltr,
+              children: List.generate(
+                list.length,
+                (index) {
+                  return _Result(
+                    isMovie: isMovie,
+                    list: list,
+                    imageService: imageService,
+                    index: index,
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
+        _Paginator(page: page, totalPages: data.totalPages),
+      ],
+    );
+  }
+}
+
+class _Result extends StatelessWidget {
+  const _Result({
+    required this.isMovie,
+    required this.list,
+    required this.imageService,
+    required this.index,
+  });
+
+  final bool isMovie;
+  final List list;
+  final IMediaImageService imageService;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 120,
+      height: 250,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 5,
+        vertical: 10,
+      ),
+      child: (isMovie)
+          ? MovieCard(
+              movie: list[index],
+              imageUrl: imageService.getMediaPosterUrl(
+                size: PosterSizes.w154,
+                path: list[index].posterPath,
+              ),
+              onTap: () => list[index].id,
+            )
+          : TVCard(
+              imageUrl: imageService.getMediaPosterUrl(
+                size: PosterSizes.w154,
+                path: list[index].posterPath,
+              ),
+              onTap: () => Navigator.pushNamed(
+                context,
+                AppRoute.tv,
+                arguments: list[index].id,
+              ),
+              adult: list[index].adult,
+              name: list[index].name,
+              voteAverage: list[index].voteAverage,
+            ),
     );
   }
 }

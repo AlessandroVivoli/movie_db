@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/tv_shows/domain/tv_show.dart';
 import '../tv_card/tv_card.dart';
 
 class TVList extends StatelessWidget {
-  final List<TVShow> tvList;
   final double padding;
   final ScrollController? controller;
   final double seperatorSize;
 
-  final String? Function(String? imagePath) imageBuilder;
-  final void Function(int tvId)? onCardTap;
+  final int length;
+
+  final String? Function(int index) imageBuilder;
+  final void Function(int index)? onCardTap;
+  final bool Function(int index) isAdultBuilder;
+  final String Function(int index) nameBuilder;
+  final double Function(int index) averageVoteBuilder;
 
   const TVList({
     super.key,
-    required this.tvList,
     this.padding = 0,
     this.controller,
     this.seperatorSize = 10,
     required this.imageBuilder,
     this.onCardTap,
+    required this.length,
+    required this.isAdultBuilder,
+    required this.nameBuilder,
+    required this.averageVoteBuilder,
   });
 
   @override
@@ -28,7 +34,7 @@ class TVList extends StatelessWidget {
       shrinkWrap: true,
       controller: controller,
       scrollDirection: Axis.horizontal,
-      itemCount: tvList.length,
+      itemCount: length,
       padding: EdgeInsets.symmetric(horizontal: padding),
       separatorBuilder: (context, index) {
         return SizedBox(width: seperatorSize);
@@ -37,12 +43,11 @@ class TVList extends StatelessWidget {
         return LimitedBox(
           maxWidth: 117,
           child: TVCard(
-            tvShow: tvList[index],
-            imageUrl: imageBuilder(
-              tvList[index].posterPath,
-            ),
-            onTap: () =>
-                onCardTap != null ? onCardTap!(tvList[index].id) : null,
+            imageUrl: imageBuilder(index),
+            adult: isAdultBuilder(index),
+            name: nameBuilder(index),
+            voteAverage: averageVoteBuilder(index),
+            onTap: () => onCardTap != null ? onCardTap!(index) : null,
           ),
         );
       },
