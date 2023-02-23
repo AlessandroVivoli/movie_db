@@ -69,16 +69,19 @@ class _TopRatedMoviesList extends ConsumerWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 5),
             child: MovieList(
-              movieList: movies,
-              imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
+              imageBuilder: (index) => imageService.getMediaPosterUrl(
                 size: PosterSizes.w154,
-                path: imagePath,
+                path: movies[index].posterPath,
               ),
-              onCardTap: (movieId) => Navigator.pushNamed(
+              onCardTap: (index) => Navigator.pushNamed(
                 context,
                 AppRoute.movie,
-                arguments: movieId,
+                arguments: movies[index].id,
               ),
+              averageVoteBuilder: (index) => movies[index].voteAverage,
+              isAdultBuilder: (index) => movies[index].adult,
+              titleBuilder: (index) => movies[index].title,
+              length: movies.length,
             ),
           );
         },

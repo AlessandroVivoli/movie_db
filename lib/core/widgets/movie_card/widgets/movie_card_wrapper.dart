@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../features/movies/domain/movie.dart';
 import '../../custom_image/custom_network_image.dart';
 import '../../rating/rating.dart';
 import '../../stroke_text/stroke_text.dart';
@@ -8,22 +7,27 @@ import '../../stroke_text/stroke_text.dart';
 class MovieCardWrapper extends StatelessWidget {
   const MovieCardWrapper({
     super.key,
-    required this.movie,
     required this.imageUrl,
     required this.ratingSize,
     required this.ratingSpacing,
     required this.ratingAlignment,
     required this.ratingDigitSpacing,
     required this.showRatingNum,
+    required this.adult,
+    required this.voteAverage,
+    required this.title,
   });
 
-  final Movie movie;
   final String? imageUrl;
   final double ratingSize;
   final double ratingSpacing;
   final MainAxisAlignment ratingAlignment;
   final double ratingDigitSpacing;
   final bool showRatingNum;
+
+  final bool adult;
+  final double voteAverage;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +56,7 @@ class MovieCardWrapper extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (movie.adult)
+                if (adult)
                   const Positioned(
                     top: 8,
                     right: 8,
@@ -70,12 +74,12 @@ class MovieCardWrapper extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 5),
                 child: Text(
-                  '${movie.title}',
+                  title,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
               Rating(
-                rating: movie.voteAverage,
+                rating: voteAverage,
                 size: ratingSize,
                 padding: ratingSpacing,
                 alignment: ratingAlignment,

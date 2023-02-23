@@ -22,13 +22,14 @@ Movie _$MovieFromJson(Map<String, dynamic> json) {
 mixin _$Movie {
   String? get posterPath => throw _privateConstructorUsedError;
   bool get adult => throw _privateConstructorUsedError;
-  String? get overview => throw _privateConstructorUsedError;
-  String? get releaseDate => throw _privateConstructorUsedError;
+  String get overview => throw _privateConstructorUsedError;
+  @DateTimeConverter()
+  DateTime? get releaseDate => throw _privateConstructorUsedError;
   List<int> get genreIds => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
-  String? get originalTitle => throw _privateConstructorUsedError;
-  String? get originalLanguage => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
+  String get originalTitle => throw _privateConstructorUsedError;
+  String get originalLanguage => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
   String? get backdropPath => throw _privateConstructorUsedError;
   double get popularity => throw _privateConstructorUsedError;
   int get voteCount => throw _privateConstructorUsedError;
@@ -48,13 +49,13 @@ abstract class $MovieCopyWith<$Res> {
   $Res call(
       {String? posterPath,
       bool adult,
-      String? overview,
-      String? releaseDate,
+      String overview,
+      @DateTimeConverter() DateTime? releaseDate,
       List<int> genreIds,
       int id,
-      String? originalTitle,
-      String? originalLanguage,
-      String? title,
+      String originalTitle,
+      String originalLanguage,
+      String title,
       String? backdropPath,
       double popularity,
       int voteCount,
@@ -77,13 +78,13 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
   $Res call({
     Object? posterPath = freezed,
     Object? adult = null,
-    Object? overview = freezed,
+    Object? overview = null,
     Object? releaseDate = freezed,
     Object? genreIds = null,
     Object? id = null,
-    Object? originalTitle = freezed,
-    Object? originalLanguage = freezed,
-    Object? title = freezed,
+    Object? originalTitle = null,
+    Object? originalLanguage = null,
+    Object? title = null,
     Object? backdropPath = freezed,
     Object? popularity = null,
     Object? voteCount = null,
@@ -99,14 +100,14 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
               as bool,
-      overview: freezed == overview
+      overview: null == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       genreIds: null == genreIds
           ? _value.genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
@@ -115,18 +116,18 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      originalTitle: freezed == originalTitle
+      originalTitle: null == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
-              as String?,
-      originalLanguage: freezed == originalLanguage
+              as String,
+      originalLanguage: null == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      title: freezed == title
+              as String,
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
@@ -160,13 +161,13 @@ abstract class _$$_MovieCopyWith<$Res> implements $MovieCopyWith<$Res> {
   $Res call(
       {String? posterPath,
       bool adult,
-      String? overview,
-      String? releaseDate,
+      String overview,
+      @DateTimeConverter() DateTime? releaseDate,
       List<int> genreIds,
       int id,
-      String? originalTitle,
-      String? originalLanguage,
-      String? title,
+      String originalTitle,
+      String originalLanguage,
+      String title,
       String? backdropPath,
       double popularity,
       int voteCount,
@@ -185,13 +186,13 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
   $Res call({
     Object? posterPath = freezed,
     Object? adult = null,
-    Object? overview = freezed,
+    Object? overview = null,
     Object? releaseDate = freezed,
     Object? genreIds = null,
     Object? id = null,
-    Object? originalTitle = freezed,
-    Object? originalLanguage = freezed,
-    Object? title = freezed,
+    Object? originalTitle = null,
+    Object? originalLanguage = null,
+    Object? title = null,
     Object? backdropPath = freezed,
     Object? popularity = null,
     Object? voteCount = null,
@@ -207,14 +208,14 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
               as bool,
-      overview: freezed == overview
+      overview: null == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       genreIds: null == genreIds
           ? _value._genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
@@ -223,18 +224,18 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      originalTitle: freezed == originalTitle
+      originalTitle: null == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
-              as String?,
-      originalLanguage: freezed == originalLanguage
+              as String,
+      originalLanguage: null == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      title: freezed == title
+              as String,
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
@@ -266,7 +267,7 @@ class _$_Movie implements _Movie {
       {required this.posterPath,
       required this.adult,
       required this.overview,
-      required this.releaseDate,
+      @DateTimeConverter() required this.releaseDate,
       required final List<int> genreIds,
       required this.id,
       required this.originalTitle,
@@ -287,9 +288,10 @@ class _$_Movie implements _Movie {
   @override
   final bool adult;
   @override
-  final String? overview;
+  final String overview;
   @override
-  final String? releaseDate;
+  @DateTimeConverter()
+  final DateTime? releaseDate;
   final List<int> _genreIds;
   @override
   List<int> get genreIds {
@@ -301,11 +303,11 @@ class _$_Movie implements _Movie {
   @override
   final int id;
   @override
-  final String? originalTitle;
+  final String originalTitle;
   @override
-  final String? originalLanguage;
+  final String originalLanguage;
   @override
-  final String? title;
+  final String title;
   @override
   final String? backdropPath;
   @override
@@ -389,13 +391,13 @@ abstract class _Movie implements Movie {
   const factory _Movie(
       {required final String? posterPath,
       required final bool adult,
-      required final String? overview,
-      required final String? releaseDate,
+      required final String overview,
+      @DateTimeConverter() required final DateTime? releaseDate,
       required final List<int> genreIds,
       required final int id,
-      required final String? originalTitle,
-      required final String? originalLanguage,
-      required final String? title,
+      required final String originalTitle,
+      required final String originalLanguage,
+      required final String title,
       required final String? backdropPath,
       required final double popularity,
       required final int voteCount,
@@ -409,19 +411,20 @@ abstract class _Movie implements Movie {
   @override
   bool get adult;
   @override
-  String? get overview;
+  String get overview;
   @override
-  String? get releaseDate;
+  @DateTimeConverter()
+  DateTime? get releaseDate;
   @override
   List<int> get genreIds;
   @override
   int get id;
   @override
-  String? get originalTitle;
+  String get originalTitle;
   @override
-  String? get originalLanguage;
+  String get originalLanguage;
   @override
-  String? get title;
+  String get title;
   @override
   String? get backdropPath;
   @override

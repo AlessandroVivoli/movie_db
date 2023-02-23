@@ -58,16 +58,19 @@ class _CreditsList extends ConsumerWidget {
           }
 
           return MovieList(
-            movieList: movies,
-            imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
+            imageBuilder: (index) => imageService.getMediaPosterUrl(
               size: PosterSizes.w154,
-              path: imagePath,
+              path: movies[index].posterPath,
             ),
-            onCardTap: (movieId) => Navigator.pushNamed(
+            onCardTap: (index) => Navigator.pushNamed(
               context,
               AppRoute.movie,
-              arguments: movieId,
+              arguments: movies[index].id,
             ),
+            length: movies.length,
+            averageVoteBuilder: (index) => movies[index].voteAverage,
+            isAdultBuilder: (index) => movies[index].adult,
+            titleBuilder: (index) => movies[index].title,
           );
         },
         error: (error, stackTrace) {

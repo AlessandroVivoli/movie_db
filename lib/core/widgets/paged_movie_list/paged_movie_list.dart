@@ -11,12 +11,20 @@ class PagedMovieList extends HookWidget {
     this.onPageChanged,
     required this.movieList,
     required this.imageBuilder,
+    required this.averageVoteBuilder,
+    required this.length,
+    required this.isAdultBuilder,
+    required this.titleBuilder,
   });
 
   final MovieListModel movieList;
   final void Function(int movieId)? onCardTap;
   final void Function(int page)? onPageChanged;
-  final String? Function(String? imagePath) imageBuilder;
+  final String? Function(int index) imageBuilder;
+  final double Function(int index) averageVoteBuilder;
+  final bool Function(int index) isAdultBuilder;
+  final String Function(int index) titleBuilder;
+  final int length;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +34,13 @@ class PagedMovieList extends HookWidget {
       children: [
         Expanded(
           child: MovieList(
-            movieList: movieList.results,
+            length: length,
             controller: scrollController,
             imageBuilder: imageBuilder,
             onCardTap: onCardTap,
+            averageVoteBuilder: averageVoteBuilder,
+            isAdultBuilder: isAdultBuilder,
+            titleBuilder: titleBuilder,
           ),
         ),
         SizedBox(

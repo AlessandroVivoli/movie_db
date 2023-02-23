@@ -8,6 +8,7 @@ import '../../../../../core/widgets/movie_card/movie_card.dart';
 import '../../../../../features/account/provider/favorites/get_favorite_movies_provider.dart';
 import '../../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../../features/movies/provider/images/movie_image_service_provider.dart';
+import '../../../../../routing/routes.dart';
 
 class FavoriteMoviesTab extends HookConsumerWidget {
   const FavoriteMoviesTab({
@@ -58,12 +59,19 @@ class FavoriteMoviesTab extends HookConsumerWidget {
                         ratingDigitSpacing: 15,
                         ratingSpacing: .5,
                         ratingAlignment: MainAxisAlignment.start,
-                        movie: movie,
                         imageUrl: imageService.getMediaPosterUrl(
                           size: PosterSizes.w154,
                           path: movie.posterPath,
                         ),
                         showRatingNum: false,
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          AppRoute.movie,
+                          arguments: movie.id,
+                        ),
+                        adult: movie.adult,
+                        title: movie.title,
+                        voteAverage: movie.voteAverage,
                       ),
                     ),
                   ),

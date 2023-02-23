@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$AuthHash() => r'5b68252871f30d21ceb2c34ec91095caf47d947d';
+String _$AuthHash() => r'1ba6af8d8f665d99d1130d9a031878f4eddd4140';
 
 /// See also [Auth].
 final authProvider = NotifierProvider<Auth, AuthState>(

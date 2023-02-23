@@ -7,11 +7,12 @@ import '../../../../core/widgets/error_text/error_text.dart';
 import '../../../../core/widgets/movie_card/movie_card.dart';
 import '../../../../core/widgets/tv_card/tv_card.dart';
 import '../../../../features/auth/provider/auth_provider.dart';
-import '../../../../features/media/domain/i_media_image_service.dart';
+import '../../../../features/movies/domain/movie.dart';
 import '../../../../features/movies/domain/movie_list.dart';
 import '../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../features/movies/provider/images/movie_image_service_provider.dart';
 import '../../../../features/movies/provider/search_movies_provider.dart';
+import '../../../../features/tv_shows/domain/tv_show.dart';
 import '../../../../features/tv_shows/provider/search_tv_shows_provider.dart';
 import '../../../../features/tv_shows/provider/tv_image_service_provider.dart';
 import '../../../../routing/routes.dart';
@@ -35,8 +36,6 @@ class ResultList<T> extends HookConsumerWidget {
 
     final isMovie = T == MovieListModel;
 
-    IMediaImageService imageService;
-
     late final AsyncValue search;
 
     if (isMovie) {
@@ -47,8 +46,6 @@ class ResultList<T> extends HookConsumerWidget {
           page: page.value,
         ),
       );
-
-      imageService = ref.watch(movieImageServiceProvider);
     } else {
       search = ref.watch(
         searchTVShowsProvider(
@@ -57,8 +54,6 @@ class ResultList<T> extends HookConsumerWidget {
           page: page.value,
         ),
       );
-
-      imageService = ref.watch(tvImageServiceProvider);
     }
 
     return search.when(
@@ -79,7 +74,6 @@ class ResultList<T> extends HookConsumerWidget {
         return _ResultColumn(
           list: list,
           isMovie: isMovie,
-          imageService: imageService,
           page: page,
           data: data,
         );
@@ -107,14 +101,12 @@ class _ResultColumn extends StatelessWidget {
   const _ResultColumn({
     required this.list,
     required this.isMovie,
-    required this.imageService,
     required this.page,
     required this.data,
   });
 
   final List list;
   final bool isMovie;
-  final IMediaImageService imageService;
   final ValueNotifier<int> page;
   final dynamic data;
 
@@ -132,7 +124,6 @@ class _ResultColumn extends StatelessWidget {
                   return _Result(
                     isMovie: isMovie,
                     list: list,
-                    imageService: imageService,
                     index: index,
                   );
                 },
@@ -150,13 +141,11 @@ class _Result extends StatelessWidget {
   const _Result({
     required this.isMovie,
     required this.list,
-    required this.imageService,
     required this.index,
   });
 
   final bool isMovie;
   final List list;
-  final IMediaImageService imageService;
   final int index;
 
   @override
@@ -169,28 +158,64 @@ class _Result extends StatelessWidget {
         vertical: 10,
       ),
       child: (isMovie)
-          ? MovieCard(
-              movie: list[index],
-              imageUrl: imageService.getMediaPosterUrl(
-                size: PosterSizes.w154,
-                path: list[index].posterPath,
-              ),
-              onTap: () => list[index].id,
-            )
-          : TVCard(
-              imageUrl: imageService.getMediaPosterUrl(
-                size: PosterSizes.w154,
-                path: list[index].posterPath,
-              ),
-              onTap: () => Navigator.pushNamed(
-                context,
-                AppRoute.tv,
-                arguments: list[index].id,
-              ),
-              adult: list[index].adult,
-              name: list[index].name,
-              voteAverage: list[index].voteAverage,
-            ),
+          ? _MovieCard(list: list as List<Movie>, index: index)
+          : _TVCard(list: list as List<TVShow>, index: index),
+    );
+  }
+}
+
+class _TVCard extends ConsumerWidget {
+  const _TVCard({
+    required this.list,
+    required this.index,
+  });
+
+  final List<TVShow> list;
+  final int index;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final imageService = ref.watch(tvImageServiceProvider);
+
+    return TVCard(
+      imageUrl: imageService.getMediaPosterUrl(
+        size: PosterSizes.w154,
+        path: list[index].posterPath,
+      ),
+      onTap: () => Navigator.pushNamed(
+        context,
+        AppRoute.tv,
+        arguments: list[index].id,
+      ),
+      adult: list[index].adult,
+      name: list[index].name,
+      voteAverage: list[index].voteAverage,
+    );
+  }
+}
+
+class _MovieCard extends ConsumerWidget {
+  const _MovieCard({
+    required this.list,
+    required this.index,
+  });
+
+  final List<Movie> list;
+  final int index;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final imageService = ref.watch(movieImageServiceProvider);
+
+    return MovieCard(
+      imageUrl: imageService.getMediaPosterUrl(
+        size: PosterSizes.w154,
+        path: list[index].posterPath,
+      ),
+      onTap: () => list[index].id,
+      adult: list[index].adult,
+      title: list[index].title,
+      voteAverage: list[index].voteAverage,
     );
   }
 }

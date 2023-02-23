@@ -38,7 +38,7 @@ class MovieCarousel extends HookWidget {
               itemBuilder: (context, index) {
                 return MovieCarouselItem(
                   image: movies[index].backdropPath,
-                  title: movies[index].title!,
+                  title: movies[index].title,
                   id: movies[index].id,
                 );
               },

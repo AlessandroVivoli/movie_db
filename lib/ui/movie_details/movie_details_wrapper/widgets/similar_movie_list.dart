@@ -66,17 +66,20 @@ class _SimilarMoviesBuilder extends ConsumerWidget {
         }
 
         return MovieList(
-          movieList: similarMovies,
+          length: similarMovies.length,
           padding: 10,
-          imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
+          imageBuilder: (index) => imageService.getMediaPosterUrl(
             size: PosterSizes.w154,
-            path: imagePath,
+            path: similarMovies[index].posterPath,
           ),
           onCardTap: (movieId) => Navigator.pushNamed(
             context,
             AppRoute.movie,
             arguments: movieId,
           ),
+          averageVoteBuilder: (int index) => similarMovies[index].voteAverage,
+          isAdultBuilder: (int index) => similarMovies[index].adult,
+          titleBuilder: (int index) => similarMovies[index].title,
         );
       },
       error: (error, stackTrace) {
