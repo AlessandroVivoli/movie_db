@@ -8,6 +8,7 @@ import '../../features/person/domain/profile_sizes_enum.dart';
 import '../../features/person/provider/get_trending_persons_provider.dart';
 import '../../features/person/provider/image/person_image_service_provider.dart';
 import '../../features/time_window/domain/time_window.dart';
+import '../../routing/routes.dart';
 
 class TrendingPersonsSection extends StatelessWidget {
   const TrendingPersonsSection({
@@ -81,6 +82,11 @@ class _TrendingPersonsList extends ConsumerWidget {
                   path: persons[index].profilePath,
                 ),
                 departmentBuilder: (index) => persons[index].knownForDepartment,
+                onCardTap: (index) => Navigator.pushNamed(
+                  context,
+                  AppRoute.person,
+                  arguments: persons[index].id,
+                ),
               ),
             );
           },

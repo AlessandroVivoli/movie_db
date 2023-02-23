@@ -7,6 +7,7 @@ import '../../core/widgets/person_list/person_list.dart';
 import '../../features/person/domain/profile_sizes_enum.dart';
 import '../../features/person/provider/get_cast_provider.dart';
 import '../../features/person/provider/image/person_image_service_provider.dart';
+import '../../routing/routes.dart';
 
 class MediaCasts extends StatelessWidget {
   const MediaCasts({
@@ -77,6 +78,11 @@ class _CastList extends ConsumerWidget {
             path: castList[index].profilePath,
           ),
           departmentBuilder: (int index) => castList[index].knownForDepartment,
+          onCardTap: (index) => Navigator.pushNamed(
+            context,
+            AppRoute.person,
+            arguments: castList[index].id,
+          ),
         );
       },
       error: (error, stackTrace) {

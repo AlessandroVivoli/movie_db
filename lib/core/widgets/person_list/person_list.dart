@@ -9,6 +9,7 @@ class PersonList extends StatelessWidget {
   final String? Function(int index) imageBuilder;
   final String Function(int index) nameBuilder;
   final String? Function(int index) departmentBuilder;
+  final void Function(int index)? onCardTap;
 
   const PersonList({
     super.key,
@@ -17,6 +18,7 @@ class PersonList extends StatelessWidget {
     required this.imageBuilder,
     required this.nameBuilder,
     required this.departmentBuilder,
+    this.onCardTap,
   });
 
   @override
@@ -36,6 +38,7 @@ class PersonList extends StatelessWidget {
           imageUrl: imageBuilder(index),
           name: nameBuilder(index),
           department: departmentBuilder(index),
+          onTap: (onCardTap != null) ? () => onCardTap!(index) : null,
         );
       },
     );
