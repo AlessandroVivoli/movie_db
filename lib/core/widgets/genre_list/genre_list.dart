@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../features/genre/domain/genre.dart';
 import '../../extensions/build_context_extensions.dart';
 import '../../extensions/list_extensions.dart';
 
-class GenreList extends ConsumerWidget {
-  final List<Genre> genres;
+class GenreList extends StatelessWidget {
+  final List<String> genres;
 
   const GenreList({super.key, required this.genres});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -31,7 +29,6 @@ class GenreList extends ConsumerWidget {
             child: Text(
               context.locale.translateGenres(
                 genres[index]
-                    .name
                     .replaceAll(' ', '')
                     .replaceAll('&', 'And')
                     .replaceAll('-', ''),
