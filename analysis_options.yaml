@@ -37,6 +37,8 @@ analyzer:
   exclude:
     - lib/**/*.g.dart
     - lib/**/*.freezed.dart
+  plugins:
+    - dart_code_metrics
 
 dart_code_metrics:
   rules:
