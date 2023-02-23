@@ -90,9 +90,21 @@ class MovieDetailsWrapper extends ConsumerWidget {
         ),
         SimilarMovieList(movieId: details.id),
         ReviewsSection(
-          reviews: details.reviews.results,
-          avatarBuilder: (avatarPath) =>
-              imageService.getImageUrl(path: avatarPath),
+          avatarBuilder: (index) => imageService.getImageUrl(
+            path: details.reviews.results[index].authorDetails.avatarPath,
+          ),
+          authorNameBuilder: (index) => details.reviews.results[index].author,
+          contentBuilder: (index) => details.reviews.results[index].content,
+          dateCreatedBuilder: (index) {
+            return details.reviews.results[index].createdAt!;
+          },
+          dateUpdatedBuilder: (index) {
+            return details.reviews.results[index].updatedAt;
+          },
+          length: details.reviews.results.length,
+          ratingBuilder: (index) {
+            return details.reviews.results[index].authorDetails.rating;
+          },
         )
       ],
     );

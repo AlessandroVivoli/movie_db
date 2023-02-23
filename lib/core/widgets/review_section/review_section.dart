@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/reviews/domain/review.dart';
 import '../../extensions/build_context_extensions.dart';
 import 'widgets/review_card.dart';
 
 class ReviewsSection extends StatelessWidget {
   const ReviewsSection({
     super.key,
-    required this.reviews,
     required this.avatarBuilder,
+    required this.authorNameBuilder,
+    required this.contentBuilder,
+    required this.dateCreatedBuilder,
+    required this.dateUpdatedBuilder,
+    required this.ratingBuilder,
+    required this.length,
   });
 
-  final List<Review> reviews;
-  final String? Function(String? avatarPath) avatarBuilder;
+  final String? Function(int index) avatarBuilder;
+  final String Function(int index) authorNameBuilder;
+  final String Function(int index) contentBuilder;
+  final DateTime Function(int index) dateCreatedBuilder;
+  final DateTime? Function(int index) dateUpdatedBuilder;
+  final double? Function(int index) ratingBuilder;
+
+  final int length;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +41,13 @@ class ReviewsSection extends StatelessWidget {
           ),
         ),
         _ReviewList(
-          reviews: reviews,
           avatarBuilder: avatarBuilder,
+          authorNameBuilder: authorNameBuilder,
+          contentBuilder: contentBuilder,
+          dateCreatedBuilder: dateCreatedBuilder,
+          dateUpdatedBuilder: dateUpdatedBuilder,
+          length: length,
+          ratingBuilder: ratingBuilder,
         )
       ],
     );
@@ -41,16 +56,27 @@ class ReviewsSection extends StatelessWidget {
 
 class _ReviewList extends StatelessWidget {
   const _ReviewList({
-    required this.reviews,
     required this.avatarBuilder,
+    required this.authorNameBuilder,
+    required this.contentBuilder,
+    required this.dateCreatedBuilder,
+    required this.dateUpdatedBuilder,
+    required this.ratingBuilder,
+    required this.length,
   });
 
-  final List<Review> reviews;
-  final String? Function(String? avatarPath) avatarBuilder;
+  final String? Function(int index) avatarBuilder;
+  final String Function(int index) authorNameBuilder;
+  final String Function(int index) contentBuilder;
+  final DateTime Function(int index) dateCreatedBuilder;
+  final DateTime? Function(int index) dateUpdatedBuilder;
+  final double? Function(int index) ratingBuilder;
+
+  final int length;
 
   @override
   Widget build(BuildContext context) {
-    if (reviews.isEmpty) return Text(context.locale.noReviews);
+    if (length == 0) return Text(context.locale.noReviews);
 
     return ListView.separated(
       physics: const NeverScrollableScrollPhysics(),
@@ -58,14 +84,16 @@ class _ReviewList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       itemBuilder: (context, index) {
         return ReviewCard(
-          review: reviews[index],
-          reviewAuthorAvatarUrl: avatarBuilder(
-            reviews[index].authorDetails.avatarPath,
-          ),
+          reviewAuthorAvatarUrl: avatarBuilder(index),
+          author: authorNameBuilder(index),
+          content: contentBuilder(index),
+          createdAt: dateCreatedBuilder(index),
+          updatedAt: dateUpdatedBuilder(index),
+          rating: ratingBuilder(index),
         );
       },
       separatorBuilder: (context, index) => const SizedBox(height: 10),
-      itemCount: reviews.length,
+      itemCount: length,
     );
   }
 }

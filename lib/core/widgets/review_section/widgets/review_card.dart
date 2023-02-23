@@ -4,7 +4,6 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../features/reviews/domain/review.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../../custom_image/custom_network_image.dart';
 import '../../rating/rating.dart';
@@ -12,12 +11,20 @@ import '../../rating/rating.dart';
 class ReviewCard extends StatelessWidget {
   const ReviewCard({
     super.key,
-    required this.review,
     required this.reviewAuthorAvatarUrl,
+    required this.content,
+    required this.author,
+    required this.createdAt,
+    this.updatedAt,
+    this.rating,
   });
 
-  final Review review;
   final String? reviewAuthorAvatarUrl;
+  final String content;
+  final String author;
+  final DateTime createdAt;
+  final DateTime? updatedAt;
+  final double? rating;
 
   @override
   Widget build(BuildContext context) {
@@ -46,20 +53,26 @@ class ReviewCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _ReviewAuthorAvatar(
-                review: review,
                 reviewAuthorAvatarUrl: reviewAuthorAvatarUrl,
               ),
               const SizedBox(
                 width: 10,
               ),
-              Expanded(child: _ReviewAuthoUsername(review: review)),
+              Expanded(
+                child: _ReviewAuthoUsername(
+                  author: author,
+                  createdAt: createdAt,
+                  rating: null,
+                  updatedAt: null,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 10),
           Markdown(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
             physics: const NeverScrollableScrollPhysics(),
-            data: review.content,
+            data: content,
             shrinkWrap: true,
             selectable: true,
             extensionSet: md.ExtensionSet(
@@ -82,9 +95,17 @@ class ReviewCard extends StatelessWidget {
 }
 
 class _ReviewAuthoUsername extends StatelessWidget {
-  const _ReviewAuthoUsername({required this.review});
+  const _ReviewAuthoUsername({
+    required this.author,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.rating,
+  });
 
-  final Review review;
+  final String author;
+  final DateTime createdAt;
+  final DateTime? updatedAt;
+  final double? rating;
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +121,7 @@ class _ReviewAuthoUsername extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  review.author,
+                  author,
                   overflow: TextOverflow.fade,
                   maxLines: 1,
                   softWrap: false,
@@ -108,14 +129,14 @@ class _ReviewAuthoUsername extends StatelessWidget {
               ),
               const SizedBox(width: 5),
               Text(
-                context.locale.releaseDateValue(review.createdAt!),
+                context.locale.releaseDateValue(createdAt),
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.secondary,
                   fontSize: 10,
                 ),
               ),
               const SizedBox(width: 2),
-              if (review.updatedAt != null)
+              if (updatedAt != null)
                 Text(
                   '(edited)',
                   style: TextStyle(
@@ -125,10 +146,10 @@ class _ReviewAuthoUsername extends StatelessWidget {
                 ),
             ],
           ),
-          if (review.authorDetails.rating != null)
+          if (rating != null)
             Rating(
               showNum: false,
-              rating: review.authorDetails.rating!,
+              rating: rating!,
               alignment: MainAxisAlignment.start,
               padding: 1,
               size: 16,
@@ -141,11 +162,9 @@ class _ReviewAuthoUsername extends StatelessWidget {
 
 class _ReviewAuthorAvatar extends StatelessWidget {
   const _ReviewAuthorAvatar({
-    required this.review,
     required this.reviewAuthorAvatarUrl,
   });
 
-  final Review review;
   final String? reviewAuthorAvatarUrl;
 
   @override
