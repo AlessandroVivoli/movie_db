@@ -63,6 +63,8 @@ class _RatedMoviesHookWidget extends HookConsumerWidget {
 
     return ratedMovies.when(
       data: (movies) {
+        final results = movies.results;
+
         if (movies.totalResults == 0) {
           return Center(
             child: Text(context.locale.noRated),
@@ -70,19 +72,24 @@ class _RatedMoviesHookWidget extends HookConsumerWidget {
         }
 
         return PagedMovieList(
-          movieList: movies,
           onPageChanged: (index) {
             page.value = index;
           },
-          imageBuilder: (imagePath) => imageService.getMediaPosterUrl(
+          imageBuilder: (index) => imageService.getMediaPosterUrl(
             size: PosterSizes.w154,
-            path: imagePath,
+            path: results[index].posterPath,
           ),
-          onCardTap: (movieId) => Navigator.pushNamed(
+          onCardTap: (index) => Navigator.pushNamed(
             context,
             AppRoute.movie,
-            arguments: movieId,
+            arguments: results[index].id,
           ),
+          length: results.length,
+          averageVoteBuilder: (index) => results[index].voteAverage,
+          isAdultBuilder: (index) => results[index].adult,
+          titleBuilder: (index) => results[index].title,
+          page: movies.page,
+          totalPages: movies.totalPages,
         );
       },
       error: (error, stackTrace) {

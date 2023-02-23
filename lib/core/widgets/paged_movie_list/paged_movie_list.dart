@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../features/movies/domain/movie_list.dart';
 import '../movie_list/movie_list.dart';
 
 class PagedMovieList extends HookWidget {
@@ -9,15 +8,15 @@ class PagedMovieList extends HookWidget {
     super.key,
     this.onCardTap,
     this.onPageChanged,
-    required this.movieList,
     required this.imageBuilder,
     required this.averageVoteBuilder,
     required this.length,
     required this.isAdultBuilder,
     required this.titleBuilder,
+    required this.page,
+    required this.totalPages,
   });
 
-  final MovieListModel movieList;
   final void Function(int movieId)? onCardTap;
   final void Function(int page)? onPageChanged;
   final String? Function(int index) imageBuilder;
@@ -25,6 +24,9 @@ class PagedMovieList extends HookWidget {
   final bool Function(int index) isAdultBuilder;
   final String Function(int index) titleBuilder;
   final int length;
+
+  final int page;
+  final int totalPages;
 
   @override
   Widget build(BuildContext context) {
@@ -50,22 +52,21 @@ class PagedMovieList extends HookWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               IconButton(
-                onPressed: (onPageChanged == null || movieList.page == 1)
+                onPressed: (onPageChanged == null || page == 1)
                     ? null
                     : () {
-                        onPageChanged!(movieList.page - 1);
+                        onPageChanged!(page - 1);
 
                         scrollController.jumpTo(0);
                       },
                 icon: const Icon(Icons.chevron_left),
               ),
-              Text('${movieList.page}'),
+              Text('$page'),
               IconButton(
-                onPressed: (onPageChanged == null ||
-                        movieList.page >= movieList.totalPages)
+                onPressed: (onPageChanged == null || page >= totalPages)
                     ? null
                     : () {
-                        onPageChanged!(movieList.page + 1);
+                        onPageChanged!(page + 1);
 
                         scrollController.jumpTo(0);
                       },
