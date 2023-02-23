@@ -5,7 +5,11 @@ class DateTimeConverter implements JsonConverter<DateTime?, String> {
 
   @override
   DateTime? fromJson(String json) {
-    return DateTime.tryParse(json);
+    try {
+      return DateTime.tryParse(json);
+    } on Exception {
+      return null;
+    }
   }
 
   @override

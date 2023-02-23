@@ -12,7 +12,7 @@ class Paginator extends HookWidget {
     final currentPage = useValueListenable(page);
     final currentMaxPage = useValueListenable(maxPage);
 
-    final validTop = (currentPage + 1 < currentMaxPage);
+    final validTop = (currentPage < currentMaxPage);
     final validBottom = (currentPage > 1);
 
     return Row(

@@ -9,86 +9,87 @@ import '../../../../../features/account/provider/watchlist/get_movie_watchlist_p
 import '../../../../../features/movies/domain/poster_sizes_enum.dart';
 import '../../../../../features/movies/provider/images/movie_image_service_provider.dart';
 import '../../../../../routing/routes.dart';
+import '../../../paginator/paginator.dart';
 
 class MovieWatchlistTab extends HookConsumerWidget {
-  const MovieWatchlistTab({
-    super.key,
-    required this.page,
-    required this.maxPage,
-  });
-
-  final ValueNotifier<int> page;
-  final ValueNotifier<int> maxPage;
+  const MovieWatchlistTab({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentPage = useValueListenable(page);
+    final page = useState(1);
+    final maxPage = useValueNotifier(1);
 
-    final movieList = ref.watch(getMovieWatchlistProvider(page: currentPage));
+    final movieProvider = getMovieWatchlistProvider(page: page.value);
+
+    ref.listen(movieProvider, (previous, next) {
+      next.maybeWhen(
+        data: (value) => maxPage.value = value.totalPages,
+        orElse: () => maxPage.value = 1,
+      );
+    });
+
+    final movieList = ref.watch(movieProvider);
     final imageService = ref.watch(movieImageServiceProvider);
 
-    ref.listen(
-      getMovieWatchlistProvider(page: currentPage),
-      (previous, next) {
-        next.whenData((value) => maxPage.value = value.totalPages);
-      },
-    );
+    return Column(
+      children: [
+        Expanded(
+          child: movieList.when(
+            data: (data) {
+              if (data.totalResults == 0) {
+                return Center(
+                  child: Text(context.locale.noMovieWatchlist),
+                );
+              }
 
-    return movieList.when(
-      data: (data) {
-        if (data.totalResults == 0) {
-          return Center(
-            child: Text(context.locale.noMovieWatchlist),
-          );
-        }
-
-        return Align(
-          alignment: Alignment.topCenter,
-          child: SingleChildScrollView(
-            child: Wrap(
-                verticalDirection: VerticalDirection.down,
-                alignment: WrapAlignment.start,
-                spacing: 10,
-                runSpacing: 10,
-                children: [
-                  ...data.results.map(
-                    (movie) => ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 80),
-                      child: MovieCard(
-                        ratingSize: 12,
-                        ratingDigitSpacing: 15,
-                        ratingSpacing: .5,
-                        ratingAlignment: MainAxisAlignment.start,
-                        imageUrl: imageService.getMediaPosterUrl(
-                          size: PosterSizes.w154,
-                          path: movie.posterPath,
+              return SingleChildScrollView(
+                child: Wrap(
+                    verticalDirection: VerticalDirection.down,
+                    alignment: WrapAlignment.start,
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: [
+                      ...data.results.map(
+                        (movie) => ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 80),
+                          child: MovieCard(
+                            ratingSize: 12,
+                            ratingDigitSpacing: 15,
+                            ratingSpacing: .5,
+                            ratingAlignment: MainAxisAlignment.start,
+                            imageUrl: imageService.getMediaPosterUrl(
+                              size: PosterSizes.w154,
+                              path: movie.posterPath,
+                            ),
+                            showRatingNum: false,
+                            onTap: () => Navigator.pushNamed(
+                              context,
+                              AppRoute.movie,
+                              arguments: movie.id,
+                            ),
+                            adult: movie.adult,
+                            title: movie.title,
+                            voteAverage: movie.voteAverage,
+                          ),
                         ),
-                        showRatingNum: false,
-                        onTap: () => Navigator.pushNamed(
-                          context,
-                          AppRoute.movie,
-                          arguments: movie.id,
-                        ),
-                        adult: movie.adult,
-                        title: movie.title,
-                        voteAverage: movie.voteAverage,
                       ),
-                    ),
-                  ),
-                ]),
-          ),
-        );
-      },
-      error: (error, stackTrace) {
-        context.showErrorSnackBar(context.locale.getMovieWatchlistError);
+                    ]),
+              );
+            },
+            error: (error, stackTrace) {
+              context.showErrorSnackBar(context.locale.getMovieWatchlistError);
 
-        return Center(
-          child: ErrorText(context.locale.unexpectedErrorMessage),
-        );
-      },
-      loading: () => const Center(
-        child: CircularProgressIndicator(),
-      ),
+              return Center(
+                child: ErrorText(context.locale.unexpectedErrorMessage),
+              );
+            },
+            loading: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        ),
+        Paginator(page: page, maxPage: maxPage)
+      ],
     );
   }
 }

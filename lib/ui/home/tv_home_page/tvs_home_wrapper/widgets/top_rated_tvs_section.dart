@@ -67,10 +67,10 @@ class _TopRatedTVsList extends ConsumerWidget {
                 size: PosterSizes.w154,
                 path: tvs[index].posterPath,
               ),
-              onCardTap: (tvId) => Navigator.pushNamed(
+              onCardTap: (index) => Navigator.pushNamed(
                 context,
                 AppRoute.tv,
-                arguments: tvId,
+                arguments: tvs[index].id,
               ),
               averageVoteBuilder: (index) => tvs[index].voteAverage,
               isAdultBuilder: (index) => tvs[index].adult,

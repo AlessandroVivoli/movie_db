@@ -72,12 +72,14 @@ class _SimilarMoviesBuilder extends ConsumerWidget {
             size: PosterSizes.w154,
             path: similarMovies[index].posterPath,
           ),
-          onCardTap: (movieId) => Navigator.pushNamed(
+          onCardTap: (index) => Navigator.pushNamed(
             context,
             AppRoute.movie,
-            arguments: movieId,
+            arguments: similarMovies[index].id,
           ),
-          averageVoteBuilder: (int index) => similarMovies[index].voteAverage,
+          averageVoteBuilder: (int index) {
+            return similarMovies[index].voteAverage;
+          },
           isAdultBuilder: (int index) => similarMovies[index].adult,
           titleBuilder: (int index) => similarMovies[index].title,
         );

@@ -13,16 +13,17 @@ _$_Movie _$$_MovieFromJson(Map<String, dynamic> json) => _$_Movie(
       releaseDate: _$JsonConverterFromJson<String, DateTime?>(
           json['release_date'], const DateTimeConverter().fromJson),
       genreIds:
-          (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
+          (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
       id: json['id'] as int,
       originalTitle: json['original_title'] as String,
       originalLanguage: json['original_language'] as String,
       title: json['title'] as String,
       backdropPath: json['backdrop_path'] as String?,
-      popularity: (json['popularity'] as num).toDouble(),
-      voteCount: json['vote_count'] as int,
-      video: json['video'] as bool,
-      voteAverage: (json['vote_average'] as num).toDouble(),
+      popularity: (json['popularity'] as num?)?.toDouble(),
+      voteCount: json['vote_count'] as int?,
+      video: json['video'] as bool?,
+      voteAverage:
+          const VoteAverageConverter().fromJson(json['vote_average'] as num?),
     );
 
 Map<String, dynamic> _$$_MovieToJson(_$_Movie instance) => <String, dynamic>{
@@ -39,7 +40,7 @@ Map<String, dynamic> _$$_MovieToJson(_$_Movie instance) => <String, dynamic>{
       'popularity': instance.popularity,
       'vote_count': instance.voteCount,
       'video': instance.video,
-      'vote_average': instance.voteAverage,
+      'vote_average': const VoteAverageConverter().toJson(instance.voteAverage),
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

@@ -25,15 +25,16 @@ mixin _$Movie {
   String get overview => throw _privateConstructorUsedError;
   @DateTimeConverter()
   DateTime? get releaseDate => throw _privateConstructorUsedError;
-  List<int> get genreIds => throw _privateConstructorUsedError;
+  List<int>? get genreIds => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   String get originalTitle => throw _privateConstructorUsedError;
   String get originalLanguage => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String? get backdropPath => throw _privateConstructorUsedError;
-  double get popularity => throw _privateConstructorUsedError;
-  int get voteCount => throw _privateConstructorUsedError;
-  bool get video => throw _privateConstructorUsedError;
+  double? get popularity => throw _privateConstructorUsedError;
+  int? get voteCount => throw _privateConstructorUsedError;
+  bool? get video => throw _privateConstructorUsedError;
+  @VoteAverageConverter()
   double get voteAverage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,16 +52,16 @@ abstract class $MovieCopyWith<$Res> {
       bool adult,
       String overview,
       @DateTimeConverter() DateTime? releaseDate,
-      List<int> genreIds,
+      List<int>? genreIds,
       int id,
       String originalTitle,
       String originalLanguage,
       String title,
       String? backdropPath,
-      double popularity,
-      int voteCount,
-      bool video,
-      double voteAverage});
+      double? popularity,
+      int? voteCount,
+      bool? video,
+      @VoteAverageConverter() double voteAverage});
 }
 
 /// @nodoc
@@ -80,15 +81,15 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
     Object? adult = null,
     Object? overview = null,
     Object? releaseDate = freezed,
-    Object? genreIds = null,
+    Object? genreIds = freezed,
     Object? id = null,
     Object? originalTitle = null,
     Object? originalLanguage = null,
     Object? title = null,
     Object? backdropPath = freezed,
-    Object? popularity = null,
-    Object? voteCount = null,
-    Object? video = null,
+    Object? popularity = freezed,
+    Object? voteCount = freezed,
+    Object? video = freezed,
     Object? voteAverage = null,
   }) {
     return _then(_value.copyWith(
@@ -108,10 +109,10 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      genreIds: null == genreIds
+      genreIds: freezed == genreIds
           ? _value.genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -132,18 +133,18 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      popularity: null == popularity
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
-              as double,
-      voteCount: null == voteCount
+              as double?,
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      video: null == video
+              as int?,
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       voteAverage: null == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
@@ -163,16 +164,16 @@ abstract class _$$_MovieCopyWith<$Res> implements $MovieCopyWith<$Res> {
       bool adult,
       String overview,
       @DateTimeConverter() DateTime? releaseDate,
-      List<int> genreIds,
+      List<int>? genreIds,
       int id,
       String originalTitle,
       String originalLanguage,
       String title,
       String? backdropPath,
-      double popularity,
-      int voteCount,
-      bool video,
-      double voteAverage});
+      double? popularity,
+      int? voteCount,
+      bool? video,
+      @VoteAverageConverter() double voteAverage});
 }
 
 /// @nodoc
@@ -188,15 +189,15 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
     Object? adult = null,
     Object? overview = null,
     Object? releaseDate = freezed,
-    Object? genreIds = null,
+    Object? genreIds = freezed,
     Object? id = null,
     Object? originalTitle = null,
     Object? originalLanguage = null,
     Object? title = null,
     Object? backdropPath = freezed,
-    Object? popularity = null,
-    Object? voteCount = null,
-    Object? video = null,
+    Object? popularity = freezed,
+    Object? voteCount = freezed,
+    Object? video = freezed,
     Object? voteAverage = null,
   }) {
     return _then(_$_Movie(
@@ -216,10 +217,10 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      genreIds: null == genreIds
+      genreIds: freezed == genreIds
           ? _value._genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -240,18 +241,18 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      popularity: null == popularity
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
-              as double,
-      voteCount: null == voteCount
+              as double?,
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      video: null == video
+              as int?,
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       voteAverage: null == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
@@ -268,7 +269,7 @@ class _$_Movie implements _Movie {
       required this.adult,
       required this.overview,
       @DateTimeConverter() required this.releaseDate,
-      required final List<int> genreIds,
+      required final List<int>? genreIds,
       required this.id,
       required this.originalTitle,
       required this.originalLanguage,
@@ -277,7 +278,7 @@ class _$_Movie implements _Movie {
       required this.popularity,
       required this.voteCount,
       required this.video,
-      required this.voteAverage})
+      @VoteAverageConverter() required this.voteAverage})
       : _genreIds = genreIds;
 
   factory _$_Movie.fromJson(Map<String, dynamic> json) =>
@@ -292,12 +293,14 @@ class _$_Movie implements _Movie {
   @override
   @DateTimeConverter()
   final DateTime? releaseDate;
-  final List<int> _genreIds;
+  final List<int>? _genreIds;
   @override
-  List<int> get genreIds {
+  List<int>? get genreIds {
+    final value = _genreIds;
+    if (value == null) return null;
     if (_genreIds is EqualUnmodifiableListView) return _genreIds;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_genreIds);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -311,12 +314,13 @@ class _$_Movie implements _Movie {
   @override
   final String? backdropPath;
   @override
-  final double popularity;
+  final double? popularity;
   @override
-  final int voteCount;
+  final int? voteCount;
   @override
-  final bool video;
+  final bool? video;
   @override
+  @VoteAverageConverter()
   final double voteAverage;
 
   @override
@@ -393,16 +397,16 @@ abstract class _Movie implements Movie {
       required final bool adult,
       required final String overview,
       @DateTimeConverter() required final DateTime? releaseDate,
-      required final List<int> genreIds,
+      required final List<int>? genreIds,
       required final int id,
       required final String originalTitle,
       required final String originalLanguage,
       required final String title,
       required final String? backdropPath,
-      required final double popularity,
-      required final int voteCount,
-      required final bool video,
-      required final double voteAverage}) = _$_Movie;
+      required final double? popularity,
+      required final int? voteCount,
+      required final bool? video,
+      @VoteAverageConverter() required final double voteAverage}) = _$_Movie;
 
   factory _Movie.fromJson(Map<String, dynamic> json) = _$_Movie.fromJson;
 
@@ -416,7 +420,7 @@ abstract class _Movie implements Movie {
   @DateTimeConverter()
   DateTime? get releaseDate;
   @override
-  List<int> get genreIds;
+  List<int>? get genreIds;
   @override
   int get id;
   @override
@@ -428,12 +432,13 @@ abstract class _Movie implements Movie {
   @override
   String? get backdropPath;
   @override
-  double get popularity;
+  double? get popularity;
   @override
-  int get voteCount;
+  int? get voteCount;
   @override
-  bool get video;
+  bool? get video;
   @override
+  @VoteAverageConverter()
   double get voteAverage;
   @override
   @JsonKey(ignore: true)

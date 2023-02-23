@@ -65,10 +65,10 @@ class _SimilarTVShowsBuilder extends ConsumerWidget {
             size: PosterSizes.w154,
             path: similarTVShows[index].posterPath,
           ),
-          onCardTap: (tvId) => Navigator.pushNamed(
+          onCardTap: (index) => Navigator.pushNamed(
             context,
             AppRoute.tv,
-            arguments: tvId,
+            arguments: similarTVShows[index].id,
           ),
           length: similarTVShows.length,
           averageVoteBuilder: (index) => similarTVShows[index].voteAverage,
