@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../features/person/domain/person.dart';
-import '../../../../features/person/domain/profile_sizes_enum.dart';
-import '../../../../features/person/provider/image/person_image_service_provider.dart';
 import '../../custom_image/custom_network_image.dart';
 
-class PersonCardWrapper extends ConsumerWidget {
+class PersonCardWrapper extends StatelessWidget {
   const PersonCardWrapper({
     super.key,
     required this.imgRadius,
-    required this.person,
+    required this.imageUrl,
+    this.department,
+    required this.name,
   });
 
   final double imgRadius;
-  final Person person;
+  final String? imageUrl;
+  final String? department;
+  final String name;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final imageService = ref.watch(personImageServiceProvider);
-
+  Widget build(BuildContext context) {
     return Column(
       children: [
         CircleAvatar(
@@ -30,10 +28,7 @@ class PersonCardWrapper extends ConsumerWidget {
             child: CustomNetworkImage(
               width: imgRadius * 2,
               height: imgRadius * 2,
-              url: imageService.getPersonProfileUrl(
-                size: ProfileSizes.w185,
-                path: person.profilePath,
-              ),
+              url: imageUrl,
               placeholder: const Icon(
                 Icons.person,
                 size: 40,
@@ -49,7 +44,7 @@ class PersonCardWrapper extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(vertical: 2),
                 child: Center(
                   child: Text(
-                    person.name,
+                    name,
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
@@ -57,10 +52,10 @@ class PersonCardWrapper extends ConsumerWidget {
                   ),
                 ),
               ),
-              if (person.knownForDepartment != null)
+              if (department != null)
                 Center(
                   child: Text(
-                    'Trending for ${person.knownForDepartment!}',
+                    'Trending for $department',
                     style: const TextStyle(
                       fontSize: 10,
                       color: Colors.grey,

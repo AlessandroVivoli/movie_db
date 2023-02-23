@@ -1,13 +1,23 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../features/person/domain/person.dart';
 import '../person_card/person_card.dart';
 
 class PersonList extends StatelessWidget {
-  final List<Person> personList;
+  final int length;
   final double? padding;
 
-  const PersonList({super.key, required this.personList, this.padding});
+  final String? Function(int index) imageBuilder;
+  final String Function(int index) nameBuilder;
+  final String? Function(int index) departmentBuilder;
+
+  const PersonList({
+    super.key,
+    this.padding,
+    required this.length,
+    required this.imageBuilder,
+    required this.nameBuilder,
+    required this.departmentBuilder,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +30,14 @@ class PersonList extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: padding ?? 0),
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
-      itemCount: personList.length,
-      itemBuilder: ((context, index) {
-        return PersonCard(person: personList[index]);
-      }),
+      itemCount: length,
+      itemBuilder: (context, index) {
+        return PersonCard(
+          imageUrl: imageBuilder(index),
+          name: nameBuilder(index),
+          department: departmentBuilder(index),
+        );
+      },
     );
   }
 }

@@ -4,7 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../core/extensions/build_context_extensions.dart';
 import '../../core/widgets/error_text/error_text.dart';
 import '../../core/widgets/person_list/person_list.dart';
+import '../../features/person/domain/profile_sizes_enum.dart';
 import '../../features/person/provider/get_cast_provider.dart';
+import '../../features/person/provider/image/person_image_service_provider.dart';
 
 class MediaCasts extends StatelessWidget {
   const MediaCasts({
@@ -56,6 +58,8 @@ class _CastList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final cast = ref.watch(getCastProvider(mediaId, mediaType));
 
+    final imageService = ref.watch(personImageServiceProvider);
+
     return cast.when(
       data: (castList) {
         if (castList.isEmpty) {
@@ -65,8 +69,14 @@ class _CastList extends ConsumerWidget {
         }
 
         return PersonList(
-          personList: castList,
+          length: castList.length,
           padding: 10,
+          nameBuilder: (int index) => castList[index].name,
+          imageBuilder: (int index) => imageService.getPersonProfileUrl(
+            size: ProfileSizes.w185,
+            path: castList[index].profilePath,
+          ),
+          departmentBuilder: (int index) => castList[index].knownForDepartment,
         );
       },
       error: (error, stackTrace) {
