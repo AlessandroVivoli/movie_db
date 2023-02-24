@@ -43,7 +43,7 @@ class TVSeasonList extends ConsumerWidget {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: TVSeasonCard(
-                    season: seasons[index],
+                    seasonNumber: seasons[index].seasonNumber,
                     showName: showName,
                     imageUrl: imageService.getMediaPosterUrl(
                       size: PosterSizes.w154,

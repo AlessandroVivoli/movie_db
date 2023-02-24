@@ -32,7 +32,7 @@ class PersonLifetime extends ConsumerWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          personDetails.getLifetime(extendedDate, locale),
+          personDetails.getLifetime(extendedDate, locale.languageCode),
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontWeight: FontWeight.w600,

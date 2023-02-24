@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/tv_shows/domain/seasons/tv_season.dart';
 import '../../extensions/build_context_extensions.dart';
 import '../custom_image/custom_network_image.dart';
 
 class TVSeasonCard extends StatelessWidget {
   const TVSeasonCard({
     super.key,
-    required this.season,
     required this.showName,
     required this.imageUrl,
+    required this.seasonNumber,
     this.onTap,
   });
 
-  final TVSeason season;
   final String showName;
   final String? imageUrl;
   final void Function()? onTap;
+  final int seasonNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class TVSeasonCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      '${context.locale.seasonLabel(1)} ${season.seasonNumber}',
+                      '${context.locale.seasonLabel(1)} $seasonNumber',
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.secondary,
                         fontSize: 14,
