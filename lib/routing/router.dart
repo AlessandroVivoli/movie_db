@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../ui/account_details/account_details_screen.dart';
-import '../ui/auth/login_screen.dart';
 import '../ui/home/home_screen.dart';
+import '../ui/login/login_screen.dart';
 import '../ui/movie_details/movie_details_screen.dart';
 import '../ui/person_details/person_details_screen.dart';
 import '../ui/tv_details/season_details/season_details.dart';
