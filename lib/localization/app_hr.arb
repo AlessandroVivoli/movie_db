@@ -1,0 +1,135 @@
+{
+  "trendingPersons": "Osobe u Trendu ovog tjedna",
+  "localizationLabel": "Jezik",
+  "profileButtonLabel": "Profil",
+  "logoutButtonLabel": "Odjava",
+  "loginButtonLabel": "Prijava",
+  "helloLabel": "Bok, {userName}",
+  "loginScreenTitle": "Prijava",
+  "usernameTextFieldLabel": "Korisničko ime",
+  "passwordTextFieldLabel": "Lozinka",
+  "noBiography": "Nema biografije",
+  "poweredByLabel": "Pokreće",
+  "loginSubmitButtonLabel": "Prijavi se",
+  "fieldRequired": "Obavezno",
+  "wrongCredentialsErrorMessage": "Pogresno korisničko ime i/ili lozinka",
+  "generalLoginErrorMessage": "Prijava nije moguća",
+  "unexpectedErrorMessage": "Nešto je pošlo po krivu",
+  "notLoggedInErrorMessage": "Niste prijavljeni!",
+  "noFavoriteMovies": "Nije pronađen nijedan omiljeni film.",
+  "getFavoriteMoviesError": "Nije moguće dobiti omiljene filmove",
+  "noFavoriteTVShows": "Nije pronađena nijedna omiljena tv serija.",
+  "getFavoriteTVShowError": "Nije moguće dobiti omiljene tv serije",
+  "noRated": "Nije pronađen nijedan ocijenjen film.",
+  "getRatedError": "Nije moguće dobiti ocijenjene filmove",
+  "noMovieWatchlist": "Nije pronađen popis za praćenje filmova.",
+  "getMovieWatchlistError": "Nije moguće dobiti popis za praćenje filmova",
+  "noTVWatchlist": "Nije pronađen popis za praćenje tv serija.",
+  "getTVWatchlistError": "Nije moguće dobiti popis za praćenje tv serija",
+  "noTrendingMovies": "Nisu pronađeni popularni filmovi.",
+  "getTrendingMoviesError": "Nije moguće dobiti popularne filmove",
+  "noTopRatedMovies": "Nije pronađen niti jedan najbolje ocijenjen film.",
+  "getTopRatedMoviesError": "Nije moguće dobiti najbolje ocijenjene filmove",
+  "noTrendingPersons": "Nije pronađena nijedna popularna osoba.",
+  "getTrendingPersonsError": "Nije moguće dobiti popularne osobe",
+  "getMovieDetailsError": "Nije moguće dobiti detalje o filmu",
+  "noCast": "Nije pronađena nijedna filmska postava.",
+  "getCastError": "Nije moguće dobiti filmsku postavu",
+  "noSimilarMovies": "Nije pronađen nijedan sličan film.",
+  "getSimilarMoviesError": "Nije moguće dobiti slične filmove",
+  "removeFavoriteError": "Nije moguće ukloniti film iz favorita",
+  "addFavoriteError": "Nije moguće dodati film na favorite",
+  "removeWatchlistError": "Nije moguće ukloniti film s popisa gledanja",
+  "addWatchlistError": "Nije moguće dodati film na popis gledanja",
+  "rateButtonLabel": "Ocijeni",
+  "rateConfirmButtonLabel": "Potvrdi",
+  "rateError": "Nije moguće ocijeniti film",
+  "rateDeleteButtonLabel": "Izbriši",
+  "deleteRatingError": "Nije moguće izbrisati ocijenu filma",
+  "getPersonDetailsError": "Nije moguće dobiti detalje o osobi",
+  "getPersonImagesError": "Nije moguće dobiti slike osobe",
+  "noMovieCredits": "Nije pronađena nijedna filmska špica.",
+  "getMovieCreditsError": "Nije moguće dobiti filmsku špicu",
+  "noTrailer": "Nije pronađen nijedan trailer.",
+  "trailerError": "Nije moguće pokrenuti filmski trailer",
+  "accountRealName": "Puno Ime",
+  "favoriteMoviesSectionTitle": "Omiljeni Filmovi",
+  "ratedMoviesSectionTitle": "Ocijenjeni Filmovi",
+  "watchlistSectionTitle": "Popis Gledanja",
+  "topRatedMoviesSectionTitle": "Najbolje ocijenjeni filmovi",
+  "trendingPersonsSectionTitle": "Popularne osobe ovog tjedna",
+  "movieCastsLabel": "Filmska postava",
+  "descriptionLabel": "Opis",
+  "genresSectionTitle": "Žanrovi",
+  "movieBudgetLabel": "Buđet",
+  "movieDurationLabel": "Trajanje filma",
+  "releaseDateLabel": "Datum izlaska",
+  "releaseDateValue": "{date}",
+  "@releaseDateValue": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "dMy"
+      }
+    }
+  },
+  "similarMoviesSectionTitle": "Slični filmovi",
+  "personAgeLabel": "Godina",
+  "personBiographyLabel": "Biografija",
+  "personCreditsLabel": "Zasluge",
+  "personDepartmentLabel": "Poznat po",
+  "personLifetimeLabel": "Godište",
+  "translateGenres": "{value, select, Action{Akcija} Adventure{Avantura} Animation{Animirani} Comedy{Komedija} Crime{Kriminalni} Documentary{Documentarac} Family{Obiteljski} Fantasy{Fantazija} History{Povijesni} Horror{Horor} Music{Glazbeni} Mistery{Misterij} Romance{Romantički} ScienceFiction{Znanstvena Fantastika} TVMovie{TV Film} Thriller{Triler} War{Ratni} ActionAndAdventure{Akcija & Avantura} SciFiAndFantasy{Sci-Fi & Fantazija} WarAndPolitics{Rat & Politika} Kids{Dječji} Mystery{Misterij} News{Vijesti} Soap{Sapunice} Talk{Razgovor} other{{value}}}",
+  "@translateGenres": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "languageSelection": "{locale, select, hr{Hrvatski} en{Engleski} other{{locale}}}",
+  "@languageSelection": {
+    "placeholders": {
+      "locale": {
+        "type": "String"
+      }
+    }
+  },
+  "noMovieGenres": "Nije pronađen nijedan filmski žanr.",
+  "getMovieGenresError": "Nije moguće dobiti filmske žanrove",
+  "noTVGenres": "Nije pronađen nijedan tv žanr.",
+  "getTVGenresError": "Nije moguće dobiti tv žanrove",
+  "topRatedTvsSectionTitle": "Najbolje ocijenjene tv serije",
+  "bottomBarMoviesLabel": "Filmovi",
+  "bottomBarTVShowsLabel": "TV Serije",
+  "bottomBarWatchlistLabel": "Popis gledanja",
+  "bottomBarFavoritesLabel": "Favoriti",
+  "noPopularMovies": "Nije pronađen nijedan popularni film.",
+  "getPopularMoviesError": "Nije moguće dobiti popularne filmove",
+  "noMovieSearchResult": "Nije pronađen nijedan film.",
+  "noTvSearchResult": "Nije pronađena nijedna tv serija.",
+  "nothingFound": "Nije ništa pronađeno",
+  "searchMoviesError": "Nije moguće tražiti filmove",
+  "searchTVShowsError": "Nije moguće tražiti tv serije",
+  "getTVDetailsError": "Nije moguće dobiti detalje o tv seriji",
+  "seasonLabel": "{seasons, plural, =0{Nema sezona} =1{Sezona} other{Sezone}}",
+  "@seasonLabel": {
+    "placeholders": {
+      "seasons": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "noReviews": "Nema recenzije.",
+  "noPopularTVShows": "Nije pronađena nijedna popularna tv serija.",
+  "popularTVShowsError": "Nije moguće dobiti popularne tv serije",
+  "noTrendingTVShows": "Nije pronađen nijedna trending tv serija.",
+  "trendingTVShowsError": "Nije moguće dobiti trending tv serije",
+  "noTopRatedTVShows": "Nije pronađen nijedna najbolje ocjenjena tv serija.",
+  "topRatedTVShowsError": "Nije moguće dobiti najbolje ocjenjene tv serije",
+  "reviewsLabel": "Recenzije",
+  "noSimilarTVShows": "Nije pronađena nijedna slična tv serija.",
+  "similarTVShowsError": "Nije moguće dobiti slične tv serije",
+  "similarTVShowsLabel": "Slične TV Serije"
+}
